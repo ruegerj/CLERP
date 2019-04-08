@@ -29,14 +29,9 @@ namespace CLERP.Database.Entities
         public string City { get; set; }
 
         /// <summary>
-        /// The name of the country
+        /// The mapped country
         /// </summary>
-        public string Country { get; set; }
-
-        /// <summary>
-        /// The abbrevation of the country e.g. Switzerland => CH
-        /// </summary>
-        public string CountryAbbreviation { get; set; }
+        public virtual Country Country { get; set; }
 
         /// <summary>
         /// All warehouses at this adress

@@ -57,6 +57,9 @@ namespace CLERP.Database
             builder.Entity<Product>()
                 .ToTable(nameof(Products).ToLower());
 
+            builder.Entity<Country>()
+                .ToTable(nameof(Countries).ToLower());
+
             builder.Entity<BusinessPartner>()
                 .ToTable("business-partners");
 
@@ -91,6 +94,10 @@ namespace CLERP.Database
 
             builder = ConfigureBusinessPartner(builder);
 
+            builder = ConfigureBusinessContact(builder);
+
+            builder = ConfigureCountry(builder);
+
             #endregion
 
             #region Table relations
@@ -123,13 +130,6 @@ namespace CLERP.Database
                 .WithMany(y => y.Roles)
                 .HasForeignKey(y => y.RoleId);
 
-            // Product(Parent) -> Prodcut(Child)
-            builder.Entity<Product>()
-                .HasOne(x => x.Parent)
-                .WithMany(x => x.Children)
-                .HasForeignKey(x => x.ParentId)
-                .OnDelete(DeleteBehavior.Restrict);
-
             #endregion
 
             #region Value Converters
@@ -141,6 +141,22 @@ namespace CLERP.Database
             builder.Entity<Role>()
                 .Property(x => x.Type)
                 .HasConversion(roleTypeConverter);
+
+            var countryAbbrevationConverter = new ValueConverter<string, string>(
+                v => v.ToUpperInvariant(),
+                v => v);
+
+            builder.Entity<Country>()
+                .Property(x => x.Abbreviation)
+                .HasConversion(countryAbbrevationConverter);
+
+            var productStateConverter = new ValueConverter<ProductState, string>(
+                v => v.ToString(),
+                v => (ProductState)Enum.Parse(typeof(ProductState), v));
+
+            builder.Entity<Product>()
+                .Property(x => x.State)
+                .HasConversion(productStateConverter);
 
             #endregion
         }
@@ -157,6 +173,7 @@ namespace CLERP.Database
         public DbSet<Product> Products { get; set; }
         public DbSet<BusinessPartner> BusinessPartners { get; set; }
         public DbSet<BusinessContact> BusinessContacts { get; set; }
+        public DbSet<Country> Countries { get; set; }
 
         // Link-Tables
         public DbSet<RoleEmployee> RolesEmployees { get; set; }
@@ -164,18 +181,48 @@ namespace CLERP.Database
 
         #region Configurators for entities
 
-        private ModelBuilder ConfigureRole(ModelBuilder builder)
+        /// <summary>
+        /// Configures all shared attributes of an entity which inherits from <see cref="EntityBase"/>
+        /// </summary>
+        /// <typeparam name="T">Type of the sub class</typeparam>
+        /// <param name="builder">current <see cref="ModelBuilder"/> instance</param>
+        /// <returns></returns>
+        private ModelBuilder ConfigureBaseFields<T>(ModelBuilder builder) where T : EntityBase
         {
-            builder.Entity<Role>()
-                .HasKey(x => x.Id);
+            builder.Entity<T>()                
+                .HasKey(x => x.Guid);
 
-            builder.Entity<Role>()
-                .Property(x => x.Creation)                
+            // Set auto generate for GUID in Db
+            builder.Entity<T>()
+                .Property(x => x.Guid)
+                .HasDefaultValueSql("NEWID()");
+
+            builder.Entity<T>()
+                .Property(x => x.Creation)
                 .IsRequired();
 
-            builder.Entity<Role>()
+            builder.Entity<T>()
+                .Property(x => x.Creation)
+                .IsRequired();
+
+            builder.Entity<T>()
+                .Property(x => x.CreatedBy)
+                .IsRequired();
+
+            builder.Entity<T>()
                 .Property(x => x.LastModified)
                 .IsRequired();
+
+            builder.Entity<T>()
+                .Property(x => x.LastModifiedBy)
+                .IsRequired();
+
+            return builder;
+        }
+
+        private ModelBuilder ConfigureRole(ModelBuilder builder)
+        {
+            builder = ConfigureBaseFields<Role>(builder);
 
             builder.Entity<Role>()
                 .Property(x => x.Type)
@@ -186,28 +233,18 @@ namespace CLERP.Database
 
         private ModelBuilder ConfigureDepartment(ModelBuilder builder)
         {
-            builder.Entity<Department>()
-                .HasKey(x => x.Id);
+            builder = ConfigureBaseFields<Department>(builder);
 
             builder.Entity<Department>()
                 .Property(x => x.Title)
-                .IsRequired();
-
-            builder.Entity<Department>()
-                .Property(x => x.Creation)
-                .IsRequired();
-
-            builder.Entity<Department>()
-                .Property(x => x.LastModified)
-                .IsRequired();
+                .IsRequired();           
 
             return builder;
         }
 
         private ModelBuilder ConfigureEmployee(ModelBuilder builder)
         {
-            builder.Entity<Employee>()
-                .HasKey(x => x.Id);
+            builder = ConfigureBaseFields<Employee>(builder);
 
             builder.Entity<Employee>()
                 .Property(x => x.Email)
@@ -223,32 +260,15 @@ namespace CLERP.Database
 
             builder.Entity<Employee>()
                 .Property(x => x.Lastname)
-                .IsRequired();
-
-            builder.Entity<Employee>()
-                .Property(x => x.Creation)
-                .IsRequired();
-
-            builder.Entity<Employee>()
-                .Property(x => x.LastModified)
-                .IsRequired();
+                .IsRequired();            
 
             return builder;
         }
 
         private ModelBuilder ConfigureAdress(ModelBuilder builder)
         {
-            builder.Entity<Adress>()
-              .HasKey(x => x.Id);
-
-            builder.Entity<Adress>()
-                .Property(x => x.Creation)
-                .IsRequired();
-
-            builder.Entity<Adress>()
-                .Property(x => x.LastModified)
-                .IsRequired();
-
+            builder = ConfigureBaseFields<Adress>(builder);
+            
             builder.Entity<Adress>()
                 .Property(x => x.PostalCode)
                 .IsRequired();
@@ -263,27 +283,14 @@ namespace CLERP.Database
 
             builder.Entity<Adress>()
                 .Property(x => x.Country)
-                .IsRequired();
-
-            builder.Entity<Adress>()
-                .Property(x => x.CountryAbbreviation)
-                .IsRequired();
+                .IsRequired();            
 
             return builder;
         }
 
         private ModelBuilder ConfigureWarehouse(ModelBuilder builder)
         {
-            builder.Entity<Warehouse>()
-                .HasKey(x => x.Id);
-
-            builder.Entity<Warehouse>()
-                .Property(x => x.Creation)
-                .IsRequired();
-
-            builder.Entity<Warehouse>()
-                .Property(x => x.LastModified)
-                .IsRequired();
+            builder = ConfigureBaseFields<Warehouse>(builder);
 
             builder.Entity<Warehouse>()
                 .Property(x => x.Name)
@@ -294,16 +301,7 @@ namespace CLERP.Database
 
         private ModelBuilder ConfigureShelf(ModelBuilder builder)
         {
-            builder.Entity<Shelf>()
-                .HasKey(x => x.Id);
-
-            builder.Entity<Shelf>()
-                .Property(x => x.Creation)
-                .IsRequired();
-
-            builder.Entity<Shelf>()
-                .Property(x => x.LastModified)
-                .IsRequired();
+            builder = ConfigureBaseFields<Shelf>(builder);
 
             builder.Entity<Shelf>()
                 .Property(x => x.Designation)
@@ -314,16 +312,7 @@ namespace CLERP.Database
 
         private ModelBuilder ConfigureCompartment(ModelBuilder builder)
         {
-            builder.Entity<Compartment>()
-                .HasKey(x => x.Id);
-
-            builder.Entity<Compartment>()
-                .Property(x => x.Creation)
-                .IsRequired();
-
-            builder.Entity<Compartment>()
-                .Property(x => x.LastModified)
-                .IsRequired();
+            builder = ConfigureBaseFields<Compartment>(builder);
 
             builder.Entity<Compartment>()
                 .Property(x => x.Row)
@@ -338,25 +327,16 @@ namespace CLERP.Database
 
         private ModelBuilder ConfigureProduct(ModelBuilder builder)
         {
-            builder.Entity<Product>()
-                .HasKey(x => x.Id);
-
-            builder.Entity<Product>()
-               .Property(x => x.Creation)
-               .IsRequired();
-
-            builder.Entity<Product>()
-                .Property(x => x.LastModified)
-                .IsRequired();
+            builder = ConfigureBaseFields<Product>(builder);
 
             builder.Entity<Product>()
                .Property(x => x.Name)
                .IsRequired();
 
-            builder.Entity<Product>()
-                .Property(x => x.Price)
-                .HasColumnType<decimal>("decimal(18,2)") // specify precision and scale of decimal for Db
-                .IsRequired();                         
+            //builder.Entity<Product>()
+            //    .Property(x => x.Price)
+            //    .HasColumnType<decimal>("decimal(18,2)") // specify precision and scale of decimal for Db
+            //    .IsRequired();                         
 
             builder.Entity<Product>()
               .Property(x => x.SerialNumber)
@@ -366,21 +346,16 @@ namespace CLERP.Database
               .Property(x => x.EAN)
               .IsRequired();
 
+            builder.Entity<Product>()
+                .Property(x => x.State)
+                .IsRequired();
+
             return builder;
         }
 
         private ModelBuilder ConfigureBusinessPartner(ModelBuilder builder)
         {
-            builder.Entity<BusinessPartner>()
-                .HasKey(x => x.Id);
-
-            builder.Entity<BusinessPartner>()
-               .Property(x => x.Creation)
-               .IsRequired();
-
-            builder.Entity<BusinessPartner>()
-                .Property(x => x.LastModified)
-                .IsRequired();
+            builder = ConfigureBaseFields<BusinessPartner>(builder);
 
             builder.Entity<BusinessPartner>()
                 .Property(x => x.Name)
@@ -391,8 +366,7 @@ namespace CLERP.Database
 
         private ModelBuilder ConfigureBusinessContact(ModelBuilder builder)
         {
-            builder.Entity<BusinessContact>()
-                .HasKey(x => x.Id);
+            builder = ConfigureBaseFields<BusinessContact>(builder);
 
             builder.Entity<BusinessContact>()
                 .Property(x => x.Firstname)
@@ -400,18 +374,28 @@ namespace CLERP.Database
 
             builder.Entity<BusinessContact>()
                 .Property(x => x.Lastname)
-                .IsRequired();
-
-            builder.Entity<BusinessContact>()
-                .Property(x => x.Creation)
-                .IsRequired();
-
-            builder.Entity<BusinessContact>()
-                .Property(x => x.LastModified)
-                .IsRequired();
+                .IsRequired();            
 
             builder.Entity<BusinessContact>()
                 .Property(x => x.Email)
+                .IsRequired();
+
+            return builder;
+        }
+
+        private ModelBuilder ConfigureCountry(ModelBuilder builder)
+        {
+            builder = ConfigureBaseFields<Country>(builder);
+
+            // Set length of abbrevation to 3
+            builder.Entity<Country>()
+                .Property(x => x.Abbreviation)
+                .HasMaxLength(3)
+                .IsFixedLength(true)
+                .IsRequired();
+
+            builder.Entity<Country>()
+                .Property(x => x.Name)
                 .IsRequired();
 
             return builder;

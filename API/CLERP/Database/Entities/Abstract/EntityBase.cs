@@ -11,9 +11,9 @@ namespace CLERP.Database.Entities.Abstract
     public abstract class EntityBase
     {
         /// <summary>
-        /// Primary Key
+        /// GUID as primary Key
         /// </summary>
-        public int Id { get; set; }
+        public Guid Guid { get; set; }
 
         /// <summary>
         /// Datetime when the entity was added to the table
@@ -21,8 +21,18 @@ namespace CLERP.Database.Entities.Abstract
         public DateTime Creation { get; set; }
 
         /// <summary>
+        /// Username of the employee which created this entity
+        /// </summary>
+        public string CreatedBy { get; set; }
+
+        /// <summary>
         /// Datetime when the entity was the last time modified
         /// </summary>
         public DateTime LastModified { get; set; }
+
+        /// <summary>
+        /// Username of the employee which last modified this entity
+        /// </summary>
+        public string LastModifiedBy { get; set; }
     }
 }

@@ -29,5 +29,16 @@ namespace CLERP.Database.Entities.Abstract
         HeadOfProduction
     }
 
+    /// <summary>
+    /// Different states a product can have
+    /// </summary>
+    public enum ProductState
+    {
+        InStock,
+        Reserved,
+        Sold,
+        Defect
+    }
+
     #endregion
 }
