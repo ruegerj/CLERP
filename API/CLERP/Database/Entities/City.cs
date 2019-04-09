@@ -21,6 +21,11 @@ namespace CLERP.Database.Entities
         public virtual ICollection<Address> Addresses { get; set; }
 
         /// <summary>
+        /// Foreign key to the country this city is attached
+        /// </summary>
+        public Guid CountryGuid { get; set; }
+
+        /// <summary>
         /// The mapped country
         /// </summary>
         public virtual Country Country { get; set; }

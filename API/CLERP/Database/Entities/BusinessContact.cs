@@ -12,6 +12,11 @@ namespace CLERP.Database.Entities
     public class BusinessContact : Person
     {
         /// <summary>
+        /// Foreign key to the business-partner this business-contact is attached to
+        /// </summary>
+        public Guid BusinessPartnerGuid { get; set; }
+
+        /// <summary>
         /// The firm this person is working for
         /// </summary>
         public virtual BusinessPartner BusinessPartner { get; set; }

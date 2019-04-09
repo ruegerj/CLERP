@@ -52,5 +52,15 @@ namespace CLERP.Database.Entities.Abstract
         Finished
     }
 
+    /// <summary>
+    /// Different states a bill can have
+    /// </summary>
+    public enum BillState
+    {
+        Received,
+        PaymentPlaced,
+        Payed
+    }
+
     #endregion
 }

@@ -1,4 +1,5 @@
 ﻿using CLERP.Database.Entities.Abstract;
+using CLERP.Database.Entities.Link;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,24 +9,28 @@ namespace CLERP.Database.Entities
 {
     /// <summary>
     /// Represents an order in the Db
-    /// Can be an incoming order (from one of the business-partners of this firm)
-    /// Or can be an outgoing order (from our firm to one of the business-partners)
+    /// Is an order for specific products (types) sendt to a business partner or to this firm
     /// </summary>
     public class Order : EntityBase
     {
         /// <summary>
-        /// From this date the order is valid
+        /// Date when the order was sendt
         /// </summary>
-        public DateTime Date { get; set; }
+        public DateTime SendDate { get; set; }
 
         /// <summary>
         /// Optional description
         /// </summary>
         public string Description { get; set; }
 
-        public decimal TotalPrice { get; set; }
-
         public OrderState State { get; set; }
+
+        public decimal EstimatedPrice { get; set; }
+
+        /// <summary>
+        /// All types and count for each type for all ordered products
+        /// </summary>
+        public virtual ICollection<ProductTypeOrder> ProductTypes { get; set; }
 
         /// <summary>
         /// Foreign key for the sending business-partner
@@ -66,5 +71,15 @@ namespace CLERP.Database.Entities
         /// The address the bill should go to
         /// </summary>
         public virtual Address BillingAddress { get; set; }
+
+        /// <summary>
+        /// Foreign key to the attached bill
+        /// </summary>
+        public Guid BillGuid { get; set; }
+
+        /// <summary>
+        /// The bill for this order
+        /// </summary>
+        public virtual Bill Bill { get; set; }
     }
 }

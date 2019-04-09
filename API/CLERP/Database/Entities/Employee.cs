@@ -11,7 +11,7 @@ namespace CLERP.Database.Entities
     /// Represents an employee of the firm in the Db
     /// </summary>
     public class Employee : Person
-    {               
+    {
         public string Username { get; set; }
 
         /// <summary>
@@ -20,6 +20,11 @@ namespace CLERP.Database.Entities
         public string Password { get; set; }
 
         public DateTime Birthday { get; set; }
+
+        /// <summary>
+        /// Foreign key to the department this employee works for
+        /// </summary>
+        public Guid DepartmentGuid { get; set; }
 
         /// <summary>
         /// The department this employee is attached to

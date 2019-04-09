@@ -43,5 +43,10 @@ namespace CLERP.Database.Entities
         /// All products which have this type
         /// </summary>
         public virtual ICollection<Product> Products { get; set; }
+
+        /// <summary>
+        /// All Orders which contained this product
+        /// </summary>
+        public virtual ICollection<ProductTypeOrder> Orders { get; set; }
     }
 }

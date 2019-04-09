@@ -22,6 +22,11 @@ namespace CLERP.Database.Entities
         public int? Housenumber { get; set; }
 
         /// <summary>
+        /// Foreign key to the city this address is attached
+        /// </summary>
+        public Guid CityGuid { get; set; }
+
+        /// <summary>
         /// The mapped City to this address
         /// </summary>
         public virtual City City { get; set; }
@@ -30,6 +35,11 @@ namespace CLERP.Database.Entities
         /// The warehouse which have this address
         /// </summary>
         public virtual Warehouse Warehouse { get; set; }
+
+        /// <summary>
+        /// Foreign key to the business-partner this address is attached
+        /// </summary>
+        public Guid BusinessPartnerGuid { get; set; }
 
         /// <summary>
         /// The business-partner this address is attached to
