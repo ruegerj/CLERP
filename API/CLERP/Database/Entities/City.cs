@@ -7,21 +7,22 @@ using System.Threading.Tasks;
 namespace CLERP.Database.Entities
 {
     /// <summary>
-    /// Represents a country in the Db
+    /// Represents a City in the Db
     /// </summary>
-    public class Country : EntityBase
+    public class City : EntityBase
     {
         public string Name { get; set; }
 
-        /// <summary>
-        /// The abbrevation of the country e.g. Switzerland => CHE
-        /// Three digit country codes
-        /// </summary>
-        public string Abbreviation { get; set; }
+        public int PostalCode { get; set; }
 
         /// <summary>
-        /// All cities which are in this country
+        /// All addresses within this city
         /// </summary>
-        public virtual ICollection<City> Cities { get; set; }
+        public virtual ICollection<Address> Addresses { get; set; }
+
+        /// <summary>
+        /// The mapped country
+        /// </summary>
+        public virtual Country Country { get; set; }
     }
 }

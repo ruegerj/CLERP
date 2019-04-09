@@ -13,7 +13,15 @@ namespace CLERP.Database.Entities
     {
         public string Name { get; set; }
 
-        // Relation to order for order-history
+        /// <summary>
+        /// All orders this business-partner has received
+        /// </summary>
+        public virtual ICollection<Order> ReceivedOrders { get; set; }
+
+        /// <summary>
+        /// All orders this business-partner has sendt
+        /// </summary>
+        public virtual ICollection<Order> SendtOrders { get; set; }
 
         /// <summary>
         /// All business contacts / persons registered for this firm
@@ -21,8 +29,13 @@ namespace CLERP.Database.Entities
         public virtual ICollection<BusinessContact> Contacts { get; set; }
 
         /// <summary>
-        /// All adresses of this business partner (e.g. multple office locations)
+        /// All logs for this business partner
         /// </summary>
-        public virtual ICollection<Adress> Adresses { get; set; }
+        public virtual ICollection<PartnerLog> Logs { get; set; }
+
+        /// <summary>
+        /// All adresses of this business partner (e.g. multple office- or warehouse-, factory- locations)
+        /// </summary>
+        public virtual ICollection<Address> Addresses { get; set; }
     }
 }

@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 namespace CLERP.Database.Entities
 {
     /// <summary>
-    /// Represents an adress of a company, warehouse etc.
+    /// Base class for an adress
     /// </summary>
-    public class Adress : EntityBase
+    public class Address : EntityBase
     {
-        public int PostalCode { get; set; }
-
         /// <summary>
         /// The street name without the house-number
         /// </summary>
@@ -24,23 +22,28 @@ namespace CLERP.Database.Entities
         public int? Housenumber { get; set; }
 
         /// <summary>
-        /// The name of the city
+        /// The mapped City to this address
         /// </summary>
-        public string City { get; set; }
+        public virtual City City { get; set; }
 
         /// <summary>
-        /// The mapped country
+        /// The warehouse which have this address
         /// </summary>
-        public virtual Country Country { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
 
         /// <summary>
-        /// All warehouses at this adress
-        /// </summary>
-        public virtual ICollection<Warehouse> Warehouses { get; set; }
-
-        /// <summary>
-        /// The business partner this adress is attached to
+        /// The business-partner this address is attached to
         /// </summary>
         public virtual BusinessPartner BusinessPartner { get; set; }
+
+        /// <summary>
+        /// All orders where this is the shipping address
+        /// </summary>
+        public virtual ICollection<Order> ShippingOrders { get; set; }
+
+        /// <summary>
+        /// All orders where this is the billing address
+        /// </summary>
+        public virtual ICollection<Order> BillingOrders { get; set; }
     }
 }

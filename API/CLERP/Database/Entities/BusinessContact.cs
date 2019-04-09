@@ -15,5 +15,10 @@ namespace CLERP.Database.Entities
         /// The firm this person is working for
         /// </summary>
         public virtual BusinessPartner BusinessPartner { get; set; }
+
+        /// <summary>
+        /// All log entries for this business-contact
+        /// </summary>
+        public virtual ICollection<ContactLog> Logs { get; set; }
     }
 }

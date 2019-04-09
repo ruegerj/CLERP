@@ -13,12 +13,12 @@ namespace CLERP.Database.Entities.Link
         /// <summary>
         /// Foreig key for Role
         /// </summary>
-        public int RoleId { get; set; }
+        public Guid RoleId { get; set; }
 
         /// <summary>
         /// Foreig key for Employee
         /// </summary>
-        public int EmployeeId { get; set; }
+        public Guid EmployeeId { get; set; }
 
         /// <summary>
         /// Link to the mapped role

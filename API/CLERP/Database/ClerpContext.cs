@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -26,109 +27,187 @@ namespace CLERP.Database
         /// <summary>
         /// Db-Configurations via the Fluent-Api
         /// </summary>
-        /// <param name="builder">current <see cref="ModelBuilder"/> instance</param>
-        protected override void OnModelCreating(ModelBuilder builder)
+        /// <param name="modelBuilder">current <see cref="ModelBuilder"/> instance</param>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
 
             #region Table renaming
 
-            builder.Entity<Role>()
+            modelBuilder.Entity<Role>()
                 .ToTable(nameof(Roles).ToLower());
 
-            builder.Entity<Department>()
+            modelBuilder.Entity<Department>()
                 .ToTable(nameof(Departments).ToLower());
 
-            builder.Entity<Employee>()
+            modelBuilder.Entity<Employee>()
                 .ToTable(nameof(Employees).ToLower());
 
-            builder.Entity<Adress>()
-                .ToTable(nameof(Adresses).ToLower());
-
-            builder.Entity<Warehouse>()
+            modelBuilder.Entity<Warehouse>()
                 .ToTable(nameof(Warehouses).ToLower());
 
-            builder.Entity<Shelf>()
+            modelBuilder.Entity<Shelf>()
                 .ToTable(nameof(Shelves).ToLower());
 
-            builder.Entity<Compartment>()
+            modelBuilder.Entity<Compartment>()
                 .ToTable(nameof(Compartments).ToLower());
 
-            builder.Entity<Product>()
+            modelBuilder.Entity<Product>()
                 .ToTable(nameof(Products).ToLower());
 
-            builder.Entity<Country>()
+            modelBuilder.Entity<Country>()
                 .ToTable(nameof(Countries).ToLower());
 
-            builder.Entity<BusinessPartner>()
+            modelBuilder.Entity<City>()
+                .ToTable(nameof(Cities).ToLower());
+
+            modelBuilder.Entity<Address>()
+                 .ToTable(nameof(Addresses).ToLower());
+
+            modelBuilder.Entity<Order>()
+                .ToTable(nameof(Orders).ToLower());
+
+            modelBuilder.Entity<ContactLog>()
+                .ToTable("business-contact-logs");
+
+            modelBuilder.Entity<PartnerLog>()
+                .ToTable("business-partner-logs");
+
+            modelBuilder.Entity<ProductType>()
+                .ToTable("product-types");
+
+            modelBuilder.Entity<BusinessPartner>()
                 .ToTable("business-partners");
 
-            builder.Entity<BusinessContact>()
+            modelBuilder.Entity<BusinessContact>()
                 .ToTable("business-contacts");
 
-            builder.Entity<RoleDepartment>()
+            modelBuilder.Entity<RoleDepartment>()
                 .ToTable("roles_departments");
 
-            builder.Entity<RoleEmployee>()
+            modelBuilder.Entity<RoleEmployee>()
                 .ToTable("roles_employees");
+
+            modelBuilder.Entity<ProductTypeProductType>()
+                .ToTable("product-types_product-types");
 
             #endregion
 
             #region Table configurations            
 
-            builder = ConfigureRole(builder);
+            modelBuilder = ConfigureRole(modelBuilder);
 
-            builder = ConfigureDepartment(builder);
+            modelBuilder = ConfigureDepartment(modelBuilder);
 
-            builder = ConfigureEmployee(builder);
+            modelBuilder = ConfigureEmployee(modelBuilder);
 
-            builder = ConfigureAdress(builder);
+            modelBuilder = ConfigureAddress(modelBuilder);
 
-            builder = ConfigureWarehouse(builder);
+            modelBuilder = ConfigureWarehouse(modelBuilder);
 
-            builder = ConfigureShelf(builder);
+            modelBuilder = ConfigureShelf(modelBuilder);
 
-            builder = ConfigureCompartment(builder);
+            modelBuilder = ConfigureCompartment(modelBuilder);
 
-            builder = ConfigureProduct(builder);
+            modelBuilder = ConfigureProduct(modelBuilder);
 
-            builder = ConfigureBusinessPartner(builder);
+            modelBuilder = ConfigureBusinessPartner(modelBuilder);
 
-            builder = ConfigureBusinessContact(builder);
+            modelBuilder = ConfigureBusinessContact(modelBuilder);
 
-            builder = ConfigureCountry(builder);
+            modelBuilder = ConfigureCountry(modelBuilder);
+
+            modelBuilder = ConfigureCity(modelBuilder);
+
+            modelBuilder = ConfigureProductType(modelBuilder);
+
+            modelBuilder = ConfigureLogEntry<ContactLog>(modelBuilder);
+
+            modelBuilder = ConfigureLogEntry<PartnerLog>(modelBuilder);
+
+            modelBuilder = ConfigureOrder(modelBuilder);
 
             #endregion
 
             #region Table relations
 
-            // Role <-> Department
-            builder.Entity<RoleDepartment>()
-                .HasKey(x => new { x.RoleId, x.DepartmentId });
+            // Role m-m Department
+            modelBuilder.Entity<RoleDepartment>()
+                .HasKey(x => new { x.RoleGuid, x.DepartmentGuid });
 
-            builder.Entity<RoleDepartment>()
+            modelBuilder.Entity<RoleDepartment>()
                 .HasOne(x => x.Role)
                 .WithMany(y => y.Departments)
-                .HasForeignKey(y => y.DepartmentId);
+                .HasForeignKey(y => y.DepartmentGuid);
 
-            builder.Entity<RoleDepartment>()
+            modelBuilder.Entity<RoleDepartment>()
                 .HasOne(x => x.Department)
                 .WithMany(y => y.Roles)
-                .HasForeignKey(y => y.RoleId);
+                .HasForeignKey(y => y.RoleGuid);
 
-            // Role <-> Employee
-            builder.Entity<RoleEmployee>()
+            // Role m-m Employee
+            modelBuilder.Entity<RoleEmployee>()
                 .HasKey(x => new { x.RoleId, x.EmployeeId });
 
-            builder.Entity<RoleEmployee>()
+            modelBuilder.Entity<RoleEmployee>()
                 .HasOne(x => x.Role)
                 .WithMany(y => y.Employees)
                 .HasForeignKey(y => y.EmployeeId);
 
-            builder.Entity<RoleEmployee>()
+            modelBuilder.Entity<RoleEmployee>()
                 .HasOne(x => x.Employee)
                 .WithMany(y => y.Roles)
                 .HasForeignKey(y => y.RoleId);
+
+            // Parent Product-Type m-m Child Product-Type
+            modelBuilder.Entity<ProductTypeProductType>()
+                .HasKey(x => new { x.ChildGuid, x.ParentGuid });
+
+            modelBuilder.Entity<ProductTypeProductType>()
+                .HasOne(x => x.Parent)
+                .WithMany(y => y.Children)
+                .HasForeignKey(y => y.ChildGuid)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ProductTypeProductType>()
+                .HasOne(x => x.Child)
+                .WithMany(y => y.Parents)
+                .HasForeignKey(y => y.ParentGuid)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Address 1-1 Warehouse 
+            modelBuilder.Entity<Address>()
+                .HasOne(x => x.Warehouse)
+                .WithOne(y => y.Address)
+                .HasForeignKey<Warehouse>(y => y.AddressGuid);
+
+            // Address 1-m Order (Shipping-Address)
+            modelBuilder.Entity<Address>()
+                .HasMany(x => x.ShippingOrders)
+                .WithOne(y => y.ShippingAddress)
+                .HasForeignKey(y => y.ShippingAddressGuid)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Address 1-m Order (Billing-Address)
+            modelBuilder.Entity<Address>()
+                .HasMany(x => x.BillingOrders)
+                .WithOne(y => y.BillingAddress)
+                .HasForeignKey(y => y.BillingAddressGuid)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Business-Partner 1-m Order (Receiving)
+            modelBuilder.Entity<BusinessPartner>()
+                .HasMany(x => x.ReceivedOrders)
+                .WithOne(y => y.ReceivingPartner)
+                .HasForeignKey(y => y.ReceivingPartnerGuid)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Business-Partner 1-m Order (Sending)
+            modelBuilder.Entity<BusinessPartner>()
+                .HasMany(x => x.SendtOrders)
+                .WithOne(y => y.SendingPartner)
+                .HasForeignKey(y => y.SendingPartnerGuid)
+                .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
 
@@ -138,46 +217,65 @@ namespace CLERP.Database
                 v => v.ToString(), // value -> Db
                 v => (RoleType)Enum.Parse(typeof(RoleType), v)); // value <- Db
 
-            builder.Entity<Role>()
+            modelBuilder.Entity<Role>()
                 .Property(x => x.Type)
                 .HasConversion(roleTypeConverter);
 
-            var countryAbbrevationConverter = new ValueConverter<string, string>(
-                v => v.ToUpperInvariant(),
-                v => v);
+            var countryAbbrevationConverter = new ValueConverter<string, string>
+                (
+                    v => v.ToUpperInvariant(),
+                    v => v
+                );
 
-            builder.Entity<Country>()
+            modelBuilder.Entity<Country>()
                 .Property(x => x.Abbreviation)
                 .HasConversion(countryAbbrevationConverter);
 
-            var productStateConverter = new ValueConverter<ProductState, string>(
-                v => v.ToString(),
-                v => (ProductState)Enum.Parse(typeof(ProductState), v));
+            var productStateConverter = new ValueConverter<ProductState, string>
+                (
+                    v => v.ToString(),
+                    v => (ProductState)Enum.Parse(typeof(ProductState), v)
+                );
 
-            builder.Entity<Product>()
+            modelBuilder.Entity<Product>()
                 .Property(x => x.State)
                 .HasConversion(productStateConverter);
+
+            var orderStateConverter = new ValueConverter<OrderState, string>
+                (
+                    v => v.ToString(),
+                    v => (OrderState)Enum.Parse(typeof(OrderState), v)
+                );
+
+            modelBuilder.Entity<Order>()
+                .Property(x => x.State)
+                .HasConversion(orderStateConverter);
 
             #endregion
         }
 
-        
         // Ordinary Tables
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<Adress> Adresses { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
         public DbSet<Shelf> Shelves { get; set; }
         public DbSet<Compartment> Compartments { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<BusinessPartner> BusinessPartners { get; set; }
         public DbSet<BusinessContact> BusinessContacts { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<ContactLog> ContactLogs { get; set; }
+        public DbSet<PartnerLog> PartnerLogs { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         // Link-Tables
         public DbSet<RoleEmployee> RolesEmployees { get; set; }
         public DbSet<RoleDepartment> RolesDepartments { get; set; }
+        public DbSet<ProductTypeProductType> ProductTypesProductTypes { get; set; }
 
         #region Configurators for entities
 
@@ -186,10 +284,9 @@ namespace CLERP.Database
         /// </summary>
         /// <typeparam name="T">Type of the sub class</typeparam>
         /// <param name="builder">current <see cref="ModelBuilder"/> instance</param>
-        /// <returns></returns>
         private ModelBuilder ConfigureBaseFields<T>(ModelBuilder builder) where T : EntityBase
         {
-            builder.Entity<T>()                
+            builder.Entity<T>()
                 .HasKey(x => x.Guid);
 
             // Set auto generate for GUID in Db
@@ -260,30 +357,18 @@ namespace CLERP.Database
 
             builder.Entity<Employee>()
                 .Property(x => x.Lastname)
-                .IsRequired();            
+                .IsRequired();
 
             return builder;
         }
 
-        private ModelBuilder ConfigureAdress(ModelBuilder builder)
+        private ModelBuilder ConfigureAddress(ModelBuilder builder)
         {
-            builder = ConfigureBaseFields<Adress>(builder);
-            
-            builder.Entity<Adress>()
-                .Property(x => x.PostalCode)
-                .IsRequired();
+            builder = ConfigureBaseFields<Address>(builder);
 
-            builder.Entity<Adress>()
+            builder.Entity<Address>()
                 .Property(x => x.Street)
                 .IsRequired();
-
-            builder.Entity<Adress>()
-                .Property(x => x.City)
-                .IsRequired();
-
-            builder.Entity<Adress>()
-                .Property(x => x.Country)
-                .IsRequired();            
 
             return builder;
         }
@@ -322,7 +407,7 @@ namespace CLERP.Database
                 .Property(x => x.Column)
                 .IsRequired();
 
-            return builder;                
+            return builder;
         }
 
         private ModelBuilder ConfigureProduct(ModelBuilder builder)
@@ -331,19 +416,10 @@ namespace CLERP.Database
 
             builder.Entity<Product>()
                .Property(x => x.Name)
-               .IsRequired();
-
-            //builder.Entity<Product>()
-            //    .Property(x => x.Price)
-            //    .HasColumnType<decimal>("decimal(18,2)") // specify precision and scale of decimal for Db
-            //    .IsRequired();                         
+               .IsRequired();                              
 
             builder.Entity<Product>()
               .Property(x => x.SerialNumber)
-              .IsRequired();
-
-            builder.Entity<Product>()
-              .Property(x => x.EAN)
               .IsRequired();
 
             builder.Entity<Product>()
@@ -401,7 +477,77 @@ namespace CLERP.Database
             return builder;
         }
 
+        private ModelBuilder ConfigureCity(ModelBuilder builder)
+        {
+            builder = ConfigureBaseFields<City>(builder);
+
+            builder.Entity<City>()
+                .Property(x => x.Name)
+                .IsRequired();
+
+            builder.Entity<City>()
+                .Property(x => x.PostalCode)
+                .IsRequired();
+
+            return builder;
+        }
+
+        private ModelBuilder ConfigureProductType(ModelBuilder builder)
+        {
+            builder = ConfigureBaseFields<ProductType>(builder);
+
+            builder.Entity<ProductType>()
+              .Property(x => x.EAN)
+              .IsRequired();
+
+            builder.Entity<ProductType>()
+                .Property(x => x.Name)
+                .IsRequired();
+
+            builder.Entity<ProductType>()
+                .Property(x => x.Price)
+                .HasColumnType("decimal(18,2)") // specify precision and scale of decimal for Db
+                .IsRequired();
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Configure method for all entities wich inherit from <see cref="LogEntry"/>
+        /// </summary>
+        /// <typeparam name="TLog">Type of derived class</typeparam>
+        /// <param name="builder">current <see cref="ModelBuilder"/> instance</param>
+        private ModelBuilder ConfigureLogEntry<TLog>(ModelBuilder builder) where TLog : LogEntry
+        {
+            builder = ConfigureBaseFields<TLog>(builder);
+
+            builder.Entity<TLog>()
+                .Property(x => x.LogMessage)
+                .IsRequired();
+
+            return builder;
+        }
+
+        private ModelBuilder ConfigureOrder(ModelBuilder builder)
+        {
+            builder = ConfigureBaseFields<Order>(builder);
+
+            builder.Entity<Order>()
+                .Property(x => x.Date)
+                .IsRequired();
+
+            builder.Entity<Order>()
+                .Property(x => x.State)
+                .IsRequired();
+
+            builder.Entity<Order>()
+                .Property(x => x.TotalPrice)
+                .HasColumnType("decimal(18,2)") // specify precision and scale of decimal for Db
+                .IsRequired();
+
+            return builder;
+        }
+
         #endregion
     }
-
 }

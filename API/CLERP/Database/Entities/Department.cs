@@ -15,6 +15,9 @@ namespace CLERP.Database.Entities
     {
         public string Title { get; set; }
 
+        /// <summary>
+        /// Optional description
+        /// </summary>
         public string Description { get; set; }
 
         /// <summary>

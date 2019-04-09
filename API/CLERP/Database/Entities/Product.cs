@@ -14,20 +14,33 @@ namespace CLERP.Database.Entities
     {
         public string Name { get; set; }
 
-        public string Description { get; set; }        
+        /// <summary>
+        /// Optional description
+        /// </summary>
+        public string Description { get; set; }
 
         public string SerialNumber { get; set; }
 
         public ProductState State { get; set; }
 
         /// <summary>
-        /// European Article Number 
+        /// The parent product of this product
         /// </summary>
-        public string EAN { get; set; }        
+        public virtual Product Parent { get; set; }
+
+        /// <summary>
+        /// All child prodcuts of this product
+        /// </summary>
+        public virtual ICollection<Product> Children { get; set; }
+
+        /// <summary>
+        /// The type this product is attached to
+        /// </summary>
+        public virtual ProductType Type { get; set; }
 
         /// <summary>
         /// The physical location of the product
         /// </summary>
-        public virtual Compartment Compartment { get; set; }        
+        public virtual Compartment Compartment { get; set; }
     }
 }

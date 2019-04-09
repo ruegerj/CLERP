@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace CLERP.Database.Entities
+{
+    /// <summary>
+    /// Represents a log for a business-partner
+    /// </summary>
+    public class PartnerLog : LogEntry
+    {
+        /// <summary>
+        /// Link to the business-partner this log is attached
+        /// </summary>
+        public virtual BusinessPartner Partner { get; set; }
+    }
+}

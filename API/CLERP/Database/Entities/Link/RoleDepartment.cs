@@ -13,12 +13,12 @@ namespace CLERP.Database.Entities.Link
         /// <summary>
         /// Foreign key for Role
         /// </summary>
-        public int RoleId { get; set; }
+        public Guid RoleGuid { get; set; }
 
         /// <summary>
         /// Foreign key for Department
         /// </summary>
-        public int DepartmentId { get; set; }
+        public Guid DepartmentGuid { get; set; }
 
         /// <summary>
         /// Link to mapped Role

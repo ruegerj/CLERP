@@ -40,5 +40,17 @@ namespace CLERP.Database.Entities.Abstract
         Defect
     }
 
+    /// <summary>
+    /// Different states an order can have
+    /// </summary>
+    public enum OrderState
+    {
+        Placed,
+        Pending,
+        Shipped,
+        Received,
+        Finished
+    }
+
     #endregion
 }

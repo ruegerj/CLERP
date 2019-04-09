@@ -14,9 +14,14 @@ namespace CLERP.Database.Entities
         public string Name { get; set; }
 
         /// <summary>
-        /// Link to the mapped adress
+        /// Foreign key for Address relation
         /// </summary>
-        public virtual Adress Adress { get; set; }
+        public Guid AddressGuid { get; set; }
+
+        /// <summary>
+        /// Link to the mapped warehouse-address
+        /// </summary>
+        public virtual Address Address { get; set; }
 
         /// <summary>
         /// All shelves inside this warehouse
