@@ -14,7 +14,12 @@ namespace CLERP.Database.Entities
         /// <summary>
         /// Designation of the shelf e.g. shelf 7A
         /// </summary>
-        public string Designation { get; set; }        
+        public string Designation { get; set; }
+
+        /// <summary>
+        /// Foreign key to the warehouse this shelf is in
+        /// </summary>
+        public Guid WarehouseGuid { get; set; }
 
         /// <summary>
         /// The warehouse this shelf is inside

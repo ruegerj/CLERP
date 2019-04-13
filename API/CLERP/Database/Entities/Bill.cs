@@ -14,9 +14,14 @@ namespace CLERP.Database.Entities
     public class Bill : EntityBase
     {
         /// <summary>
-        /// Datetime which indicates to which date the bill has to be payed
+        /// Datetime after which the this bill is valid
         /// </summary>
-        public DateTime PayableUntil { get; set; }
+        public DateTime ValidFrom { get; set; }
+
+        /// <summary>
+        /// Number of days which result in the deadline for the payment of the bill when added to the valid from date
+        /// </summary>
+        public int AdditionalDeadlineDays { get; set; }
 
         /// <summary>
         /// Optional description

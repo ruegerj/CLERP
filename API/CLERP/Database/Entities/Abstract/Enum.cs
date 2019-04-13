@@ -58,7 +58,6 @@ namespace CLERP.Database.Entities.Abstract
     public enum BillState
     {
         Received,
-        PaymentPlaced,
         Payed
     }
 
