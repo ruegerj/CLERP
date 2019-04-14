@@ -1,6 +1,4 @@
-﻿using CLERP.Database.Configurations;
-using CLERP.Database.Configurations.Link;
-using CLERP.Domain.Models;
+﻿using CLERP.Domain.Models;
 using CLERP.Domain.Models.Link;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -11,7 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace CLERP.Database
+namespace CLERP.Persistence.Contexts
 {
     /// <summary>
     /// Db-Context for ClerpDb

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CLERP.Database.Configurations
+namespace CLERP.Persistence.Configurations.Abstract
 {
     /// <summary>
     /// Base class for all EntityTypeConfigurations

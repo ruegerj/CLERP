@@ -1,5 +1,5 @@
-﻿using CLERP.Database;
-using CLERP.Domain.Models.Abstract;
+﻿using CLERP.Domain.Models.Abstract;
+using CLERP.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

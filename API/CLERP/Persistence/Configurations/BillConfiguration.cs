@@ -1,5 +1,6 @@
 ﻿using CLERP.Domain.Models;
 using CLERP.Domain.Models.Abstract;
+using CLERP.Persistence.Configurations.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CLERP.Database.Configurations
+namespace CLERP.Persistence.Configurations
 {
     public class BillConfiguration : EntityTypeConfiguration<Bill>
     {

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CLERP.Database.Configurations.Link
+namespace CLERP.Persistence.Configurations.Link
 {
     public class RoleEmployeeConfiguration : IEntityTypeConfiguration<RoleEmployee>
     {
