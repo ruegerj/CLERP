@@ -1,4 +1,4 @@
-﻿using CLERP.Database.Entities.Link;
+﻿using CLERP.Domain.Models.Link;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

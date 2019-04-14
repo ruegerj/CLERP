@@ -1,8 +1,7 @@
 ﻿using CLERP.Database.Configurations;
 using CLERP.Database.Configurations.Link;
-using CLERP.Database.Entities;
-using CLERP.Database.Entities.Abstract;
-using CLERP.Database.Entities.Link;
+using CLERP.Domain.Models;
+using CLERP.Domain.Models.Link;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;

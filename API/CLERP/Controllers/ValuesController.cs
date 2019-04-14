@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CLERP.Database.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CLERP.Controllers

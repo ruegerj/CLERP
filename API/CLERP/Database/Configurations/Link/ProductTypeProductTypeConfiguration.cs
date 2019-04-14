@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using CLERP.Database.Entities.Link;
+using CLERP.Domain.Models.Link;
 using System;
 using System.Collections.Generic;
 using System.Linq;

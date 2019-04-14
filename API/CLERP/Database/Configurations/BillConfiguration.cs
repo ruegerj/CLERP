@@ -1,5 +1,5 @@
-﻿using CLERP.Database.Entities;
-using CLERP.Database.Entities.Abstract;
+﻿using CLERP.Domain.Models;
+using CLERP.Domain.Models.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
