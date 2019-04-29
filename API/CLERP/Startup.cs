@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CLERP.Domain.Repositories;
+using CLERP.Domain.Security.Hashing;
 using CLERP.Persistence.Contexts;
+using CLERP.Persistence.Security.Hashing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,9 +41,10 @@ namespace CLERP
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddCors();
+            
+            services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; } ); // Disable built in validation error response
 
-            // Disable built in validation error response
-            services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; } );
+            services.AddScoped<IPasswordHasher, Sha512Hasher>(); // Register hashing implentation for password hashing within the application
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

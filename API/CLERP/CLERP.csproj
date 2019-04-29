@@ -7,13 +7,31 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <Compile Remove="Dtos\**" />
+    <Content Remove="Dtos\**" />
+    <EmbeddedResource Remove="Dtos\**" />
+    <None Remove="Dtos\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\" />
+    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Domain\Pipe\Dispatcher\CommandDispatcher\" />
+    <Folder Include="Domain\Pipe\Dispatcher\QueryDispatcher\" />
+    <Folder Include="Domain\Pipe\Handler\CommandHandler\" />
+    <Folder Include="Domain\Pipe\Handler\QueryHandler\" />
+    <Folder Include="Domain\Pipe\Result\CommandResult\" />
+    <Folder Include="Domain\Pipe\Result\QueryResult\" />
+    <Folder Include="Domain\Services\" />
+    <Folder Include="Dto\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Persistence\Repositories\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
