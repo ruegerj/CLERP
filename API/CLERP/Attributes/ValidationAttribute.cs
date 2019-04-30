@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CLERP.Attributes
+namespace CLERP.API.Attributes
 {
     /// <summary>
     /// Custom attribute for erros in model validation

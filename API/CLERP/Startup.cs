@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CLERP.Domain.Repositories;
-using CLERP.Domain.Security.Hashing;
-using CLERP.Persistence.Contexts;
-using CLERP.Persistence.Security.Hashing;
+using CLERP.Business.Security.Hashing;
+using CLERP.DataAccess.Contexts;
+using CLERP.DataAccess.Security.Hashing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace CLERP
+namespace CLERP.API
 {
     public class Startup
     {

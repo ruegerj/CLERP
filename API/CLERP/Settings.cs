@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CLERP
+namespace CLERP.API
 {
     /// <summary>
     /// Represents the custom settings from the appsettings.json file
