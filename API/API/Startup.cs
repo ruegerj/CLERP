@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CLERP.Business.Security.Hashing;
-using CLERP.DataAccess.Contexts;
-using CLERP.DataAccess.Security.Hashing;
+using CLERP.API.Infrastructure.Security.Hashing;
+using CLERP.API.Infrastructure.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +13,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MediatR;
+using System.Reflection;
+using AutoMapper;
+using CLERP.API.Infrastructure.Conventions;
+using Newtonsoft.Json;
+using FluentValidation.AspNetCore;
+using CLERP.API.Infrastructure.Errors;
+using CLERP.API.Infrastructure.Behavior;
+using CLERP.API.Infrastructure.Utilities;
+using Microsoft.AspNetCore.Http;
+using CLERP.API.Infrastructure.Middleware;
 
 namespace CLERP.API
 {
@@ -29,6 +39,8 @@ namespace CLERP.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var currentAssembly = GetType().Assembly;
+
             // load custom settings
             var settingsSection = Configuration.GetSection(nameof(Settings));
             var settings = settingsSection.Get<Settings>();
@@ -37,13 +49,36 @@ namespace CLERP.API
 
             services.AddDbContext<ClerpContext>(options => options.UseSqlServer(settings.ConnectionStringLocal));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => 
+            {
+                options.Conventions.Add(new GroupByApiRootConvention());
+            })
+            .AddJsonOptions(options => 
+            {
+                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            })
+            .AddFluentValidation(config => 
+            {
+                config.RegisterValidatorsFromAssemblyContaining<Startup>();
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddApiVersioning();
 
             services.AddCors();
-            
+
+            // Register MediatR and custom behavior for pipeline
+            services.AddMediatR(currentAssembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(DBContextTransactionPipelineBehavior<,>));
+
+            services.AddAutoMapper(currentAssembly);
+
             services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; } ); // Disable built in validation error response
 
             services.AddScoped<IPasswordHasher, Sha512Hasher>(); // Register hashing implentation for password hashing within the application
+            services.AddScoped<ICurrentUserAccessor, CurrentUserAccessor>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +93,8 @@ namespace CLERP.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCustomMiddleware();
 
             app.UseCors(c => c
                 .AllowAnyOrigin()
