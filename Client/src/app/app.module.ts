@@ -3,20 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavComponent } from './nav/nav.component';
-import { FooterComponent } from './footer/footer.component';
-import { ProductMainComponent } from './productMain/productMain.component';
-import { ProductDetailComponent } from './productMain/productDetail/productDetail.component';
-import { ProductListComponent } from './productMain/productList/productList.component';
+import { NavComponent } from './core/nav/nav.component';
+import { FooterComponent } from './core/footer/footer.component';
+import { ProductDetailComponent } from './products/productDetail/productDetail.component';
+import { ProductListComponent } from './products/productList/productList.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       NavComponent,
       FooterComponent,
-      ProductMainComponent,
       ProductDetailComponent,
-      ProductListComponent
+      ProductListComponent,
+      ProductsComponent
    ],
    imports: [
       BrowserModule,
