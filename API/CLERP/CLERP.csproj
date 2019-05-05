@@ -12,9 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\Entities\" />
     <Folder Include="Dtos\" />
-    <Folder Include="Database\" />
+    <Folder Include="Migrations\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 
