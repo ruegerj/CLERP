@@ -1,4 +1,4 @@
-﻿using CLERP.API.Infrastructure.Errors;
+﻿using CLERP.API.Infrastructure.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Localization;
@@ -53,7 +53,7 @@ namespace CLERP.API.Infrastructure.Middleware
             {
                 case RestException re:
                     {
-                        errors = re.Errors;
+                        errors = re.Payload;
                         context.Response.StatusCode = (int)re.StatusCode;
                         break;
                     }

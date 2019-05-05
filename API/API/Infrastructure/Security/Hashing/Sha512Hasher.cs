@@ -29,7 +29,7 @@ namespace CLERP.API.Infrastructure.Security.Hashing
         public bool PasswordMatches(string plainPassword, string hashedPassword, string salt)
         {
             var tempHash = HashPasswordWithSalt(plainPassword, salt);
-
+            
             return String.Equals(tempHash.HashBase64, hashedPassword);
         }
 
@@ -77,15 +77,8 @@ namespace CLERP.API.Infrastructure.Security.Hashing
         {
             byte[] result = new byte[array1.Length + array2.Length];
 
-            for (int i = 0; i < array1.Length; i++)
-            {
-                result[i] = array1[i];
-            }
-
-            for (int i = 0; i < array2.Length; i++)
-            {
-                result[array1.Length + i] = array2[i];
-            }
+            Buffer.BlockCopy(array1, 0, result, 0, array1.Length);
+            Buffer.BlockCopy(array2, 0, result, array1.Length, array2.Length);
 
             return result;
         }

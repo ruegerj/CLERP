@@ -32,9 +32,9 @@ namespace CLERP.API.Domain.Models
         public virtual City City { get; set; }
 
         /// <summary>
-        /// The warehouse which have this address
+        /// The warehouses which have this address
         /// </summary>
-        public virtual Warehouse Warehouse { get; set; }
+        public virtual ICollection<Warehouse> Warehouses { get; set; }
 
         /// <summary>
         /// Foreign key to the business-partner this address is attached

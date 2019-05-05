@@ -30,11 +30,10 @@ namespace CLERP.API.Infrastructure.Configurations
 
             builder.HasIndex(x => x.OrderGuid).IsUnique();
 
-            // Order 1:1 Bill
+            // Order 1:n Bill
             builder.HasOne(x => x.Order)
-                .WithOne(y => y.Bill)
-                .HasForeignKey<Bill>(x => x.OrderGuid)
-                .OnDelete(DeleteBehavior.Restrict);
+                .WithMany(y => y.Bills)
+                .HasForeignKey(x => x.OrderGuid);
 
             // Product n:m Bill
             builder.HasMany(x => x.ProductsToPay)

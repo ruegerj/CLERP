@@ -20,10 +20,10 @@ namespace CLERP.API.Infrastructure.Configurations
 
             builder.HasIndex(x => x.AddressGuid);
 
-            // Address 1-1 Warehouse 
+            // Address 1-n Warehouse 
             builder.HasOne(x => x.Address)
-                .WithOne(y => y.Warehouse)
-                .HasForeignKey<Warehouse>(x => x.AddressGuid);
+                .WithMany(y => y.Warehouses)
+                .HasForeignKey(y => y.AddressGuid);
         }
     }
 }

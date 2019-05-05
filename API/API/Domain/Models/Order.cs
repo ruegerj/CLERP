@@ -73,13 +73,8 @@ namespace CLERP.API.Domain.Models
         public virtual Address BillingAddress { get; set; }
 
         /// <summary>
-        /// Foreign key to the attached bill
+        /// Bills attached to this order
         /// </summary>
-        public Guid? BillGuid { get; set; } = null;
-
-        /// <summary>
-        /// The bill for this order
-        /// </summary>
-        public virtual Bill Bill { get; set; }
+        public virtual ICollection<Bill> Bills { get; set; }
     }
 }

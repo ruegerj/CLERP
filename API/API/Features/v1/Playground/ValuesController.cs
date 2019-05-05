@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CLERP.API.Attributes;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CLERP.API.Controllers
+namespace CLERP.API.Features.v1.Playground
 {
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ValidateModel]
     public class ValuesController : ControllerBase
     {
         private readonly ILogger<ValuesController> _logger;
 
-        private readonly Infrastructure.Contexts.ClerpContext _context;
-
-        public ValuesController(ILogger<ValuesController> logger, Infrastructure.Contexts.ClerpContext context)
+        public ValuesController(ILogger<ValuesController> logger)
         {
             _logger = logger;
-            _context = context;
         }
 
         // GET api/values
@@ -39,7 +39,7 @@ namespace CLERP.API.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] string data)
         {           
         }
 
@@ -54,5 +54,5 @@ namespace CLERP.API.Controllers
         public void Delete(int id)
         {
         }
-    }
+    }    
 }

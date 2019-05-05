@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CLERP.API.Infrastructure.Security.Jwt;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -28,9 +30,14 @@ namespace CLERP.API.Infrastructure.Utilities
             }
         }
 
-        public string GetCurrentUsername()
+        public string GetId()
         {
-            return _userClaims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            return _userClaims?.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
+        }
+
+        public string GetUsername()
+        {
+            return _userClaims?.FirstOrDefault(c => c.Type == CustomJwtClaims.EmployeeUsername)?.Value;
         }
 
         private void GetUserClaims()

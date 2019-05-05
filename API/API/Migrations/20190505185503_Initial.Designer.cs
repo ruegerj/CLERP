@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CLERP.API.Migrations
 {
     [DbContext(typeof(ClerpContext))]
-    [Migration("20190503215137_Initial")]
+    [Migration("20190505185503_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -423,8 +423,6 @@ namespace CLERP.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<Guid?>("BillGuid");
-
                     b.Property<Guid>("BillingAddressGuid");
 
                     b.Property<string>("CreatedBy")
@@ -515,6 +513,8 @@ namespace CLERP.API.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description");
+
+                    b.Property<byte[]>("Image");
 
                     b.Property<DateTime>("LastModified")
                         .ValueGeneratedOnUpdate();
@@ -665,8 +665,7 @@ namespace CLERP.API.Migrations
 
                     b.HasKey("Guid");
 
-                    b.HasIndex("AddressGuid")
-                        .IsUnique();
+                    b.HasIndex("AddressGuid");
 
                     b.ToTable("Warehouses");
                 });
@@ -686,9 +685,9 @@ namespace CLERP.API.Migrations
             modelBuilder.Entity("CLERP.API.Domain.Models.Bill", b =>
                 {
                     b.HasOne("CLERP.API.Domain.Models.Order", "Order")
-                        .WithOne("Bill")
-                        .HasForeignKey("CLERP.API.Domain.Models.Bill", "OrderGuid")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .WithMany("Bills")
+                        .HasForeignKey("OrderGuid")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CLERP.API.Domain.Models.BusinessContact", b =>
@@ -845,8 +844,8 @@ namespace CLERP.API.Migrations
             modelBuilder.Entity("CLERP.API.Domain.Models.Warehouse", b =>
                 {
                     b.HasOne("CLERP.API.Domain.Models.Address", "Address")
-                        .WithOne("Warehouse")
-                        .HasForeignKey("CLERP.API.Domain.Models.Warehouse", "AddressGuid")
+                        .WithMany("Warehouses")
+                        .HasForeignKey("AddressGuid")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

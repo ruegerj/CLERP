@@ -19,11 +19,15 @@ using AutoMapper;
 using CLERP.API.Infrastructure.Conventions;
 using Newtonsoft.Json;
 using FluentValidation.AspNetCore;
-using CLERP.API.Infrastructure.Errors;
+using CLERP.API.Infrastructure.Exceptions;
 using CLERP.API.Infrastructure.Behavior;
 using CLERP.API.Infrastructure.Utilities;
 using Microsoft.AspNetCore.Http;
 using CLERP.API.Infrastructure.Middleware;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using CLERP.API.Infrastructure.Security.Jwt;
 
 namespace CLERP.API
 {
@@ -42,12 +46,34 @@ namespace CLERP.API
             var currentAssembly = GetType().Assembly;
 
             // load custom settings
-            var settingsSection = Configuration.GetSection(nameof(Settings));
-            var settings = settingsSection.Get<Settings>();
+            var settingsSection = Configuration.GetSection(nameof(AppSettings));
+            var jwtSection = Configuration.GetSection(nameof(JwtOptions));
+            var settings = settingsSection.Get<AppSettings>();
 
-            services.Configure<Settings>(settingsSection);
+            services.Configure<AppSettings>(settingsSection);
+            services.Configure<JwtOptions>(jwtSection);
 
             services.AddDbContext<ClerpContext>(options => options.UseSqlServer(settings.ConnectionStringLocal));
+
+            // configure jwt auth
+            var key = settings.JwtOptions.GetBytesFromKey;
+            services.AddAuthentication(auth =>
+            {
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(bearer =>
+            {
+                bearer.RequireHttpsMetadata = true;
+                bearer.SaveToken = true;
+                bearer.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
             services.AddMvc(options => 
             {

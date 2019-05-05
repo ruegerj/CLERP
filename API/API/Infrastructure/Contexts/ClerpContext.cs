@@ -159,7 +159,7 @@ namespace CLERP.API.Infrastructure.Contexts
         {
             DateTime now = DateTime.Now;
 
-            string currentUsername = _currentUserAccessor.GetCurrentUsername();
+            string currentUsername = _currentUserAccessor.GetUsername();
             string username  = !String.IsNullOrEmpty(currentUsername) ? currentUsername : "Unknown user";
 
             var addedEntities = ChangeTracker.Entries().Where(e => e.State == EntityState.Added).ToList();

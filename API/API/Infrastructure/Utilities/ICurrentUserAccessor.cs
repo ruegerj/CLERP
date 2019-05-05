@@ -7,6 +7,8 @@ namespace CLERP.API.Infrastructure.Utilities
 {
     public interface ICurrentUserAccessor
     {
-        string GetCurrentUsername();
+        string GetId();
+
+        string GetUsername();
     }
 }

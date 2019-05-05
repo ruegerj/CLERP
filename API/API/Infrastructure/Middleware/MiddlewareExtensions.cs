@@ -1,4 +1,4 @@
-﻿using CLERP.API.Infrastructure.Errors;
+﻿using CLERP.API.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using System;
 using System.Collections.Generic;

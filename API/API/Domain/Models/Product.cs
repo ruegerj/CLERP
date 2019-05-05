@@ -24,6 +24,8 @@ namespace CLERP.API.Domain.Models
 
         public ProductState State { get; set; }
 
+        public byte[] Image { get; set; }
+
         /// <summary>
         /// Foreign key to parent product
         /// </summary>

@@ -341,8 +341,7 @@ namespace CLERP.API.Migrations
                     SendingPartnerGuid = table.Column<Guid>(nullable: false),
                     ReceivingPartnerGuid = table.Column<Guid>(nullable: false),
                     ShippingAddressGuid = table.Column<Guid>(nullable: false),
-                    BillingAddressGuid = table.Column<Guid>(nullable: false),
-                    BillGuid = table.Column<Guid>(nullable: true)
+                    BillingAddressGuid = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -420,7 +419,7 @@ namespace CLERP.API.Migrations
                         column: x => x.OrderGuid,
                         principalTable: "Orders",
                         principalColumn: "Guid",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -508,6 +507,7 @@ namespace CLERP.API.Migrations
                     Description = table.Column<string>(nullable: true),
                     SerialNumber = table.Column<string>(nullable: false),
                     State = table.Column<string>(nullable: false),
+                    Image = table.Column<byte[]>(nullable: true),
                     ParentGuid = table.Column<Guid>(nullable: true),
                     TypeGuid = table.Column<Guid>(nullable: false),
                     CompartmentGuid = table.Column<Guid>(nullable: false),
@@ -656,8 +656,7 @@ namespace CLERP.API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Warehouses_AddressGuid",
                 table: "Warehouses",
-                column: "AddressGuid",
-                unique: true);
+                column: "AddressGuid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
