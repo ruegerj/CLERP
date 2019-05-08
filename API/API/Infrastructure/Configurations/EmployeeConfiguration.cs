@@ -18,7 +18,6 @@ namespace CLERP.API.Infrastructure.Configurations
             builder.ToTable("Employees");
             builder.Property(x => x.Email).IsRequired();
             builder.Property(x => x.Password).IsRequired();
-            builder.Property(x => x.Salt).IsRequired();
             builder.Property(x => x.Firstname).IsRequired();
             builder.Property(x => x.Lastname).IsRequired();
 

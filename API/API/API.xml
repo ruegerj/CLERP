@@ -14,11 +14,6 @@
             Connection-String to local dev DB
             </summary>
         </member>
-        <member name="P:CLERP.API.AppSettings.JwtOptions">
-            <summary>
-            Configurations for the Jwt's
-            </summary>
-        </member>
         <member name="T:CLERP.API.Domain.Models.Abstract.EntityBase">
             <summary>
             Base class for an entity in the clerp Db
@@ -326,11 +321,6 @@
         <member name="P:CLERP.API.Domain.Models.Employee.Password">
             <summary>
             A 512 bit hash (Sha-512) as a Base64String which represents the hashed password of an employee
-            </summary>
-        </member>
-        <member name="P:CLERP.API.Domain.Models.Employee.Salt">
-            <summary>
-            The salt used to generate the password hash as Base64String
             </summary>
         </member>
         <member name="P:CLERP.API.Domain.Models.Employee.DepartmentGuid">
@@ -885,6 +875,7 @@
             Object which a hasher implentation of IPasswordHasher returns
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "T:CLERP.API.Infrastructure.Security.Hashing.PasswordHasher" -->
         <member name="M:CLERP.API.Infrastructure.Security.Hashing.Sha512Hasher.HashPassword(System.String)">
             <summary>
             Hashes a plain password with a random salt
@@ -917,43 +908,39 @@
             <param name="size">Size the generated salt should have (Default = 64) in bytes</param>
             <returns>Random salt as byte array</returns>
         </member>
-        <member name="T:CLERP.API.Infrastructure.Security.Jwt.CustomJwtClaims">
+        <member name="T:CLERP.API.Infrastructure.Security.Tokens.CustomJwtClaims">
             <summary>
             Constins custom claims for JWt created within this app
             </summary>
         </member>
-        <member name="F:CLERP.API.Infrastructure.Security.Jwt.CustomJwtClaims.EmployeeUsername">
+        <member name="F:CLERP.API.Infrastructure.Security.Tokens.CustomJwtClaims.EmployeeUsername">
             <summary>
             Claim key for a username of an employee
             </summary>
         </member>
-        <member name="T:CLERP.API.Infrastructure.Security.Jwt.JwtOptions">
+        <member name="T:CLERP.API.Infrastructure.Security.Tokens.JwtOptions">
             <summary>
             Configurations for the Jwt stored in the appsettings.json
             </summary>
         </member>
-        <member name="P:CLERP.API.Infrastructure.Security.Jwt.JwtOptions.Key">
-            <summary>
-            Secret private key to generate and validate Jwt-Tokens against
-            </summary>
-        </member>
-        <member name="P:CLERP.API.Infrastructure.Security.Jwt.JwtOptions.ValidFor">
+        <member name="P:CLERP.API.Infrastructure.Security.Tokens.JwtOptions.ValidFor">
             <summary>
             Timespan which defines how long a token is valid
             </summary>
         </member>
-        <member name="P:CLERP.API.Infrastructure.Security.Jwt.JwtOptions.GetBytesFromKey">
-            <summary>
-            Returns the bytes from key
-            </summary>
-        </member>
-        <member name="M:CLERP.API.Infrastructure.Security.Jwt.JwtTokenGenerator.CreateToken(CLERP.API.Domain.Models.Employee,System.Collections.Generic.IEnumerable{CLERP.API.Domain.Models.Role})">
+        <member name="M:CLERP.API.Infrastructure.Security.Tokens.JwtTokenGenerator.CreateToken(CLERP.API.Domain.Models.Employee,System.Collections.Generic.IEnumerable{CLERP.API.Domain.Models.Role})">
             <summary>
             Creates a new Jwt-Token  for an employee/user with the required data of him and his roles
             </summary>
             <param name="employee">Employee th token should be issued for</param>
             <param name="roles">All roles the employee is currently in</param>
             <returns></returns>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Security.Tokens.SignInConfigurations">
+            <summary>
+            Global Sign-In Configurations, generate on Startup an random crytpographical value wich acts as private key for token generation
+            Instance is globally registered as singleton 
+            </summary>
         </member>
         <member name="T:CLERP.API.Infrastructure.Utilities.CurrentUserAccessor">
             <summary>

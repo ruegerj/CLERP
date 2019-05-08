@@ -27,7 +27,7 @@ using CLERP.API.Infrastructure.Middleware;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using CLERP.API.Infrastructure.Security.Jwt;
+using CLERP.API.Infrastructure.Security.Tokens;
 
 namespace CLERP.API
 {
@@ -50,34 +50,32 @@ namespace CLERP.API
 
             // load custom settings
             var settingsSection = Configuration.GetSection(nameof(AppSettings));
-            var jwtSection = Configuration.GetSection(nameof(JwtOptions));
             var settings = settingsSection.Get<AppSettings>();
+
+            var jwtSection = Configuration.GetSection(nameof(JwtOptions));
+            var jwtOptions = jwtSection.Get<JwtOptions>();
 
             services.Configure<AppSettings>(settingsSection);
             services.Configure<JwtOptions>(jwtSection);
 
             services.AddDbContext<ClerpContext>(options => options.UseSqlServer(settings.ConnectionStringLocal));
 
+            var signInConfigurations = new SignInConfigurations();
+            services.AddSingleton(signInConfigurations);
+
             // configure jwt auth
-            var key = settings.JwtOptions.GetBytesFromKey;
-            services.AddAuthentication(auth =>
-            {
-                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(bearer =>
-            {
-                bearer.RequireHttpsMetadata = true;
-                bearer.SaveToken = true;
-                bearer.TokenValidationParameters = new TokenValidationParameters()
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(jwtBearerOptions =>
                 {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew = TimeSpan.Zero
-                };
-            });
+                    jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = signInConfigurations.Key,
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
 
             services.AddMvc(options =>
             {
@@ -117,7 +115,7 @@ namespace CLERP.API
 
             services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; } ); // Disable built in validation error response
 
-            services.AddScoped<IPasswordHasher, Sha512Hasher>(); // Register hashing implentation for password hashing within the application
+            services.AddScoped<IPasswordHasher, PasswordHasher>(); // Register hashing implentation for password hashing within the application
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<ICurrentUserAccessor, CurrentUserAccessor>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

@@ -53,11 +53,18 @@ namespace CLERP.API.Features.v1.EmployeeArea.Create
                 throw new ConflictException(nameof(request.Email), "Chosen email isn't available, please take another one.");
             }
 
-            IHashedPassword hashInfo = _hasher.HashPassword(request.Password);
+            string hashedPassword = _hasher.HashPassword(request.Password);
 
-            Employee newEmployee = _mapper.Map<EmployeeCreateDto, Employee>(request);
-            newEmployee.Password = hashInfo.HashBase64;
-            newEmployee.Salt = hashInfo.SaltBase64;
+            Employee newEmployee = new Employee()
+            {
+                Birthday = request.Birthday,
+                Email = request.Email,
+                Firstname = request.Firstname,
+                Lastname = request.Lastname,
+                PhoneNumber = request.PhoneNumber,
+                Username = request.Username,
+                Password = hashedPassword,
+            };
 
             await _context.AddAsync(newEmployee, cancellationToken);
 

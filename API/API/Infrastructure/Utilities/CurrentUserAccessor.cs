@@ -1,4 +1,4 @@
-﻿using CLERP.API.Infrastructure.Security.Jwt;
+﻿using CLERP.API.Infrastructure.Security.Tokens;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

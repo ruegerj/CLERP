@@ -1,7 +1,7 @@
 ﻿using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Contexts;
 using CLERP.API.Infrastructure.Security.Hashing;
-using CLERP.API.Infrastructure.Security.Jwt;
+using CLERP.API.Infrastructure.Security.Tokens;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -52,7 +52,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Login
                 return null;
             }
 
-            if(!_hasher.PasswordMatches(request.Password, requestedEmployee.Password, requestedEmployee.Salt))
+            if(!_hasher.PasswordMatches(request.Password, requestedEmployee.Password))
             {
                 _logger.LogWarning($"Failed login attempt with username: {request.Username}");
 

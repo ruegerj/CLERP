@@ -8,15 +8,17 @@ using CLERP.API.Domain.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace CLERP.API.Infrastructure.Security.Jwt
+namespace CLERP.API.Infrastructure.Security.Tokens
 {
     public class JwtTokenGenerator : IJwtTokenGenerator
     {
-        private readonly AppSettings _appSettings;
+        private readonly JwtOptions _jwtOptions;
+        private readonly SignInConfigurations _signInConfigurations;
 
-        public JwtTokenGenerator(IOptions<AppSettings> appSettings)
+        public JwtTokenGenerator(IOptions<JwtOptions> jwtOptions, SignInConfigurations signInConfigurations)
         {
-            _appSettings = appSettings.Value;
+            _jwtOptions = jwtOptions.Value;
+            _signInConfigurations = signInConfigurations;
         }
 
         /// <summary>
@@ -28,7 +30,7 @@ namespace CLERP.API.Infrastructure.Security.Jwt
         public string CreateToken(Employee employee, IEnumerable<Role> roles)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = _appSettings.JwtOptions.GetBytesFromKey;
+            var key = _signInConfigurations.Key;
 
             var claims = new List<Claim>()
             {
@@ -43,8 +45,8 @@ namespace CLERP.API.Infrastructure.Security.Jwt
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.Add(_appSettings.JwtOptions.ValidFor),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                Expires = DateTime.UtcNow.Add(_jwtOptions.ValidFor),
+                SigningCredentials = _signInConfigurations.SigningCredentials
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);

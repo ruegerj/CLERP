@@ -7,7 +7,7 @@ namespace CLERP.API.Infrastructure.Security.Hashing
 {
     public interface IPasswordHasher
     {
-        IHashedPassword HashPassword(string plainPassword);
-        bool PasswordMatches(string plainPassword, string hashedPassword, string salt);
+        string HashPassword(string password);
+        bool PasswordMatches(string providedPassword, string passwordHash);
     }
 }

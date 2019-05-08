@@ -19,11 +19,6 @@ namespace CLERP.API.Domain.Models
         /// </summary>
         public string Password { get; set; }
 
-        /// <summary>
-        /// The salt used to generate the password hash as Base64String
-        /// </summary>
-        public string Salt { get; set; }
-
         public DateTime Birthday { get; set; }
 
         /// <summary>

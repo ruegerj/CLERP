@@ -1,4 +1,4 @@
-﻿using CLERP.API.Infrastructure.Security.Jwt;
+﻿using CLERP.API.Infrastructure.Security.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +16,5 @@ namespace CLERP.API
         /// Connection-String to local dev DB
         /// </summary>
         public string ConnectionStringLocal { get; set; }
-
-        /// <summary>
-        /// Configurations for the Jwt's
-        /// </summary>
-        public JwtOptions JwtOptions { get; set; }
     }
 }

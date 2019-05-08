@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CLERP.API.Infrastructure.Security.Jwt
+namespace CLERP.API.Infrastructure.Security.Tokens
 {
     public interface IJwtTokenGenerator
     {
