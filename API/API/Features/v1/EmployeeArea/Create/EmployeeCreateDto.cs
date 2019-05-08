@@ -1,11 +1,12 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.EmployeeArea.Create
 {
-    public class EmployeeCreateDto
+    public class EmployeeCreateDto : IRequest<Guid>
     {
         public string Lastname { get; set; }
 

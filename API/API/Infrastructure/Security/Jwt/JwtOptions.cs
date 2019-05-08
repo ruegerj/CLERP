@@ -17,7 +17,7 @@ namespace CLERP.API.Infrastructure.Security.Jwt
         public string Key { get; set; }
 
         /// <summary>
-        /// Timespan whihc defines how long a token is valid
+        /// Timespan which defines how long a token is valid
         /// </summary>
         public TimeSpan ValidFor { get; set; }
 

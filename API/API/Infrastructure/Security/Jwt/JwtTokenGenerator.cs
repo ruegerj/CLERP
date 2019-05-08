@@ -12,11 +12,11 @@ namespace CLERP.API.Infrastructure.Security.Jwt
 {
     public class JwtTokenGenerator : IJwtTokenGenerator
     {
-        private readonly JwtOptions _jwtOptions;
+        private readonly AppSettings _appSettings;
 
-        public JwtTokenGenerator(IOptions<JwtOptions> jwtOptions)
+        public JwtTokenGenerator(IOptions<AppSettings> appSettings)
         {
-            _jwtOptions = jwtOptions.Value;
+            _appSettings = appSettings.Value;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace CLERP.API.Infrastructure.Security.Jwt
         public string CreateToken(Employee employee, IEnumerable<Role> roles)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = _jwtOptions.GetBytesFromKey;
+            var key = _appSettings.JwtOptions.GetBytesFromKey;
 
             var claims = new List<Claim>()
             {
@@ -43,8 +43,8 @@ namespace CLERP.API.Infrastructure.Security.Jwt
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.Add(_jwtOptions.ValidFor),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
+                Expires = DateTime.UtcNow.Add(_appSettings.JwtOptions.ValidFor),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);

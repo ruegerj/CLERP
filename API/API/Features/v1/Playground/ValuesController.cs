@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CLERP.API.Attributes;
+using CLERP.API.Infrastructure.Attributes;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace CLERP.API.Features.v1.Playground
 {
+    /// <summary>
+    /// Sample Controller
+    /// </summary>
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
@@ -24,6 +28,7 @@ namespace CLERP.API.Features.v1.Playground
 
         // GET api/values
         [HttpGet]
+        [Authorize]
         public ActionResult<IEnumerable<string>> Get()
         {
             _logger.LogDebug("Hello World :)");

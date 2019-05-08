@@ -26,7 +26,7 @@ namespace CLERP.API.Infrastructure.Exceptions
         {
             Payload = new
             {
-                Conflict = message
+                message
             };
         }
 

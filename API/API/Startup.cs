@@ -40,7 +40,10 @@ namespace CLERP.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             var currentAssembly = GetType().Assembly;
@@ -71,19 +74,20 @@ namespace CLERP.API
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
-                    ValidateAudience = false
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
                 };
             });
 
-            services.AddMvc(options => 
+            services.AddMvc(options =>
             {
                 options.Conventions.Add(new GroupByApiRootConvention());
             })
-            .AddJsonOptions(options => 
+            .AddJsonOptions(options =>
             {
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             })
-            .AddFluentValidation(config => 
+            .AddFluentValidation(config =>
             {
                 config.RegisterValidatorsFromAssemblyContaining<Startup>();
             })
@@ -92,6 +96,17 @@ namespace CLERP.API
             services.AddApiVersioning();
 
             services.AddCors();
+
+            // configure swagger doc
+            services.AddSwaggerDocument(config => 
+            {
+                config.PostProcess = document =>
+                {
+                    document.Info.Version = "v1";
+                    document.Info.Title = "CLERP API";
+                    document.Info.Description = "REST Web-Api-Backend for the CLERP application";
+                };
+            });
 
             // Register MediatR and custom behavior for pipeline
             services.AddMediatR(currentAssembly);
@@ -103,11 +118,16 @@ namespace CLERP.API
             services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; } ); // Disable built in validation error response
 
             services.AddScoped<IPasswordHasher, Sha512Hasher>(); // Register hashing implentation for password hashing within the application
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<ICurrentUserAccessor, CurrentUserAccessor>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -129,6 +149,12 @@ namespace CLERP.API
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseAuthentication();
+
+            // Register the Swagger generator and the Swagger UI middlewares
+            app.UseSwagger();
+            app.UseSwaggerUi3();
         }
     }
 }

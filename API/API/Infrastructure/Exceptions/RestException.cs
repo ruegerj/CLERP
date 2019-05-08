@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace CLERP.API.Infrastructure.Exceptions
 {
     /// <summary>
-    /// Base class for all rest exception implementations
+    /// All derived types of this class will be catched in the <see cref="Middleware.ErrorHandlingMiddleware"/>
+    /// and will be handled there
     /// </summary>
     public abstract class RestException : Exception
     {
@@ -18,7 +19,7 @@ namespace CLERP.API.Infrastructure.Exceptions
 
         public HttpStatusCode StatusCode { get; set; }
         /// <summary>
-        /// Container for detailed information about the erros happened
+        /// Container / Struct, which is defined in the derived types constructors, for detailed information why the error/s happened
         /// </summary>
         public object Payload { get; set; }
     }

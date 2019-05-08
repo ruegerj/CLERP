@@ -17,32 +17,24 @@ namespace CLERP.API.Infrastructure.Utilities
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        private IEnumerable<Claim> _userClaims;
-
         public CurrentUserAccessor(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
-
-            // Prevent NullReferenceException while Migration-Buidling and DB-Updates
-            if (_httpContextAccessor != null && _httpContextAccessor.HttpContext != null)
-            {
-                GetUserClaims();
-            }
         }
 
         public string GetId()
         {
-            return _userClaims?.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
+            return GetUserClaims()?.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
         }
 
         public string GetUsername()
         {
-            return _userClaims?.FirstOrDefault(c => c.Type == CustomJwtClaims.EmployeeUsername)?.Value;
+            return GetUserClaims()?.FirstOrDefault(c => c.Type == CustomJwtClaims.EmployeeUsername)?.Value;
         }
 
-        private void GetUserClaims()
+        private IEnumerable<Claim> GetUserClaims()
         {
-            _userClaims = _httpContextAccessor?.HttpContext.User?.Claims;
+            return _httpContextAccessor?.HttpContext.User?.Claims;
         }
     }
 }

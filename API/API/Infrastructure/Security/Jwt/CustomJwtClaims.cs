@@ -13,6 +13,6 @@ namespace CLERP.API.Infrastructure.Security.Jwt
         /// <summary>
         /// Claim key for a username of an employee
         /// </summary>
-        public const string EmployeeUsername = "EUN";
+        public const string EmployeeUsername = "eun";
     }
 }
