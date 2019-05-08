@@ -876,38 +876,6 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:CLERP.API.Infrastructure.Security.Hashing.PasswordHasher" -->
-        <member name="M:CLERP.API.Infrastructure.Security.Hashing.Sha512Hasher.HashPassword(System.String)">
-            <summary>
-            Hashes a plain password with a random salt
-            </summary>
-            <param name="plainPassword">plain password from employee</param>
-            <returns>Hash including generated salt</returns>
-        </member>
-        <member name="M:CLERP.API.Infrastructure.Security.Hashing.Sha512Hasher.PasswordMatches(System.String,System.String,System.String)">
-            <summary>
-            Compares a plain password with a hashed one
-            </summary>
-            <param name="plainPassword">Plain password</param>
-            <param name="hashedPassword">Hash as Base64String</param>
-            <param name="salt">Salt as Base64String</param>
-            <returns>hashes match?</returns>
-        </member>
-        <member name="M:CLERP.API.Infrastructure.Security.Hashing.Sha512Hasher.HashPasswordWithSalt(System.String,System.String)">
-            <summary>
-            Hashes a plain password with a defined salt or when empty generates a new salt
-            Is private because every salt should be generated randomly
-            </summary>
-            <param name="plainPassword">plain password as string</param>
-            <param name="salt">Salt as Base64-String which should be added to the hash, leave empty when a new random hash should be generated</param>
-            <returns></returns>
-        </member>
-        <member name="M:CLERP.API.Infrastructure.Security.Hashing.Sha512Hasher.GenerateSalt(System.Int32)">
-            <summary>
-            Generates a salt value using <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider"/>
-            </summary>
-            <param name="size">Size the generated salt should have (Default = 64) in bytes</param>
-            <returns>Random salt as byte array</returns>
-        </member>
         <member name="T:CLERP.API.Infrastructure.Security.Tokens.CustomJwtClaims">
             <summary>
             Constins custom claims for JWt created within this app

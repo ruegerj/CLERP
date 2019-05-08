@@ -28,7 +28,6 @@ namespace CLERP.API.Features.v1.Playground
 
         // GET api/values
         [HttpGet]
-        [Authorize]
         public ActionResult<IEnumerable<string>> Get()
         {
             _logger.LogDebug("Hello World :)");

@@ -28,6 +28,8 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using CLERP.API.Infrastructure.Security.Tokens;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace CLERP.API
 {
@@ -64,22 +66,37 @@ namespace CLERP.API
             services.AddSingleton(signInConfigurations);
 
             // configure jwt auth
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(jwtBearerOptions =>
+            services.AddAuthentication(auth => 
+            {
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(jwtBearerOptions =>
+            {
+                jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters()
                 {
-                    jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters()
-                    {
-                        ValidateAudience = false,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = signInConfigurations.Key,
-                        ClockSkew = TimeSpan.Zero
-                    };
-                });
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = signInConfigurations.Key,
+                    ClockSkew = TimeSpan.Zero,
+                    RequireSignedTokens = true
+                };
+
+                jwtBearerOptions.RequireHttpsMetadata = true;
+            });
 
             services.AddMvc(options =>
             {
                 options.Conventions.Add(new GroupByApiRootConvention());
+
+                // add auth policy globally so every reqest has be authenticated, unless the controller is decorated with the "AllowAnonymous" attribute
+                var authPolicy = new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser()
+                    .Build();
+                options.Filters.Add(new AuthorizeFilter(authPolicy));
             })
             .AddJsonOptions(options =>
             {

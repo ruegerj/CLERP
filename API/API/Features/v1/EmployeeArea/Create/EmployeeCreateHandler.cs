@@ -21,18 +21,15 @@ namespace CLERP.API.Features.v1.EmployeeArea.Create
         private readonly ClerpContext _context;
         private readonly ILogger<EmployeeCreateHandler> _logger;
         private readonly IPasswordHasher _hasher;
-        private readonly IMapper _mapper;
 
         public EmployeeCreateHandler(
             ClerpContext context,
             ILogger<EmployeeCreateHandler> logger,
-            IPasswordHasher hasher,
-            IMapper mapper)
+            IPasswordHasher hasher)
         {
             _context = context;
             _logger = logger;
             _hasher = hasher;
-            _mapper = mapper;
         }
 
         public async Task<Guid> Handle(EmployeeCreateDto request, CancellationToken cancellationToken)

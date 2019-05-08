@@ -65,6 +65,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
         /// <param name="loginData">Username and password from the employee</param>
         /// <returns></returns>
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<ActionResult> Login([FromBody] Login.EmployeeLoginDto loginData)
         {
             var token = await _mediator.Send(loginData);
