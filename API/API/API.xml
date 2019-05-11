@@ -14,6 +14,11 @@
             Connection-string to local dev DB
             </summary>
         </member>
+        <member name="P:CLERP.API.AppSettings.HSTSMaxAge">
+            <summary>
+            May age of HSTS in days
+            </summary>
+        </member>
         <member name="T:CLERP.API.Domain.Models.Abstract.EntityBase">
             <summary>
             Base class for an entity in the clerp Db
@@ -753,6 +758,11 @@
             which lists all failed fields of the model
             </summary>   
         </member>
+        <member name="T:CLERP.API.Infrastructure.Attributes.ValidationError">
+            <summary>
+            Represents a validation error, occured when validating an incoming model
+            </summary>
+        </member>
         <member name="T:CLERP.API.Infrastructure.Attributes.ValidationFailedResult">
             <summary>
             Class to configure the default Http-Status code when the model validation fails
@@ -763,11 +773,6 @@
             <summary>
             Represents the summary of all validation errors
             Data-Format that will be returned after a failed validation
-            </summary>
-        </member>
-        <member name="T:CLERP.API.Infrastructure.Attributes.ValidationError">
-            <summary>
-            Represents a validation error, occured when validating an incoming model
             </summary>
         </member>
         <member name="T:CLERP.API.Infrastructure.Behavior.DBContextTransactionPipelineBehavior`2">
@@ -893,11 +898,6 @@
             </summary>
             <param name="app"></param>
             <returns></returns>
-        </member>
-        <member name="T:CLERP.API.Infrastructure.Security.Hashing.HashedPassword">
-            <summary>
-            Object which a hasher implentation of IPasswordHasher returns
-            </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:CLERP.API.Infrastructure.Security.Hashing.PasswordHasher" -->
         <member name="T:CLERP.API.Infrastructure.Security.Tokens.CustomJwtClaims">

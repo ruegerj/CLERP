@@ -79,7 +79,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Create
 
         private static bool BeWhiteSpaceless(string value)
         {
-            return !string.IsNullOrWhiteSpace(value);
+            return !value.Contains(" ");
         }
 
         private static bool BeWithoutSpecialChars(string value)
@@ -90,7 +90,8 @@ namespace CLERP.API.Features.v1.EmployeeArea.Create
 
         private static bool BeWithSpecialChars(string value)
         {
-            return !BeWithoutSpecialChars(value);
+            int specialCharsCount = value.Count(c => !char.IsLetterOrDigit(c));
+            return specialCharsCount >= 1;
         }
     }
 }

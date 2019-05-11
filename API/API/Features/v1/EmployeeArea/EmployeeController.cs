@@ -52,6 +52,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
         /// <param name="createData">Required data for creating an employee</param>
         /// <returns></returns>
         [HttpPost("create")]
+        [AllowAnonymous]
         public async Task<ActionResult> CreateEmployee([FromBody] Create.EmployeeCreateDto createData)
         {
             await _mediator.Send(createData);

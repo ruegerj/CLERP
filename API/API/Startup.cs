@@ -30,6 +30,7 @@ using Microsoft.IdentityModel.Tokens;
 using CLERP.API.Infrastructure.Security.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using System.Net;
 
 namespace CLERP.API
 {
@@ -112,6 +113,20 @@ namespace CLERP.API
 
             services.AddCors();
 
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(settings.HSTSMaxAge);
+
+            });
+
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+                options.HttpsPort = 5001;
+            });
+
             // configure swagger doc
             services.AddSwaggerDocument(config => 
             {
@@ -147,6 +162,12 @@ namespace CLERP.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                // Allow cors only while development
+                app.UseCors(c => c
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
             }
             else
             {
@@ -155,11 +176,6 @@ namespace CLERP.API
             }
 
             app.UseCustomMiddleware();
-
-            app.UseCors(c => c
-                .AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod());
 
             app.UseHttpsRedirection();
             app.UseMvc();
