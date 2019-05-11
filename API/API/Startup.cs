@@ -60,7 +60,7 @@ namespace CLERP.API
             services.Configure<AppSettings>(settingsSection);
             services.Configure<JwtOptions>(jwtSection);
 
-            services.AddDbContext<ClerpContext>(options => options.UseSqlServer(settings.ConnectionStringLocal));
+            services.AddDbContext<ClerpContext>(options => options.UseSqlServer(settings.ConnectionstringLocal));
 
             var signInConfigurations = new SignInConfigurations();
             services.AddSingleton(signInConfigurations);
@@ -125,7 +125,6 @@ namespace CLERP.API
 
             // Register MediatR and custom behavior for pipeline
             services.AddMediatR(currentAssembly);
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(DBContextTransactionPipelineBehavior<,>));
 
             services.AddAutoMapper(currentAssembly);

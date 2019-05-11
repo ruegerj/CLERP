@@ -15,7 +15,7 @@ namespace CLERP.API.Domain.Models
         public string Username { get; set; }
 
         /// <summary>
-        /// A 512 bit hash (Sha-512) as a Base64String which represents the hashed password of an employee
+        /// A 512 bit hash (Sha-512) as a Base64string which represents the hashed password of an employee
         /// </summary>
         public string Password { get; set; }
 

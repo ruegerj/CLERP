@@ -32,11 +32,19 @@ namespace CLERP.API.Features.v1.EmployeeArea.Create
                 .MinimumLength(minNameLength)
                 .MaximumLength(maxNameLengt);
 
-            RuleFor(e => e.Email).EmailAddress();
+            RuleFor(e => e.Email)
+                .NotNull()
+                .NotEmpty()
+                .EmailAddress();
 
-            RuleFor(e => e.PhoneNumber).Must(BePhoneNumber).WithMessage("The entered phone number is not valid.");
+            RuleFor(e => e.PhoneNumber)
+                .NotNull()
+                .NotEmpty()
+                .Must(BePhoneNumber).WithMessage("The entered phone number is not valid.");
 
-            RuleFor(e => e.Birthday).Must(BeValidBirthday).WithMessage($"The new employee can't be younger than {minAge} years or older than {maxAge} years.");
+            RuleFor(e => e.Birthday)
+                .NotNull()
+                .Must(BeValidBirthday).WithMessage($"The new employee can't be younger than {minAge} years or older than {maxAge} years.");
 
             RuleFor(e => e.Username)
                 .NotNull()
@@ -71,7 +79,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Create
 
         private static bool BeWhiteSpaceless(string value)
         {
-            return !String.IsNullOrWhiteSpace(value);
+            return !string.IsNullOrWhiteSpace(value);
         }
 
         private static bool BeWithoutSpecialChars(string value)

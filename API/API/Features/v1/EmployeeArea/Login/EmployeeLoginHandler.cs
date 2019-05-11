@@ -43,7 +43,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Login
                 .Include(e => e.Roles)
                 .Include(e => e.Department)
                 .Include(e => e.Department.Roles)
-                .FirstOrDefaultAsync(e => String.Equals(request.Username, e.Username, StringComparison.InvariantCultureIgnoreCase));
+                .FirstOrDefaultAsync(e => string.Equals(request.Username, e.Username, StringComparison.InvariantCultureIgnoreCase));
 
             if (requestedEmployee == null)
             {

@@ -9,25 +9,15 @@ namespace CLERP.API.Infrastructure.Exceptions
     /// <summary>
     /// Exception which, when thrown, returns an result with the HttpStatusCode 409 - Conflict
     /// </summary>
-    public class ConflictException : RestException
+    public class ConflictException : RestException<ConflictResponse>
     {
-        /// <summary>
-        /// Creates a an excpetion when an conflict with the existing data happened
-        /// </summary>
-        public ConflictException() : base(HttpStatusCode.Conflict)
-        {
-        }
-
         /// <summary>
         /// Creates a an excpetion when an conflict with the existing data happened
         /// </summary>
         /// <param name="message">Message why the conflict happened</param>
         public ConflictException(string message) : base(HttpStatusCode.Conflict)
         {
-            Payload = new
-            {
-                message
-            };
+            Payload = new ConflictResponse(message);
         }
 
         /// <summary>
@@ -37,14 +27,12 @@ namespace CLERP.API.Infrastructure.Exceptions
         /// <param name="message">Description why this conflict happened</param>
         public ConflictException(string propertyName, string message) : base(HttpStatusCode.Conflict)
         {
-            Payload = new
-            {
-                conflict = new
-                {
-                    property = propertyName,
-                    message
-                }
-            };
+            Payload = new ConflictResponse(message, propertyName);
         }
+
+        /// <summary>
+        /// Contains information about the conflict
+        /// </summary>
+        public override ConflictResponse Payload { get; set; }
     }
 }

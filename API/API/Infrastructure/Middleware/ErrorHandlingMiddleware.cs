@@ -46,20 +46,24 @@ namespace CLERP.API.Infrastructure.Middleware
             Exception exception,
             ILogger<ErrorHandlingMiddleware> logger)
         {
-            object errors = null;
+            object responseContainer = default; // container for the response data
 
             // prepare response based on excpetion type / log exception base on type
             switch (exception)
             {
-                case RestException re:
+                case ConflictException ce:
                     {
-                        errors = re.Payload;
-                        context.Response.StatusCode = (int)re.StatusCode;
+                        responseContainer = ce.Payload;
+                        context.Response.StatusCode = (int)ce.StatusCode;
                         break;
                     }
                 case Exception ex:
                     {
-                        errors = String.IsNullOrWhiteSpace(ex.Message) ? "Error" : ex.Message;
+                        responseContainer = new
+                        {
+                            errors = string.IsNullOrWhiteSpace(ex.Message) ? "Error" : ex.Message
+                        };
+                        
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
                         logger.LogError("Caught excption, sending appropriate response...", ex);
@@ -69,12 +73,9 @@ namespace CLERP.API.Infrastructure.Middleware
 
             context.Response.ContentType = "application/json";
 
-            var result = JsonConvert.SerializeObject(new
-            {
-                errors
-            });
+            var result = JsonConvert.SerializeObject(responseContainer);
 
-            await context.Response.WriteAsync(result); // Send response
+            await context.Response.WriteAsync(result); // Write data in response body
         }        
     }
 }

@@ -28,7 +28,7 @@ namespace CLERP.API.Infrastructure.Contexts
         private IDbContextTransaction _currentTransaction;
 
         /// <summary>
-        /// Include context options e.g. Connection-String etc.
+        /// Include context options e.g. Connection-string etc.
         /// </summary>
         /// <param name="options">Options injected by the builder</param>
         public ClerpContext(DbContextOptions<ClerpContext> options, 
@@ -160,7 +160,7 @@ namespace CLERP.API.Infrastructure.Contexts
             DateTime now = DateTime.Now;
 
             string currentUsername = _currentUserAccessor.GetUsername();
-            string username  = !String.IsNullOrEmpty(currentUsername) ? currentUsername : "Unknown user";
+            string username  = !string.IsNullOrEmpty(currentUsername) ? currentUsername : "Unknown user";
 
             var addedEntities = ChangeTracker.Entries().Where(e => e.State == EntityState.Added).ToList();
 

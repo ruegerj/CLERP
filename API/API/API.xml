@@ -9,9 +9,9 @@
             Represents the custom settings from the appsettings.json file
             </summary>
         </member>
-        <member name="P:CLERP.API.AppSettings.ConnectionStringLocal">
+        <member name="P:CLERP.API.AppSettings.ConnectionstringLocal">
             <summary>
-            Connection-String to local dev DB
+            Connection-string to local dev DB
             </summary>
         </member>
         <member name="T:CLERP.API.Domain.Models.Abstract.EntityBase">
@@ -320,7 +320,7 @@
         </member>
         <member name="P:CLERP.API.Domain.Models.Employee.Password">
             <summary>
-            A 512 bit hash (Sha-512) as a Base64String which represents the hashed password of an employee
+            A 512 bit hash (Sha-512) as a Base64string which represents the hashed password of an employee
             </summary>
         </member>
         <member name="P:CLERP.API.Domain.Models.Employee.DepartmentGuid">
@@ -796,7 +796,7 @@
         </member>
         <member name="M:CLERP.API.Infrastructure.Contexts.ClerpContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{CLERP.API.Infrastructure.Contexts.ClerpContext},Microsoft.Extensions.Logging.ILogger{CLERP.API.Infrastructure.Contexts.ClerpContext},CLERP.API.Infrastructure.Utilities.ICurrentUserAccessor)">
             <summary>
-            Include context options e.g. Connection-String etc.
+            Include context options e.g. Connection-string etc.
             </summary>
             <param name="options">Options injected by the builder</param>
         </member>
@@ -829,11 +829,6 @@
             Exception which, when thrown, returns an result with the HttpStatusCode 409 - Conflict
             </summary>
         </member>
-        <member name="M:CLERP.API.Infrastructure.Exceptions.ConflictException.#ctor">
-            <summary>
-            Creates a an excpetion when an conflict with the existing data happened
-            </summary>
-        </member>
         <member name="M:CLERP.API.Infrastructure.Exceptions.ConflictException.#ctor(System.String)">
             <summary>
             Creates a an excpetion when an conflict with the existing data happened
@@ -847,13 +842,42 @@
             <param name="propertyName">Name of the property from the Dto whose value created the conflict</param>
             <param name="message">Description why this conflict happened</param>
         </member>
-        <member name="T:CLERP.API.Infrastructure.Exceptions.RestException">
+        <member name="P:CLERP.API.Infrastructure.Exceptions.ConflictException.Payload">
             <summary>
-            All derived types of this class will be catched in the <see cref="T:CLERP.API.Infrastructure.Middleware.ErrorHandlingMiddleware"/>
-            and will be handled there
+            Contains information about the conflict
             </summary>
         </member>
-        <member name="P:CLERP.API.Infrastructure.Exceptions.RestException.Payload">
+        <member name="M:CLERP.API.Infrastructure.Exceptions.ConflictResponse.#ctor(System.String)">
+            <summary>
+            Creates an new <see cref="T:CLERP.API.Infrastructure.Exceptions.ConflictResponse"/> with a message only
+            </summary>
+            <param name="message">Message why the conflict happened</param>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Exceptions.ConflictResponse.#ctor(System.String,System.String)">
+            <summary>
+            Creates an new <see cref="T:CLERP.API.Infrastructure.Exceptions.ConflictResponse"/> with the message and the field-name
+            </summary>
+            <param name="message">Message why the conflict happened</param>
+            <param name="fieldName">Name of the field/property which caused the conflict</param>
+        </member>
+        <member name="P:CLERP.API.Infrastructure.Exceptions.ConflictResponse.FieldName">
+            <summary>
+            Name of the property which caused the conflict
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Infrastructure.Exceptions.ConflictResponse.Message">
+            <summary>
+            Message about the reason/background of the conflict
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Exceptions.RestException`1">
+            <summary>
+            All derived types of this class will be catched in the <see cref="T:CLERP.API.Infrastructure.Middleware.ErrorHandlingMiddleware"/>
+            and handled there
+            </summary>
+            <typeparam name="TPayload">Type of the payload from the derived implementation</typeparam>
+        </member>
+        <member name="P:CLERP.API.Infrastructure.Exceptions.RestException`1.Payload">
             <summary>
             Container / Struct, which is defined in the derived types constructors, for detailed information why the error/s happened
             </summary>

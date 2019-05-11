@@ -13,8 +13,8 @@ namespace CLERP.API
     public class AppSettings
     {
         /// <summary>
-        /// Connection-String to local dev DB
+        /// Connection-string to local dev DB
         /// </summary>
-        public string ConnectionStringLocal { get; set; }
+        public string ConnectionstringLocal { get; set; }
     }
 }
