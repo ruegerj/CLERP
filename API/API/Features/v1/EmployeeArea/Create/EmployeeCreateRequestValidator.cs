@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.EmployeeArea.Create
 {
-    public class EmployeeCreateDtoValidator : AbstractValidator<EmployeeCreateDto>
+    public class EmployeeCreateRequestValidator : AbstractValidator<EmployeeCreateRequest>
     {
         private const int minNameLength = 2;
         private const int maxNameLengt = 100;
@@ -18,7 +18,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Create
         private const int maxAge = 100;
         private const int minAge = 18;
 
-        public EmployeeCreateDtoValidator()
+        public EmployeeCreateRequestValidator()
         {
             RuleFor(e => e.Firstname)
                 .NotNull()

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.EmployeeArea.Login
 {
-    public class EmployeeLoginDto : IRequest<string>
+    public class EmployeeLoginRequest : IRequest<TokenResponse>
     {
         [Required]
         [JsonProperty("username")]

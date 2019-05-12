@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Infrastructure.Exceptions
 {
+    /// <summary>
+    /// Payload of a <see cref="ConflictException"/>
+    /// </summary>
     public class ConflictResponse
     {
         /// <summary>

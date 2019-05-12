@@ -59,14 +59,13 @@ namespace CLERP.API.Infrastructure.Middleware
                     }
                 case Exception ex:
                     {
-                        responseContainer = new
-                        {
-                            errors = string.IsNullOrWhiteSpace(ex.Message) ? "Error" : ex.Message
-                        };
+                        responseContainer = new Features.v1.MessageResponse(
+                            !string.IsNullOrWhiteSpace(ex.Message) ? ex.Message : "An unknown error occured"
+                        );
                         
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-                        logger.LogError("Caught excption, sending appropriate response...", ex);
+                        logger.LogError($"Caught exception of type {ex.GetType()}, sending appropriate response...", ex);
                         break;
                     }
             }

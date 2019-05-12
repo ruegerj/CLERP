@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.EmployeeArea.Login
 {
-    public class EmployeeLoginDtoValidator : AbstractValidator<EmployeeLoginDto>
+    public class EmployeeLoginRequestValidator : AbstractValidator<EmployeeLoginRequest>
     {
-        public EmployeeLoginDtoValidator()
+        public EmployeeLoginRequestValidator()
         {
             RuleFor(eld => eld.Username)
                 .NotNull()

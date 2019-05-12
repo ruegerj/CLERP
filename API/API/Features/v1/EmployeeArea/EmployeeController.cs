@@ -34,13 +34,23 @@ namespace CLERP.API.Features.v1.EmployeeArea
         /// <param name="id">id of the requested employee</param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<EmployeeDto>> GetEmployeeById(Guid id)
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: typeof(EmployeeResponse), Description = "Employee found")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.NotFound, 
+            responseType: typeof(MessageResponse), 
+            Description = "Employee couldn't be found")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
+            responseType: typeof(ValidationFailedResponse),
+            Description = "Validation failed")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
+            responseType: typeof(MessageResponse),
+            Description = "An unknown error occured")]
+        public async Task<ActionResult<EmployeeResponse>> GetEmployeeById(Guid id)
         {
             var employee = await _mediator.Send(new GetById.EmployeeGetByIdQuery() { EmployeeId = id });
 
             if (employee == null)
             {
-                return NotFound(new { message = $"employee with id: {id} not found" });
+                return NotFound(new MessageResponse($"employee with the id: {id} couldn't be found"));
             }
 
             return Ok(employee);
@@ -52,12 +62,76 @@ namespace CLERP.API.Features.v1.EmployeeArea
         /// <param name="createData">Required data for creating an employee</param>
         /// <returns></returns>
         [HttpPost("create")]
-        [AllowAnonymous]
-        public async Task<ActionResult> CreateEmployee([FromBody] Create.EmployeeCreateDto createData)
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, null, Description = "Employee successfuly created")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity, 
+            responseType: typeof(ValidationFailedResponse),
+            Description = "Validation failed")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError, 
+            responseType: typeof(MessageResponse), 
+            Description = "An unknown error occured")]
+        public async Task<ActionResult> CreateEmployee([FromBody] Create.EmployeeCreateRequest createData)
         {
             await _mediator.Send(createData);
 
-            return Ok(new ResponseContainer("Employee successfuly created."));
+            return Ok();
+        }
+
+        /// <summary>
+        /// Updates the data from an employee
+        /// </summary>
+        /// <param name="updateData">Data to update</param>
+        /// <param name="id">Id of the employee</param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: typeof(EmployeeResponse), Description = "Employee successfuly updated")]        
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, responseType: typeof(MessageResponse), Description = "Employee couldn't be found")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
+            responseType: typeof(ValidationFailedResponse),
+            Description = "Validation failed")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
+            responseType: typeof(MessageResponse),
+            Description = "An unknown error occured")]
+        public async Task<ActionResult> UpdateEmployee([FromBody] Update.EmployeeUpdateRequest updateData, Guid id)
+        {
+            updateData.EmployeeId = id;
+
+            var updatedEmployee = await _mediator.Send(updateData);
+
+            if (updatedEmployee == null) // Employee not found
+            {
+                return BadRequest(new MessageResponse($"The employee with the id: {id} couldn't be updated, because it couldn't be found"));
+            }
+
+            return Ok(updatedEmployee);
+        }
+
+
+        /// <summary>
+        /// Deletes an employee
+        /// </summary>
+        /// <param name="id">Guid/Id from the employee</param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null, Description = "Employee successfuly deleted")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
+            responseType: typeof(MessageResponse), 
+            Description = "Employee to delete couldn't be found")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
+            responseType: typeof(ValidationFailedResponse),
+            Description = "Validation failed")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
+            responseType: typeof(MessageResponse),
+            Description = "An unknown error occured")]
+        public async Task<ActionResult> DeleteEmployee(Guid id)
+        {
+            var successfulyDeleted = await _mediator.Send(new Delete.EmployeeDeleteRequest() { EmployeeId = id });
+
+            if (!successfulyDeleted) // Employee not found
+            {
+                return BadRequest(new MessageResponse($"Employee with the id: {id} doesn't exists or has already been deleted"));
+            }
+
+            return Ok();
         }
 
         /// <summary>
@@ -67,17 +141,26 @@ namespace CLERP.API.Features.v1.EmployeeArea
         /// <returns></returns>
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult> Login([FromBody] Login.EmployeeLoginDto loginData)
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: typeof(Login.TokenResponse), Description = "Login successsful")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, 
+            responseType: typeof(MessageResponse), 
+            Description = "Invalid credentials")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
+            responseType: typeof(ValidationFailedResponse),
+            Description = "Validation failed")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
+            responseType: typeof(MessageResponse),
+            Description = "An unknown error occured")]
+        public async Task<ActionResult> Login([FromBody] Login.EmployeeLoginRequest loginData)
         {
-            var token = await _mediator.Send(loginData);
+            var tokenResponse = await _mediator.Send(loginData);
 
-            if (token == null)
+            if (tokenResponse == null)
             {
-                return UnprocessableEntity(new ResponseContainer("Invalid credentials", 
-                    new { description = "The provided username or password is wrong"}));
+                return BadRequest(new MessageResponse("The provided username or password is invalid"));
             }
 
-            return Ok(new ResponseContainer("Login successful",  new { token }));
+            return Ok(tokenResponse);
         }
     }
 }

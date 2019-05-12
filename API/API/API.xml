@@ -692,9 +692,14 @@
             All shelves inside this warehouse
             </summary>
         </member>
-        <member name="P:CLERP.API.Features.v1.EmployeeArea.Create.EmployeeCreateDto.Password">
+        <member name="P:CLERP.API.Features.v1.EmployeeArea.Create.EmployeeCreateRequest.Password">
             <summary>
             Plain password
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.EmployeeArea.Delete.EmployeeDeleteRequest.EmployeeId">
+            <summary>
+            Id of the employee which have to be deleted
             </summary>
         </member>
         <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.GetEmployeeById(System.Guid)">
@@ -704,14 +709,29 @@
             <param name="id">id of the requested employee</param>
             <returns></returns>
         </member>
-        <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.CreateEmployee(CLERP.API.Features.v1.EmployeeArea.Create.EmployeeCreateDto)">
+        <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.CreateEmployee(CLERP.API.Features.v1.EmployeeArea.Create.EmployeeCreateRequest)">
             <summary>
             Creates an employee
             </summary>
             <param name="createData">Required data for creating an employee</param>
             <returns></returns>
         </member>
-        <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.Login(CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginDto)">
+        <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.UpdateEmployee(CLERP.API.Features.v1.EmployeeArea.Update.EmployeeUpdateRequest,System.Guid)">
+            <summary>
+            Updates the data from an employee
+            </summary>
+            <param name="updateData">Data to update</param>
+            <param name="id">Id of the employee</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.DeleteEmployee(System.Guid)">
+            <summary>
+            Deletes an employee
+            </summary>
+            <param name="id">Guid/Id from the employee</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.Login(CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginRequest)">
             <summary>
             Logs a employee in and returns the created Jwt
             </summary>
@@ -723,18 +743,33 @@
             Default response dto for an employee
             </summary>
         </member>
-        <member name="P:CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginDto.Password">
-            <summary>
-            Plain password
-            </summary>
-        </member>
-        <member name="M:CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginHandler.Handle(CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginDto,System.Threading.CancellationToken)">
+        <member name="M:CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginHandler.Handle(CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginRequest,System.Threading.CancellationToken)">
             <summary>
             Creates an Jwt for an employee if credentials are correct
             </summary>
             <param name="request"></param>
             <param name="cancellationToken"></param>
             <returns>token or null when credentials are invalid</returns>
+        </member>
+        <member name="P:CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginRequest.Password">
+            <summary>
+            Plain password
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.EmployeeArea.Login.TokenResponse">
+            <summary>
+            Response after an employee is logged in
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.EmployeeArea.Login.TokenResponse.Token">
+            <summary>
+            Access token for the employee
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.MessageResponse">
+            <summary>
+            A response contianer when just a message have to be returned
+            </summary>
         </member>
         <member name="T:CLERP.API.Features.v1.Playground.ValuesController">
             <summary>
@@ -758,21 +793,10 @@
             which lists all failed fields of the model
             </summary>   
         </member>
-        <member name="T:CLERP.API.Infrastructure.Attributes.ValidationError">
-            <summary>
-            Represents a validation error, occured when validating an incoming model
-            </summary>
-        </member>
         <member name="T:CLERP.API.Infrastructure.Attributes.ValidationFailedResult">
             <summary>
             Class to configure the default Http-Status code when the model validation fails
-            Wraps arround the <see cref="T:CLERP.API.Infrastructure.Attributes.ValidationResultModel"/>
-            </summary>
-        </member>
-        <member name="T:CLERP.API.Infrastructure.Attributes.ValidationResultModel">
-            <summary>
-            Represents the summary of all validation errors
-            Data-Format that will be returned after a failed validation
+            Wraps arround the <see cref="T:CLERP.API.Infrastructure.Exceptions.ValidationFailedResponse"/>
             </summary>
         </member>
         <member name="T:CLERP.API.Infrastructure.Behavior.DBContextTransactionPipelineBehavior`2">
@@ -852,6 +876,11 @@
             Contains information about the conflict
             </summary>
         </member>
+        <member name="T:CLERP.API.Infrastructure.Exceptions.ConflictResponse">
+            <summary>
+            Payload of a <see cref="T:CLERP.API.Infrastructure.Exceptions.ConflictException"/>
+            </summary>
+        </member>
         <member name="M:CLERP.API.Infrastructure.Exceptions.ConflictResponse.#ctor(System.String)">
             <summary>
             Creates an new <see cref="T:CLERP.API.Infrastructure.Exceptions.ConflictResponse"/> with a message only
@@ -886,6 +915,29 @@
             <summary>
             Container / Struct, which is defined in the derived types constructors, for detailed information why the error/s happened
             </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Exceptions.ValidationError">
+            <summary>
+            Represents a validation error, occured when validating an incoming model
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Exceptions.ValidationFailedResponse">
+            <summary>
+            Represents the summary of all validation errors
+            Data-Format that will be returned after a failed validation
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Exceptions.ValidationFailedResponse.#ctor(System.Collections.Generic.IEnumerable{CLERP.API.Infrastructure.Exceptions.ValidationError})">
+            <summary>
+            Creates a new <see cref="T:CLERP.API.Infrastructure.Exceptions.ValidationFailedResponse"/> object with existing <see cref="T:CLERP.API.Infrastructure.Exceptions.ValidationError"/> objects
+            </summary>
+            <param name="validationErrors"></param>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Exceptions.ValidationFailedResponse.#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <summary>
+            Creates a new <see cref="T:CLERP.API.Infrastructure.Exceptions.ValidationFailedResponse"/> object based on the modelstate
+            </summary>
+            <param name="modelState">Current modelstate</param>
         </member>
         <member name="T:CLERP.API.Infrastructure.Middleware.ErrorHandlingMiddleware">
             <summary>

@@ -9,7 +9,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
     /// <summary>
     /// Default response dto for an employee
     /// </summary>
-    public class EmployeeDto
+    public class EmployeeResponse
     {
         [JsonProperty("firstname")]
         public string Firstname { get; set; }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CLERP.API.Infrastructure.Attributes
+namespace CLERP.API.Infrastructure.Exceptions
 {
     /// <summary>
     /// Represents a validation error, occured when validating an incoming model

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.EmployeeArea.Login
 {
-    public class EmployeeLoginHandler : IRequestHandler<EmployeeLoginDto, string>
+    public class EmployeeLoginHandler : IRequestHandler<EmployeeLoginRequest, TokenResponse>
     {
         private readonly ClerpContext _context;
         private readonly ILogger<EmployeeLoginHandler> _logger;
@@ -37,13 +37,13 @@ namespace CLERP.API.Features.v1.EmployeeArea.Login
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>token or null when credentials are invalid</returns>
-        public async Task<string> Handle(EmployeeLoginDto request, CancellationToken cancellationToken)
+        public async Task<TokenResponse> Handle(EmployeeLoginRequest request, CancellationToken cancellationToken)
         {
             Employee requestedEmployee = await _context.Employees
                 .Include(e => e.Roles)
                 .Include(e => e.Department)
                 .Include(e => e.Department.Roles)
-                .FirstOrDefaultAsync(e => string.Equals(request.Username, e.Username, StringComparison.InvariantCultureIgnoreCase));
+                .FirstOrDefaultAsync(e => string.Equals(request.Username, e.Username, StringComparison.InvariantCultureIgnoreCase), cancellationToken);
 
             if (requestedEmployee == null)
             {
@@ -52,7 +52,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Login
                 return null;
             }
 
-            if(!_hasher.PasswordMatches(request.Password, requestedEmployee.Password))
+            if (!_hasher.PasswordMatches(request.Password, requestedEmployee.Password))
             {
                 _logger.LogWarning($"Failed login attempt with username: {request.Username}");
 
@@ -63,9 +63,15 @@ namespace CLERP.API.Features.v1.EmployeeArea.Login
             var rolesFromDepartment = requestedEmployee.Department?.Roles?.Select(r => r?.Role);
 
             // add roles from employees department
-            rolesFromUser = rolesFromDepartment != null && rolesFromDepartment.Count() > 0 ? rolesFromUser.Concat(rolesFromDepartment) : rolesFromUser; 
+            rolesFromUser = rolesFromDepartment != null 
+                && rolesFromDepartment.Count() > 0 ? rolesFromUser.Concat(rolesFromDepartment) : rolesFromUser;
 
-            return _tokenGenerator.CreateToken(requestedEmployee, rolesFromUser);
+            var token = _tokenGenerator.CreateToken(requestedEmployee, rolesFromUser);
+
+            return new TokenResponse()
+            {
+                Token = token
+            };
         }
     }
 }

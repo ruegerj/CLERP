@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.EmployeeArea.Create
 {
-    public class EmployeeCreateHandler : IRequestHandler<EmployeeCreateDto, Guid>
+    public class EmployeeCreateHandler : IRequestHandler<EmployeeCreateRequest, Guid>
     {
         private readonly ClerpContext _context;
         private readonly ILogger<EmployeeCreateHandler> _logger;
@@ -32,11 +32,11 @@ namespace CLERP.API.Features.v1.EmployeeArea.Create
             _hasher = hasher;
         }
 
-        public async Task<Guid> Handle(EmployeeCreateDto request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(EmployeeCreateRequest request, CancellationToken cancellationToken)
         {
             var employeesWithSimilarUsernameEmail = await _context.Employees
                 .Where(e => e.Username == request.Username || e.Email == request.Email)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
 
             // check if username is available / unique
             if (employeesWithSimilarUsernameEmail.Any(e => e.Username == request.Username))
