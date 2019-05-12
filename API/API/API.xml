@@ -702,6 +702,12 @@
             Id of the employee which have to be deleted
             </summary>
         </member>
+        <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.GetAll">
+            <summary>
+            Gets all employees
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.GetEmployeeById(System.Guid)">
             <summary>
             Gets an employee by his id
@@ -738,9 +744,14 @@
             <param name="loginData">Username and password from the employee</param>
             <returns></returns>
         </member>
-        <member name="T:CLERP.API.Features.v1.EmployeeArea.EmployeeDto">
+        <member name="T:CLERP.API.Features.v1.EmployeeArea.EmployeeResponse">
             <summary>
             Default response dto for an employee
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.EmployeeArea.GetAll.EmployeeGetAllRequest">
+            <summary>
+            Empty class just for meadiatR mapping
             </summary>
         </member>
         <member name="M:CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginHandler.Handle(CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginRequest,System.Threading.CancellationToken)">
@@ -784,6 +795,32 @@
         <member name="P:CLERP.API.Features.v1.ResponseContainer.Payload">
             <summary>
             Contains the data for the reponse, if existing
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.RoleArea.GetAll.RoleGetAllRequest">
+            <summary>
+            Empty class just for meadiatR mapping
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetAll">
+            <summary>
+            Gets all roles
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CLERP.API.Features.v1.RoleArea.RoleResponse">
+            <summary>
+            Default response dto for a role
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.RoleResponse.Type">
+            <summary>
+            Defines the explicit type / function
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.RoleResponse.Description">
+            <summary>
+            Optional description of the role
             </summary>
         </member>
         <member name="T:CLERP.API.Infrastructure.Attributes.ValidateModelAttribute">

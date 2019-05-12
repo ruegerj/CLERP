@@ -11,6 +11,9 @@ namespace CLERP.API.Features.v1.EmployeeArea
     /// </summary>
     public class EmployeeResponse
     {
+        [JsonProperty("id")]
+        public Guid Guid { get; set; }
+
         [JsonProperty("firstname")]
         public string Firstname { get; set; }
 
