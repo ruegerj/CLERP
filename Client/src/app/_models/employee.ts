@@ -3,14 +3,14 @@ export class Employee{
     public FirstName : string;
     public Email : string;
     public PhoneNr : string;
-    public Birthday : string;
+    public Birthday : Date;
     public Username: string;
     public Password : string;
 
     
 
     constructor(lastName : string, firstName : string, email : string, 
-        phoneNr : string, birthday : string, 
+        phoneNr : string, birthday : Date, 
         username : string, password : string = null)
     {
         this.LastName = lastName;

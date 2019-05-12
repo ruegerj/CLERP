@@ -1,9 +1,60 @@
-<app-crudbar></app-crudbar>
-<form>
+<app-crudbar (editWasClicked)="onEditClicked()"></app-crudbar>
+<div class="p-5">
+  <form>
     <div class="form-group row">
-        <label for="employeeEmail" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm-10">
-          <input type="text" readonly class="form-control-plaintext" id="employeeEmail" value="email@example.com">
-        </div>
+      <label for="username" class="col-sm-2 col-form-label">Username</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="username" [disabled]="!isEditing" value="{{employee.Username}}">
+      </div>
     </div>
-</form>
+
+    <div class="form-group row">
+      <label for="password" class="col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="password" [disabled]="!isEditing" value="{{employee.Password}}">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="firstname" class="col-sm-2 col-form-label">Firstname</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="firstname" [disabled]="!isEditing" value="{{employee.FirstName}}">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="firstname" class="col-sm-2 col-form-label">Firstname</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="firstname" [disabled]="!isEditing" value="{{employee.FirstName}}">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="lastname" class="col-sm-2 col-form-label">Lastname</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="lastname" [disabled]="!isEditing" value="{{employee.LastName}}">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="email" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="email" [disabled]="!isEditing" value="{{employee.Email}}">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="phonenr" class="col-sm-2 col-form-label">Phone Number</label>
+      <div class="col-sm-10">
+        <input type="tel" class="form-control" id="phonenr" [disabled]="!isEditing" value="{{employee.PhoneNr}}">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="birthday" class="col-sm-2 col-form-label">Date of Birth</label>
+      <div class="col-sm-10">
+        <input type="date" class="form-control" id="birthday" [disabled]="!isEditing" value="{{employee.Birthday}}">
+      </div>
+    </div>
+  </form>
+</div>

@@ -7,11 +7,22 @@ import { Employee } from '@Models/Employee'
   styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit {
-  private employee : Employee
+  isEditing : boolean;
+  employee : Employee = new Employee("ExLastName", "ExFirstName", "ExEmail", "+41 88 99 44 66", new Date(19890564), "ExUsername");
 
-  constructor() { }
+
+
+
+  constructor() { 
+    this.isEditing = false;
+  }
 
   ngOnInit() {
   }
 
+
+
+  onEditClicked() : void{
+    this.isEditing = !this.isEditing;
+  }
 }
