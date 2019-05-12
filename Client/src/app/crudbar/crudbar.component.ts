@@ -6,15 +6,30 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./crudbar.component.scss']
 })
 export class CrudbarComponent implements OnInit {
-  @Output() editWasClicked = new EventEmitter<boolean>();
-  
+  isEditing : boolean;
+  @Output() editStateChanged = new EventEmitter<boolean>();   
 
-  constructor() { }
+  constructor() { 
+    this.isEditing = false;
+  }
 
   ngOnInit() {
   }
 
   editBtnClicked() : void{
-    this.editWasClicked.emit(true);
+    this.isEditing = !this.isEditing;
+    this.editStateChanged.emit(this.isEditing);
+  }
+
+  cancelBtnClicked() : void {
+    console.log("not implemented yet");
+  }
+
+  saveBtnClicked() : void {
+    console.log("not implemented yet");
+  }
+
+  newBtnClicked() : void {
+    console.log("not implemented yet");
   }
 }

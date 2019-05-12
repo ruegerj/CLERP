@@ -22,7 +22,7 @@ export class EmployeesComponent implements OnInit {
 
 
 
-  onEditClicked() : void{
-    this.isEditing = !this.isEditing;
+  onEditStateChanged($event) : void{
+    this.isEditing = $event;
   }
 }
