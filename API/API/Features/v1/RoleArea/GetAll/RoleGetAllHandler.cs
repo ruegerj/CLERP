@@ -28,7 +28,7 @@ namespace CLERP.API.Features.v1.RoleArea.GetAll
             {
                 Guid = r.Guid,
                 Description = r.Description,
-                Type = r.Type
+                Name = r.Name
             }).ToListAsync(cancellationToken);
 
             return new RoleGetAllResponse() { Roles = roleDtos };

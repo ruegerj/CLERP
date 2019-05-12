@@ -40,7 +40,7 @@ namespace CLERP.API.Infrastructure.Security.Tokens
                  new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()) // Issued at
             };
 
-            claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r.Type.ToString())));
+            claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r.Name)));
 
             var tokenDescriptor = new SecurityTokenDescriptor()
             {

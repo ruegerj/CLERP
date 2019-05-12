@@ -10,7 +10,7 @@ using MediatR;
 
 namespace CLERP.API.Features.v1.EmployeeArea.GetById
 {
-    public class EmployeeGetByIdHandler : IRequestHandler<EmployeeGetByIdQuery, EmployeeResponse>
+    public class EmployeeGetByIdHandler : IRequestHandler<EmployeeGetByIdRequest, EmployeeResponse>
     {
         private readonly ClerpContext _context;
         private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.GetById
             _mapper = mapper;
         }
 
-        public async Task<EmployeeResponse> Handle(EmployeeGetByIdQuery request, CancellationToken cancellationToken)
+        public async Task<EmployeeResponse> Handle(EmployeeGetByIdRequest request, CancellationToken cancellationToken)
         {
             var employee = await _context.Employees.FindAsync(request.EmployeeId, cancellationToken);
 

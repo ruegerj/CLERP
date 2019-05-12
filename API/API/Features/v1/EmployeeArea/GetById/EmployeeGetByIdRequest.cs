@@ -6,7 +6,7 @@ using MediatR;
 
 namespace CLERP.API.Features.v1.EmployeeArea.GetById
 {
-    public class EmployeeGetByIdQuery : IRequest<EmployeeResponse>
+    public class EmployeeGetByIdRequest : IRequest<EmployeeResponse>
     {
         public Guid EmployeeId { get; set; }
     }

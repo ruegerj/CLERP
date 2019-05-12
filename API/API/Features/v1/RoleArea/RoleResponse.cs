@@ -16,10 +16,10 @@ namespace CLERP.API.Features.v1.RoleArea
         public Guid Guid { get; set; }
 
         /// <summary>
-        /// Defines the explicit type / function
+        /// Name of the role
         /// </summary>
-        [JsonProperty("type")]
-        public RoleType Type { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// Optional description of the role

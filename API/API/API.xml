@@ -626,10 +626,10 @@
             Represents a role that can be attached to a department or an individual employee
             </summary>
         </member>
-        <member name="P:CLERP.API.Domain.Models.Role.Type">
+        <member name="P:CLERP.API.Domain.Models.Role.Name">
             <summary>
-            Defines the explicit type / function
-            Is used for authorization
+            Unique name of the role
+            Is used for Authorization
             </summary>
         </member>
         <member name="P:CLERP.API.Domain.Models.Role.Description">
@@ -797,6 +797,21 @@
             Contains the data for the reponse, if existing
             </summary>
         </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest.RoleId">
+            <summary>
+            Id of the role which should be added to the employee
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest.EmployeeId">
+            <summary>
+            Id of the employee whicht the role should be added to
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.Create.RoleCreateResponse.RoleId">
+            <summary>
+            Id of the new created role
+            </summary>
+        </member>
         <member name="T:CLERP.API.Features.v1.RoleArea.GetAll.RoleGetAllRequest">
             <summary>
             Empty class just for meadiatR mapping
@@ -808,14 +823,50 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetRoleById(System.Guid)">
+            <summary>
+            Gets a role by id
+            </summary>
+            <param name="id">Id of the role</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.AddRoleToEmployee(CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest)">
+            <summary>
+            Add's a certain role to an employee
+            </summary>
+            <param name="roleAddEmployeeData">Data for adding a role to an employee</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.CreateRole(CLERP.API.Features.v1.RoleArea.Create.RoleCreateRequest)">
+            <summary>
+            Creates a role
+            </summary>
+            <param name="createData">Data for creating a new role</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.UpdateRole(CLERP.API.Features.v1.RoleArea.Update.RoleUpdateRequest,System.Guid)">
+            <summary>
+            Updates a role
+            </summary>
+            <param name="updateData">Updated role data</param>
+            <param name="id">Id of the role</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.DeleteRole(System.Guid)">
+            <summary>
+            Deletes a role
+            </summary>
+            <param name="id">Id of the role</param>
+            <returns></returns>
+        </member>
         <member name="T:CLERP.API.Features.v1.RoleArea.RoleResponse">
             <summary>
             Default response dto for a role
             </summary>
         </member>
-        <member name="P:CLERP.API.Features.v1.RoleArea.RoleResponse.Type">
+        <member name="P:CLERP.API.Features.v1.RoleArea.RoleResponse.Name">
             <summary>
-            Defines the explicit type / function
+            Name of the role
             </summary>
         </member>
         <member name="P:CLERP.API.Features.v1.RoleArea.RoleResponse.Description">

@@ -13,10 +13,10 @@ namespace CLERP.API.Domain.Models
     public class Role : EntityBase
     {
         /// <summary>
-        /// Defines the explicit type / function
-        /// Is used for authorization
+        /// Unique name of the role
+        /// Is used for Authorization
         /// </summary>
-        public RoleType Type { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Optional description of the role

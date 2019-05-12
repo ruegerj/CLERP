@@ -60,7 +60,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
             Description = "An unknown error occured")]
         public async Task<ActionResult<EmployeeResponse>> GetEmployeeById(Guid id)
         {
-            var employee = await _mediator.Send(new GetById.EmployeeGetByIdQuery() { EmployeeId = id });
+            var employee = await _mediator.Send(new GetById.EmployeeGetByIdRequest() { EmployeeId = id });
 
             if (employee == null)
             {
@@ -77,6 +77,9 @@ namespace CLERP.API.Features.v1.EmployeeArea
         /// <returns></returns>
         [HttpPost("create")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, null, Description = "Employee successfuly created")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.Conflict, 
+            responseType: typeof(ConflictResponse), 
+            Description = "Entered data conflicts with existing")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity, 
             responseType: typeof(ValidationFailedResponse),
             Description = "Validation failed")]
