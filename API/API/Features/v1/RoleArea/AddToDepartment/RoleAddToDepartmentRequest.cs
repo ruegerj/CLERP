@@ -10,7 +10,7 @@ namespace CLERP.API.Features.v1.RoleArea.AddToDepartment
     public class RoleAddToDepartmentRequest : IRequest<bool>
     {
         /// <summary>
-        /// Id of the role whihc should be added to the department
+        /// Id of the role which should be added to the department
         /// </summary>
         [JsonProperty("role-id")]
         public Guid RoleId { get; set; }

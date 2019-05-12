@@ -797,6 +797,16 @@
             Contains the data for the reponse, if existing
             </summary>
         </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.AddToDepartment.RoleAddToDepartmentRequest.RoleId">
+            <summary>
+            Id of the role whihc should be added to the department
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.AddToDepartment.RoleAddToDepartmentRequest.DepartmentId">
+            <summary>
+            Id of the department to role should be added to
+            </summary>
+        </member>
         <member name="P:CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest.RoleId">
             <summary>
             Id of the role which should be added to the employee
@@ -835,6 +845,13 @@
             Add's a certain role to an employee
             </summary>
             <param name="roleAddEmployeeData">Data for adding a role to an employee</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.AddRoleToDepartment(CLERP.API.Features.v1.RoleArea.AddToDepartment.RoleAddToDepartmentRequest)">
+            <summary>
+            Adds a certain role to a department
+            </summary>
+            <param name="roleAddDepartmentData">Data for adding a role to a department</param>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.CreateRole(CLERP.API.Features.v1.RoleArea.Create.RoleCreateRequest)">
