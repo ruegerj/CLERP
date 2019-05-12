@@ -1,0 +1,1096 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API</name>
+    </assembly>
+    <members>
+        <member name="T:CLERP.API.AppSettings">
+            <summary>
+            Represents the custom settings from the appsettings.json file
+            </summary>
+        </member>
+        <member name="P:CLERP.API.AppSettings.ConnectionstringLocal">
+            <summary>
+            Connection-string to local dev DB
+            </summary>
+        </member>
+        <member name="P:CLERP.API.AppSettings.HSTSMaxAge">
+            <summary>
+            May age of HSTS in days
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Abstract.EntityBase">
+            <summary>
+            Base class for an entity in the clerp Db
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Abstract.EntityBase.Guid">
+            <summary>
+            GUID as primary Key
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Abstract.EntityBase.Creation">
+            <summary>
+            Datetime when the entity was added to the table
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Abstract.EntityBase.CreatedBy">
+            <summary>
+            Username of the employee which created this entity
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Abstract.EntityBase.LastModified">
+            <summary>
+            Datetime when the entity was the last time modified
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Abstract.EntityBase.LastModifiedBy">
+            <summary>
+            Username of the employee which last modified this entity
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Abstract.RoleType">
+            <summary>
+            Different Roles covered in this application
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Abstract.ProductState">
+            <summary>
+            Different states a product can have
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Abstract.OrderState">
+            <summary>
+            Different states an order can have
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Abstract.BillState">
+            <summary>
+            Different states a bill can have
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Abstract.LogEntry">
+            <summary>
+            Represents base class for a log / note
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Abstract.LogEntry.LogMessage">
+            <summary>
+            The logged text/message
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Abstract.Person">
+            <summary>
+            Superclass for all people
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Address">
+            <summary>
+            Base class for an adress
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Address.Street">
+            <summary>
+            The street name without the house-number
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Address.Housenumber">
+            <summary>
+            The housenumber , can be null if non existing
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Address.CityGuid">
+            <summary>
+            Foreign key to the city this address is attached
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Address.City">
+            <summary>
+            The mapped City to this address
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Address.Warehouses">
+            <summary>
+            The warehouses which have this address
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Address.BusinessPartnerGuid">
+            <summary>
+            Foreign key to the business-partner this address is attached
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Address.BusinessPartner">
+            <summary>
+            The business-partner this address is attached to
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Address.ShippingOrders">
+            <summary>
+            All orders where this is the shipping address
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Address.BillingOrders">
+            <summary>
+            All orders where this is the billing address
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Bill">
+            <summary>
+            Represents a bill in the Db
+            A bill contains a reference to the order which has to be payed
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Bill.ValidFrom">
+            <summary>
+            Datetime after which the this bill is valid
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Bill.AdditionalDeadlineDays">
+            <summary>
+            Number of days which result in the deadline for the payment of the bill when added to the valid from date
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Bill.Description">
+            <summary>
+            Optional description
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Bill.ProductsToPay">
+            <summary>
+            All delivered physical products from the order
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Bill.OrderGuid">
+            <summary>
+            Foreign key to the mapped order
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Bill.Order">
+            <summary>
+            The mapped order to this bill
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.BusinessContact">
+            <summary>
+            Represents a person from a <see cref="P:CLERP.API.Domain.Models.BusinessContact.BusinessPartner"/> which acts as contact for that firm
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.BusinessContact.BusinessPartnerGuid">
+            <summary>
+            Foreign key to the business-partner this business-contact is attached to
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.BusinessContact.BusinessPartner">
+            <summary>
+            The firm this person is working for
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.BusinessContact.Logs">
+            <summary>
+            All log entries for this business-contact
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.BusinessPartner">
+            <summary>
+            Represents a business contact e.g. another firm or business partner
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.BusinessPartner.ReceivedOrders">
+            <summary>
+            All orders this business-partner has received
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.BusinessPartner.SendtOrders">
+            <summary>
+            All orders this business-partner has sendt
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.BusinessPartner.Contacts">
+            <summary>
+            All business contacts / persons registered for this firm
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.BusinessPartner.Logs">
+            <summary>
+            All logs for this business partner
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.BusinessPartner.Addresses">
+            <summary>
+            All adresses of this business partner (e.g. multple office- or warehouse-, factory- locations)
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.City">
+            <summary>
+            Represents a City in the Db
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.City.Addresses">
+            <summary>
+            All addresses within this city
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.City.CountryGuid">
+            <summary>
+            Foreign key to the country this city is attached
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.City.Country">
+            <summary>
+            The mapped country
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Compartment">
+            <summary>
+            Represents a compartment inside a shelf
+            Is the physical place where a product is stored
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Compartment.Row">
+            <summary>
+            The row number inside the compartment grid
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Compartment.Column">
+            <summary>
+            The column number inside the compartment grid
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Compartment.Shelf">
+            <summary>
+            The shelf this compartmnet is inside
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Compartment.Products">
+            <summary>
+            All products which are stored inside this compartment
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.ContactLog">
+            <summary>
+            Represents a log for a business contact
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.ContactLog.ContactGuid">
+            <summary>
+            Foreign key to the business-contact this log-entry is attached
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.ContactLog.Contact">
+            <summary>
+            Link to the business-contact this log is attached
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Country">
+            <summary>
+            Represents a country in the Db
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Country.Abbreviation">
+            <summary>
+            The abbrevation of the country e.g. Switzerland => CHE
+            Three digit country codes
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Country.Cities">
+            <summary>
+            All cities which are in this country
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Department">
+            <summary>
+            Represents a department in the Db
+            Every employee can belong to one department wich has specific roles attached
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Department.Description">
+            <summary>
+            Optional description
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Department.Roles">
+            <summary>
+            All roles wich are claimed by this department
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Department.Employees">
+            <summary>
+            All employee which are attached to this department
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Employee">
+            <summary>
+            Represents an employee of the firm in the Db
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Employee.Password">
+            <summary>
+            A 512 bit hash (Sha-512) as a Base64string which represents the hashed password of an employee
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Employee.DepartmentGuid">
+            <summary>
+            Foreign key to the department this employee works for
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Employee.Department">
+            <summary>
+            The department this employee is attached to
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Employee.Roles">
+            <summary>
+            All roles wich are claimed by this person
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Link.ProductTypeOrder">
+            <summary>
+            Link table for the many to mayn relation between <see cref="P:CLERP.API.Domain.Models.Link.ProductTypeOrder.ProductType"/> and <see cref="P:CLERP.API.Domain.Models.Link.ProductTypeOrder.Order"/>
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.ProductTypeOrder.ProductTypeGuid">
+            <summary>
+            Foreign key to the mapped product-type
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.ProductTypeOrder.OrderGuid">
+            <summary>
+            Foreign key to the mapped order
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.ProductTypeOrder.ProductType">
+            <summary>
+            Link to the mapped product-type
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.ProductTypeOrder.Order">
+            <summary>
+            Link to the mapped order
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Link.ProductTypeProductType">
+            <summary>
+            Link table for the many to many relation
+            between the Parent Product-Type and the Child Product-Type
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.ProductTypeProductType.ParentGuid">
+            <summary>
+            Foreign key to the parent product-type
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.ProductTypeProductType.ChildGuid">
+            <summary>
+            Foreign key to the child product-type
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.ProductTypeProductType.Parent">
+            <summary>
+            Link to the parent product-type
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.ProductTypeProductType.Child">
+            <summary>
+            Link to the child product-type
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Link.RoleDepartment">
+            <summary>
+            Link table for many to many relation of <see cref="P:CLERP.API.Domain.Models.Link.RoleDepartment.Role"/> to <see cref="P:CLERP.API.Domain.Models.Link.RoleDepartment.Department"/>
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.RoleDepartment.RoleGuid">
+            <summary>
+            Foreign key for Role
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.RoleDepartment.DepartmentGuid">
+            <summary>
+            Foreign key for Department
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.RoleDepartment.Role">
+            <summary>
+            Link to mapped Role
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.RoleDepartment.Department">
+            <summary>
+            Link to mapped Department
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Link.RoleEmployee">
+            <summary>
+            Link table for many to many relation of <see cref="P:CLERP.API.Domain.Models.Link.RoleEmployee.Role"/> to <see cref="P:CLERP.API.Domain.Models.Link.RoleEmployee.Employee"/>
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.RoleEmployee.RoleGuid">
+            <summary>
+            Foreig key for Role
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.RoleEmployee.EmployeeGuid">
+            <summary>
+            Foreig key for Employee
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.RoleEmployee.Role">
+            <summary>
+            Link to the mapped role
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Link.RoleEmployee.Employee">
+            <summary>
+            Link to the mapped employee
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Order">
+            <summary>
+            Represents an order in the Db
+            Is an order for specific products (types) sendt to a business partner or to this firm
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Order.SendDate">
+            <summary>
+            Date when the order was sendt
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Order.Description">
+            <summary>
+            Optional description
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Order.ProductTypes">
+            <summary>
+            All types and count for each type for all ordered products
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Order.SendingPartnerGuid">
+            <summary>
+            Foreign key for the sending business-partner
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Order.SendingPartner">
+            <summary>
+            Business-partner which sends this order
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Order.ReceivingPartnerGuid">
+            <summary>
+            Foreign key for the receiving business-partner
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Order.ReceivingPartner">
+            <summary>
+            Business-partner which receives this order
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Order.ShippingAddressGuid">
+            <summary>
+            Foreign key to shipping address
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Order.ShippingAddress">
+            <summary>
+            The address where the products should be shipped to
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Order.BillingAddressGuid">
+            <summary>
+            Foreign key to the billing address
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Order.BillingAddress">
+            <summary>
+            The address the bill should go to
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Order.Bills">
+            <summary>
+            Bills attached to this order
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.PartnerLog">
+            <summary>
+            Represents a log for a business-partner
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.PartnerLog.PartnerGuid">
+            <summary>
+            Foreign key to the business-partner this log entry is attached
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.PartnerLog.Partner">
+            <summary>
+            Link to the business-partner this log is attached
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Product">
+            <summary>
+            Represents a physical product in the Db
+            Each product can have a parent product
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Product.Description">
+            <summary>
+            Optional description
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Product.ParentGuid">
+            <summary>
+            Foreign key to parent product
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Product.Parent">
+            <summary>
+            The parent product of this product
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Product.Children">
+            <summary>
+            All child prodcuts of this product
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Product.TypeGuid">
+            <summary>
+            Foreign key to the product-type of this product
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Product.Type">
+            <summary>
+            The type this product is attached to
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Product.CompartmentGuid">
+            <summary>
+            Foreign key to the compartment this product is stored
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Product.Compartment">
+            <summary>
+            The physical location of the product
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Product.BillGuid">
+            <summary>
+            Foreign key to the bill which includes this product
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Product.Bill">
+            <summary>
+            The bill which includes this product
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.ProductType">
+            <summary>
+            Represents a type of a product
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.ProductType.Description">
+            <summary>
+            Optional description
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.ProductType.EAN">
+            <summary>
+            European Article Number 
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.ProductType.Price">
+            <summary>
+            The price of the physical product wiht this type
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.ProductType.Parents">
+            <summary>
+            All parent product-types which have this product type as child
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.ProductType.Children">
+            <summary>
+            All child product-types which have this product type as parent
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.ProductType.Products">
+            <summary>
+            All products which have this type
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.ProductType.Orders">
+            <summary>
+            All Orders which contained this product
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Role">
+            <summary>
+            Represents a role that can be attached to a department or an individual employee
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Role.Name">
+            <summary>
+            Unique name of the role
+            Is used for Authorization
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Role.Description">
+            <summary>
+            Optional description of the role
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Role.Employees">
+            <summary>
+            All people wich claimed this role
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Role.Departments">
+            <summary>
+            All departments which claimed this role
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Shelf">
+            <summary>
+            Represents a shelf in a warehouse in the Db
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Shelf.Designation">
+            <summary>
+            Designation of the shelf e.g. shelf 7A
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Shelf.WarehouseGuid">
+            <summary>
+            Foreign key to the warehouse this shelf is in
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Shelf.Warehouse">
+            <summary>
+            The warehouse this shelf is inside
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Shelf.Compartments">
+            <summary>
+            All compartments inside this shelf
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Domain.Models.Warehouse">
+            <summary>
+            Represents a warehouse of the firm in the Db
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Warehouse.AddressGuid">
+            <summary>
+            Foreign key for Address relation
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Warehouse.Address">
+            <summary>
+            Link to the mapped warehouse-address
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Warehouse.Shelves">
+            <summary>
+            All shelves inside this warehouse
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.EmployeeArea.Create.EmployeeCreateRequest.Password">
+            <summary>
+            Plain password
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.EmployeeArea.Delete.EmployeeDeleteRequest.EmployeeId">
+            <summary>
+            Id of the employee which have to be deleted
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.GetAll">
+            <summary>
+            Gets all employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.GetEmployeeById(System.Guid)">
+            <summary>
+            Gets an employee by his id
+            </summary>
+            <param name="id">id of the requested employee</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.CreateEmployee(CLERP.API.Features.v1.EmployeeArea.Create.EmployeeCreateRequest)">
+            <summary>
+            Creates an employee
+            </summary>
+            <param name="createData">Required data for creating an employee</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.UpdateEmployee(CLERP.API.Features.v1.EmployeeArea.Update.EmployeeUpdateRequest,System.Guid)">
+            <summary>
+            Updates the data from an employee
+            </summary>
+            <param name="updateData">Data to update</param>
+            <param name="id">Id of the employee</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.DeleteEmployee(System.Guid)">
+            <summary>
+            Deletes an employee
+            </summary>
+            <param name="id">Guid/Id from the employee</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.Login(CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginRequest)">
+            <summary>
+            Logs a employee in and returns the created Jwt
+            </summary>
+            <param name="loginData">Username and password from the employee</param>
+            <returns></returns>
+        </member>
+        <member name="T:CLERP.API.Features.v1.EmployeeArea.EmployeeResponse">
+            <summary>
+            Default response dto for an employee
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.EmployeeArea.GetAll.EmployeeGetAllRequest">
+            <summary>
+            Empty class just for meadiatR mapping
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginHandler.Handle(CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginRequest,System.Threading.CancellationToken)">
+            <summary>
+            Creates an Jwt for an employee if credentials are correct
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns>token or null when credentials are invalid</returns>
+        </member>
+        <member name="P:CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginRequest.Password">
+            <summary>
+            Plain password
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.EmployeeArea.Login.TokenResponse">
+            <summary>
+            Response after an employee is logged in
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.EmployeeArea.Login.TokenResponse.Token">
+            <summary>
+            Access token for the employee
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.MessageResponse">
+            <summary>
+            A response contianer when just a message have to be returned
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.Playground.ValuesController">
+            <summary>
+            Sample Controller
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.ResponseContainer">
+            <summary>
+            Default container for every success response
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ResponseContainer.Payload">
+            <summary>
+            Contains the data for the reponse, if existing
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest.RoleId">
+            <summary>
+            Id of the role which should be added to the employee
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest.EmployeeId">
+            <summary>
+            Id of the employee whicht the role should be added to
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.Create.RoleCreateResponse.RoleId">
+            <summary>
+            Id of the new created role
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.RoleArea.GetAll.RoleGetAllRequest">
+            <summary>
+            Empty class just for meadiatR mapping
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetAll">
+            <summary>
+            Gets all roles
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetRoleById(System.Guid)">
+            <summary>
+            Gets a role by id
+            </summary>
+            <param name="id">Id of the role</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.AddRoleToEmployee(CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest)">
+            <summary>
+            Add's a certain role to an employee
+            </summary>
+            <param name="roleAddEmployeeData">Data for adding a role to an employee</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.CreateRole(CLERP.API.Features.v1.RoleArea.Create.RoleCreateRequest)">
+            <summary>
+            Creates a role
+            </summary>
+            <param name="createData">Data for creating a new role</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.UpdateRole(CLERP.API.Features.v1.RoleArea.Update.RoleUpdateRequest,System.Guid)">
+            <summary>
+            Updates a role
+            </summary>
+            <param name="updateData">Updated role data</param>
+            <param name="id">Id of the role</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.DeleteRole(System.Guid)">
+            <summary>
+            Deletes a role
+            </summary>
+            <param name="id">Id of the role</param>
+            <returns></returns>
+        </member>
+        <member name="T:CLERP.API.Features.v1.RoleArea.RoleResponse">
+            <summary>
+            Default response dto for a role
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.RoleResponse.Name">
+            <summary>
+            Name of the role
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.RoleResponse.Description">
+            <summary>
+            Optional description of the role
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Attributes.ValidateModelAttribute">
+            <summary>
+            Custom attribute for erros in model validation
+            Returns a custom formated error response if the validation of the model fails
+            which lists all failed fields of the model
+            </summary>   
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Attributes.ValidationFailedResult">
+            <summary>
+            Class to configure the default Http-Status code when the model validation fails
+            Wraps arround the <see cref="T:CLERP.API.Infrastructure.Exceptions.ValidationFailedResponse"/>
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Behavior.DBContextTransactionPipelineBehavior`2">
+            <summary>
+            Adds database transactions to the pipeline
+            </summary>
+            <typeparam name="TRequest"></typeparam>
+            <typeparam name="TResponse"></typeparam>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Configurations.Abstract.EntityTypeConfiguration`1">
+            <summary>
+            Base class for all EntityTypeConfigurations
+            </summary>
+            <typeparam name="TEntity">Type of the entity which should be configured</typeparam>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Configurations.Abstract.EntityTypeConfiguration`1.ConfigureSharedAttributes(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
+            <summary>
+            Configure all properties of <see cref="T:CLERP.API.Domain.Models.Abstract.EntityBase"/>
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Contexts.ClerpContext">
+            <summary>
+            Db-Context for ClerpDb
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Contexts.ClerpContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{CLERP.API.Infrastructure.Contexts.ClerpContext},Microsoft.Extensions.Logging.ILogger{CLERP.API.Infrastructure.Contexts.ClerpContext},CLERP.API.Infrastructure.Utilities.ICurrentUserAccessor)">
+            <summary>
+            Include context options e.g. Connection-string etc.
+            </summary>
+            <param name="options">Options injected by the builder</param>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Contexts.ClerpContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Db-Configurations using <see cref="T:Microsoft.EntityFrameworkCore.IEntityTypeConfiguration`1"/>
+            </summary>
+            <param name="modelBuilder">current <see cref="T:Microsoft.EntityFrameworkCore.ModelBuilder"/> instance</param>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Contexts.ClerpContext.SaveChanges">
+            <summary>
+            SaveChanges which additionally updates the metadata of all changed entities
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Contexts.ClerpContext.SaveChangesAsync(System.Threading.CancellationToken)">
+            <summary>
+            SaveChangesAsync which additionally updates the metadata of all changed entities
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Contexts.ClerpContext.RegisterConfigurations(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Method to bulk register all entity configurations
+            </summary>
+            <param name="builder">current <see cref="T:Microsoft.EntityFrameworkCore.ModelBuilder"/> instance</param>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Exceptions.ConflictException">
+            <summary>
+            Exception which, when thrown, returns an result with the HttpStatusCode 409 - Conflict
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Exceptions.ConflictException.#ctor(System.String)">
+            <summary>
+            Creates a an excpetion when an conflict with the existing data happened
+            </summary>
+            <param name="message">Message why the conflict happened</param>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Exceptions.ConflictException.#ctor(System.String,System.String)">
+            <summary>
+            Creates a an excpetion when an conflict with the existing data happened
+            </summary>
+            <param name="propertyName">Name of the property from the Dto whose value created the conflict</param>
+            <param name="message">Description why this conflict happened</param>
+        </member>
+        <member name="P:CLERP.API.Infrastructure.Exceptions.ConflictException.Payload">
+            <summary>
+            Contains information about the conflict
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Exceptions.ConflictResponse">
+            <summary>
+            Payload of a <see cref="T:CLERP.API.Infrastructure.Exceptions.ConflictException"/>
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Exceptions.ConflictResponse.#ctor(System.String)">
+            <summary>
+            Creates an new <see cref="T:CLERP.API.Infrastructure.Exceptions.ConflictResponse"/> with a message only
+            </summary>
+            <param name="message">Message why the conflict happened</param>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Exceptions.ConflictResponse.#ctor(System.String,System.String)">
+            <summary>
+            Creates an new <see cref="T:CLERP.API.Infrastructure.Exceptions.ConflictResponse"/> with the message and the field-name
+            </summary>
+            <param name="message">Message why the conflict happened</param>
+            <param name="fieldName">Name of the field/property which caused the conflict</param>
+        </member>
+        <member name="P:CLERP.API.Infrastructure.Exceptions.ConflictResponse.FieldName">
+            <summary>
+            Name of the property which caused the conflict
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Infrastructure.Exceptions.ConflictResponse.Message">
+            <summary>
+            Message about the reason/background of the conflict
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Exceptions.RestException`1">
+            <summary>
+            All derived types of this class will be catched in the <see cref="T:CLERP.API.Infrastructure.Middleware.ErrorHandlingMiddleware"/>
+            and handled there
+            </summary>
+            <typeparam name="TPayload">Type of the payload from the derived implementation</typeparam>
+        </member>
+        <member name="P:CLERP.API.Infrastructure.Exceptions.RestException`1.Payload">
+            <summary>
+            Container / Struct, which is defined in the derived types constructors, for detailed information why the error/s happened
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Exceptions.ValidationError">
+            <summary>
+            Represents a validation error, occured when validating an incoming model
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Exceptions.ValidationFailedResponse">
+            <summary>
+            Represents the summary of all validation errors
+            Data-Format that will be returned after a failed validation
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Exceptions.ValidationFailedResponse.#ctor(System.Collections.Generic.IEnumerable{CLERP.API.Infrastructure.Exceptions.ValidationError})">
+            <summary>
+            Creates a new <see cref="T:CLERP.API.Infrastructure.Exceptions.ValidationFailedResponse"/> object with existing <see cref="T:CLERP.API.Infrastructure.Exceptions.ValidationError"/> objects
+            </summary>
+            <param name="validationErrors"></param>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Exceptions.ValidationFailedResponse.#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary)">
+            <summary>
+            Creates a new <see cref="T:CLERP.API.Infrastructure.Exceptions.ValidationFailedResponse"/> object based on the modelstate
+            </summary>
+            <param name="modelState">Current modelstate</param>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Middleware.ErrorHandlingMiddleware">
+            <summary>
+            Middleware which handles error thrown in the app
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Middleware.MiddlewareExtensions.UseCustomMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Extension method which registers all custom middleware in the correct order
+            </summary>
+            <param name="app"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:CLERP.API.Infrastructure.Security.Hashing.PasswordHasher" -->
+        <member name="T:CLERP.API.Infrastructure.Security.Tokens.CustomJwtClaims">
+            <summary>
+            Constins custom claims for JWt created within this app
+            </summary>
+        </member>
+        <member name="F:CLERP.API.Infrastructure.Security.Tokens.CustomJwtClaims.EmployeeUsername">
+            <summary>
+            Claim key for a username of an employee
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Security.Tokens.JwtOptions">
+            <summary>
+            Configurations for the Jwt stored in the appsettings.json
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Infrastructure.Security.Tokens.JwtOptions.ValidFor">
+            <summary>
+            Timespan which defines how long a token is valid
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Security.Tokens.JwtTokenGenerator.CreateToken(CLERP.API.Domain.Models.Employee,System.Collections.Generic.IEnumerable{CLERP.API.Domain.Models.Role})">
+            <summary>
+            Creates a new Jwt-Token  for an employee/user with the required data of him and his roles
+            </summary>
+            <param name="employee">Employee th token should be issued for</param>
+            <param name="roles">All roles the employee is currently in</param>
+            <returns></returns>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Security.Tokens.SignInConfigurations">
+            <summary>
+            Global Sign-In Configurations, generate on Startup an random crytpographical value wich acts as private key for token generation
+            Instance is globally registered as singleton 
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Utilities.CurrentUserAccessor">
+            <summary>
+            Content accesor which fetches data about the current user (current request) from the current HttpContext
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:CLERP.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>
