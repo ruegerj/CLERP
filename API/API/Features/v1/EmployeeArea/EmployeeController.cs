@@ -29,6 +29,20 @@ namespace CLERP.API.Features.v1.EmployeeArea
         }
 
         /// <summary>
+        /// Gets all employees
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: typeof(GetAll.EmployeeGetAllResponse))]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
+            responseType: typeof(MessageResponse),
+            Description = "An unknown error occured")]
+        public async Task<ActionResult> GetAll()
+        {
+            return Ok(await _mediator.Send(new GetAll.EmployeeGetAllRequest()));
+        }
+
+        /// <summary>
         /// Gets an employee by his id
         /// </summary>
         /// <param name="id">id of the requested employee</param>
