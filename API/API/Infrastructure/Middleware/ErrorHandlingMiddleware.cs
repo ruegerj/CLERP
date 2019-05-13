@@ -57,6 +57,12 @@ namespace CLERP.API.Infrastructure.Middleware
                         context.Response.StatusCode = (int)ce.StatusCode;
                         break;
                     }
+                case BadRequestException bre:
+                    {
+                        responseContainer = bre.Payload;
+                        context.Response.StatusCode = (int)bre.StatusCode;
+                        break;
+                    }
                 case Exception ex:
                     {
                         responseContainer = new Features.v1.MessageResponse(

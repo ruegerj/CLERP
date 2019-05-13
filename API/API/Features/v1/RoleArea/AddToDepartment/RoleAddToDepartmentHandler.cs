@@ -1,5 +1,6 @@
 ﻿using CLERP.API.Domain.Models.Link;
 using CLERP.API.Infrastructure.Contexts;
+using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.RoleArea.AddToDepartment
 {
-    public class RoleAddToDepartmentHandler : IRequestHandler<RoleAddToDepartmentRequest, bool>
+    public class RoleAddToDepartmentHandler : AsyncRequestHandler<RoleAddToDepartmentRequest>
     {
         private readonly ClerpContext _context;
 
@@ -18,20 +19,20 @@ namespace CLERP.API.Features.v1.RoleArea.AddToDepartment
             _context = context;
         }
 
-        public async Task<bool> Handle(RoleAddToDepartmentRequest request, CancellationToken cancellationToken)
+        protected async override Task Handle(RoleAddToDepartmentRequest request, CancellationToken cancellationToken)
         {
             var role = await _context.Roles.FindAsync(request.RoleId, cancellationToken);
 
             if (role == null)
             {
-                return false;
+                throw new BadRequestException("Something went wrong, please try it again"); // role to add not found
             }
 
             var department = await _context.Departments.FindAsync(request.DepartmentId, cancellationToken);
 
             if (department == null)
             {
-                return false;
+                throw new BadRequestException("Something went wrong, please try it again"); // department to add role not found
             }
 
             role.Departments.Add(new RoleDepartment()
@@ -41,8 +42,6 @@ namespace CLERP.API.Features.v1.RoleArea.AddToDepartment
             });
 
             await _context.SaveChangesAsync(cancellationToken);
-
-            return true;
         }
     }
 }

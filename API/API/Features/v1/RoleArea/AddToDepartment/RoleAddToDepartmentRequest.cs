@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.RoleArea.AddToDepartment
 {
-    public class RoleAddToDepartmentRequest : IRequest<bool>
+    public class RoleAddToDepartmentRequest : IRequest
     {
         /// <summary>
         /// Id of the role which should be added to the department

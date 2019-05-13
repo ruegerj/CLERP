@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.EmployeeArea.Delete
 {
-    public class EmployeeDeleteRequest : IRequest<bool>
+    public class EmployeeDeleteRequest : IRequest
     {
         /// <summary>
         /// Id of the employee which have to be deleted

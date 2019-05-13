@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Contexts;
+using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace CLERP.API.Features.v1.RoleArea.Update
 
             if (role == null)
             {
-                return null;
+                throw new BadRequestException("Something went wrong, please try it again"); // role to update not found
             }
 
             role.Name = request.Name;

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Contexts;
+using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
 
             if (employee == null)
             {
-                return null;
+                throw new BadRequestException("Something went wrong, please try it again"); // employee to update not found
             }
 
             employee.Birthday = request.Birthday;

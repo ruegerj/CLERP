@@ -74,7 +74,7 @@ namespace CLERP.API.Features.v1.RoleArea
         [HttpPost("add-to-employee")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, null, Description = "Role successfuly added to the employee")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, 
-            responseType: typeof(MessageResponse), 
+            responseType: typeof(BadRequestResponse), 
             Description = "Role or employee couln't be found")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
             responseType: typeof(ValidationFailedResponse),
@@ -85,12 +85,7 @@ namespace CLERP.API.Features.v1.RoleArea
         public async Task<ActionResult> AddRoleToEmployee(
             [FromBody] AddToEmployee.RoleAddToEmployeeRequest roleAddEmployeeData)
         {
-            var roleSuccessfulyAdded = await _mediator.Send(roleAddEmployeeData);
-
-            if (!roleSuccessfulyAdded)
-            {
-                return BadRequest(new MessageResponse($"The role coulnd't be added, because either the role or the employee couln't be found"));
-            }
+            await _mediator.Send(roleAddEmployeeData);
 
             return Ok();
         }
@@ -104,7 +99,7 @@ namespace CLERP.API.Features.v1.RoleArea
         [HttpPost("add-to-department")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, null, Description = "Role successfuly added to the department")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
-            responseType: typeof(MessageResponse),
+            responseType: typeof(BadRequestResponse),
             Description = "Role or department couln't be found")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
             responseType: typeof(ValidationFailedResponse),
@@ -115,12 +110,7 @@ namespace CLERP.API.Features.v1.RoleArea
         public async Task<ActionResult> AddRoleToDepartment(
             [FromBody] AddToDepartment.RoleAddToDepartmentRequest roleAddDepartmentData)
         {
-            var roleSuccessfulyAdded = await _mediator.Send(roleAddDepartmentData);
-
-            if (!roleSuccessfulyAdded)
-            {
-                return BadRequest(new MessageResponse($"The role coulnd't be added, because either the role or the department couln't be found"));
-            }
+            await _mediator.Send(roleAddDepartmentData);
 
             return Ok();
         }
@@ -156,7 +146,7 @@ namespace CLERP.API.Features.v1.RoleArea
         /// <returns></returns>
         [HttpPut("{id}")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: typeof(RoleResponse), Description = "Role successfuly updated")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, responseType: typeof(MessageResponse), Description = "Role couldn't be found")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, responseType: typeof(BadRequestResponse), Description = "Role couldn't be found")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
             responseType: typeof(ValidationFailedResponse),
             Description = "Validation failed")]
@@ -167,14 +157,7 @@ namespace CLERP.API.Features.v1.RoleArea
         {
             updateData.RoleId = id;
 
-            var updatedRole = await _mediator.Send(updateData);
-
-            if (updatedRole == null) // Role to update not found
-            {
-                return BadRequest(new MessageResponse($"The role with the id: {id} couldn't be updated, because it couldn't be found"));
-            }
-
-            return Ok(updatedRole);
+            return Ok(await _mediator.Send(updateData));
         }
 
         /// <summary>
@@ -185,7 +168,7 @@ namespace CLERP.API.Features.v1.RoleArea
         [HttpDelete("{id}")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null,  Description = "Role deleted successfuly")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, 
-            responseType: typeof(MessageResponse), 
+            responseType: typeof(BadRequestResponse), 
             Description = "Role coulnd't be found")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
             responseType: typeof(ValidationFailedResponse),
@@ -195,12 +178,7 @@ namespace CLERP.API.Features.v1.RoleArea
             Description = "An unknown error occured")]
         public async Task<ActionResult> DeleteRole(Guid id)
         {
-            var deletedSuccessfuly = await _mediator.Send(new Delete.RoleDeleteRequest() { RoleId = id });
-
-            if (!deletedSuccessfuly)
-            {
-                return BadRequest(new MessageResponse($"Role with the id: {id} doesn't exists or has already been deleted"));
-            }
+            await _mediator.Send(new Delete.RoleDeleteRequest() { RoleId = id });
 
             return Ok();
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
 {
-    public class RoleAddToEmployeeRequest : IRequest<bool>
+    public class RoleAddToEmployeeRequest : IRequest
     {
         /// <summary>
         /// Id of the role which should be added to the employee

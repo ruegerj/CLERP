@@ -1,5 +1,6 @@
 ﻿using CLERP.API.Domain.Models.Link;
 using CLERP.API.Infrastructure.Contexts;
+using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
 {
-    public class RoleAddToEmployeeHandler : IRequestHandler<RoleAddToEmployeeRequest, bool>
+    public class RoleAddToEmployeeHandler : AsyncRequestHandler<RoleAddToEmployeeRequest>
     {
         private readonly ClerpContext _context;
 
@@ -18,20 +19,20 @@ namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
             _context = context;
         }
 
-        public async Task<bool> Handle(RoleAddToEmployeeRequest request, CancellationToken cancellationToken)
+        protected async override Task Handle(RoleAddToEmployeeRequest request, CancellationToken cancellationToken)
         {
             var role = await _context.Roles.FindAsync(request.RoleId, cancellationToken);
 
             if (role == null)
             {
-                return false;
+                throw new BadRequestException("Something went wrong, please try it again"); // role to add not found
             }
 
             var employee = await _context.Employees.FindAsync(request.EmployeeId, cancellationToken);
 
             if (employee == null)
             {
-                return false;
+                throw new BadRequestException("Something went wrong, please try it again"); // employee to add role not found
             }
 
             role.Employees.Add(new RoleEmployee()
@@ -41,8 +42,6 @@ namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
             });
 
             await _context.SaveChangesAsync(cancellationToken);
-
-            return true;
         }
     }
 }
