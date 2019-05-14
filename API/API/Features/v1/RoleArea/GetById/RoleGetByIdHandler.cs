@@ -2,6 +2,7 @@
 using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Contexts;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace CLERP.API.Features.v1.RoleArea.GetById
 
         public async Task<RoleResponse> Handle(RoleGetByIdRequest request, CancellationToken cancellationToken)
         {
-            var role = await _context.Roles.FindAsync(request.RoleId, cancellationToken);
+            var role = await _context.Roles.FindByGuidAsync(request.RoleId, cancellationToken);
 
             if (role == null)
             {

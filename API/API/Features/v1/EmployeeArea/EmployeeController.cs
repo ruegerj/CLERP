@@ -76,7 +76,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
         /// <param name="createData">Required data for creating an employee</param>
         /// <returns></returns>
         [HttpPost("create")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, null, Description = "Employee successfuly created")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null, Description = "Employee successfuly created")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.Conflict, 
             responseType: typeof(ConflictResponse), 
             Description = "Entered data conflicts with existing")]
@@ -101,7 +101,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
         /// <returns></returns>
         [HttpPut("{id}")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: typeof(EmployeeResponse), Description = "Employee successfuly updated")]        
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, responseType: typeof(MessageResponse), Description = "Employee couldn't be found")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, responseType: typeof(BadRequestResponse), Description = "Employee couldn't be found")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
             responseType: typeof(ValidationFailedResponse),
             Description = "Validation failed")]
@@ -112,14 +112,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
         {
             updateData.EmployeeId = id;
 
-            var updatedEmployee = await _mediator.Send(updateData);
-
-            if (updatedEmployee == null) // Employee not found
-            {
-                return BadRequest(new MessageResponse($"The employee with the id: {id} couldn't be updated, because it couldn't be found"));
-            }
-
-            return Ok(updatedEmployee);
+            return Ok(await _mediator.Send(updateData));
         }
 
 
@@ -131,7 +124,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
         [HttpDelete("{id}")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null, Description = "Employee successfuly deleted")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
-            responseType: typeof(MessageResponse), 
+            responseType: typeof(BadRequestResponse), 
             Description = "Employee to delete couldn't be found")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
             responseType: typeof(ValidationFailedResponse),
@@ -141,12 +134,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
             Description = "An unknown error occured")]
         public async Task<ActionResult> DeleteEmployee(Guid id)
         {
-            var successfulyDeleted = await _mediator.Send(new Delete.EmployeeDeleteRequest() { EmployeeId = id });
-
-            if (!successfulyDeleted) // Employee not found
-            {
-                return BadRequest(new MessageResponse($"Employee with the id: {id} doesn't exists or has already been deleted"));
-            }
+            await _mediator.Send(new Delete.EmployeeDeleteRequest() { EmployeeId = id });
 
             return Ok();
         }
@@ -160,7 +148,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
         [AllowAnonymous]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: typeof(Login.TokenResponse), Description = "Login successsful")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, 
-            responseType: typeof(MessageResponse), 
+            responseType: typeof(BadRequestResponse), 
             Description = "Invalid credentials")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
             responseType: typeof(ValidationFailedResponse),
@@ -169,15 +157,8 @@ namespace CLERP.API.Features.v1.EmployeeArea
             responseType: typeof(MessageResponse),
             Description = "An unknown error occured")]
         public async Task<ActionResult> Login([FromBody] Login.EmployeeLoginRequest loginData)
-        {
-            var tokenResponse = await _mediator.Send(loginData);
-
-            if (tokenResponse == null)
-            {
-                return BadRequest(new MessageResponse("The provided username or password is invalid"));
-            }
-
-            return Ok(tokenResponse);
+        {                    
+            return Ok(await _mediator.Send(loginData));
         }
     }
 }

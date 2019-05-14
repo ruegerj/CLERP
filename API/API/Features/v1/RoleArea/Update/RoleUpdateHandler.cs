@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Contexts;
+using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,11 @@ namespace CLERP.API.Features.v1.RoleArea.Update
 
         public async Task<RoleResponse> Handle(RoleUpdateRequest request, CancellationToken cancellationToken)
         {
-            var role = await _context.Roles.FindAsync(request.RoleId, cancellationToken);
+            var role = await _context.Roles.FindByGuidAsync(request.RoleId, cancellationToken);
 
             if (role == null)
             {
-                return null;
+                throw new BadRequestException(); // role to update not found
             }
 
             role.Name = request.Name;

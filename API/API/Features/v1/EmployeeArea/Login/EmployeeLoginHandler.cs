@@ -1,5 +1,6 @@
 ﻿using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Contexts;
+using CLERP.API.Infrastructure.Exceptions;
 using CLERP.API.Infrastructure.Security.Hashing;
 using CLERP.API.Infrastructure.Security.Tokens;
 using MediatR;
@@ -49,14 +50,14 @@ namespace CLERP.API.Features.v1.EmployeeArea.Login
             {
                 _logger.LogWarning($"Failed login attempt with username: {request.Username}");
 
-                return null;
+                throw new BadRequestException("The provided username or password is invalid");
             }
 
             if (!_hasher.PasswordMatches(request.Password, requestedEmployee.Password))
             {
                 _logger.LogWarning($"Failed login attempt with username: {request.Username}");
 
-                return null;
+                throw new BadRequestException("The provided username or password is invalid");
             }
 
             var rolesFromUser = requestedEmployee.Roles.Select(r => r.Role);

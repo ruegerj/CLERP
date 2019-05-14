@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CLERP.API.Infrastructure.Middleware;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,6 +10,9 @@ namespace CLERP.API.Infrastructure.Exceptions
     /// <summary>
     /// Exception which, when thrown, returns an result with the HttpStatusCode 409 - Conflict
     /// </summary>
+    /// <remarks>
+    /// Will be catched and handled in the <see cref="ErrorHandlingMiddleware"/>
+    /// </remarks>
     public class ConflictException : RestException<ConflictResponse>
     {
         /// <summary>

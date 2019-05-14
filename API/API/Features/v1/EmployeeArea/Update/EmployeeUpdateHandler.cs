@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Contexts;
+using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,11 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
 
         public async Task<EmployeeResponse> Handle(EmployeeUpdateRequest request, CancellationToken cancellationToken)
         {
-            var employee = await _context.Employees.FindAsync(request.EmployeeId, cancellationToken);
+            var employee = await _context.Employees.FindByGuidAsync(request.EmployeeId, cancellationToken);
 
             if (employee == null)
             {
-                return null;
+                throw new BadRequestException(); // employee to update not found
             }
 
             employee.Birthday = request.Birthday;

@@ -799,7 +799,7 @@
         </member>
         <member name="P:CLERP.API.Features.v1.RoleArea.AddToDepartment.RoleAddToDepartmentRequest.RoleId">
             <summary>
-            Id of the role whihc should be added to the department
+            Id of the role which should be added to the department
             </summary>
         </member>
         <member name="P:CLERP.API.Features.v1.RoleArea.AddToDepartment.RoleAddToDepartmentRequest.DepartmentId">
@@ -958,10 +958,72 @@
             </summary>
             <param name="builder">current <see cref="T:Microsoft.EntityFrameworkCore.ModelBuilder"/> instance</param>
         </member>
+        <member name="T:CLERP.API.Infrastructure.Contexts.DbSetExtensions">
+            <summary>
+            Extension-Methods for the DbSets from the derived DbContext
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Contexts.DbSetExtensions.FindByGuidAsync``1(Microsoft.EntityFrameworkCore.DbSet{``0},System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Custom call to FindAsync on a DbSet
+            Work-Arround for this issue in ef core: 
+            https://github.com/aspnet/EntityFrameworkCore/issues/12012
+            </summary>
+            <typeparam name="TEntity">Type of the Entity the FindAsync should be executed on</typeparam>
+            <param name="entities">DbSet from type IEntity, provided by the DbContext</param>
+            <param name="entityGuid">Guid of the entity to find</param>
+            <param name="cancellationToken">Optional Cancellation-Token</param>
+            <returns>If found the entity with the provided Guid, else null</returns>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Exceptions.BadRequestException">
+            <summary>
+            Exception which, when thrown, returns an result with the HttpStatusCode 400 - BadRequest
+            </summary>
+            <remarks>
+            Will be catched and handled in the <see cref="T:CLERP.API.Infrastructure.Middleware.ErrorHandlingMiddleware"/>
+            </remarks>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Exceptions.BadRequestException.#ctor">
+            <summary>
+            Creates an exception with a default message, when something strange happened but it is no system exception
+            => e.g. Id which doesn't exist
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Exceptions.BadRequestException.#ctor(System.String)">
+            <summary>
+            Creates an exception when something strange happened but it is no system exception
+            => e.g. Id which doesn't exist
+            </summary>
+            <param name="message">Custom message that will be returned in the response body</param>
+        </member>
+        <member name="P:CLERP.API.Infrastructure.Exceptions.BadRequestException.Payload">
+            <summary>
+            Contains the provided message
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Exceptions.BadRequestResponse">
+            <summary>
+            Payload of <see cref="T:CLERP.API.Infrastructure.Exceptions.BadRequestException"/>
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Exceptions.BadRequestResponse.#ctor(System.String)">
+            <summary>
+            Creates a new <see cref="T:CLERP.API.Infrastructure.Exceptions.BadRequestResponse"/> with an error message
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="P:CLERP.API.Infrastructure.Exceptions.BadRequestResponse.ErrorMessage">
+            <summary>
+            Error message, which explains that something went wrong
+            </summary>
+        </member>
         <member name="T:CLERP.API.Infrastructure.Exceptions.ConflictException">
             <summary>
             Exception which, when thrown, returns an result with the HttpStatusCode 409 - Conflict
             </summary>
+            <remarks>
+            Will be catched and handled in the <see cref="T:CLERP.API.Infrastructure.Middleware.ErrorHandlingMiddleware"/>
+            </remarks>
         </member>
         <member name="M:CLERP.API.Infrastructure.Exceptions.ConflictException.#ctor(System.String)">
             <summary>

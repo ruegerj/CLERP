@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.RoleArea.Delete
 {
-    public class RoleDeleteRequest : IRequest<bool>
+    public class RoleDeleteRequest : IRequest
     {
         public Guid RoleId { get; set; }
     }
