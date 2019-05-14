@@ -23,7 +23,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.GetById
 
         public async Task<EmployeeResponse> Handle(EmployeeGetByIdRequest request, CancellationToken cancellationToken)
         {
-            var employee = await _context.Employees.FindAsync(request.EmployeeId, cancellationToken);
+            var employee = await _context.Employees.FindByGuidAsync(request.EmployeeId, cancellationToken);
 
             if (employee == null)
             {

@@ -21,14 +21,14 @@ namespace CLERP.API.Features.v1.RoleArea.AddToDepartment
 
         protected async override Task Handle(RoleAddToDepartmentRequest request, CancellationToken cancellationToken)
         {
-            var role = await _context.Roles.FindAsync(request.RoleId, cancellationToken);
+            var role = await _context.Roles.FindByGuidAsync(request.RoleId, cancellationToken);
 
             if (role == null)
             {
                 throw new BadRequestException(); // role to add not found
             }
 
-            var department = await _context.Departments.FindAsync(request.DepartmentId, cancellationToken);
+            var department = await _context.Departments.FindByGuidAsync(request.DepartmentId, cancellationToken);
 
             if (department == null)
             {

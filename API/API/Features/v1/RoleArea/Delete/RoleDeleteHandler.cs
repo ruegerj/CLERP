@@ -20,7 +20,7 @@ namespace CLERP.API.Features.v1.RoleArea.Delete
 
         protected async override Task Handle(RoleDeleteRequest request, CancellationToken cancellationToken)
         {
-            var roleToDelete = await _context.Roles.FindAsync(request.RoleId, cancellationToken);
+            var roleToDelete = await _context.Roles.FindByGuidAsync(request.RoleId, cancellationToken);
 
             if (roleToDelete == null) // Role not found
             {

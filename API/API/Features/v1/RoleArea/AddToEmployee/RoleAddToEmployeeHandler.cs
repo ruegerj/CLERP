@@ -21,14 +21,14 @@ namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
 
         protected async override Task Handle(RoleAddToEmployeeRequest request, CancellationToken cancellationToken)
         {
-            var role = await _context.Roles.FindAsync(request.RoleId, cancellationToken);
+            var role = await _context.Roles.FindByGuidAsync(request.RoleId, cancellationToken);
 
             if (role == null)
             {
                 throw new BadRequestException(); // role to add not found
             }
 
-            var employee = await _context.Employees.FindAsync(request.EmployeeId, cancellationToken);
+            var employee = await _context.Employees.FindByGuidAsync(request.EmployeeId, cancellationToken);
 
             if (employee == null)
             {

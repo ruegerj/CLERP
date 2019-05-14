@@ -24,7 +24,7 @@ namespace CLERP.API.Features.v1.RoleArea.Update
 
         public async Task<RoleResponse> Handle(RoleUpdateRequest request, CancellationToken cancellationToken)
         {
-            var role = await _context.Roles.FindAsync(request.RoleId, cancellationToken);
+            var role = await _context.Roles.FindByGuidAsync(request.RoleId, cancellationToken);
 
             if (role == null)
             {
