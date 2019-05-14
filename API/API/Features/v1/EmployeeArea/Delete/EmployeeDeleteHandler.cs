@@ -25,7 +25,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Delete
 
             if (employee == null)
             {
-                throw new BadRequestException("Something went wrong, please try it again"); // employee to delete not found
+                throw new BadRequestException(); // employee to delete not found
             }
 
             _context.Employees.Remove(employee);

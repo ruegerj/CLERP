@@ -16,10 +16,19 @@ namespace CLERP.API.Infrastructure.Exceptions
     public class BadRequestException : RestException<BadRequestResponse>
     {
         /// <summary>
+        /// Creates an exception with a default message, when something strange happened but it is no system exception
+        /// => e.g. Id which doesn't exist
+        /// </summary>
+        public BadRequestException() : base(HttpStatusCode.BadRequest)
+        {
+            Payload = new BadRequestResponse("Something went wrong, plesae try it again");
+        }
+
+        /// <summary>
         /// Creates an exception when something strange happened but it is no system exception
         /// => e.g. Id which doesn't exist
         /// </summary>
-        /// <param name="message">Message that will be returned in the response body</param>
+        /// <param name="message">Custom message that will be returned in the response body</param>
         public BadRequestException(string message) : base(HttpStatusCode.BadRequest)
         {
             Payload = new BadRequestResponse(message);

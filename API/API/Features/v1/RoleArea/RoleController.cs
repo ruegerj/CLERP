@@ -72,7 +72,7 @@ namespace CLERP.API.Features.v1.RoleArea
         /// <param name="roleAddEmployeeData">Data for adding a role to an employee</param>
         /// <returns></returns>
         [HttpPost("add-to-employee")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, null, Description = "Role successfuly added to the employee")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null, Description = "Role successfuly added to the employee")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, 
             responseType: typeof(BadRequestResponse), 
             Description = "Role or employee couln't be found")]
@@ -97,7 +97,7 @@ namespace CLERP.API.Features.v1.RoleArea
         /// <param name="roleAddDepartmentData">Data for adding a role to a department</param>
         /// <returns></returns>
         [HttpPost("add-to-department")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, null, Description = "Role successfuly added to the department")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null, Description = "Role successfuly added to the department")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
             responseType: typeof(BadRequestResponse),
             Description = "Role or department couln't be found")]

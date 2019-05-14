@@ -25,14 +25,14 @@ namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
 
             if (role == null)
             {
-                throw new BadRequestException("Something went wrong, please try it again"); // role to add not found
+                throw new BadRequestException(); // role to add not found
             }
 
             var employee = await _context.Employees.FindAsync(request.EmployeeId, cancellationToken);
 
             if (employee == null)
             {
-                throw new BadRequestException("Something went wrong, please try it again"); // employee to add role not found
+                throw new BadRequestException(); // employee to add role not found
             }
 
             role.Employees.Add(new RoleEmployee()

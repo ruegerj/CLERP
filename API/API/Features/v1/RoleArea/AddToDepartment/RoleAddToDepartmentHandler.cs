@@ -25,14 +25,14 @@ namespace CLERP.API.Features.v1.RoleArea.AddToDepartment
 
             if (role == null)
             {
-                throw new BadRequestException("Something went wrong, please try it again"); // role to add not found
+                throw new BadRequestException(); // role to add not found
             }
 
             var department = await _context.Departments.FindAsync(request.DepartmentId, cancellationToken);
 
             if (department == null)
             {
-                throw new BadRequestException("Something went wrong, please try it again"); // department to add role not found
+                throw new BadRequestException(); // department to add role not found
             }
 
             role.Departments.Add(new RoleDepartment()

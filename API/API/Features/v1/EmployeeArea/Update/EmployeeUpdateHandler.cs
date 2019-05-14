@@ -28,7 +28,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
 
             if (employee == null)
             {
-                throw new BadRequestException("Something went wrong, please try it again"); // employee to update not found
+                throw new BadRequestException(); // employee to update not found
             }
 
             employee.Birthday = request.Birthday;

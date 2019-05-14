@@ -76,7 +76,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
         /// <param name="createData">Required data for creating an employee</param>
         /// <returns></returns>
         [HttpPost("create")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, null, Description = "Employee successfuly created")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null, Description = "Employee successfuly created")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.Conflict, 
             responseType: typeof(ConflictResponse), 
             Description = "Entered data conflicts with existing")]

@@ -24,7 +24,7 @@ namespace CLERP.API.Features.v1.RoleArea.Delete
 
             if (roleToDelete == null) // Role not found
             {
-                throw new BadRequestException("Something went wrong, please try it again"); // role to delete not found
+                throw new BadRequestException(); // role to delete not found
             }
 
             _context.Roles.Remove(roleToDelete);

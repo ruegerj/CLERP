@@ -66,7 +66,7 @@ namespace CLERP.API.Infrastructure.Middleware
                 case Exception ex:
                     {
                         responseContainer = new Features.v1.MessageResponse(
-                            !string.IsNullOrWhiteSpace(ex.Message) ? ex.Message : "An unknown error occured"
+                            "An unknown error occured"
                         );
                         
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
