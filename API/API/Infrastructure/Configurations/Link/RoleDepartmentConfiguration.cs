@@ -1,4 +1,5 @@
 ﻿using CLERP.API.Domain.Models.Link;
+using CLERP.API.Infrastructure.Configurations.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -8,10 +9,12 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Infrastructure.Configurations.Link
 {
-    public class RoleDepartmentConfiguration : IEntityTypeConfiguration<RoleDepartment>
+    public class RoleDepartmentConfiguration : LinkEntityTypeConfiguration<RoleDepartment>
     {
-        public void Configure(EntityTypeBuilder<RoleDepartment> builder)
+        public override void Configure(EntityTypeBuilder<RoleDepartment> builder)
         {
+            base.Configure(builder);
+
             builder.ToTable("Roles_Departments");
 
             // Role m-m Department

@@ -2,6 +2,7 @@
 using CLERP.API.Infrastructure.Contexts;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,10 @@ namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
 
         protected async override Task Handle(RoleAddToEmployeeRequest request, CancellationToken cancellationToken)
         {
-            var role = await _context.Roles.FindByGuidAsync(request.RoleId, cancellationToken);
+            // Load role including the employees whi^ch have this role
+            var role = await _context.Roles.Where(r => r.Guid == request.RoleId)
+                .Include(r => r.Employees)
+                .FirstOrDefaultAsync();
 
             if (role == null)
             {
@@ -33,6 +37,11 @@ namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
             if (employee == null)
             {
                 throw new BadRequestException(); // employee to add role not found
+            }
+
+            if (role.Employees.Select(e => e.Employee).Any(e => e.Guid == employee.Guid))
+            {
+                throw new ConflictException("role is already added to this employee"); // role is already added to the employee
             }
 
             role.Employees.Add(new RoleEmployee()

@@ -76,6 +76,9 @@ namespace CLERP.API.Features.v1.RoleArea
         [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, 
             responseType: typeof(BadRequestResponse), 
             Description = "Role or employee couln't be found")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.Conflict,
+            responseType: typeof(ConflictResponse),
+            Description = "Can't add role, the employee has this role already")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
             responseType: typeof(ValidationFailedResponse),
             Description = "Validation failed")]
@@ -101,6 +104,9 @@ namespace CLERP.API.Features.v1.RoleArea
         [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
             responseType: typeof(BadRequestResponse),
             Description = "Role or department couln't be found")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.Conflict,
+            responseType: typeof(ConflictResponse),
+            Description = "Can't add role, the department has this role already")]
         [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
             responseType: typeof(ValidationFailedResponse),
             Description = "Validation failed")]

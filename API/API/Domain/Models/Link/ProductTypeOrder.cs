@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CLERP.API.Domain.Models.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace CLERP.API.Domain.Models.Link
     /// <summary>
     /// Link table for the many to mayn relation between <see cref="ProductType"/> and <see cref="Order"/>
     /// </summary>
-    public class ProductTypeOrder
+    public class ProductTypeOrder : LinkEntityBase
     {
         /// <summary>
         /// Foreign key to the mapped product-type

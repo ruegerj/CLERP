@@ -9,24 +9,22 @@ using System.Threading.Tasks;
 namespace CLERP.API.Infrastructure.Configurations.Abstract
 {
     /// <summary>
-    /// Base class for all EntityTypeConfigurations for an entity which is derived from <see cref="EntityBase"/>
+    /// Base class for all EntityTypeConfigurations for an entity which is derived from <see cref="LinkEntityBase"/>
     /// </summary>
-    /// <typeparam name="TEntity">Type of the entity which should be configured</typeparam>
-    public abstract class EntityTypeConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : EntityBase
+    /// <typeparam name="TLinkEntity">Type of the entity which should be configured</typeparam>
+    public abstract class LinkEntityTypeConfiguration<TLinkEntity> : IEntityTypeConfiguration<TLinkEntity> where TLinkEntity : LinkEntityBase
     {
-        public virtual void Configure(EntityTypeBuilder<TEntity> builder)
+        public virtual void Configure(EntityTypeBuilder<TLinkEntity> builder)
         {
             ConfigureSharedAttributes(builder);
         }
 
         /// <summary>
-        /// Configure all properties of <see cref="EntityBase"/>
+        /// Configure all properties of <see cref="LinkEntityBase"/>
         /// </summary>
         /// <param name="builder"></param>
-        private void ConfigureSharedAttributes(EntityTypeBuilder<TEntity> builder)
+        private void ConfigureSharedAttributes(EntityTypeBuilder<TLinkEntity> builder)
         {
-            builder.HasKey(x => x.Guid);
-            builder.Property(x => x.Guid).HasDefaultValueSql("NEWID()");
             builder.Property(x => x.Creation).ValueGeneratedOnAdd();
             builder.Property(x => x.CreatedBy).IsRequired();
             builder.Property(x => x.LastModified).ValueGeneratedOnUpdate();
