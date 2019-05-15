@@ -1004,6 +1004,8 @@
             Include context options e.g. Connection-string etc.
             </summary>
             <param name="options">Options injected by the builder</param>
+            <param name="logger">Injected logger</param>
+            <param name="currentUserAccessor">Injected user accessor</param>
         </member>
         <member name="M:CLERP.API.Infrastructure.Contexts.ClerpContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>

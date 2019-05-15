@@ -31,6 +31,8 @@ namespace CLERP.API.Infrastructure.Contexts
         /// Include context options e.g. Connection-string etc.
         /// </summary>
         /// <param name="options">Options injected by the builder</param>
+        /// <param name="logger">Injected logger</param>
+        /// <param name="currentUserAccessor">Injected user accessor</param>
         public ClerpContext(DbContextOptions<ClerpContext> options, 
                             ILogger<ClerpContext> logger,
                             ICurrentUserAccessor currentUserAccessor) : base(options)
