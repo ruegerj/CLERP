@@ -69,6 +69,31 @@
             Different states a bill can have
             </summary>
         </member>
+        <member name="T:CLERP.API.Domain.Models.Abstract.LinkEntityBase">
+            <summary>
+            Base class for an link-entity in the clerp Db
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Abstract.LinkEntityBase.Creation">
+            <summary>
+            Datetime when the entity was added to the table
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Abstract.LinkEntityBase.CreatedBy">
+            <summary>
+            Username of the employee which created this entity
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Abstract.LinkEntityBase.LastModified">
+            <summary>
+            Datetime when the entity was the last time modified
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Domain.Models.Abstract.LinkEntityBase.LastModifiedBy">
+            <summary>
+            Username of the employee which last modified this entity
+            </summary>
+        </member>
         <member name="T:CLERP.API.Domain.Models.Abstract.LogEntry">
             <summary>
             Represents base class for a log / note
@@ -814,7 +839,7 @@
         </member>
         <member name="P:CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest.EmployeeId">
             <summary>
-            Id of the employee whicht the role should be added to
+            Id of the employee which the role should be added to
             </summary>
         </member>
         <member name="P:CLERP.API.Features.v1.RoleArea.Create.RoleCreateResponse.RoleId">
@@ -825,6 +850,26 @@
         <member name="T:CLERP.API.Features.v1.RoleArea.GetAll.RoleGetAllRequest">
             <summary>
             Empty class just for meadiatR mapping
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.RemoveFromDepartment.RoleRemoveFromDepartmentRequest.RoleId">
+            <summary>
+            Id of the role which should be removed from the department
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.RemoveFromDepartment.RoleRemoveFromDepartmentRequest.DepartmentId">
+            <summary>
+            Id of the department to role should be removed from
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.RemoveFromEmployee.RoleRemoveFromEmployeeRequest.RoleId">
+            <summary>
+            Id of the role which should be removed from the employee
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.RemoveFromEmployee.RoleRemoveFromEmployeeRequest.EmployeeId">
+            <summary>
+            Id of the employee which the role should be removed from
             </summary>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetAll">
@@ -852,6 +897,20 @@
             Adds a certain role to a department
             </summary>
             <param name="roleAddDepartmentData">Data for adding a role to a department</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.RemoveRoleFromEmployee(CLERP.API.Features.v1.RoleArea.RemoveFromEmployee.RoleRemoveFromEmployeeRequest)">
+            <summary>
+            Removes a certain role from an employee
+            </summary>
+            <param name="removeRoleFromEmployeeData">Data for removing a role from an employee</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.RemoveRoleFromDepartment(CLERP.API.Features.v1.RoleArea.RemoveFromDepartment.RoleRemoveFromDepartmentRequest)">
+            <summary>
+            Removes a certain role from a department
+            </summary>
+            <param name="roleRemoveFromDepartmentData">Data for removing the role from the department</param>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.CreateRole(CLERP.API.Features.v1.RoleArea.Create.RoleCreateRequest)">
@@ -913,13 +972,25 @@
         </member>
         <member name="T:CLERP.API.Infrastructure.Configurations.Abstract.EntityTypeConfiguration`1">
             <summary>
-            Base class for all EntityTypeConfigurations
+            Base class for all EntityTypeConfigurations for an entity which is derived from <see cref="T:CLERP.API.Domain.Models.Abstract.EntityBase"/>
             </summary>
             <typeparam name="TEntity">Type of the entity which should be configured</typeparam>
         </member>
         <member name="M:CLERP.API.Infrastructure.Configurations.Abstract.EntityTypeConfiguration`1.ConfigureSharedAttributes(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
             <summary>
             Configure all properties of <see cref="T:CLERP.API.Domain.Models.Abstract.EntityBase"/>
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Configurations.Abstract.LinkEntityTypeConfiguration`1">
+            <summary>
+            Base class for all EntityTypeConfigurations for an entity which is derived from <see cref="T:CLERP.API.Domain.Models.Abstract.LinkEntityBase"/>
+            </summary>
+            <typeparam name="TLinkEntity">Type of the entity which should be configured</typeparam>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Configurations.Abstract.LinkEntityTypeConfiguration`1.ConfigureSharedAttributes(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
+            <summary>
+            Configure all properties of <see cref="T:CLERP.API.Domain.Models.Abstract.LinkEntityBase"/>
             </summary>
             <param name="builder"></param>
         </member>
@@ -933,6 +1004,8 @@
             Include context options e.g. Connection-string etc.
             </summary>
             <param name="options">Options injected by the builder</param>
+            <param name="logger">Injected logger</param>
+            <param name="currentUserAccessor">Injected user accessor</param>
         </member>
         <member name="M:CLERP.API.Infrastructure.Contexts.ClerpContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>

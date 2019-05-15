@@ -1,4 +1,5 @@
 ﻿using CLERP.API.Domain.Models.Link;
+using CLERP.API.Infrastructure.Configurations.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -8,10 +9,12 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Infrastructure.Configurations.Link
 {
-    public class ProductTypeOrderConfiguration : IEntityTypeConfiguration<ProductTypeOrder>
+    public class ProductTypeOrderConfiguration : LinkEntityTypeConfiguration<ProductTypeOrder>
     {
-        public void Configure(EntityTypeBuilder<ProductTypeOrder> builder)
+        public override void Configure(EntityTypeBuilder<ProductTypeOrder> builder)
         {
+            base.Configure(builder);
+
             builder.ToTable("Product-Types_Orders");
 
             // ProductType m:m Order

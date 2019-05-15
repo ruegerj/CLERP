@@ -34,7 +34,7 @@ namespace CLERP.API.Infrastructure.Exceptions
         /// <summary>
         /// Name of the property which caused the conflict
         /// </summary>
-        [JsonProperty("field")]
+        [JsonProperty("field", NullValueHandling = NullValueHandling.Ignore)]
         public string FieldName { get; }
 
         /// <summary>

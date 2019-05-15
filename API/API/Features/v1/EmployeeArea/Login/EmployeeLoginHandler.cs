@@ -40,10 +40,14 @@ namespace CLERP.API.Features.v1.EmployeeArea.Login
         /// <returns>token or null when credentials are invalid</returns>
         public async Task<TokenResponse> Handle(EmployeeLoginRequest request, CancellationToken cancellationToken)
         {
+            // Load only the needed data from employee for initial check (without roles etc)
             Employee requestedEmployee = await _context.Employees
-                .Include(e => e.Roles)
-                .Include(e => e.Department)
-                .Include(e => e.Department.Roles)
+                .Select(e => new Employee()
+                {
+                    Guid = e.Guid,
+                    Username = e.Username,
+                    Password = e.Password
+                })
                 .FirstOrDefaultAsync(e => string.Equals(request.Username, e.Username, StringComparison.InvariantCultureIgnoreCase), cancellationToken);
 
             if (requestedEmployee == null)
@@ -59,6 +63,15 @@ namespace CLERP.API.Features.v1.EmployeeArea.Login
 
                 throw new BadRequestException("The provided username or password is invalid");
             }
+
+            // Reload the employee with all his roles (department and self asigned)
+            requestedEmployee = _context.Employees
+                .Include(e => e.Roles)
+                    .ThenInclude(r => r.Role)
+                .Include(e => e.Department)
+                    .ThenInclude(d => d.Roles)
+                        .ThenInclude(r => r.Role)
+                .FirstOrDefault(e => e.Guid == requestedEmployee.Guid);
 
             var rolesFromUser = requestedEmployee.Roles.Select(r => r.Role);
             var rolesFromDepartment = requestedEmployee.Department?.Roles?.Select(r => r?.Role);

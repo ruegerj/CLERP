@@ -2,6 +2,7 @@
 using CLERP.API.Infrastructure.Contexts;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,9 @@ namespace CLERP.API.Features.v1.RoleArea.AddToDepartment
 
         protected async override Task Handle(RoleAddToDepartmentRequest request, CancellationToken cancellationToken)
         {
-            var role = await _context.Roles.FindByGuidAsync(request.RoleId, cancellationToken);
+            var role = await _context.Roles.Where(r => r.Guid == request.RoleId)
+                .Include(r => r.Departments)
+                .FirstOrDefaultAsync();
 
             if (role == null)
             {
@@ -33,6 +36,11 @@ namespace CLERP.API.Features.v1.RoleArea.AddToDepartment
             if (department == null)
             {
                 throw new BadRequestException(); // department to add role not found
+            }
+
+            if (role.Departments.Select(d => d.Department).Any(d => d.Guid == department.Guid))
+            {
+                throw new ConflictException("role is already added to this department"); // role is already added to the department
             }
 
             role.Departments.Add(new RoleDepartment()

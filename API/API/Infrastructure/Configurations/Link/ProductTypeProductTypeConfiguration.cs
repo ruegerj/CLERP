@@ -5,13 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CLERP.API.Infrastructure.Configurations.Abstract;
 
 namespace CLERP.API.Infrastructure.Configurations.Link
 {
-    public class ProductTypeProductTypeConfiguration : IEntityTypeConfiguration<ProductTypeProductType>
+    public class ProductTypeProductTypeConfiguration : LinkEntityTypeConfiguration<ProductTypeProductType>
     {
-        public void Configure(EntityTypeBuilder<ProductTypeProductType> builder)
+        public override void Configure(EntityTypeBuilder<ProductTypeProductType> builder)
         {
+            base.Configure(builder);
+
             builder.ToTable("Product-Types_Product-Types");
 
             // Parent Product-Type m-m Child Product-Type
