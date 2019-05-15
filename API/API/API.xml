@@ -839,7 +839,7 @@
         </member>
         <member name="P:CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest.EmployeeId">
             <summary>
-            Id of the employee whicht the role should be added to
+            Id of the employee which the role should be added to
             </summary>
         </member>
         <member name="P:CLERP.API.Features.v1.RoleArea.Create.RoleCreateResponse.RoleId">
@@ -850,6 +850,26 @@
         <member name="T:CLERP.API.Features.v1.RoleArea.GetAll.RoleGetAllRequest">
             <summary>
             Empty class just for meadiatR mapping
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.RemoveFromDepartment.RoleRemoveFromDepartmentRequest.RoleId">
+            <summary>
+            Id of the role which should be removed from the department
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.RemoveFromDepartment.RoleRemoveFromDepartmentRequest.DepartmentId">
+            <summary>
+            Id of the department to role should be removed from
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.RemoveFromEmployee.RoleRemoveFromEmployeeRequest.RoleId">
+            <summary>
+            Id of the role which should be removed from the employee
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.RoleArea.RemoveFromEmployee.RoleRemoveFromEmployeeRequest.EmployeeId">
+            <summary>
+            Id of the employee which the role should be removed from
             </summary>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetAll">
@@ -877,6 +897,20 @@
             Adds a certain role to a department
             </summary>
             <param name="roleAddDepartmentData">Data for adding a role to a department</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.RemoveRoleFromEmployee(CLERP.API.Features.v1.RoleArea.RemoveFromEmployee.RoleRemoveFromEmployeeRequest)">
+            <summary>
+            Removes a certain role from an employee
+            </summary>
+            <param name="removeRoleFromEmployeeData">Data for removing a role from an employee</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.RemoveRoleFromDepartment(CLERP.API.Features.v1.RoleArea.RemoveFromDepartment.RoleRemoveFromDepartmentRequest)">
+            <summary>
+            Removes a certain role from a department
+            </summary>
+            <param name="roleRemoveFromDepartmentData">Data for removing the role from the department</param>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.CreateRole(CLERP.API.Features.v1.RoleArea.Create.RoleCreateRequest)">
