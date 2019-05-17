@@ -22,7 +22,7 @@ namespace CLERP.API.Features.v1.RoleArea.Delete
         {
             var roleToDelete = await _context.Roles.FindByGuidAsync(request.RoleId, cancellationToken);
 
-            if (roleToDelete == null) // Role not found
+            if (roleToDelete == null)
             {
                 throw new BadRequestException(); // role to delete not found
             }

@@ -717,6 +717,100 @@
             All shelves inside this warehouse
             </summary>
         </member>
+        <member name="P:CLERP.API.Features.v1.DepartmentArea.AddEmployee.DepartmentAddEmployeeRequest.DepartmentId">
+            <summary>
+            Id of the department which the employee should be added to
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.DepartmentArea.AddEmployee.DepartmentAddEmployeeRequest.EmployeeId">
+            <summary>
+            Id of the employee which should be added to the department
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.DepartmentArea.Create.DepartmentCreateResponse.RoleId">
+            <summary>
+            Id of the generated role
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.GetAllDepartments">
+            <summary>
+            Gets all roles
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.GetDepartmentById(System.Guid)">
+            <summary>
+            Gets an department by the id
+            </summary>
+            <param name="id">Id of the department</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.AddEmployeeToDepartment(CLERP.API.Features.v1.DepartmentArea.AddEmployee.DepartmentAddEmployeeRequest)">
+            <summary>
+            Adds an employee to a department
+            </summary>
+            <param name="departmentAddEmployeeData">Data for adding an employee to a department</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.RemoveEmployeeFromDepartment(CLERP.API.Features.v1.DepartmentArea.RemoveEmployee.DepartmentRemoveEmployeeRequest)">
+            <summary>
+            Removes an employee from a department
+            </summary>
+            <param name="departmentRemoveEmployeeData">Data for removing an employee from a department</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.CreateDepartment(CLERP.API.Features.v1.DepartmentArea.Create.DepartmentCreateRequest)">
+            <summary>
+            Creates a department
+            </summary>
+            <param name="createData">Data for creating a new departmen</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.UpdateDepartment(CLERP.API.Features.v1.DepartmentArea.Update.DepartmentUpdateRequest,System.Guid)">
+            <summary>
+            Updates a department
+            </summary>
+            <param name="updateData">Updated department data</param>
+            <param name="id">Id of the department to update</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.DeleteDepartment(System.Guid)">
+            <summary>
+            Deletes a department
+            </summary>
+            <param name="id">Id of the department</param>
+            <returns></returns>
+        </member>
+        <member name="T:CLERP.API.Features.v1.DepartmentArea.DepartmentResponse">
+            <summary>
+            Default response dto for a department
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.DepartmentArea.DepartmentResponse.Title">
+            <summary>
+            Title of the department
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.DepartmentArea.DepartmentResponse.Description">
+            <summary>
+            Description of the deparment
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.DepartmentArea.GetAll.DepartmentGetAllRequest">
+            <summary>
+            Empty class just for meadiatR mapping
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.DepartmentArea.RemoveEmployee.DepartmentRemoveEmployeeRequest.DepartmentId">
+            <summary>
+            Id of the department which the employee should be removed from
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.DepartmentArea.RemoveEmployee.DepartmentRemoveEmployeeRequest.EmployeeId">
+            <summary>
+            Id of the employee which should be removed from the department
+            </summary>
+        </member>
         <member name="P:CLERP.API.Features.v1.EmployeeArea.Create.EmployeeCreateRequest.Password">
             <summary>
             Plain password
@@ -872,7 +966,7 @@
             Id of the employee which the role should be removed from
             </summary>
         </member>
-        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetAll">
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetAllDepartments">
             <summary>
             Gets all roles
             </summary>
