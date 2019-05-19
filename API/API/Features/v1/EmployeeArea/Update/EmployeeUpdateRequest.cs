@@ -26,5 +26,17 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
 
         [JsonProperty("birthday")]
         public DateTime Birthday { get; set; }
+
+        /// <summary>
+        /// The current plain password of the employee, can be null  if a password change shouldn't be performed
+        /// </summary>
+        [JsonProperty("current-password")]
+        public string CurrentPassword { get; set; }
+
+        /// <summary>
+        /// The new plain password from the employee, can be null if password change shouldn't be performed
+        /// </summary>
+        [JsonProperty("new-password")]
+        public string NewPassword { get; set; }
     }
 }
