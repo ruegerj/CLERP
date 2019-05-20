@@ -35,7 +35,7 @@ namespace CLERP.API.Features.v1.RoleArea
         [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
             responseType: typeof(MessageResponse),
             Description = "An unknown error occured")]
-        public async Task<ActionResult> GetAll()
+        public async Task<ActionResult> GetAllDepartments()
         {
             return Ok(await _mediator.Send(new GetAll.RoleGetAllRequest()));
         }
@@ -191,9 +191,7 @@ namespace CLERP.API.Features.v1.RoleArea
             Description = "An unknown error occured")]
         public async Task<ActionResult> CreateRole([FromBody] Create.RoleCreateRequest createData)
         {
-            var roleIdDto = await _mediator.Send(createData);
-
-            return Ok(roleIdDto);
+            return Ok(await _mediator.Send(createData));
         }
 
         /// <summary>

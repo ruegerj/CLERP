@@ -22,9 +22,9 @@ namespace CLERP.API.Features.v1.RoleArea.AddToDepartment
 
         protected async override Task Handle(RoleAddToDepartmentRequest request, CancellationToken cancellationToken)
         {
-            var role = await _context.Roles.Where(r => r.Guid == request.RoleId)
+            var role = await _context.Roles
                 .Include(r => r.Departments)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(r => r.Guid == request.RoleId, cancellationToken);
 
             if (role == null)
             {

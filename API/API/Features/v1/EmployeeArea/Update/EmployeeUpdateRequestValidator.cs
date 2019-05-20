@@ -13,6 +13,8 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
         private const int maxNameLengt = 100;
         private const int maxAge = 100;
         private const int minAge = 18;
+        private const int minPasswordLength = 10;
+        private const int maxPasswordLength = 50;
 
         public EmployeeUpdateRequestValidator()
         {
@@ -41,6 +43,19 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
             RuleFor(e => e.Birthday)
                 .NotNull()
                 .Must(BeValidBirthday).WithMessage($"The new employee can't be younger than {minAge} years or older than {maxAge} years.");
+
+            RuleFor(e => e.CurrentPassword)
+                .NotNull()
+                .NotEmpty()
+                .When(e => !string.IsNullOrEmpty(e.NewPassword));
+
+            RuleFor(e => e.CurrentPassword)
+                .NotNull()
+                .NotEmpty()
+                .MinimumLength(minPasswordLength)
+                .MaximumLength(maxPasswordLength)
+                .Must(BeWithSpecialChars).WithMessage("The entered password must atleast contain one special character.")
+                .When(e => !string.IsNullOrEmpty(e.CurrentPassword));
         }
 
         private static bool BePhoneNumber(string phoneNumber)
@@ -56,6 +71,12 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
 
             return birthday.AddYears(minAge) <= now
                 && birthday.AddYears(maxAge) >= now;
+        }
+
+        private static bool BeWithSpecialChars(string value)
+        {
+            int specialCharsCount = value.Count(c => !char.IsLetterOrDigit(c));
+            return specialCharsCount >= 1;
         }
     }
 }

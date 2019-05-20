@@ -24,12 +24,7 @@ namespace CLERP.API.Features.v1.RoleArea.GetAll
 
         public async Task<RoleGetAllResponse> Handle(RoleGetAllRequest request, CancellationToken cancellationToken)
         {
-            var roleDtos = await _context.Roles.Select(r => new RoleResponse()
-            {
-                Guid = r.Guid,
-                Description = r.Description,
-                Name = r.Name
-            }).ToListAsync(cancellationToken);
+            var roleDtos = await _context.Roles.Select(r => _mapper.Map<Role, RoleResponse>(r)).ToListAsync(cancellationToken);
 
             return new RoleGetAllResponse() { Roles = roleDtos };
         }

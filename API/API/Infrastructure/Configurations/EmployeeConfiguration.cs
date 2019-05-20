@@ -1,5 +1,6 @@
 ﻿using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Configurations.Abstract;
+using CLERP.API.Infrastructure.Security.Hashing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -27,6 +28,23 @@ namespace CLERP.API.Infrastructure.Configurations
             builder.HasOne(x => x.Department)
                 .WithMany(y => y.Employees)
                 .HasForeignKey(x => x.DepartmentGuid);
+
+            // seed data
+            builder.HasData(new Employee()
+            {
+                Guid = Guid.NewGuid(),
+                Birthday = new DateTime(2001, 5, 27),
+                Creation = DateTime.Now,
+                CreatedBy = "system",
+                Email = "admin@clerp.ch",
+                Firstname = "System",
+                Lastname = "Administrator",
+                PhoneNumber = "+41 79 122 90 72",
+                LastModified = DateTime.Now,
+                LastModifiedBy = "system",
+                Username = "admin",
+                Password = "AI1ZmgGoYudgP1w9VOvAIAnobk5IXBU3wC/Pfv/Xyg0Mr9PEgJPW5UBP9ScXzpEiVg=="
+            });
         }
     }
 }
