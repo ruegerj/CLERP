@@ -9,9 +9,9 @@ namespace CLERP.API.Features.v1.DepartmentArea.Create
     public class DepartmentCreateResponse
     {
         /// <summary>
-        /// Id of the generated role
+        /// Id of the generated department
         /// </summary>
-        [JsonProperty("role-id")]
-        public Guid RoleId { get; set; }
+        [JsonProperty("department-id")]
+        public Guid DepartmentId { get; set; }
     }
 }

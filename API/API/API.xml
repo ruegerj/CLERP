@@ -727,9 +727,9 @@
             Id of the employee which should be added to the department
             </summary>
         </member>
-        <member name="P:CLERP.API.Features.v1.DepartmentArea.Create.DepartmentCreateResponse.RoleId">
+        <member name="P:CLERP.API.Features.v1.DepartmentArea.Create.DepartmentCreateResponse.DepartmentId">
             <summary>
-            Id of the generated role
+            Id of the generated department
             </summary>
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.GetAllDepartments">
@@ -916,6 +916,26 @@
             Sample Controller
             </summary>
         </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.Create.ProductTypeCreateRequest.EAN">
+            <summary>
+            European Article Number
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.Create.ProductTypeCreateRequest.ParentGuids">
+            <summary>
+            Collection with all ids of all parent product types
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.Create.ProductTypeCreateRequest.ChildGuids">
+            <summary>
+            Collection with all ids of all the child product types
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.Create.ProductTypeCreateResponse.ProductTypeGuid">
+            <summary>
+            Id of the created product type
+            </summary>
+        </member>
         <member name="T:CLERP.API.Features.v1.ProductTypeArea.GetAll.ProductTypeGetAllRequest">
             <summary>
             Empty class just for meadiatR mapping
@@ -925,6 +945,35 @@
             <summary>
             Gets all product types
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.GetProductTypeById(System.Guid)">
+            <summary>
+            Gets a product type by the id
+            </summary>
+            <param name="id">Id of the product type</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.CreateProductType(CLERP.API.Features.v1.ProductTypeArea.Create.ProductTypeCreateRequest)">
+            <summary>
+            Creates a new product type
+            </summary>
+            <param name="createData">Data for creating a new product type</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.UpdateProductType(CLERP.API.Features.v1.ProductTypeArea.Update.ProductTypeUpdateRequest,System.Guid)">
+            <summary>
+            Updates a product type
+            </summary>
+            <param name="updateData">Data for updating a product type</param>
+            <param name="id">Id of the product type</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.DeleteProductType(System.Guid)">
+            <summary>
+            Deletes a product type
+            </summary>
+            <param name="id">Id of the prodcut type</param>
             <returns></returns>
         </member>
         <member name="T:CLERP.API.Features.v1.ProductTypeArea.ProductTypeResponse">
@@ -945,6 +994,11 @@
         <member name="P:CLERP.API.Features.v1.ProductTypeArea.ProductTypeResponse.ParentGuids">
             <summary>
             All ids from the entities related as paretns to this product type
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.Update.ProductTypeUpdateRequest.EAN">
+            <summary>
+            European Article Number
             </summary>
         </member>
         <member name="T:CLERP.API.Features.v1.ResponseContainer">

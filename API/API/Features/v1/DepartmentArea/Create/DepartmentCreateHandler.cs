@@ -27,7 +27,7 @@ namespace CLERP.API.Features.v1.DepartmentArea.Create
             // Check if title of the department is unique
             if (_context.Departments.Where(d => d.Title == request.Title).Count() > 0)
             {
-                throw new ConflictException(nameof(request.Title), $"A role with the name: {request.Title} already exists, please choose another name");
+                throw new ConflictException(nameof(request.Title), $"A department with the title: {request.Title} already exists, please choose another name");
             }
 
             var newDepartment = _mapper.Map<DepartmentCreateRequest, Department>(request);
@@ -36,7 +36,7 @@ namespace CLERP.API.Features.v1.DepartmentArea.Create
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return new DepartmentCreateResponse() { RoleId = newDepartment.Guid };
+            return new DepartmentCreateResponse() { DepartmentId = newDepartment.Guid };
         }
     }
 }

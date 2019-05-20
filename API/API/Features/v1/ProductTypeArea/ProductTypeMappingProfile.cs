@@ -15,6 +15,10 @@ namespace CLERP.API.Features.v1.ProductTypeArea
             CreateMap<ProductType, ProductTypeResponse>()
                 .ForMember(pt => pt.ParentGuids, t => t.Ignore())
                 .ForMember(pt => pt.ChildGuids, t => t.Ignore());
+
+            CreateMap<Create.ProductTypeCreateRequest, ProductType>()
+                .ForMember(pt => pt.Children, t => t.Ignore())
+                .ForMember(pt => pt.Parents, t => t.Ignore());
         }
     }
 }

@@ -33,8 +33,8 @@ namespace CLERP.API.Features.v1.ProductTypeArea.GetAll
                 var productTypeDto = _mapper.Map<ProductType, ProductTypeResponse>(pt);
 
                 // Fill parent and child id collections
-                productTypeDto.ChildGuids = pt.Children.Select(c => c.ChildGuid).ToList();
-                productTypeDto.ParentGuids = pt.Parents.Select(p => p.ParentGuid).ToList();
+                productTypeDto.ChildGuids = pt.Children.Select(c => c.ChildGuid);
+                productTypeDto.ParentGuids = pt.Parents.Select(p => p.ParentGuid);
 
                 return productTypeDto;
             });

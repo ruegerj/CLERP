@@ -33,12 +33,12 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// All ids from the entities related as children to this product type
         /// </summary>
         [JsonProperty("child-ids")]
-        public List<Guid> ChildGuids { get; set; }
+        public IEnumerable<Guid> ChildGuids { get; set; }
 
         /// <summary>
         /// All ids from the entities related as paretns to this product type
         /// </summary>
         [JsonProperty("parent-ids")]
-        public List<Guid> ParentGuids { get; set; }
+        public IEnumerable<Guid> ParentGuids { get; set; }
     }
 }
