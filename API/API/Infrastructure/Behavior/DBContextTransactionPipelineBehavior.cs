@@ -22,7 +22,9 @@ namespace CLERP.API.Infrastructure.Behavior
             _context = context;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, 
+            CancellationToken cancellationToken, 
+            RequestHandlerDelegate<TResponse> next)
         {
             TResponse result;
 

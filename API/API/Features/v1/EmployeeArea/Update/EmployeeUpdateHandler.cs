@@ -46,7 +46,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
                 && !string.IsNullOrEmpty(request.NewPassword)
                 && _hasher.PasswordMatches(request.CurrentPassword, employee.Password))
             {
-                employee.Password = request.NewPassword;
+                employee.Password = _hasher.HashPassword(request.NewPassword);
             }
 
             await _context.SaveChangesAsync(cancellationToken);

@@ -140,9 +140,12 @@ namespace CLERP.API
 
             // Register MediatR and custom behavior for pipeline
             services.AddMediatR(currentAssembly);
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(PerformanceProfilerPipelineBehaviour<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(DBContextTransactionPipelineBehavior<,>));
 
+            // Add Automapper and scan assembly automatically for mapping profiles
             services.AddAutoMapper(currentAssembly);
+            Mapper.Initialize(cfg => cfg.AddMaps(currentAssembly));
 
             services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; } ); // Disable built in validation error response
 
