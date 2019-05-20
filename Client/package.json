@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "generate-swagger-client": ""
+    "generate-swagger-client": "ng-swagger-gen -i ./src/app/_generated/config/swagger-config.json -o ./src/app/_generated"
   },
   "private": true,
   "dependencies": {
