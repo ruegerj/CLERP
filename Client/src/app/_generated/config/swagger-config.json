@@ -1,0 +1,1412 @@
+{
+  "x-generator": "NSwag v12.2.5.0 (NJsonSchema v9.13.37.0 (Newtonsoft.Json v12.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "CLERP API",
+    "description": "REST Web-Api-Backend for the CLERP application",
+    "version": "v1"
+  },
+  "host": "localhost:44369",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/api/v{version}/Role": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Gets all roles",
+        "operationId": "Role_GetAll",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RoleGetAllResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Creates a role",
+        "operationId": "Role_CreateRole",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "createData",
+            "in": "body",
+            "required": true,
+            "description": "Data for creating a new role",
+            "schema": {
+              "$ref": "#/definitions/RoleCreateRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "Role successfuly created",
+            "schema": {
+              "$ref": "#/definitions/RoleCreateResponse"
+            }
+          },
+          "409": {
+            "x-nullable": true,
+            "description": "Entered data conflicts with existing",
+            "schema": {
+              "$ref": "#/definitions/ConflictResponse"
+            }
+          },
+          "422": {
+            "x-nullable": true,
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/Role/{id}": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Gets a role by id",
+        "operationId": "Role_GetRoleById",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the role",
+            "format": "guid",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "Role found",
+            "schema": {
+              "$ref": "#/definitions/RoleResponse"
+            }
+          },
+          "404": {
+            "x-nullable": true,
+            "description": "Role couldn't be found",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          },
+          "422": {
+            "x-nullable": true,
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Updates a role",
+        "operationId": "Role_UpdateRole",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "updateData",
+            "in": "body",
+            "required": true,
+            "description": "Updated role data",
+            "schema": {
+              "$ref": "#/definitions/RoleUpdateRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the role",
+            "format": "guid",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "Role successfuly updated",
+            "schema": {
+              "$ref": "#/definitions/RoleResponse"
+            }
+          },
+          "400": {
+            "x-nullable": true,
+            "description": "Role couldn't be found",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "422": {
+            "x-nullable": true,
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Deletes a role",
+        "operationId": "Role_DeleteRole",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the role",
+            "format": "guid",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Role deleted successfuly"
+          },
+          "400": {
+            "x-nullable": true,
+            "description": "Role coulnd't be found",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "422": {
+            "x-nullable": true,
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/Role/add-to-employee": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Add's a certain role to an employee",
+        "operationId": "Role_AddRoleToEmployee",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "roleAddEmployeeData",
+            "in": "body",
+            "required": true,
+            "description": "Data for adding a role to an employee",
+            "schema": {
+              "$ref": "#/definitions/RoleAddToEmployeeRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Role successfuly added to the employee"
+          },
+          "400": {
+            "x-nullable": true,
+            "description": "Role or employee couln't be found",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "409": {
+            "x-nullable": true,
+            "description": "Can't add role, the employee has this role already",
+            "schema": {
+              "$ref": "#/definitions/ConflictResponse"
+            }
+          },
+          "422": {
+            "x-nullable": true,
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/Role/add-to-department": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Adds a certain role to a department",
+        "operationId": "Role_AddRoleToDepartment",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "roleAddDepartmentData",
+            "in": "body",
+            "required": true,
+            "description": "Data for adding a role to a department",
+            "schema": {
+              "$ref": "#/definitions/RoleAddToDepartmentRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Role successfuly added to the department"
+          },
+          "400": {
+            "x-nullable": true,
+            "description": "Role or department couln't be found",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "409": {
+            "x-nullable": true,
+            "description": "Can't add role, the department has this role already",
+            "schema": {
+              "$ref": "#/definitions/ConflictResponse"
+            }
+          },
+          "422": {
+            "x-nullable": true,
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/Role/remove-from-employee": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Removes a certain role from an employee",
+        "operationId": "Role_RemoveRoleFromEmployee",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "removeRoleFromEmployeeData",
+            "in": "body",
+            "required": true,
+            "description": "Data for removing a role from an employee",
+            "schema": {
+              "$ref": "#/definitions/RoleRemoveFromEmployeeRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Role successfuly removed from the employee"
+          },
+          "400": {
+            "x-nullable": true,
+            "description": "Role or employee couln't be found, or the employee doesn't have the role",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "422": {
+            "x-nullable": true,
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/Role/remove-from-department": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Removes a certain role from a department",
+        "operationId": "Role_RemoveRoleFromDepartment",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "roleRemoveFromDepartmentData",
+            "in": "body",
+            "required": true,
+            "description": "Data for removing the role from the department",
+            "schema": {
+              "$ref": "#/definitions/RoleRemoveFromDepartmentRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Role successfuly removed from the department"
+          },
+          "400": {
+            "x-nullable": true,
+            "description": "Role or department couln't be found, or the department doesn't have the role",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "422": {
+            "x-nullable": true,
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/Values": {
+      "get": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "Values_GetAll",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "Values_Post",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v{version}/Values/{id}": {
+      "get": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "Values_Get",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "Values_Put",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "Values_Delete",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v{version}/Employee": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Gets all employees",
+        "operationId": "Employee_GetAll",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EmployeeGetAllResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/Employee/{id}": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Gets an employee by his id",
+        "operationId": "Employee_GetEmployeeById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "id of the requested employee",
+            "format": "guid",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "Employee found",
+            "schema": {
+              "$ref": "#/definitions/EmployeeResponse"
+            }
+          },
+          "404": {
+            "x-nullable": true,
+            "description": "Employee couldn't be found",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          },
+          "422": {
+            "x-nullable": true,
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Updates the data from an employee",
+        "operationId": "Employee_UpdateEmployee",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "updateData",
+            "in": "body",
+            "required": true,
+            "description": "Data to update",
+            "schema": {
+              "$ref": "#/definitions/EmployeeUpdateRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the employee",
+            "format": "guid",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "Employee successfuly updated",
+            "schema": {
+              "$ref": "#/definitions/EmployeeResponse"
+            }
+          },
+          "400": {
+            "x-nullable": true,
+            "description": "Employee couldn't be found",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "422": {
+            "x-nullable": true,
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Deletes an employee",
+        "operationId": "Employee_DeleteEmployee",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Guid/Id from the employee",
+            "format": "guid",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee successfuly deleted"
+          },
+          "400": {
+            "x-nullable": true,
+            "description": "Employee to delete couldn't be found",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "422": {
+            "x-nullable": true,
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/Employee/create": {
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Creates an employee",
+        "operationId": "Employee_CreateEmployee",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "createData",
+            "in": "body",
+            "required": true,
+            "description": "Required data for creating an employee",
+            "schema": {
+              "$ref": "#/definitions/EmployeeCreateRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee successfuly created"
+          },
+          "409": {
+            "x-nullable": true,
+            "description": "Entered data conflicts with existing",
+            "schema": {
+              "$ref": "#/definitions/ConflictResponse"
+            }
+          },
+          "422": {
+            "x-nullable": true,
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v{version}/Employee/login": {
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Logs a employee in and returns the created Jwt",
+        "operationId": "Employee_Login",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "loginData",
+            "in": "body",
+            "required": true,
+            "description": "Username and password from the employee",
+            "schema": {
+              "$ref": "#/definitions/EmployeeLoginRequest"
+            },
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "Login successsful",
+            "schema": {
+              "$ref": "#/definitions/TokenResponse"
+            }
+          },
+          "400": {
+            "x-nullable": true,
+            "description": "Invalid credentials",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "422": {
+            "x-nullable": true,
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "x-nullable": true,
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RoleGetAllResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleResponse"
+          }
+        }
+      }
+    },
+    "RoleResponse": {
+      "type": "object",
+      "description": "Default response dto for a role",
+      "additionalProperties": false,
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "guid"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the role"
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description of the role"
+        }
+      }
+    },
+    "MessageResponse": {
+      "type": "object",
+      "description": "A response contianer when just a message have to be returned",
+      "additionalProperties": false,
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ValidationFailedResponse": {
+      "type": "object",
+      "description": "Represents the summary of all validation errors\nData-Format that will be returned after a failed validation",
+      "additionalProperties": false,
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "validation-errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "ValidationError": {
+      "type": "object",
+      "description": "Represents a validation error, occured when validating an incoming model",
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "BadRequestResponse": {
+      "type": "object",
+      "description": "Payload of BadRequestException",
+      "additionalProperties": false,
+      "properties": {
+        "error-message": {
+          "type": "string",
+          "description": "Error message, which explains that something went wrong"
+        }
+      }
+    },
+    "ConflictResponse": {
+      "type": "object",
+      "description": "Payload of a ConflictException",
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "Name of the property which caused the conflict"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message about the reason/background of the conflict"
+        }
+      }
+    },
+    "RoleAddToEmployeeRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role-id",
+        "employee-id"
+      ],
+      "properties": {
+        "role-id": {
+          "type": "string",
+          "description": "Id of the role which should be added to the employee",
+          "format": "guid"
+        },
+        "employee-id": {
+          "type": "string",
+          "description": "Id of the employee which the role should be added to",
+          "format": "guid"
+        }
+      }
+    },
+    "RoleAddToDepartmentRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role-id",
+        "department-id"
+      ],
+      "properties": {
+        "role-id": {
+          "type": "string",
+          "description": "Id of the role which should be added to the department",
+          "format": "guid"
+        },
+        "department-id": {
+          "type": "string",
+          "description": "Id of the department to role should be added to",
+          "format": "guid"
+        }
+      }
+    },
+    "RoleRemoveFromEmployeeRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role-id",
+        "employee-id"
+      ],
+      "properties": {
+        "role-id": {
+          "type": "string",
+          "description": "Id of the role which should be removed from the employee",
+          "format": "guid"
+        },
+        "employee-id": {
+          "type": "string",
+          "description": "Id of the employee which the role should be removed from",
+          "format": "guid"
+        }
+      }
+    },
+    "RoleRemoveFromDepartmentRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role-id",
+        "department-id"
+      ],
+      "properties": {
+        "role-id": {
+          "type": "string",
+          "description": "Id of the role which should be removed from the department",
+          "format": "guid"
+        },
+        "department-id": {
+          "type": "string",
+          "description": "Id of the department to role should be removed from",
+          "format": "guid"
+        }
+      }
+    },
+    "RoleCreateResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role-id"
+      ],
+      "properties": {
+        "role-id": {
+          "type": "string",
+          "description": "Id of the new created role",
+          "format": "guid"
+        }
+      }
+    },
+    "RoleCreateRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "RoleUpdateRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "EmployeeGetAllResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "employees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmployeeResponse"
+          }
+        }
+      }
+    },
+    "EmployeeResponse": {
+      "type": "object",
+      "description": "Default response dto for an employee",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "birthday"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "guid"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "phone-number": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "EmployeeCreateRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "birthday"
+      ],
+      "properties": {
+        "lastname": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone-number": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string",
+          "description": "Plain password"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "EmployeeUpdateRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "birthday"
+      ],
+      "properties": {
+        "lastname": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone-number": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "TokenResponse": {
+      "type": "object",
+      "description": "Response after an employee is logged in",
+      "additionalProperties": false,
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "Access token for the employee"
+        }
+      }
+    },
+    "EmployeeLoginRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "minLength": 1
+        },
+        "password": {
+          "type": "string",
+          "description": "Plain password",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
