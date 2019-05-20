@@ -7,7 +7,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class CrudbarComponent implements OnInit {
   isEditing : boolean;
-  @Output() editStateChanged = new EventEmitter<boolean>();   
+  @Output() EditStarted = new EventEmitter<boolean>();   
 
   constructor() { 
     this.isEditing = false;
@@ -17,8 +17,8 @@ export class CrudbarComponent implements OnInit {
   }
 
   editBtnClicked() : void{
-    this.isEditing = !this.isEditing;
-    this.editStateChanged.emit(this.isEditing);
+    this.isEditing = true;
+    this.EditStarted.emit(this.isEditing);
   }
 
   cancelBtnClicked() : void {

@@ -1,59 +1,65 @@
-<app-crudbar (editStateChanged)="onEditStateChanged($event)"></app-crudbar>
+<app-crudbar (EditStarted)="onEditStarted($event)"></app-crudbar>
 <div class="p-5">
   <form>
     <div class="form-group row">
       <label for="username" class="col-sm-2 col-form-label">Username</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="username" [disabled]="!isEditing" value="{{employee.Username}}">
+        <input type="text" class="form-control" id="username" [disabled]="!isEditing" name="username"
+          [(ngModel)]="employee.Username">
       </div>
     </div>
 
     <div class="form-group row">
       <label for="password" class="col-sm-2 col-form-label">Password</label>
       <div class="col-sm-10">
-        <input type="password" class="form-control" id="password" [disabled]="!isEditing" value="{{employee.Password}}">
+        <input type="password" class="form-control" id="password" [disabled]="!isEditing" name="password"
+          [(ngModel)]="employee.Password">
       </div>
     </div>
 
     <div class="form-group row">
       <label for="firstname" class="col-sm-2 col-form-label">Firstname</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="firstname" [disabled]="!isEditing" value="{{employee.FirstName}}">
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="firstname" class="col-sm-2 col-form-label">Firstname</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="firstname" [disabled]="!isEditing" value="{{employee.FirstName}}">
+        <input type="text" class="form-control" id="firstname" [disabled]="!isEditing" name="firstname"
+          [(ngModel)]="employee.FirstName">
       </div>
     </div>
 
     <div class="form-group row">
       <label for="lastname" class="col-sm-2 col-form-label">Lastname</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="lastname" [disabled]="!isEditing" value="{{employee.LastName}}">
+        <input type="text" class="form-control" id="lastname" [disabled]="!isEditing" name="lastname"
+          [(ngModel)]="employee.LastName">
       </div>
     </div>
 
     <div class="form-group row">
       <label for="email" class="col-sm-2 col-form-label">Email</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="email" [disabled]="!isEditing" value="{{employee.Email}}">
+        <input type="text" class="form-control" id="email" [disabled]="!isEditing" name="email"
+          [(ngModel)]="employee.Email">
       </div>
     </div>
 
     <div class="form-group row">
       <label for="phonenr" class="col-sm-2 col-form-label">Phone Number</label>
       <div class="col-sm-10">
-        <input type="tel" class="form-control" id="phonenr" [disabled]="!isEditing" value="{{employee.PhoneNr}}">
+        <input type="tel" class="form-control" id="phonenr" [disabled]="!isEditing" name="phonenr"
+          [(ngModel)]="employee.PhoneNr">
       </div>
     </div>
 
     <div class="form-group row">
       <label for="birthday" class="col-sm-2 col-form-label">Date of Birth</label>
       <div class="col-sm-10">
-        <input type="date" class="form-control" id="birthday" [disabled]="!isEditing" value="{{employee.Birthday}}">
+        <!-- <input type="date" class="form-control" id="birthday" [disabled]="!isEditing" name="birthday" [(ngModel)]="employee.Birthday"> -->
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="employee.Birthday" ngbDatepicker
+            #d="ngbDatepicker" [disabled]="!isEditing">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button" [disabled]="!isEditing"></button>
+          </div>
+        </div>
       </div>
     </div>
   </form>
