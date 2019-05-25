@@ -27,8 +27,8 @@ namespace CLERP.API.Infrastructure.Policies.Authorization.IpCheck
         {
             Claim ipClaim = _currentUserAccessor.GetIpAddressClaim();
 
-            // token doesn't contain the ip-address claim and ip-address claim isn't required => skip ip check
-            if (ipClaim == null && !requirement.IpClaimRequired)
+            // token doesn't contain the ip-address claim or ip-address claim isn't required => skip ip check
+            if (ipClaim == null || !requirement.IpClaimRequired)
             {
                 return Task.CompletedTask;
             }

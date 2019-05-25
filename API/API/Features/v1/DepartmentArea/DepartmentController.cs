@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 using CLERP.API.Infrastructure.Attributes;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NSwag.Annotations;
 
 namespace CLERP.API.Features.v1.DepartmentArea
 {
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
+    [Consumes("application/json")]
     [Produces("application/json")]
     [ValidateModel]
     public class DepartmentController : ControllerBase
@@ -29,12 +30,11 @@ namespace CLERP.API.Features.v1.DepartmentArea
         /// <summary>
         /// Gets all roles
         /// </summary>
+        /// <response code="500">An unknown error occured</response>
         /// <returns></returns>
         [HttpGet]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: typeof(GetAll.DepartmentGetAllResponse))]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-            responseType: typeof(MessageResponse),
-            Description = "An unknown error occured")]
+        [Produces(typeof(GetAll.DepartmentGetAllResponse))]
+        [ProducesResponseType(typeof(MessageResponse), (int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult> GetAllDepartments()
         {
             return Ok(await _mediator.Send(new GetAll.DepartmentGetAllRequest()));
@@ -44,16 +44,15 @@ namespace CLERP.API.Features.v1.DepartmentArea
         /// Gets an department by the id
         /// </summary>
         /// <param name="id">Id of the department</param>
+        /// <response code="404">Department couldn't be found</response>
+        /// <response code="422">Validation failed</response>
+        /// <response code="500">An unknown error occured</response>
         /// <returns></returns>
         [HttpGet("{id}")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: typeof(DepartmentResponse), Description = "Department found")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.NotFound, responseType: typeof(MessageResponse), Description = "Department couldn't be found")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-            responseType: typeof(ValidationFailedResponse),
-            Description = "Validation failed")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-            responseType: typeof(MessageResponse),
-            Description = "An unknown error occured")]
+        [Produces(typeof(DepartmentResponse))]
+        [ProducesResponseType(typeof(MessageResponse), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(ValidationFailedResponse), (int)HttpStatusCode.UnprocessableEntity)]
+        [ProducesResponseType(typeof(MessageResponse), (int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult> GetDepartmentById(Guid id)
         {
             var department = await _mediator.Send(new GetById.DepartmentGetByIdRequest() { DepartmentId = id });
@@ -70,21 +69,18 @@ namespace CLERP.API.Features.v1.DepartmentArea
         /// Adds an employee to a department
         /// </summary>
         /// <param name="departmentAddEmployeeData">Data for adding an employee to a department</param>
+        /// <response code="200">Employee successfuly added to the department</response>
+        /// <response code="400">Department or employee couln't be found</response>
+        /// <response code="409">Can't add employee, the department has this employee added already</response>
+        /// <response code="422">Validation failed</response>
+        /// <response code="500">An unknown error occured</response>
         /// <returns></returns>
         [HttpPost("add-employee")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null, Description = "Employee successfuly added to the department")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
-            responseType: typeof(BadRequestResponse),
-            Description = "Department or employee couln't be found")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.Conflict,
-            responseType: typeof(ConflictResponse),
-            Description = "Can't add employee, the department has this employee added already")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-            responseType: typeof(ValidationFailedResponse),
-            Description = "Validation failed")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-            responseType: typeof(MessageResponse),
-            Description = "An unknown error occured")]
+        [AllowAnonymous]
+        [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ConflictResponse), (int)HttpStatusCode.Conflict)]
+        [ProducesResponseType(typeof(ValidationFailedResponse), (int)HttpStatusCode.UnprocessableEntity)]
+        [ProducesResponseType(typeof(MessageResponse), (int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult> AddEmployeeToDepartment([FromBody] AddEmployee.DepartmentAddEmployeeRequest departmentAddEmployeeData)
         {
             await _mediator.Send(departmentAddEmployeeData);
@@ -96,20 +92,15 @@ namespace CLERP.API.Features.v1.DepartmentArea
         /// Removes an employee from a department
         /// </summary>
         /// <param name="departmentRemoveEmployeeData">Data for removing an employee from a department</param>
+        /// <response code="200">Employee successfuly removed from the department</response>
+        /// <response code="400">Emplyoee or department couln't be found, or the department doesn't have this employee added</response>
+        /// <response code="422">Validation failed</response>
+        /// <response code="500">An unknown error occured</response>
         /// <returns></returns>
-        [HttpPost("remove-employee")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK,
-            responseType: null,
-            Description = "Employee successfuly removed from the department")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
-            responseType: typeof(BadRequestResponse),
-            Description = "Emplyoee or department couln't be found, or the department doesn't have this employee added")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-            responseType: typeof(ValidationFailedResponse),
-            Description = "Validation failed")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-            responseType: typeof(MessageResponse),
-            Description = "An unknown error occured")]
+        [HttpDelete("remove-employee")]
+        [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ValidationFailedResponse), (int)HttpStatusCode.UnprocessableEntity)]
+        [ProducesResponseType(typeof(MessageResponse), (int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult> RemoveEmployeeFromDepartment(
             [FromBody] RemoveEmployee.DepartmentRemoveEmployeeRequest departmentRemoveEmployeeData)
         {
@@ -122,20 +113,16 @@ namespace CLERP.API.Features.v1.DepartmentArea
         /// Creates a department
         /// </summary>
         /// <param name="createData">Data for creating a new departmen</param>
+        /// <response code="200">Department successfuly created</response>
+        /// <response code="409">Entered data conflicts with existing</response>
+        /// <response code="422">Validation failed</response>
+        /// <response code="500">An unknown error occured</response>
         /// <returns></returns>
         [HttpPost]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, 
-            responseType: typeof(Create.DepartmentCreateResponse), 
-            Description = "Department successfuly created")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.Conflict,
-            responseType: typeof(ConflictResponse),
-            Description = "Entered data conflicts with existing")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-            responseType: typeof(ValidationFailedResponse),
-            Description = "Validation failed")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-            responseType: typeof(MessageResponse),
-            Description = "An unknown error occured")]
+        [Produces(typeof(Create.DepartmentCreateResponse))]
+        [ProducesResponseType(typeof(ConflictResponse), (int)HttpStatusCode.Conflict)]
+        [ProducesResponseType(typeof(ValidationFailedResponse), (int)HttpStatusCode.UnprocessableEntity)]
+        [ProducesResponseType(typeof(MessageResponse), (int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult> CreateDepartment([FromBody] Create.DepartmentCreateRequest createData)
         {
            return Ok(await _mediator.Send(createData));
@@ -146,18 +133,18 @@ namespace CLERP.API.Features.v1.DepartmentArea
         /// </summary>
         /// <param name="updateData">Updated department data</param>
         /// <param name="id">Id of the department to update</param>
+        /// <response code="200">Department successfuly updated</response>
+        /// <response code="400">Department couldn't be found</response>
+        /// <response code="409">Entered data conflicts with existing</response>
+        /// <response code="422">Validation failed</response>
+        /// <response code="500">An unknown error occured</response>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: typeof(DepartmentResponse), Description = "Department successfuly updated")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, 
-            responseType: typeof(BadRequestResponse), 
-            Description = "Department couldn't be found")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-            responseType: typeof(ValidationFailedResponse),
-            Description = "Validation failed")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-            responseType: typeof(MessageResponse),
-            Description = "An unknown error occured")]
+        [Produces(typeof(DepartmentResponse))]
+        [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ConflictResponse), (int)HttpStatusCode.Conflict)]
+        [ProducesResponseType(typeof(ValidationFailedResponse), (int)HttpStatusCode.UnprocessableEntity)]
+        [ProducesResponseType(typeof(MessageResponse), (int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult> UpdateDepartment([FromBody] Update.DepartmentUpdateRequest updateData, Guid id)
         {
             updateData.DepartmentId = id;
@@ -169,18 +156,15 @@ namespace CLERP.API.Features.v1.DepartmentArea
         /// Deletes a department
         /// </summary>
         /// <param name="id">Id of the department</param>
+        /// <response code="200">Department successfuly deleted</response>
+        /// <response code="400">Department couldn't be found</response>
+        /// <response code="422">Validation failed</response>
+        /// <response code="500">An unknown error occured</response>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null, Description = "Department deleted successfuly")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
-            responseType: typeof(BadRequestResponse),
-            Description = "Department coulnd't be found")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-            responseType: typeof(ValidationFailedResponse),
-            Description = "Validation failed")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-            responseType: typeof(MessageResponse),
-            Description = "An unknown error occured")]
+        [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ValidationFailedResponse), (int)HttpStatusCode.UnprocessableEntity)]
+        [ProducesResponseType(typeof(MessageResponse), (int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult> DeleteDepartment(Guid id)
         {
             await _mediator.Send(new Delete.DepartmentDeleteRequest() { RoleId = id });

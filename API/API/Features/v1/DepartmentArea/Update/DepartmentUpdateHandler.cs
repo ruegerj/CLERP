@@ -31,6 +31,12 @@ namespace CLERP.API.Features.v1.DepartmentArea.Update
                 throw new BadRequestException(); // department to update not found
             }
 
+            // Check if title of the department is unique
+            if (_context.Departments.Where(d => d.Title == request.Title).Count() > 0)
+            {
+                throw new ConflictException(nameof(request.Title), $"A department with the title: {request.Title} already exists, please choose another name");
+            }
+
             department.Title = request.Title;
             department.Description = request.Description;
 

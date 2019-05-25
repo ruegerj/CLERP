@@ -736,6 +736,7 @@
             <summary>
             Gets all roles
             </summary>
+            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.GetDepartmentById(System.Guid)">
@@ -743,6 +744,9 @@
             Gets an department by the id
             </summary>
             <param name="id">Id of the department</param>
+            <response code="404">Department couldn't be found</response>
+            <response code="422">Validation failed</response>
+            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.AddEmployeeToDepartment(CLERP.API.Features.v1.DepartmentArea.AddEmployee.DepartmentAddEmployeeRequest)">
@@ -750,6 +754,11 @@
             Adds an employee to a department
             </summary>
             <param name="departmentAddEmployeeData">Data for adding an employee to a department</param>
+            <response code="200">Employee successfuly added to the department</response>
+            <response code="400">Department or employee couln't be found</response>
+            <response code="409">Can't add employee, the department has this employee added already</response>
+            <response code="422">Validation failed</response>
+            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.RemoveEmployeeFromDepartment(CLERP.API.Features.v1.DepartmentArea.RemoveEmployee.DepartmentRemoveEmployeeRequest)">
@@ -757,6 +766,10 @@
             Removes an employee from a department
             </summary>
             <param name="departmentRemoveEmployeeData">Data for removing an employee from a department</param>
+            <response code="200">Employee successfuly removed from the department</response>
+            <response code="400">Emplyoee or department couln't be found, or the department doesn't have this employee added</response>
+            <response code="422">Validation failed</response>
+            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.CreateDepartment(CLERP.API.Features.v1.DepartmentArea.Create.DepartmentCreateRequest)">
@@ -764,6 +777,10 @@
             Creates a department
             </summary>
             <param name="createData">Data for creating a new departmen</param>
+            <response code="200">Department successfuly created</response>
+            <response code="409">Entered data conflicts with existing</response>
+            <response code="422">Validation failed</response>
+            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.UpdateDepartment(CLERP.API.Features.v1.DepartmentArea.Update.DepartmentUpdateRequest,System.Guid)">
@@ -772,6 +789,11 @@
             </summary>
             <param name="updateData">Updated department data</param>
             <param name="id">Id of the department to update</param>
+            <response code="200">Department successfuly updated</response>
+            <response code="400">Department couldn't be found</response>
+            <response code="409">Entered data conflicts with existing</response>
+            <response code="422">Validation failed</response>
+            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.DeleteDepartment(System.Guid)">
@@ -779,6 +801,10 @@
             Deletes a department
             </summary>
             <param name="id">Id of the department</param>
+            <response code="200">Department successfuly deleted</response>
+            <response code="400">Department couldn't be found</response>
+            <response code="422">Validation failed</response>
+            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="T:CLERP.API.Features.v1.DepartmentArea.DepartmentResponse">
@@ -1129,7 +1155,7 @@
             Id of the employee which the role should be removed from
             </summary>
         </member>
-        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetAllDepartments">
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetAllDRoles">
             <summary>
             Gets all roles
             </summary>
@@ -1450,7 +1476,7 @@
         </member>
         <member name="T:CLERP.API.Infrastructure.Policies.Authorization.IpCheck.IpCheckRequirement">
             <summary>
-            Auth requirement whihc defines if the ip-rquired claim is required in the token, default is true
+            Auth requirement which defines if the ip-rquired claim is required in the token, default is true
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:CLERP.API.Infrastructure.Security.Hashing.PasswordHasher" -->
@@ -1493,6 +1519,24 @@
             Instance is globally registered as singleton 
             </summary>
         </member>
+        <member name="T:CLERP.API.Infrastructure.Swagger.SwaggerExtension">
+            <summary>
+            Extensions for registering and configuring all swagger components
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Swagger.SwaggerExtension.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures SwaggerGen
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Swagger.SwaggerExtension.UseSwaggerMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Enables Swagger and SwaggerUI middleware
+            </summary>
+            <param name="app"></param>
+            <returns></returns>
+        </member>
         <member name="T:CLERP.API.Infrastructure.Utilities.CurrentUserAccessor">
             <summary>
             Content accesor which fetches data about the current user (current request) from the current HttpContext
@@ -1500,7 +1544,7 @@
         </member>
         <member name="M:CLERP.API.Infrastructure.Utilities.CurrentUserAccessor.GetIpAddressClaim">
             <summary>
-            Returns the custom claim fro the ip adress
+            Returns the custom claim for the ip adress
             </summary>
             <returns></returns>
         </member>
