@@ -851,6 +851,7 @@
             <summary>
             Gets all employees
             </summary>
+            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.GetEmployeeById(System.Guid)">
@@ -858,6 +859,9 @@
             Gets an employee by his id
             </summary>
             <param name="id">id of the requested employee</param>
+            <response code="404">Employee couldn't be found</response>
+            <response code="422">Validation failed</response>
+            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.CreateEmployee(CLERP.API.Features.v1.EmployeeArea.Create.EmployeeCreateRequest)">
@@ -865,6 +869,10 @@
             Creates an employee
             </summary>
             <param name="createData">Required data for creating an employee</param>
+            <response code="200">Employee successfuly created</response>
+            <response code="409">Entered data conflicts with existing</response>
+            <response code="422">Validation failed</response>
+            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.UpdateEmployee(CLERP.API.Features.v1.EmployeeArea.Update.EmployeeUpdateRequest,System.Guid)">
@@ -873,6 +881,10 @@
             </summary>
             <param name="updateData">Data to update</param>
             <param name="id">Id of the employee</param>
+            <response code="200">Employee successfuly updated</response>
+            <response code="400">Employee couldn't be found</response>
+            <response code="422">Validation failed</response>
+            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.DeleteEmployee(System.Guid)">
@@ -880,6 +892,10 @@
             Deletes an employee
             </summary>
             <param name="id">Guid/Id from the employee</param>
+            <response code="200">Employee successfuly deleted</response>
+            <response code="400">Employee couldn't be found</response>
+            <response code="422">Validation failed</response>
+            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.Login(CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginRequest)">
@@ -887,6 +903,10 @@
             Logs a employee in and returns the created Jwt
             </summary>
             <param name="loginData">Username and password from the employee</param>
+            <response code="200">Login successful</response>
+            <response code="400">Invalid credentials</response>
+            <response code="422">Validation failed</response>
+            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="T:CLERP.API.Features.v1.EmployeeArea.EmployeeResponse">

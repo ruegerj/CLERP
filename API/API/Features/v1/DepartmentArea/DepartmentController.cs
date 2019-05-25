@@ -76,7 +76,6 @@ namespace CLERP.API.Features.v1.DepartmentArea
         /// <response code="500">An unknown error occured</response>
         /// <returns></returns>
         [HttpPost("add-employee")]
-        [AllowAnonymous]
         [ProducesResponseType(typeof(BadRequestResponse), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(ConflictResponse), (int)HttpStatusCode.Conflict)]
         [ProducesResponseType(typeof(ValidationFailedResponse), (int)HttpStatusCode.UnprocessableEntity)]
