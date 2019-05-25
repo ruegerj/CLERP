@@ -916,6 +916,26 @@
             Sample Controller
             </summary>
         </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.AddChild.ProductTypeAddChildRequest.ChildId">
+            <summary>
+            Id of the new child product type
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.AddChild.ProductTypeAddChildRequest.BaseProductTypeId">
+            <summary>
+            Id of the product type which the child product type should be added to
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.AddParent.ProductTypeAddParentRequest.ParentId">
+            <summary>
+            Id of the new parent product type
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.AddParent.ProductTypeAddParentRequest.BaseProductTypeId">
+            <summary>
+            Id of the product type which the parent product type should be added to
+            </summary>
+        </member>
         <member name="P:CLERP.API.Features.v1.ProductTypeArea.Create.ProductTypeCreateRequest.EAN">
             <summary>
             European Article Number
@@ -961,12 +981,40 @@
             <param name="createData">Data for creating a new product type</param>
             <returns></returns>
         </member>
+        <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.AddParentProductType(CLERP.API.Features.v1.ProductTypeArea.AddParent.ProductTypeAddParentRequest)">
+            <summary>
+            Adds a product type as a new parent to a product type
+            </summary>
+            <param name="productTypeAddParenData">Data for adding a new parent product type</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.AddChildProductType(CLERP.API.Features.v1.ProductTypeArea.AddChild.ProductTypeAddChildRequest)">
+            <summary>
+            Adds a product type as a new child to a product type
+            </summary>
+            <param name="productTypeAddChildData">Data for adding a new child product type</param>
+            <returns></returns>
+        </member>
         <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.UpdateProductType(CLERP.API.Features.v1.ProductTypeArea.Update.ProductTypeUpdateRequest,System.Guid)">
             <summary>
             Updates a product type
             </summary>
             <param name="updateData">Data for updating a product type</param>
             <param name="id">Id of the product type</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.RemoveParentProductType(CLERP.API.Features.v1.ProductTypeArea.RemoveParent.ProductTypeRemoveParentRequest)">
+            <summary>
+            Removes a parent product type from a product type (base)
+            </summary>
+            <param name="productTypeRemoveParentData">Data for removing the parent from the base product type</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.RemoveChildProductType(CLERP.API.Features.v1.ProductTypeArea.RemoveChild.ProductTypeRemoveChildRequest)">
+            <summary>
+            Removes a child product type from a product type (base)
+            </summary>
+            <param name="productTypeRemoveChildData">Data for removing the child from the base product type</param>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.DeleteProductType(System.Guid)">
@@ -994,6 +1042,26 @@
         <member name="P:CLERP.API.Features.v1.ProductTypeArea.ProductTypeResponse.ParentGuids">
             <summary>
             All ids from the entities related as paretns to this product type
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.RemoveChild.ProductTypeRemoveChildRequest.ChildId">
+            <summary>
+            Id of the child product type which should be removed
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.RemoveChild.ProductTypeRemoveChildRequest.BaseProductTypeId">
+            <summary>
+            Id of the product type which the child should be removed from
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.RemoveParent.ProductTypeRemoveParentRequest.ParentId">
+            <summary>
+            Id of the parent product type which should be removed
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.RemoveParent.ProductTypeRemoveParentRequest.BaseProductTypeId">
+            <summary>
+            Id of the product type which the parent should be removed from
             </summary>
         </member>
         <member name="P:CLERP.API.Features.v1.ProductTypeArea.Update.ProductTypeUpdateRequest.EAN">
@@ -1088,20 +1156,6 @@
             <param name="roleAddDepartmentData">Data for adding a role to a department</param>
             <returns></returns>
         </member>
-        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.RemoveRoleFromEmployee(CLERP.API.Features.v1.RoleArea.RemoveFromEmployee.RoleRemoveFromEmployeeRequest)">
-            <summary>
-            Removes a certain role from an employee
-            </summary>
-            <param name="removeRoleFromEmployeeData">Data for removing a role from an employee</param>
-            <returns></returns>
-        </member>
-        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.RemoveRoleFromDepartment(CLERP.API.Features.v1.RoleArea.RemoveFromDepartment.RoleRemoveFromDepartmentRequest)">
-            <summary>
-            Removes a certain role from a department
-            </summary>
-            <param name="roleRemoveFromDepartmentData">Data for removing the role from the department</param>
-            <returns></returns>
-        </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.CreateRole(CLERP.API.Features.v1.RoleArea.Create.RoleCreateRequest)">
             <summary>
             Creates a role
@@ -1115,6 +1169,20 @@
             </summary>
             <param name="updateData">Updated role data</param>
             <param name="id">Id of the role</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.RemoveRoleFromEmployee(CLERP.API.Features.v1.RoleArea.RemoveFromEmployee.RoleRemoveFromEmployeeRequest)">
+            <summary>
+            Removes a certain role from an employee
+            </summary>
+            <param name="removeRoleFromEmployeeData">Data for removing a role from an employee</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.RemoveRoleFromDepartment(CLERP.API.Features.v1.RoleArea.RemoveFromDepartment.RoleRemoveFromDepartmentRequest)">
+            <summary>
+            Removes a certain role from a department
+            </summary>
+            <param name="removeRoleFromDepartmentData">Data for removing the role from the department</param>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.DeleteRole(System.Guid)">

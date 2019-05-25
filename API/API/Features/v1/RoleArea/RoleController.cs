@@ -122,58 +122,6 @@ namespace CLERP.API.Features.v1.RoleArea
         }
 
         /// <summary>
-        /// Removes a certain role from an employee
-        /// </summary>
-        /// <param name="removeRoleFromEmployeeData">Data for removing a role from an employee</param>
-        /// <returns></returns>
-        [HttpPost("remove-from-employee")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK,
-            responseType: null,
-            Description = "Role successfuly removed from the employee")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
-            responseType: typeof(BadRequestResponse),
-            Description = "Role or employee couln't be found, or the employee doesn't have the role")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-            responseType: typeof(ValidationFailedResponse),
-            Description = "Validation failed")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-            responseType: typeof(MessageResponse),
-            Description = "An unknown error occured")]
-        public async Task<ActionResult> RemoveRoleFromEmployee(
-            [FromBody] RemoveFromEmployee.RoleRemoveFromEmployeeRequest removeRoleFromEmployeeData)
-        {
-            await _mediator.Send(removeRoleFromEmployeeData);
-
-            return Ok();
-        }
-
-        /// <summary>
-        /// Removes a certain role from a department
-        /// </summary>
-        /// <param name="roleRemoveFromDepartmentData">Data for removing the role from the department</param>
-        /// <returns></returns>
-        [HttpPost("remove-from-department")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, 
-            responseType: null, 
-            Description = "Role successfuly removed from the department")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
-            responseType: typeof(BadRequestResponse),
-            Description = "Role or department couln't be found, or the department doesn't have the role")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-            responseType: typeof(ValidationFailedResponse),
-            Description = "Validation failed")]
-        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-            responseType: typeof(MessageResponse),
-            Description = "An unknown error occured")]
-        public async Task<ActionResult> RemoveRoleFromDepartment(
-            [FromBody] RemoveFromDepartment.RoleRemoveFromDepartmentRequest roleRemoveFromDepartmentData)
-        {
-            await _mediator.Send(roleRemoveFromDepartmentData);
-
-            return Ok();
-        }
-
-        /// <summary>
         /// Creates a role
         /// </summary>
         /// <param name="createData">Data for creating a new role</param>
@@ -214,6 +162,58 @@ namespace CLERP.API.Features.v1.RoleArea
             updateData.RoleId = id;
 
             return Ok(await _mediator.Send(updateData));
+        }
+
+        /// <summary>
+        /// Removes a certain role from an employee
+        /// </summary>
+        /// <param name="removeRoleFromEmployeeData">Data for removing a role from an employee</param>
+        /// <returns></returns>
+        [HttpDelete("remove-from-employee")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK,
+            responseType: null,
+            Description = "Role successfuly removed from the employee")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
+            responseType: typeof(BadRequestResponse),
+            Description = "Role or employee couln't be found, or the employee doesn't have the role")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
+            responseType: typeof(ValidationFailedResponse),
+            Description = "Validation failed")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
+            responseType: typeof(MessageResponse),
+            Description = "An unknown error occured")]
+        public async Task<ActionResult> RemoveRoleFromEmployee(
+            [FromBody] RemoveFromEmployee.RoleRemoveFromEmployeeRequest removeRoleFromEmployeeData)
+        {
+            await _mediator.Send(removeRoleFromEmployeeData);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Removes a certain role from a department
+        /// </summary>
+        /// <param name="removeRoleFromDepartmentData">Data for removing the role from the department</param>
+        /// <returns></returns>
+        [HttpDelete("remove-from-department")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK,
+            responseType: null,
+            Description = "Role successfuly removed from the department")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
+            responseType: typeof(BadRequestResponse),
+            Description = "Role or department couln't be found, or the department doesn't have the role")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
+            responseType: typeof(ValidationFailedResponse),
+            Description = "Validation failed")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
+            responseType: typeof(MessageResponse),
+            Description = "An unknown error occured")]
+        public async Task<ActionResult> RemoveRoleFromDepartment(
+            [FromBody] RemoveFromDepartment.RoleRemoveFromDepartmentRequest removeRoleFromDepartmentData)
+        {
+            await _mediator.Send(removeRoleFromDepartmentData);
+
+            return Ok();
         }
 
         /// <summary>

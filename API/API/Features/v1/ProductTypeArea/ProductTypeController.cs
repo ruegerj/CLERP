@@ -7,6 +7,7 @@ using CLERP.API.Features.v1;
 using CLERP.API.Infrastructure.Attributes;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
@@ -91,6 +92,58 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         }
 
         /// <summary>
+        /// Adds a product type as a new parent to a product type
+        /// </summary>
+        /// <param name="productTypeAddParenData">Data for adding a new parent product type</param>
+        /// <returns></returns>
+        [HttpPost("add-parent")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null, Description = "Parent successfuly added")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, 
+            responseType: typeof(BadRequestResponse), 
+            Description = "Product type or parent product type coulnd't be found")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.Conflict, 
+            responseType: typeof(ConflictResponse), 
+            Description = "Entered data conflicts with existing")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
+            responseType: typeof(ValidationFailedResponse),
+            Description = "Validation failed")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
+            responseType: typeof(MessageResponse),
+            Description = "An unknown error occured")]
+        public async Task<ActionResult> AddParentProductType([FromBody] AddParent.ProductTypeAddParentRequest productTypeAddParenData)
+        {
+            await _mediator.Send(productTypeAddParenData);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Adds a product type as a new child to a product type
+        /// </summary>
+        /// <param name="productTypeAddChildData">Data for adding a new child product type</param>
+        /// <returns></returns>
+        [HttpPost("add-child")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null, Description = "Child successfuly added")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
+            responseType: typeof(BadRequestResponse),
+            Description = "Product type or child product type coulnd't be found")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.Conflict,
+            responseType: typeof(ConflictResponse),
+            Description = "Entered data conflicts with existing")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
+            responseType: typeof(ValidationFailedResponse),
+            Description = "Validation failed")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
+            responseType: typeof(MessageResponse),
+            Description = "An unknown error occured")]
+        public async Task<ActionResult> AddChildProductType([FromBody] AddChild.ProductTypeAddChildRequest productTypeAddChildData)
+        {
+            await _mediator.Send(productTypeAddChildData);
+
+            return Ok();
+        }
+
+        /// <summary>
         /// Updates a product type
         /// </summary>
         /// <param name="updateData">Data for updating a product type</param>
@@ -114,6 +167,56 @@ namespace CLERP.API.Features.v1.ProductTypeArea
             updateData.ProductTypeGuid = id;
 
             return Ok(await _mediator.Send(updateData));
+        }
+
+        /// <summary>
+        /// Removes a parent product type from a product type (base)
+        /// </summary>
+        /// <param name="productTypeRemoveParentData">Data for removing the parent from the base product type</param>
+        /// <returns></returns>
+        [HttpDelete("remove-parent")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK,
+            responseType: null,
+            Description = "Parent successfuly removed from the product type")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
+            responseType: typeof(BadRequestResponse),
+            Description = "Parent or base product type couln't be found, or the base product type doesn't have this product type as parent")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
+            responseType: typeof(ValidationFailedResponse),
+            Description = "Validation failed")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
+            responseType: typeof(MessageResponse),
+            Description = "An unknown error occured")]
+        public async Task<ActionResult> RemoveParentProductType([FromBody] RemoveParent.ProductTypeRemoveParentRequest productTypeRemoveParentData)
+        {
+            await _mediator.Send(productTypeRemoveParentData);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Removes a child product type from a product type (base)
+        /// </summary>
+        /// <param name="productTypeRemoveChildData">Data for removing the child from the base product type</param>
+        /// <returns></returns>
+        [HttpDelete("remove-child")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.OK,
+            responseType: null,
+            Description = "Child successfuly removed from the product type")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
+            responseType: typeof(BadRequestResponse),
+            Description = "Child or base product type couln't be found, or the base product type doesn't have this product type as child")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
+            responseType: typeof(ValidationFailedResponse),
+            Description = "Validation failed")]
+        [SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
+            responseType: typeof(MessageResponse),
+            Description = "An unknown error occured")]
+        public async Task<ActionResult> RemoveChildProductType([FromBody] RemoveChild.ProductTypeRemoveChildRequest productTypeRemoveChildData)
+        {
+            await _mediator.Send(productTypeRemoveChildData);
+
+            return Ok();
         }
 
         /// <summary>

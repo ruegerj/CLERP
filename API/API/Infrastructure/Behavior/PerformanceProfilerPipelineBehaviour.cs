@@ -30,7 +30,7 @@ namespace CLERP.API.Infrastructure.Behavior
             result = await next();
 
             stopwatch.Stop();
-            _logger.LogDebug($"Finished request [{DateTime.Now}], elapsed: {stopwatch.Elapsed}, {stopwatch.ElapsedMilliseconds}ms");
+            _logger.LogDebug($"Finished request [{DateTime.Now}:{DateTime.Now.Millisecond}], elapsed: {stopwatch.Elapsed}, {stopwatch.ElapsedMilliseconds}ms");
 
             return result;
         }
