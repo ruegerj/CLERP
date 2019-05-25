@@ -14,5 +14,10 @@ namespace CLERP.API.Infrastructure.Security.Tokens
         /// Claim key for a username of an employee
         /// </summary>
         public const string EmployeeUsername = "eun";
+
+        /// <summary>
+        /// Claim key for the ip-adress where the login request came from
+        /// </summary>
+        public const string IpAddress = "ip";
     }
 }

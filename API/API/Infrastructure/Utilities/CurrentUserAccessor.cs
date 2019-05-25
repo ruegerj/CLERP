@@ -32,6 +32,15 @@ namespace CLERP.API.Infrastructure.Utilities
             return GetUserClaims()?.FirstOrDefault(c => c.Type == CustomJwtClaims.EmployeeUsername)?.Value;
         }
 
+        /// <summary>
+        /// Returns the custom claim for the ip adress
+        /// </summary>
+        /// <returns></returns>
+        public Claim GetIpAddressClaim()
+        {
+            return GetUserClaims()?.FirstOrDefault(c => c.Type == CustomJwtClaims.IpAddress);
+        }
+
         private IEnumerable<Claim> GetUserClaims()
         {
             return _httpContextAccessor?.HttpContext.User?.Claims;
