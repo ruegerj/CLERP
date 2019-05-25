@@ -121,7 +121,12 @@ namespace CLERP.API
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddApiVersioning();
+            services.AddApiVersioning(options => 
+            {
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0); // v1
+                options.ReportApiVersions = true;
+            });
 
             services.AddCors();
 

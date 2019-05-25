@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Infrastructure.Swagger.Filter
 {
-    public class ReplaceVersionWithExactValueInPath : IDocumentFilter
+    public class ReplaceVersionWithExactValueInPathFilter : IDocumentFilter
     {
         public void Apply(SwaggerDocument swaggerDoc, DocumentFilterContext context)
         {

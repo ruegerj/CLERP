@@ -736,7 +736,6 @@
             <summary>
             Gets all roles
             </summary>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.GetDepartmentById(System.Guid)">
@@ -744,9 +743,6 @@
             Gets an department by the id
             </summary>
             <param name="id">Id of the department</param>
-            <response code="404">Department couldn't be found</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.AddEmployeeToDepartment(CLERP.API.Features.v1.DepartmentArea.AddEmployee.DepartmentAddEmployeeRequest)">
@@ -754,11 +750,6 @@
             Adds an employee to a department
             </summary>
             <param name="departmentAddEmployeeData">Data for adding an employee to a department</param>
-            <response code="200">Employee successfuly added to the department</response>
-            <response code="400">Department or employee couln't be found</response>
-            <response code="409">Can't add employee, the department has this employee added already</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.RemoveEmployeeFromDepartment(CLERP.API.Features.v1.DepartmentArea.RemoveEmployee.DepartmentRemoveEmployeeRequest)">
@@ -766,10 +757,6 @@
             Removes an employee from a department
             </summary>
             <param name="departmentRemoveEmployeeData">Data for removing an employee from a department</param>
-            <response code="200">Employee successfuly removed from the department</response>
-            <response code="400">Emplyoee or department couln't be found, or the department doesn't have this employee added</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.CreateDepartment(CLERP.API.Features.v1.DepartmentArea.Create.DepartmentCreateRequest)">
@@ -777,10 +764,6 @@
             Creates a department
             </summary>
             <param name="createData">Data for creating a new departmen</param>
-            <response code="200">Department successfuly created</response>
-            <response code="409">Entered data conflicts with existing</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.UpdateDepartment(CLERP.API.Features.v1.DepartmentArea.Update.DepartmentUpdateRequest,System.Guid)">
@@ -789,11 +772,6 @@
             </summary>
             <param name="updateData">Updated department data</param>
             <param name="id">Id of the department to update</param>
-            <response code="200">Department successfuly updated</response>
-            <response code="400">Department couldn't be found</response>
-            <response code="409">Entered data conflicts with existing</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.DeleteDepartment(System.Guid)">
@@ -801,10 +779,6 @@
             Deletes a department
             </summary>
             <param name="id">Id of the department</param>
-            <response code="200">Department successfuly deleted</response>
-            <response code="400">Department couldn't be found</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="T:CLERP.API.Features.v1.DepartmentArea.DepartmentResponse">
@@ -851,7 +825,6 @@
             <summary>
             Gets all employees
             </summary>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.GetEmployeeById(System.Guid)">
@@ -859,9 +832,6 @@
             Gets an employee by his id
             </summary>
             <param name="id">id of the requested employee</param>
-            <response code="404">Employee couldn't be found</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.CreateEmployee(CLERP.API.Features.v1.EmployeeArea.Create.EmployeeCreateRequest)">
@@ -869,10 +839,6 @@
             Creates an employee
             </summary>
             <param name="createData">Required data for creating an employee</param>
-            <response code="200">Employee successfuly created</response>
-            <response code="409">Entered data conflicts with existing</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.UpdateEmployee(CLERP.API.Features.v1.EmployeeArea.Update.EmployeeUpdateRequest,System.Guid)">
@@ -881,10 +847,6 @@
             </summary>
             <param name="updateData">Data to update</param>
             <param name="id">Id of the employee</param>
-            <response code="200">Employee successfuly updated</response>
-            <response code="400">Employee couldn't be found</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.DeleteEmployee(System.Guid)">
@@ -892,21 +854,13 @@
             Deletes an employee
             </summary>
             <param name="id">Guid/Id from the employee</param>
-            <response code="200">Employee successfuly deleted</response>
-            <response code="400">Employee couldn't be found</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.EmployeeArea.EmployeeController.Login(CLERP.API.Features.v1.EmployeeArea.Login.EmployeeLoginRequest)">
             <summary>
-            Logs an employee in and returns the created Jwt
+            Logs a employee in and returns the created Jwt
             </summary>
             <param name="loginData">Username and password from the employee</param>
-            <response code="200">Login successful</response>
-            <response code="400">Invalid credentials</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="T:CLERP.API.Features.v1.EmployeeArea.EmployeeResponse">
@@ -1175,11 +1129,10 @@
             Id of the employee which the role should be removed from
             </summary>
         </member>
-        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetAllDRoles">
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetAllDepartments">
             <summary>
             Gets all roles
             </summary>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetRoleById(System.Guid)">
@@ -1187,9 +1140,6 @@
             Gets a role by id
             </summary>
             <param name="id">Id of the role</param>
-            <response code="404">Role couldn't be found</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.AddRoleToEmployee(CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest)">
@@ -1197,11 +1147,6 @@
             Add's a certain role to an employee
             </summary>
             <param name="roleAddEmployeeData">Data for adding a role to an employee</param>
-            <response code="200">Role successfuly added to the employeed</response>
-            <response code="400">Role or employee couln't be found</response>
-            <response code="409">Can't add role, the employee has this role already</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.AddRoleToDepartment(CLERP.API.Features.v1.RoleArea.AddToDepartment.RoleAddToDepartmentRequest)">
@@ -1209,11 +1154,6 @@
             Adds a certain role to a department
             </summary>
             <param name="roleAddDepartmentData">Data for adding a role to a department</param>
-            <response code="200">Role successfuly added to the department</response>
-            <response code="400">Role or department couln't be found</response>
-            <response code="409">Can't add role, the department has this role already</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.CreateRole(CLERP.API.Features.v1.RoleArea.Create.RoleCreateRequest)">
@@ -1221,10 +1161,6 @@
             Creates a role
             </summary>
             <param name="createData">Data for creating a new role</param>
-            <response code="200">Role successfuly created</response>
-            <response code="409">Entered data conflicts with existing</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.UpdateRole(CLERP.API.Features.v1.RoleArea.Update.RoleUpdateRequest,System.Guid)">
@@ -1233,10 +1169,6 @@
             </summary>
             <param name="updateData">Updated role data</param>
             <param name="id">Id of the role</param>
-            <response code="200">Role successfuly updated</response>
-            <response code="400">Role couldn't be found</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.RemoveRoleFromEmployee(CLERP.API.Features.v1.RoleArea.RemoveFromEmployee.RoleRemoveFromEmployeeRequest)">
@@ -1244,10 +1176,6 @@
             Removes a certain role from an employee
             </summary>
             <param name="removeRoleFromEmployeeData">Data for removing a role from an employee</param>
-            <response code="200">Role successfuly removed from the employee</response>
-            <response code="400">Role or employee couln't be found, or the employee doesn't have the role</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.RemoveRoleFromDepartment(CLERP.API.Features.v1.RoleArea.RemoveFromDepartment.RoleRemoveFromDepartmentRequest)">
@@ -1255,10 +1183,6 @@
             Removes a certain role from a department
             </summary>
             <param name="removeRoleFromDepartmentData">Data for removing the role from the department</param>
-            <response code="200">Role successfuly removed from the department</response>
-            <response code="400">Role or department couln't be found, or the department doesn't have the role</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.DeleteRole(System.Guid)">
@@ -1266,10 +1190,6 @@
             Deletes a role
             </summary>
             <param name="id">Id of the role</param>
-            <response code="200">Role successfuly deleted</response>
-            <response code="400">Role couldn't be found</response>
-            <response code="422">Validation failed</response>
-            <response code="500">An unknown error occured</response>
             <returns></returns>
         </member>
         <member name="T:CLERP.API.Features.v1.RoleArea.RoleResponse">
@@ -1571,6 +1491,16 @@
             <summary>
             Global Sign-In Configurations, generate on Startup an random crytpographical value wich acts as private key for token generation
             Instance is globally registered as singleton 
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Swagger.Filter.DefaultDataFormatFilter">
+            <summary>
+            Applies the data format for produced and consumed data for every endpoint / controller if nothing more concrete is specified
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Swagger.Filter.DefaultResponsesFilter">
+            <summary>
+            Registers all default responses and their appearance and adds them globally for every endpoint in the swagger doc
             </summary>
         </member>
         <member name="T:CLERP.API.Infrastructure.Swagger.SwaggerExtension">

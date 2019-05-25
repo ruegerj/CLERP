@@ -10,14 +10,13 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace CLERP.API.Features.v1.ProductTypeArea
 {
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    [Consumes("application/json")]
-    [Produces("application/json")]
     [ValidateModel]
     public class ProductTypeController : ControllerBase
     {
@@ -33,10 +32,7 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: typeof(GetAll.ProductTypeGetAllResponse))]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-        //    responseType: typeof(MessageResponse),
-        //    Description = "An unknown error occured")]
+        [Produces(typeof(GetAll.ProductTypeGetAllResponse))]
         public async Task<ActionResult> GetAllProductTypes()
         {
             return Ok(await _mediator.Send(new GetAll.ProductTypeGetAllRequest()));
@@ -48,14 +44,8 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// <param name="id">Id of the product type</param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: typeof(ProductTypeResponse), Description = "ProductType found")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.NotFound, responseType: typeof(MessageResponse), Description = "ProductType couldn't be found")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-        //    responseType: typeof(ValidationFailedResponse),
-        //    Description = "Validation failed")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-        //    responseType: typeof(MessageResponse),
-        //    Description = "An unknown error occured")]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(ProductTypeResponse), Description = "ProductType found")]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(MessageResponse), Description = "ProductType couldn't be found")]
         public async Task<ActionResult> GetProductTypeById(Guid id)
         {
             var productType = await _mediator.Send(new GetById.ProductTypeGetByIdRequest() { ProductTypeId = id });
@@ -74,18 +64,12 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// <param name="createData">Data for creating a new product type</param>
         /// <returns></returns>
         [HttpPost]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.OK,
-        //    responseType: typeof(Create.ProductTypeCreateResponse),
-        //    Description = "ProductType successfuly created")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.Conflict,
-        //    responseType: typeof(ConflictResponse),
-        //    Description = "Entered data conflicts with existing")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-        //    responseType: typeof(ValidationFailedResponse),
-        //    Description = "Validation failed")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-        //    responseType: typeof(MessageResponse),
-        //    Description = "An unknown error occured")]
+        [SwaggerResponse((int)HttpStatusCode.OK,
+            Type = typeof(Create.ProductTypeCreateResponse),
+            Description = "ProductType successfuly created")]
+        [SwaggerResponse((int)HttpStatusCode.Conflict,
+            Type = typeof(ConflictResponse),
+            Description = "Entered data conflicts with existing")]
         public async Task<ActionResult> CreateProductType([FromBody] Create.ProductTypeCreateRequest createData)
         {
            return Ok(await _mediator.Send(createData));
@@ -97,19 +81,13 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// <param name="productTypeAddParenData">Data for adding a new parent product type</param>
         /// <returns></returns>
         [HttpPost("add-parent")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null, Description = "Parent successfuly added")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest, 
-        //    responseType: typeof(BadRequestResponse), 
-        //    Description = "Product type or parent product type coulnd't be found")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.Conflict, 
-        //    responseType: typeof(ConflictResponse), 
-        //    Description = "Entered data conflicts with existing")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-        //    responseType: typeof(ValidationFailedResponse),
-        //    Description = "Validation failed")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-        //    responseType: typeof(MessageResponse),
-        //    Description = "An unknown error occured")]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "Parent successfuly added")]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, 
+            Type = typeof(BadRequestResponse), 
+            Description = "Product type or parent product type coulnd't be found")]
+        [SwaggerResponse((int)HttpStatusCode.Conflict, 
+            Type = typeof(ConflictResponse), 
+            Description = "Entered data conflicts with existing")]
         public async Task<ActionResult> AddParentProductType([FromBody] AddParent.ProductTypeAddParentRequest productTypeAddParenData)
         {
             await _mediator.Send(productTypeAddParenData);
@@ -123,19 +101,13 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// <param name="productTypeAddChildData">Data for adding a new child product type</param>
         /// <returns></returns>
         [HttpPost("add-child")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null, Description = "Child successfuly added")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
-        //    responseType: typeof(BadRequestResponse),
-        //    Description = "Product type or child product type coulnd't be found")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.Conflict,
-        //    responseType: typeof(ConflictResponse),
-        //    Description = "Entered data conflicts with existing")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-        //    responseType: typeof(ValidationFailedResponse),
-        //    Description = "Validation failed")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-        //    responseType: typeof(MessageResponse),
-        //    Description = "An unknown error occured")]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "Child successfuly added")]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest,
+            Type = typeof(BadRequestResponse),
+            Description = "Product type or child product type coulnd't be found")]
+        [SwaggerResponse((int)HttpStatusCode.Conflict,
+            Type = typeof(ConflictResponse),
+            Description = "Entered data conflicts with existing")]
         public async Task<ActionResult> AddChildProductType([FromBody] AddChild.ProductTypeAddChildRequest productTypeAddChildData)
         {
             await _mediator.Send(productTypeAddChildData);
@@ -150,18 +122,12 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// <param name="id">Id of the product type</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.OK, 
-        //    responseType: typeof(ProductTypeResponse), 
-        //    Description = "ProductType successfuly updated")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
-        //    responseType: typeof(BadRequestResponse),
-        //    Description = "ProductType couldn't be found")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-        //    responseType: typeof(ValidationFailedResponse),
-        //    Description = "Validation failed")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-        //    responseType: typeof(MessageResponse),
-        //    Description = "An unknown error occured")]
+        [SwaggerResponse((int)HttpStatusCode.OK, 
+            Type = typeof(ProductTypeResponse), 
+            Description = "ProductType successfuly updated")]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest,
+            Type = typeof(BadRequestResponse),
+            Description = "ProductType couldn't be found")]
         public async Task<ActionResult> UpdateProductType([FromBody] Update.ProductTypeUpdateRequest updateData, Guid id)
         {
             updateData.ProductTypeGuid = id;
@@ -175,18 +141,12 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// <param name="productTypeRemoveParentData">Data for removing the parent from the base product type</param>
         /// <returns></returns>
         [HttpDelete("remove-parent")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.OK,
-        //    responseType: null,
-        //    Description = "Parent successfuly removed from the product type")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
-        //    responseType: typeof(BadRequestResponse),
-        //    Description = "Parent or base product type couln't be found, or the base product type doesn't have this product type as parent")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-        //    responseType: typeof(ValidationFailedResponse),
-        //    Description = "Validation failed")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-        //    responseType: typeof(MessageResponse),
-        //    Description = "An unknown error occured")]
+        [SwaggerResponse((int)HttpStatusCode.OK,
+            Type = null,
+            Description = "Parent successfuly removed from the product type")]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest,
+            Type = typeof(BadRequestResponse),
+            Description = "Parent or base product type couln't be found, or the base product type doesn't have this product type as parent")]
         public async Task<ActionResult> RemoveParentProductType([FromBody] RemoveParent.ProductTypeRemoveParentRequest productTypeRemoveParentData)
         {
             await _mediator.Send(productTypeRemoveParentData);
@@ -200,18 +160,12 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// <param name="productTypeRemoveChildData">Data for removing the child from the base product type</param>
         /// <returns></returns>
         [HttpDelete("remove-child")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.OK,
-        //    responseType: null,
-        //    Description = "Child successfuly removed from the product type")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
-        //    responseType: typeof(BadRequestResponse),
-        //    Description = "Child or base product type couln't be found, or the base product type doesn't have this product type as child")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-        //    responseType: typeof(ValidationFailedResponse),
-        //    Description = "Validation failed")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-        //    responseType: typeof(MessageResponse),
-        //    Description = "An unknown error occured")]
+        [SwaggerResponse((int)HttpStatusCode.OK,
+            Type = null,
+            Description = "Child successfuly removed from the product type")]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest,
+            Type = typeof(BadRequestResponse),
+            Description = "Child or base product type couln't be found, or the base product type doesn't have this product type as child")]
         public async Task<ActionResult> RemoveChildProductType([FromBody] RemoveChild.ProductTypeRemoveChildRequest productTypeRemoveChildData)
         {
             await _mediator.Send(productTypeRemoveChildData);
@@ -225,16 +179,10 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// <param name="id">Id of the prodcut type</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.OK, responseType: null, Description = "ProductType deleted successfuly")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.BadRequest,
-        //    responseType: typeof(BadRequestResponse),
-        //    Description = "ProductType coulnd't be found")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.UnprocessableEntity,
-        //    responseType: typeof(ValidationFailedResponse),
-        //    Description = "Validation failed")]
-        //[SwaggerResponse(httpStatusCode: HttpStatusCode.InternalServerError,
-        //    responseType: typeof(MessageResponse),
-        //    Description = "An unknown error occured")]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "ProductType deleted successfuly")]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest,
+            Type = typeof(BadRequestResponse),
+            Description = "ProductType coulnd't be found")]
         public async Task<ActionResult> DeleteProductType(Guid id)
         {
             await _mediator.Send(new Delete.ProductTypeDeleteRequest() { ProductTypeGuid = id });

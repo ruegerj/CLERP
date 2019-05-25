@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Infrastructure.Swagger.Filter
 {
-    public class RemoveVersionFromParameter : IOperationFilter
+    public class RemoveVersionFromParameterFilter : IOperationFilter
     {
         public void Apply(Operation operation, OperationFilterContext context)
         {
