@@ -130,7 +130,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
         }
 
         /// <summary>
-        /// Logs a employee in and returns the created Jwt
+        /// Logs an employee in and returns the created Jwt
         /// </summary>
         /// <param name="loginData">Username and password from the employee</param>
         /// <response code="200">Login successful</response>
