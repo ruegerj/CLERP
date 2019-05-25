@@ -31,6 +31,7 @@ using CLERP.API.Infrastructure.Security.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Net;
+using CLERP.API.Infrastructure.Policies.Authorization.IpCheck;
 
 namespace CLERP.API
 {
@@ -66,6 +67,13 @@ namespace CLERP.API
             var signInConfigurations = new SignInConfigurations();
             services.AddSingleton(signInConfigurations);
 
+            // register custom authorization policies and handler
+            services.AddSingleton<IAuthorizationHandler, IpCheckHandler>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("MatchingIpPolicy", policy => policy.Requirements.Add(new IpCheckRequirement()));
+            });
+
             // configure jwt auth
             services.AddAuthentication(auth => 
             {
@@ -98,6 +106,9 @@ namespace CLERP.API
                     .RequireAuthenticatedUser()
                     .Build();
                 options.Filters.Add(new AuthorizeFilter(authPolicy));
+
+                // apply MatchingIpPolicy globally for all controllers, only if the current ip and the ip registered in the token match access will be granted
+                options.Filters.Add(new AuthorizeFilter("MatchingIpPolicy"));
             })
             .AddJsonOptions(options =>
             {
@@ -151,7 +162,7 @@ namespace CLERP.API
 
             services.AddScoped<IPasswordHasher, PasswordHasher>(); // Register hashing implentation for password hashing within the application
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
-            services.AddScoped<ICurrentUserAccessor, CurrentUserAccessor>();
+            services.AddSingleton<ICurrentUserAccessor, CurrentUserAccessor>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 

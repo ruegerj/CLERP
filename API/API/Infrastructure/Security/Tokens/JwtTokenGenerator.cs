@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CLERP.API.Domain.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -14,11 +15,14 @@ namespace CLERP.API.Infrastructure.Security.Tokens
     {
         private readonly JwtOptions _jwtOptions;
         private readonly SignInConfigurations _signInConfigurations;
-
-        public JwtTokenGenerator(IOptions<JwtOptions> jwtOptions, SignInConfigurations signInConfigurations)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public JwtTokenGenerator(IOptions<JwtOptions> jwtOptions, 
+            SignInConfigurations signInConfigurations,
+            IHttpContextAccessor httpContextAccessor)
         {
             _jwtOptions = jwtOptions.Value;
             _signInConfigurations = signInConfigurations;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         /// <summary>
@@ -37,7 +41,8 @@ namespace CLERP.API.Infrastructure.Security.Tokens
                  new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // unique id for token                 
                  new Claim(JwtRegisteredClaimNames.Sub, employee.Guid.ToString()), // user/employee id
                  new Claim(CustomJwtClaims.EmployeeUsername, employee.Username), // username of employee
-                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()) // Issued at
+                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()), // Issued at
+                 new Claim(CustomJwtClaims.IpAddress, _httpContextAccessor.HttpContext.Connection.RemoteIpAddress?.ToString()) // current request ip
             };
 
             claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r.Name)));

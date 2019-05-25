@@ -1448,6 +1448,11 @@
             <param name="app"></param>
             <returns></returns>
         </member>
+        <member name="T:CLERP.API.Infrastructure.Policies.Authorization.IpCheck.IpCheckRequirement">
+            <summary>
+            Auth requirement whihc defines if the ip-rquired claim is required in the token, default is true
+            </summary>
+        </member>
         <!-- Badly formed XML comment ignored for member "T:CLERP.API.Infrastructure.Security.Hashing.PasswordHasher" -->
         <member name="T:CLERP.API.Infrastructure.Security.Tokens.CustomJwtClaims">
             <summary>
@@ -1457,6 +1462,11 @@
         <member name="F:CLERP.API.Infrastructure.Security.Tokens.CustomJwtClaims.EmployeeUsername">
             <summary>
             Claim key for a username of an employee
+            </summary>
+        </member>
+        <member name="F:CLERP.API.Infrastructure.Security.Tokens.CustomJwtClaims.IpAddress">
+            <summary>
+            Claim key for the ip-adress where the login request came from
             </summary>
         </member>
         <member name="T:CLERP.API.Infrastructure.Security.Tokens.JwtOptions">
@@ -1487,6 +1497,12 @@
             <summary>
             Content accesor which fetches data about the current user (current request) from the current HttpContext
             </summary>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Utilities.CurrentUserAccessor.GetIpAddressClaim">
+            <summary>
+            Returns the custom claim fro the ip adress
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:CLERP.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
