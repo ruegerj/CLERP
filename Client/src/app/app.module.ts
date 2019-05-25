@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutingModule }     from './app-routing.module';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './core/nav/nav.component';
 import { FooterComponent } from './core/footer/footer.component';
@@ -12,6 +12,7 @@ import { ProductListComponent } from './products/productList/productList.compone
 import { ProductsComponent } from './products/products.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { CrudbarComponent } from './crudbar/crudbar.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
    declarations: [
@@ -22,13 +23,14 @@ import { CrudbarComponent } from './crudbar/crudbar.component';
       ProductListComponent,
       ProductsComponent,
       EmployeesComponent,
-      CrudbarComponent
+      CrudbarComponent,
+      HomeComponent
    ],
    imports: [
       BrowserModule,
-      AppRoutingModule,
       FormsModule,
-      NgbModule    
+      NgbModule,
+      AppRoutingModule
    ],
    providers: [],
    bootstrap: [
