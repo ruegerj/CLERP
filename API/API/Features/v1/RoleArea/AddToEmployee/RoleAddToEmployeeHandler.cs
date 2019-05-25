@@ -39,7 +39,7 @@ namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
                 throw new BadRequestException(); // employee to add role not found
             }
 
-            if (role.Employees.Select(e => e.Employee).Any(e => e.Guid == employee.Guid))
+            if (role.Employees.Any(e => e.EmployeeGuid == employee.Guid))
             {
                 throw new ConflictException("role is already added to this employee"); // role is already added to the employee
             }
