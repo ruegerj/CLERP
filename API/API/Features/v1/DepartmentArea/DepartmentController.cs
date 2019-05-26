@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CLERP.API.Infrastructure.Attributes;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
