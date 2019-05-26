@@ -1,5 +1,5 @@
 /* tslint:disable */
 export interface RoleCreateRequest {
-  name?: string;
+  name: string;
   description?: string;
 }

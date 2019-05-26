@@ -17,12 +17,12 @@ import { EmployeeLoginRequest } from '../models/employee-login-request';
   providedIn: 'root',
 })
 class EmployeeService extends __BaseService {
-  static readonly EmployeeGetAllPath = '/api/v{version}/Employee';
-  static readonly EmployeeGetEmployeeByIdPath = '/api/v{version}/Employee/{id}';
-  static readonly EmployeeUpdateEmployeePath = '/api/v{version}/Employee/{id}';
-  static readonly EmployeeDeleteEmployeePath = '/api/v{version}/Employee/{id}';
-  static readonly EmployeeCreateEmployeePath = '/api/v{version}/Employee/create';
-  static readonly EmployeeLoginPath = '/api/v{version}/Employee/login';
+  static readonly GetAllPath = '/api/v1/Employee';
+  static readonly GetEmployeeByIdPath = '/api/v1/Employee/{id}';
+  static readonly UpdateEmployeePath = '/api/v1/Employee/{id}';
+  static readonly DeleteEmployeePath = '/api/v1/Employee/{id}';
+  static readonly CreateEmployeePath = '/api/v1/Employee/create';
+  static readonly LoginPath = '/api/v1/Employee/login';
 
   constructor(
     config: __Configuration,
@@ -32,16 +32,15 @@ class EmployeeService extends __BaseService {
   }
 
   /**
-   * @param version undefined
+   * @return Success
    */
-  EmployeeGetAllResponse(version: string): __Observable<__StrictHttpResponse<EmployeeGetAllResponse>> {
+  GetAllResponse(): __Observable<__StrictHttpResponse<EmployeeGetAllResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/api/v${version}/Employee`,
+      this.rootUrl + `/api/v1/Employee`,
       __body,
       {
         headers: __headers,
@@ -57,32 +56,26 @@ class EmployeeService extends __BaseService {
     );
   }
   /**
-   * @param version undefined
+   * @return Success
    */
-  EmployeeGetAll(version: string): __Observable<EmployeeGetAllResponse> {
-    return this.EmployeeGetAllResponse(version).pipe(
+  GetAll(): __Observable<EmployeeGetAllResponse> {
+    return this.GetAllResponse().pipe(
       __map(_r => _r.body as EmployeeGetAllResponse)
     );
   }
 
   /**
-   * @param params The `EmployeeService.EmployeeGetEmployeeByIdParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `id`: id of the requested employee
-   *
+   * @param id id of the requested employee
    * @return Employee found
    */
-  EmployeeGetEmployeeByIdResponse(params: EmployeeService.EmployeeGetEmployeeByIdParams): __Observable<__StrictHttpResponse<EmployeeResponse>> {
+  GetEmployeeByIdResponse(id: string): __Observable<__StrictHttpResponse<EmployeeResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
-
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/api/v${params.version}/Employee/${params.id}`,
+      this.rootUrl + `/api/v1/Employee/${id}`,
       __body,
       {
         headers: __headers,
@@ -98,41 +91,33 @@ class EmployeeService extends __BaseService {
     );
   }
   /**
-   * @param params The `EmployeeService.EmployeeGetEmployeeByIdParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `id`: id of the requested employee
-   *
+   * @param id id of the requested employee
    * @return Employee found
    */
-  EmployeeGetEmployeeById(params: EmployeeService.EmployeeGetEmployeeByIdParams): __Observable<EmployeeResponse> {
-    return this.EmployeeGetEmployeeByIdResponse(params).pipe(
+  GetEmployeeById(id: string): __Observable<EmployeeResponse> {
+    return this.GetEmployeeByIdResponse(id).pipe(
       __map(_r => _r.body as EmployeeResponse)
     );
   }
 
   /**
-   * @param params The `EmployeeService.EmployeeUpdateEmployeeParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `updateData`: Data to update
+   * @param params The `EmployeeService.UpdateEmployeeParams` containing the following parameters:
    *
    * - `id`: Id of the employee
    *
+   * - `updateData`: Data to update
+   *
    * @return Employee successfuly updated
    */
-  EmployeeUpdateEmployeeResponse(params: EmployeeService.EmployeeUpdateEmployeeParams): __Observable<__StrictHttpResponse<EmployeeResponse>> {
+  UpdateEmployeeResponse(params: EmployeeService.UpdateEmployeeParams): __Observable<__StrictHttpResponse<EmployeeResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
     __body = params.updateData;
-
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/api/v${params.version}/Employee/${params.id}`,
+      this.rootUrl + `/api/v1/Employee/${params.id}`,
       __body,
       {
         headers: __headers,
@@ -148,38 +133,31 @@ class EmployeeService extends __BaseService {
     );
   }
   /**
-   * @param params The `EmployeeService.EmployeeUpdateEmployeeParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `updateData`: Data to update
+   * @param params The `EmployeeService.UpdateEmployeeParams` containing the following parameters:
    *
    * - `id`: Id of the employee
    *
+   * - `updateData`: Data to update
+   *
    * @return Employee successfuly updated
    */
-  EmployeeUpdateEmployee(params: EmployeeService.EmployeeUpdateEmployeeParams): __Observable<EmployeeResponse> {
-    return this.EmployeeUpdateEmployeeResponse(params).pipe(
+  UpdateEmployee(params: EmployeeService.UpdateEmployeeParams): __Observable<EmployeeResponse> {
+    return this.UpdateEmployeeResponse(params).pipe(
       __map(_r => _r.body as EmployeeResponse)
     );
   }
 
   /**
-   * @param params The `EmployeeService.EmployeeDeleteEmployeeParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `id`: Guid/Id from the employee
+   * @param id Guid/Id from the employee
    */
-  EmployeeDeleteEmployeeResponse(params: EmployeeService.EmployeeDeleteEmployeeParams): __Observable<__StrictHttpResponse<null>> {
+  DeleteEmployeeResponse(id: string): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/api/v${params.version}/Employee/${params.id}`,
+      this.rootUrl + `/api/v1/Employee/${id}`,
       __body,
       {
         headers: __headers,
@@ -195,34 +173,25 @@ class EmployeeService extends __BaseService {
     );
   }
   /**
-   * @param params The `EmployeeService.EmployeeDeleteEmployeeParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `id`: Guid/Id from the employee
+   * @param id Guid/Id from the employee
    */
-  EmployeeDeleteEmployee(params: EmployeeService.EmployeeDeleteEmployeeParams): __Observable<null> {
-    return this.EmployeeDeleteEmployeeResponse(params).pipe(
+  DeleteEmployee(id: string): __Observable<null> {
+    return this.DeleteEmployeeResponse(id).pipe(
       __map(_r => _r.body as null)
     );
   }
 
   /**
-   * @param params The `EmployeeService.EmployeeCreateEmployeeParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `createData`: Required data for creating an employee
+   * @param createData Required data for creating an employee
    */
-  EmployeeCreateEmployeeResponse(params: EmployeeService.EmployeeCreateEmployeeParams): __Observable<__StrictHttpResponse<null>> {
+  CreateEmployeeResponse(createData?: EmployeeCreateRequest): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
-    __body = params.createData;
+    __body = createData;
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/api/v${params.version}/Employee/create`,
+      this.rootUrl + `/api/v1/Employee/create`,
       __body,
       {
         headers: __headers,
@@ -238,36 +207,26 @@ class EmployeeService extends __BaseService {
     );
   }
   /**
-   * @param params The `EmployeeService.EmployeeCreateEmployeeParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `createData`: Required data for creating an employee
+   * @param createData Required data for creating an employee
    */
-  EmployeeCreateEmployee(params: EmployeeService.EmployeeCreateEmployeeParams): __Observable<null> {
-    return this.EmployeeCreateEmployeeResponse(params).pipe(
+  CreateEmployee(createData?: EmployeeCreateRequest): __Observable<null> {
+    return this.CreateEmployeeResponse(createData).pipe(
       __map(_r => _r.body as null)
     );
   }
 
   /**
-   * @param params The `EmployeeService.EmployeeLoginParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `loginData`: Username and password from the employee
-   *
+   * @param loginData Username and password from the employee
    * @return Login successsful
    */
-  EmployeeLoginResponse(params: EmployeeService.EmployeeLoginParams): __Observable<__StrictHttpResponse<TokenResponse>> {
+  LoginResponse(loginData?: EmployeeLoginRequest): __Observable<__StrictHttpResponse<TokenResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
-    __body = params.loginData;
+    __body = loginData;
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/api/v${params.version}/Employee/login`,
+      this.rootUrl + `/api/v1/Employee/login`,
       __body,
       {
         headers: __headers,
@@ -283,16 +242,11 @@ class EmployeeService extends __BaseService {
     );
   }
   /**
-   * @param params The `EmployeeService.EmployeeLoginParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `loginData`: Username and password from the employee
-   *
+   * @param loginData Username and password from the employee
    * @return Login successsful
    */
-  EmployeeLogin(params: EmployeeService.EmployeeLoginParams): __Observable<TokenResponse> {
-    return this.EmployeeLoginResponse(params).pipe(
+  Login(loginData?: EmployeeLoginRequest): __Observable<TokenResponse> {
+    return this.LoginResponse(loginData).pipe(
       __map(_r => _r.body as TokenResponse)
     );
   }
@@ -301,68 +255,19 @@ class EmployeeService extends __BaseService {
 module EmployeeService {
 
   /**
-   * Parameters for EmployeeGetEmployeeById
+   * Parameters for UpdateEmployee
    */
-  export interface EmployeeGetEmployeeByIdParams {
-    version: string;
-
-    /**
-     * id of the requested employee
-     */
-    id: string;
-  }
-
-  /**
-   * Parameters for EmployeeUpdateEmployee
-   */
-  export interface EmployeeUpdateEmployeeParams {
-    version: string;
-
-    /**
-     * Data to update
-     */
-    updateData: EmployeeUpdateRequest;
+  export interface UpdateEmployeeParams {
 
     /**
      * Id of the employee
      */
     id: string;
-  }
-
-  /**
-   * Parameters for EmployeeDeleteEmployee
-   */
-  export interface EmployeeDeleteEmployeeParams {
-    version: string;
 
     /**
-     * Guid/Id from the employee
+     * Data to update
      */
-    id: string;
-  }
-
-  /**
-   * Parameters for EmployeeCreateEmployee
-   */
-  export interface EmployeeCreateEmployeeParams {
-    version: string;
-
-    /**
-     * Required data for creating an employee
-     */
-    createData: EmployeeCreateRequest;
-  }
-
-  /**
-   * Parameters for EmployeeLogin
-   */
-  export interface EmployeeLoginParams {
-    version: string;
-
-    /**
-     * Username and password from the employee
-     */
-    loginData: EmployeeLoginRequest;
+    updateData?: EmployeeUpdateRequest;
   }
 }
 

@@ -11,11 +11,11 @@ import { map as __map, filter as __filter } from 'rxjs/operators';
   providedIn: 'root',
 })
 class ValuesService extends __BaseService {
-  static readonly ValuesGetAllPath = '/api/v{version}/Values';
-  static readonly ValuesPostPath = '/api/v{version}/Values';
-  static readonly ValuesGetPath = '/api/v{version}/Values/{id}';
-  static readonly ValuesPutPath = '/api/v{version}/Values/{id}';
-  static readonly ValuesDeletePath = '/api/v{version}/Values/{id}';
+  static readonly GetPath = '/api/v1/Values';
+  static readonly PostPath = '/api/v1/Values';
+  static readonly Get_1Path = '/api/v1/Values/{id}';
+  static readonly PutPath = '/api/v1/Values/{id}';
+  static readonly DeletePath = '/api/v1/Values/{id}';
 
   constructor(
     config: __Configuration,
@@ -25,16 +25,15 @@ class ValuesService extends __BaseService {
   }
 
   /**
-   * @param version undefined
+   * @return Success
    */
-  ValuesGetAllResponse(version: string): __Observable<__StrictHttpResponse<Array<string>>> {
+  GetResponse(): __Observable<__StrictHttpResponse<Array<string>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/api/v${version}/Values`,
+      this.rootUrl + `/api/v1/Values`,
       __body,
       {
         headers: __headers,
@@ -50,30 +49,25 @@ class ValuesService extends __BaseService {
     );
   }
   /**
-   * @param version undefined
+   * @return Success
    */
-  ValuesGetAll(version: string): __Observable<Array<string>> {
-    return this.ValuesGetAllResponse(version).pipe(
+  Get(): __Observable<Array<string>> {
+    return this.GetResponse().pipe(
       __map(_r => _r.body as Array<string>)
     );
   }
 
   /**
-   * @param params The `ValuesService.ValuesPostParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `data`:
+   * @param data undefined
    */
-  ValuesPostResponse(params: ValuesService.ValuesPostParams): __Observable<__StrictHttpResponse<null>> {
+  PostResponse(data?: string): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
-    __body = params.data;
+    __body = data;
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/api/v${params.version}/Values`,
+      this.rootUrl + `/api/v1/Values`,
       __body,
       {
         headers: __headers,
@@ -89,34 +83,26 @@ class ValuesService extends __BaseService {
     );
   }
   /**
-   * @param params The `ValuesService.ValuesPostParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `data`:
+   * @param data undefined
    */
-  ValuesPost(params: ValuesService.ValuesPostParams): __Observable<null> {
-    return this.ValuesPostResponse(params).pipe(
+  Post(data?: string): __Observable<null> {
+    return this.PostResponse(data).pipe(
       __map(_r => _r.body as null)
     );
   }
 
   /**
-   * @param params The `ValuesService.ValuesGetParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `id`:
+   * @param id undefined
+   * @return Success
    */
-  ValuesGetResponse(params: ValuesService.ValuesGetParams): __Observable<__StrictHttpResponse<string>> {
+  Get_1Response(id: number): __Observable<__StrictHttpResponse<string>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
-
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/api/v${params.version}/Values/${params.id}`,
+      this.rootUrl + `/api/v1/Values/${id}`,
       __body,
       {
         headers: __headers,
@@ -132,37 +118,31 @@ class ValuesService extends __BaseService {
     );
   }
   /**
-   * @param params The `ValuesService.ValuesGetParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `id`:
+   * @param id undefined
+   * @return Success
    */
-  ValuesGet(params: ValuesService.ValuesGetParams): __Observable<string> {
-    return this.ValuesGetResponse(params).pipe(
+  Get_1(id: number): __Observable<string> {
+    return this.Get_1Response(id).pipe(
       __map(_r => _r.body as string)
     );
   }
 
   /**
-   * @param params The `ValuesService.ValuesPutParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `value`:
+   * @param params The `ValuesService.PutParams` containing the following parameters:
    *
    * - `id`:
+   *
+   * - `value`:
    */
-  ValuesPutResponse(params: ValuesService.ValuesPutParams): __Observable<__StrictHttpResponse<null>> {
+  PutResponse(params: ValuesService.PutParams): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
     __body = params.value;
-
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/api/v${params.version}/Values/${params.id}`,
+      this.rootUrl + `/api/v1/Values/${params.id}`,
       __body,
       {
         headers: __headers,
@@ -178,36 +158,29 @@ class ValuesService extends __BaseService {
     );
   }
   /**
-   * @param params The `ValuesService.ValuesPutParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `value`:
+   * @param params The `ValuesService.PutParams` containing the following parameters:
    *
    * - `id`:
+   *
+   * - `value`:
    */
-  ValuesPut(params: ValuesService.ValuesPutParams): __Observable<null> {
-    return this.ValuesPutResponse(params).pipe(
+  Put(params: ValuesService.PutParams): __Observable<null> {
+    return this.PutResponse(params).pipe(
       __map(_r => _r.body as null)
     );
   }
 
   /**
-   * @param params The `ValuesService.ValuesDeleteParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `id`:
+   * @param id undefined
    */
-  ValuesDeleteResponse(params: ValuesService.ValuesDeleteParams): __Observable<__StrictHttpResponse<null>> {
+  DeleteResponse(id: number): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
-
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/api/v${params.version}/Values/${params.id}`,
+      this.rootUrl + `/api/v1/Values/${id}`,
       __body,
       {
         headers: __headers,
@@ -223,14 +196,10 @@ class ValuesService extends __BaseService {
     );
   }
   /**
-   * @param params The `ValuesService.ValuesDeleteParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `id`:
+   * @param id undefined
    */
-  ValuesDelete(params: ValuesService.ValuesDeleteParams): __Observable<null> {
-    return this.ValuesDeleteResponse(params).pipe(
+  Delete(id: number): __Observable<null> {
+    return this.DeleteResponse(id).pipe(
       __map(_r => _r.body as null)
     );
   }
@@ -239,36 +208,11 @@ class ValuesService extends __BaseService {
 module ValuesService {
 
   /**
-   * Parameters for ValuesPost
+   * Parameters for Put
    */
-  export interface ValuesPostParams {
-    version: string;
-    data: string;
-  }
-
-  /**
-   * Parameters for ValuesGet
-   */
-  export interface ValuesGetParams {
-    version: string;
+  export interface PutParams {
     id: number;
-  }
-
-  /**
-   * Parameters for ValuesPut
-   */
-  export interface ValuesPutParams {
-    version: string;
-    value: string;
-    id: number;
-  }
-
-  /**
-   * Parameters for ValuesDelete
-   */
-  export interface ValuesDeleteParams {
-    version: string;
-    id: number;
+    value?: string;
   }
 }
 

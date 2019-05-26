@@ -4,10 +4,10 @@
  * Default response dto for an employee
  */
 export interface EmployeeResponse {
-  id: string;
+  id?: string;
   firstname?: string;
   lastname?: string;
-  birthday: string;
+  birthday?: string;
   "phone-number"?: string;
   username?: string;
 }

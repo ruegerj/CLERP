@@ -20,9 +20,9 @@
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username">
-        <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password">
-        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Login</button>
+        <input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username" [(ngModel)]="username" name="username">
+        <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password" [(ngModel)]="password" name="password">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="loginClicked()">Login</button>
       </form>
     </div>
   </nav>

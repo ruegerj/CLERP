@@ -1,14 +1,14 @@
 /* tslint:disable */
 export interface EmployeeCreateRequest {
-  lastname?: string;
-  firstname?: string;
-  email?: string;
+  lastname: string;
+  firstname: string;
+  email: string;
   "phone-number"?: string;
-  username?: string;
+  username: string;
 
   /**
    * Plain password
    */
-  password?: string;
+  password: string;
   birthday: string;
 }

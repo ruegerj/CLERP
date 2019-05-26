@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule }     from './app-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './core/nav/nav.component';
@@ -13,6 +13,7 @@ import { ProductsComponent } from './products/products.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { CrudbarComponent } from './core/crudbar/crudbar.component';
 import { HomeComponent } from './home/home.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
    declarations: [
@@ -30,7 +31,8 @@ import { HomeComponent } from './home/home.component';
       BrowserModule,
       FormsModule,
       NgbModule,
-      AppRoutingModule
+      AppRoutingModule,
+      HttpClientModule
    ],
    providers: [],
    bootstrap: [

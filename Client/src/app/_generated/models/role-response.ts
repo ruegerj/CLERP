@@ -4,7 +4,7 @@
  * Default response dto for a role
  */
 export interface RoleResponse {
-  id: string;
+  id?: string;
 
   /**
    * Name of the role

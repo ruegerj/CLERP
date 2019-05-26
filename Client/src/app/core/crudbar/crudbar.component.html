@@ -1,10 +1,10 @@
-<form class="form-inline justify-content-center p-2">
-  <button *ngIf="!isEditing" type="button" class="btn btn-outline-primary form-control col-md-2 mx-3" (click)="newBtnClicked()">New</button>
-  <button *ngIf="!isEditing" type="button" class="btn btn-outline-primary form-control col-md-2 mx-3" (click)="editBtnClicked()">Edit</button>
+<form class="form-inline justify-content-around p-2">
+  <button *ngIf="!isEditing" type="button" class="btn btn-outline-primary form-control col-md-2" (click)="newBtnClicked()">New</button>
+  <button *ngIf="!isEditing" type="button" class="btn btn-outline-primary form-control col-md-2" (click)="editBtnClicked()">Edit</button>
 
-  <button *ngIf="isEditing" type="button" class="btn btn-outline-primary form-control col-md-2 mx-3" (click)="saveBtnClicked()">Save</button>
-  <button *ngIf="isEditing" type="button" class="btn btn-outline-primary form-control col-md-2 mx-3" (click)="cancelBtnClicked()">Cancel</button> 
+  <button *ngIf="isEditing" type="button" class="btn btn-outline-primary form-control col-md-2" (click)="saveBtnClicked()">Save</button>
+  <button *ngIf="isEditing" type="button" class="btn btn-outline-primary form-control col-md-2" (click)="cancelBtnClicked()">Cancel</button> 
 
-  <input type="text" class="form-control col-md-4 mx-3" id="search" placeholder="Search">
-  <button type="submit" class="btn btn-outline-primary col-md-2 mx-3">Search</button>
+  <input type="text" class="form-control col-md-5" id="search" placeholder="Search">
+  <button type="submit" class="btn btn-outline-primary col-md-2">Search</button>
 </form>

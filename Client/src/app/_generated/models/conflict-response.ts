@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 /**
- * Payload of a ConflictException
+ * Payload of a CLERP.API.Infrastructure.Exceptions.ConflictException
  */
 export interface ConflictResponse {
 

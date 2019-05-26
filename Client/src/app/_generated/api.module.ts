@@ -3,9 +3,11 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationInterface } from './api-configuration';
 
+import { DepartmentService } from './services/department.service';
+import { EmployeeService } from './services/employee.service';
+import { ProductTypeService } from './services/product-type.service';
 import { RoleService } from './services/role.service';
 import { ValuesService } from './services/values.service';
-import { EmployeeService } from './services/employee.service';
 
 /**
  * Provider for all Api services, plus ApiConfiguration
@@ -20,9 +22,11 @@ import { EmployeeService } from './services/employee.service';
   declarations: [],
   providers: [
     ApiConfiguration,
+    DepartmentService,
+    EmployeeService,
+    ProductTypeService,
     RoleService,
-    ValuesService,
-    EmployeeService
+    ValuesService
   ],
 })
 export class ApiModule {

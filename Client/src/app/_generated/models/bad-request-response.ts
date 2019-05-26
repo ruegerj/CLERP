@@ -1,7 +1,7 @@
 /* tslint:disable */
 
 /**
- * Payload of BadRequestException
+ * Payload of CLERP.API.Infrastructure.Exceptions.BadRequestException
  */
 export interface BadRequestResponse {
 

@@ -20,15 +20,15 @@ import { RoleRemoveFromDepartmentRequest } from '../models/role-remove-from-depa
   providedIn: 'root',
 })
 class RoleService extends __BaseService {
-  static readonly RoleGetAllPath = '/api/v{version}/Role';
-  static readonly RoleCreateRolePath = '/api/v{version}/Role';
-  static readonly RoleGetRoleByIdPath = '/api/v{version}/Role/{id}';
-  static readonly RoleUpdateRolePath = '/api/v{version}/Role/{id}';
-  static readonly RoleDeleteRolePath = '/api/v{version}/Role/{id}';
-  static readonly RoleAddRoleToEmployeePath = '/api/v{version}/Role/add-to-employee';
-  static readonly RoleAddRoleToDepartmentPath = '/api/v{version}/Role/add-to-department';
-  static readonly RoleRemoveRoleFromEmployeePath = '/api/v{version}/Role/remove-from-employee';
-  static readonly RoleRemoveRoleFromDepartmentPath = '/api/v{version}/Role/remove-from-department';
+  static readonly GetAllDepartmentsPath = '/api/v1/Role';
+  static readonly CreateRolePath = '/api/v1/Role';
+  static readonly GetRoleByIdPath = '/api/v1/Role/{id}';
+  static readonly UpdateRolePath = '/api/v1/Role/{id}';
+  static readonly DeleteRolePath = '/api/v1/Role/{id}';
+  static readonly AddRoleToEmployeePath = '/api/v1/Role/add-to-employee';
+  static readonly AddRoleToDepartmentPath = '/api/v1/Role/add-to-department';
+  static readonly RemoveRoleFromEmployeePath = '/api/v1/Role/remove-from-employee';
+  static readonly RemoveRoleFromDepartmentPath = '/api/v1/Role/remove-from-department';
 
   constructor(
     config: __Configuration,
@@ -38,16 +38,15 @@ class RoleService extends __BaseService {
   }
 
   /**
-   * @param version undefined
+   * @return Success
    */
-  RoleGetAllResponse(version: string): __Observable<__StrictHttpResponse<RoleGetAllResponse>> {
+  GetAllDepartmentsResponse(): __Observable<__StrictHttpResponse<RoleGetAllResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/api/v${version}/Role`,
+      this.rootUrl + `/api/v1/Role`,
       __body,
       {
         headers: __headers,
@@ -63,32 +62,26 @@ class RoleService extends __BaseService {
     );
   }
   /**
-   * @param version undefined
+   * @return Success
    */
-  RoleGetAll(version: string): __Observable<RoleGetAllResponse> {
-    return this.RoleGetAllResponse(version).pipe(
+  GetAllDepartments(): __Observable<RoleGetAllResponse> {
+    return this.GetAllDepartmentsResponse().pipe(
       __map(_r => _r.body as RoleGetAllResponse)
     );
   }
 
   /**
-   * @param params The `RoleService.RoleCreateRoleParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `createData`: Data for creating a new role
-   *
+   * @param createData Data for creating a new role
    * @return Role successfuly created
    */
-  RoleCreateRoleResponse(params: RoleService.RoleCreateRoleParams): __Observable<__StrictHttpResponse<RoleCreateResponse>> {
+  CreateRoleResponse(createData?: RoleCreateRequest): __Observable<__StrictHttpResponse<RoleCreateResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
-    __body = params.createData;
+    __body = createData;
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/api/v${params.version}/Role`,
+      this.rootUrl + `/api/v1/Role`,
       __body,
       {
         headers: __headers,
@@ -104,38 +97,27 @@ class RoleService extends __BaseService {
     );
   }
   /**
-   * @param params The `RoleService.RoleCreateRoleParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `createData`: Data for creating a new role
-   *
+   * @param createData Data for creating a new role
    * @return Role successfuly created
    */
-  RoleCreateRole(params: RoleService.RoleCreateRoleParams): __Observable<RoleCreateResponse> {
-    return this.RoleCreateRoleResponse(params).pipe(
+  CreateRole(createData?: RoleCreateRequest): __Observable<RoleCreateResponse> {
+    return this.CreateRoleResponse(createData).pipe(
       __map(_r => _r.body as RoleCreateResponse)
     );
   }
 
   /**
-   * @param params The `RoleService.RoleGetRoleByIdParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `id`: Id of the role
-   *
+   * @param id Id of the role
    * @return Role found
    */
-  RoleGetRoleByIdResponse(params: RoleService.RoleGetRoleByIdParams): __Observable<__StrictHttpResponse<RoleResponse>> {
+  GetRoleByIdResponse(id: string): __Observable<__StrictHttpResponse<RoleResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
-
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/api/v${params.version}/Role/${params.id}`,
+      this.rootUrl + `/api/v1/Role/${id}`,
       __body,
       {
         headers: __headers,
@@ -151,41 +133,33 @@ class RoleService extends __BaseService {
     );
   }
   /**
-   * @param params The `RoleService.RoleGetRoleByIdParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `id`: Id of the role
-   *
+   * @param id Id of the role
    * @return Role found
    */
-  RoleGetRoleById(params: RoleService.RoleGetRoleByIdParams): __Observable<RoleResponse> {
-    return this.RoleGetRoleByIdResponse(params).pipe(
+  GetRoleById(id: string): __Observable<RoleResponse> {
+    return this.GetRoleByIdResponse(id).pipe(
       __map(_r => _r.body as RoleResponse)
     );
   }
 
   /**
-   * @param params The `RoleService.RoleUpdateRoleParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `updateData`: Updated role data
+   * @param params The `RoleService.UpdateRoleParams` containing the following parameters:
    *
    * - `id`: Id of the role
    *
+   * - `updateData`: Updated role data
+   *
    * @return Role successfuly updated
    */
-  RoleUpdateRoleResponse(params: RoleService.RoleUpdateRoleParams): __Observable<__StrictHttpResponse<RoleResponse>> {
+  UpdateRoleResponse(params: RoleService.UpdateRoleParams): __Observable<__StrictHttpResponse<RoleResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
     __body = params.updateData;
-
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/api/v${params.version}/Role/${params.id}`,
+      this.rootUrl + `/api/v1/Role/${params.id}`,
       __body,
       {
         headers: __headers,
@@ -201,38 +175,31 @@ class RoleService extends __BaseService {
     );
   }
   /**
-   * @param params The `RoleService.RoleUpdateRoleParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `updateData`: Updated role data
+   * @param params The `RoleService.UpdateRoleParams` containing the following parameters:
    *
    * - `id`: Id of the role
    *
+   * - `updateData`: Updated role data
+   *
    * @return Role successfuly updated
    */
-  RoleUpdateRole(params: RoleService.RoleUpdateRoleParams): __Observable<RoleResponse> {
-    return this.RoleUpdateRoleResponse(params).pipe(
+  UpdateRole(params: RoleService.UpdateRoleParams): __Observable<RoleResponse> {
+    return this.UpdateRoleResponse(params).pipe(
       __map(_r => _r.body as RoleResponse)
     );
   }
 
   /**
-   * @param params The `RoleService.RoleDeleteRoleParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `id`: Id of the role
+   * @param id Id of the role
    */
-  RoleDeleteRoleResponse(params: RoleService.RoleDeleteRoleParams): __Observable<__StrictHttpResponse<null>> {
+  DeleteRoleResponse(id: string): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/api/v${params.version}/Role/${params.id}`,
+      this.rootUrl + `/api/v1/Role/${id}`,
       __body,
       {
         headers: __headers,
@@ -248,34 +215,25 @@ class RoleService extends __BaseService {
     );
   }
   /**
-   * @param params The `RoleService.RoleDeleteRoleParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `id`: Id of the role
+   * @param id Id of the role
    */
-  RoleDeleteRole(params: RoleService.RoleDeleteRoleParams): __Observable<null> {
-    return this.RoleDeleteRoleResponse(params).pipe(
+  DeleteRole(id: string): __Observable<null> {
+    return this.DeleteRoleResponse(id).pipe(
       __map(_r => _r.body as null)
     );
   }
 
   /**
-   * @param params The `RoleService.RoleAddRoleToEmployeeParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `roleAddEmployeeData`: Data for adding a role to an employee
+   * @param roleAddEmployeeData Data for adding a role to an employee
    */
-  RoleAddRoleToEmployeeResponse(params: RoleService.RoleAddRoleToEmployeeParams): __Observable<__StrictHttpResponse<null>> {
+  AddRoleToEmployeeResponse(roleAddEmployeeData?: RoleAddToEmployeeRequest): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
-    __body = params.roleAddEmployeeData;
+    __body = roleAddEmployeeData;
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/api/v${params.version}/Role/add-to-employee`,
+      this.rootUrl + `/api/v1/Role/add-to-employee`,
       __body,
       {
         headers: __headers,
@@ -291,34 +249,25 @@ class RoleService extends __BaseService {
     );
   }
   /**
-   * @param params The `RoleService.RoleAddRoleToEmployeeParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `roleAddEmployeeData`: Data for adding a role to an employee
+   * @param roleAddEmployeeData Data for adding a role to an employee
    */
-  RoleAddRoleToEmployee(params: RoleService.RoleAddRoleToEmployeeParams): __Observable<null> {
-    return this.RoleAddRoleToEmployeeResponse(params).pipe(
+  AddRoleToEmployee(roleAddEmployeeData?: RoleAddToEmployeeRequest): __Observable<null> {
+    return this.AddRoleToEmployeeResponse(roleAddEmployeeData).pipe(
       __map(_r => _r.body as null)
     );
   }
 
   /**
-   * @param params The `RoleService.RoleAddRoleToDepartmentParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `roleAddDepartmentData`: Data for adding a role to a department
+   * @param roleAddDepartmentData Data for adding a role to a department
    */
-  RoleAddRoleToDepartmentResponse(params: RoleService.RoleAddRoleToDepartmentParams): __Observable<__StrictHttpResponse<null>> {
+  AddRoleToDepartmentResponse(roleAddDepartmentData?: RoleAddToDepartmentRequest): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
-    __body = params.roleAddDepartmentData;
+    __body = roleAddDepartmentData;
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/api/v${params.version}/Role/add-to-department`,
+      this.rootUrl + `/api/v1/Role/add-to-department`,
       __body,
       {
         headers: __headers,
@@ -334,34 +283,25 @@ class RoleService extends __BaseService {
     );
   }
   /**
-   * @param params The `RoleService.RoleAddRoleToDepartmentParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `roleAddDepartmentData`: Data for adding a role to a department
+   * @param roleAddDepartmentData Data for adding a role to a department
    */
-  RoleAddRoleToDepartment(params: RoleService.RoleAddRoleToDepartmentParams): __Observable<null> {
-    return this.RoleAddRoleToDepartmentResponse(params).pipe(
+  AddRoleToDepartment(roleAddDepartmentData?: RoleAddToDepartmentRequest): __Observable<null> {
+    return this.AddRoleToDepartmentResponse(roleAddDepartmentData).pipe(
       __map(_r => _r.body as null)
     );
   }
 
   /**
-   * @param params The `RoleService.RoleRemoveRoleFromEmployeeParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `removeRoleFromEmployeeData`: Data for removing a role from an employee
+   * @param removeRoleFromEmployeeData Data for removing a role from an employee
    */
-  RoleRemoveRoleFromEmployeeResponse(params: RoleService.RoleRemoveRoleFromEmployeeParams): __Observable<__StrictHttpResponse<null>> {
+  RemoveRoleFromEmployeeResponse(removeRoleFromEmployeeData?: RoleRemoveFromEmployeeRequest): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
-    __body = params.removeRoleFromEmployeeData;
+    __body = removeRoleFromEmployeeData;
     let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/api/v${params.version}/Role/remove-from-employee`,
+      'DELETE',
+      this.rootUrl + `/api/v1/Role/remove-from-employee`,
       __body,
       {
         headers: __headers,
@@ -377,34 +317,25 @@ class RoleService extends __BaseService {
     );
   }
   /**
-   * @param params The `RoleService.RoleRemoveRoleFromEmployeeParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `removeRoleFromEmployeeData`: Data for removing a role from an employee
+   * @param removeRoleFromEmployeeData Data for removing a role from an employee
    */
-  RoleRemoveRoleFromEmployee(params: RoleService.RoleRemoveRoleFromEmployeeParams): __Observable<null> {
-    return this.RoleRemoveRoleFromEmployeeResponse(params).pipe(
+  RemoveRoleFromEmployee(removeRoleFromEmployeeData?: RoleRemoveFromEmployeeRequest): __Observable<null> {
+    return this.RemoveRoleFromEmployeeResponse(removeRoleFromEmployeeData).pipe(
       __map(_r => _r.body as null)
     );
   }
 
   /**
-   * @param params The `RoleService.RoleRemoveRoleFromDepartmentParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `roleRemoveFromDepartmentData`: Data for removing the role from the department
+   * @param removeRoleFromDepartmentData Data for removing the role from the department
    */
-  RoleRemoveRoleFromDepartmentResponse(params: RoleService.RoleRemoveRoleFromDepartmentParams): __Observable<__StrictHttpResponse<null>> {
+  RemoveRoleFromDepartmentResponse(removeRoleFromDepartmentData?: RoleRemoveFromDepartmentRequest): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-
-    __body = params.roleRemoveFromDepartmentData;
+    __body = removeRoleFromDepartmentData;
     let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/api/v${params.version}/Role/remove-from-department`,
+      'DELETE',
+      this.rootUrl + `/api/v1/Role/remove-from-department`,
       __body,
       {
         headers: __headers,
@@ -420,14 +351,10 @@ class RoleService extends __BaseService {
     );
   }
   /**
-   * @param params The `RoleService.RoleRemoveRoleFromDepartmentParams` containing the following parameters:
-   *
-   * - `version`:
-   *
-   * - `roleRemoveFromDepartmentData`: Data for removing the role from the department
+   * @param removeRoleFromDepartmentData Data for removing the role from the department
    */
-  RoleRemoveRoleFromDepartment(params: RoleService.RoleRemoveRoleFromDepartmentParams): __Observable<null> {
-    return this.RoleRemoveRoleFromDepartmentResponse(params).pipe(
+  RemoveRoleFromDepartment(removeRoleFromDepartmentData?: RoleRemoveFromDepartmentRequest): __Observable<null> {
+    return this.RemoveRoleFromDepartmentResponse(removeRoleFromDepartmentData).pipe(
       __map(_r => _r.body as null)
     );
   }
@@ -436,104 +363,19 @@ class RoleService extends __BaseService {
 module RoleService {
 
   /**
-   * Parameters for RoleCreateRole
+   * Parameters for UpdateRole
    */
-  export interface RoleCreateRoleParams {
-    version: string;
-
-    /**
-     * Data for creating a new role
-     */
-    createData: RoleCreateRequest;
-  }
-
-  /**
-   * Parameters for RoleGetRoleById
-   */
-  export interface RoleGetRoleByIdParams {
-    version: string;
+  export interface UpdateRoleParams {
 
     /**
      * Id of the role
      */
     id: string;
-  }
-
-  /**
-   * Parameters for RoleUpdateRole
-   */
-  export interface RoleUpdateRoleParams {
-    version: string;
 
     /**
      * Updated role data
      */
-    updateData: RoleUpdateRequest;
-
-    /**
-     * Id of the role
-     */
-    id: string;
-  }
-
-  /**
-   * Parameters for RoleDeleteRole
-   */
-  export interface RoleDeleteRoleParams {
-    version: string;
-
-    /**
-     * Id of the role
-     */
-    id: string;
-  }
-
-  /**
-   * Parameters for RoleAddRoleToEmployee
-   */
-  export interface RoleAddRoleToEmployeeParams {
-    version: string;
-
-    /**
-     * Data for adding a role to an employee
-     */
-    roleAddEmployeeData: RoleAddToEmployeeRequest;
-  }
-
-  /**
-   * Parameters for RoleAddRoleToDepartment
-   */
-  export interface RoleAddRoleToDepartmentParams {
-    version: string;
-
-    /**
-     * Data for adding a role to a department
-     */
-    roleAddDepartmentData: RoleAddToDepartmentRequest;
-  }
-
-  /**
-   * Parameters for RoleRemoveRoleFromEmployee
-   */
-  export interface RoleRemoveRoleFromEmployeeParams {
-    version: string;
-
-    /**
-     * Data for removing a role from an employee
-     */
-    removeRoleFromEmployeeData: RoleRemoveFromEmployeeRequest;
-  }
-
-  /**
-   * Parameters for RoleRemoveRoleFromDepartment
-   */
-  export interface RoleRemoveRoleFromDepartmentParams {
-    version: string;
-
-    /**
-     * Data for removing the role from the department
-     */
-    roleRemoveFromDepartmentData: RoleRemoveFromDepartmentRequest;
+    updateData?: RoleUpdateRequest;
   }
 }
 
