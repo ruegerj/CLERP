@@ -65,6 +65,9 @@ namespace CLERP.API.Infrastructure.Swagger
                     { "Bearer", new string[] { } }
                 });
 
+                options.DescribeAllEnumsAsStrings();
+                options.DescribeStringEnumsInCamelCase();
+
                 // Add fluent validation rules to swagger documentation
                 options.AddFluentValidationRules();
 
@@ -121,6 +124,7 @@ namespace CLERP.API.Infrastructure.Swagger
             {
                 config.SwaggerEndpoint("/swagger/v1/swagger.json", "CLERP API v1");
                 config.RoutePrefix = string.Empty;
+                config.DisplayOperationId();
             });
 
             return app;
