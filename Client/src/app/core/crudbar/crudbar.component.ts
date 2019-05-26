@@ -7,7 +7,10 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class CrudbarComponent implements OnInit {
   isEditing : boolean;
-  @Output() EditStarted = new EventEmitter<boolean>();   
+  @Output() EditStarted = new EventEmitter<boolean>();
+  @Output() EditCanceled = new EventEmitter<boolean>();
+  @Output() EditSaved = new EventEmitter<boolean>();
+  @Output() EditNew = new EventEmitter<boolean>();
 
   constructor() { 
     this.isEditing = false;
@@ -22,14 +25,17 @@ export class CrudbarComponent implements OnInit {
   }
 
   cancelBtnClicked() : void {
-    console.log("not implemented yet");
+    this.isEditing = false;
+    this.EditCanceled.emit(this.isEditing);
   }
 
   saveBtnClicked() : void {
-    console.log("not implemented yet");
+    this.isEditing = false;
+    this.EditSaved.emit(this.isEditing);  
   }
 
   newBtnClicked() : void {
-    console.log("not implemented yet");
+    this.isEditing = true;
+    this.EditNew.emit(this.isEditing);  
   }
 }
