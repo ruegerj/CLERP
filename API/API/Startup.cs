@@ -32,6 +32,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Net;
 using CLERP.API.Infrastructure.Policies.Authorization.IpCheck;
+using CLERP.API.Infrastructure.Swagger;
 
 namespace CLERP.API
 {
@@ -120,7 +121,12 @@ namespace CLERP.API
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddApiVersioning();
+            services.AddApiVersioning(options => 
+            {
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0); // v1
+                options.ReportApiVersions = true;
+            });
 
             services.AddCors();
 
@@ -138,16 +144,7 @@ namespace CLERP.API
                 options.HttpsPort = 5001;
             });
 
-            // configure swagger doc
-            services.AddSwaggerDocument(config => 
-            {
-                config.PostProcess = document =>
-                {
-                    document.Info.Version = "v1";
-                    document.Info.Title = "CLERP API";
-                    document.Info.Description = "REST Web-Api-Backend for the CLERP application";
-                };
-            });
+            services.AddSwagger();
 
             // Register MediatR and custom behavior for pipeline
             services.AddMediatR(currentAssembly);
@@ -196,9 +193,7 @@ namespace CLERP.API
 
             app.UseAuthentication();
 
-            // Register the Swagger generator and the Swagger UI middlewares
-            app.UseSwagger();
-            app.UseSwaggerUi3();
+            app.UseSwaggerMiddleware();
         }
     }
 }

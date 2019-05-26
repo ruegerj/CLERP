@@ -1450,7 +1450,7 @@
         </member>
         <member name="T:CLERP.API.Infrastructure.Policies.Authorization.IpCheck.IpCheckRequirement">
             <summary>
-            Auth requirement whihc defines if the ip-rquired claim is required in the token, default is true
+            Auth requirement which defines if the ip-rquired claim is required in the token, default is true
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:CLERP.API.Infrastructure.Security.Hashing.PasswordHasher" -->
@@ -1493,6 +1493,34 @@
             Instance is globally registered as singleton 
             </summary>
         </member>
+        <member name="T:CLERP.API.Infrastructure.Swagger.Filter.DefaultDataFormatFilter">
+            <summary>
+            Applies the data format for produced and consumed data for every endpoint / controller if nothing more concrete is specified
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Swagger.Filter.DefaultResponsesFilter">
+            <summary>
+            Registers all default responses and their appearance and adds them globally for every endpoint in the swagger doc
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Swagger.SwaggerExtension">
+            <summary>
+            Extensions for registering and configuring all swagger components
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Swagger.SwaggerExtension.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures SwaggerGen
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:CLERP.API.Infrastructure.Swagger.SwaggerExtension.UseSwaggerMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Enables Swagger and SwaggerUI middleware
+            </summary>
+            <param name="app"></param>
+            <returns></returns>
+        </member>
         <member name="T:CLERP.API.Infrastructure.Utilities.CurrentUserAccessor">
             <summary>
             Content accesor which fetches data about the current user (current request) from the current HttpContext
@@ -1500,7 +1528,7 @@
         </member>
         <member name="M:CLERP.API.Infrastructure.Utilities.CurrentUserAccessor.GetIpAddressClaim">
             <summary>
-            Returns the custom claim fro the ip adress
+            Returns the custom claim for the ip adress
             </summary>
             <returns></returns>
         </member>

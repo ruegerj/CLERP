@@ -15,6 +15,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
         private const int minAge = 18;
         private const int minPasswordLength = 10;
         private const int maxPasswordLength = 50;
+        private const string phoneNumberRegex = @"\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$";
 
         public EmployeeUpdateRequestValidator()
         {
@@ -38,7 +39,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
             RuleFor(e => e.PhoneNumber)
                 .NotNull()
                 .NotEmpty()
-                .Must(BePhoneNumber).WithMessage("The entered phone number is not valid.");
+                .Matches(new Regex(phoneNumberRegex)).WithMessage("The entered phone number is not valid.");
 
             RuleFor(e => e.Birthday)
                 .NotNull()
@@ -56,13 +57,6 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
                 .MaximumLength(maxPasswordLength)
                 .Must(BeWithSpecialChars).WithMessage("The entered password must atleast contain one special character.")
                 .When(e => !string.IsNullOrEmpty(e.CurrentPassword));
-        }
-
-        private static bool BePhoneNumber(string phoneNumber)
-        {
-            // Regex for international phone numbers
-            const string expression = @"\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$";
-            return Regex.Match(phoneNumber, expression).Success;
         }
 
         private static bool BeValidBirthday(DateTime birthday)
