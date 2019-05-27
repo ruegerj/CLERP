@@ -1,11 +1,4 @@
-﻿using CLERP.API.Infrastructure.Security.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CLERP.API
+﻿namespace CLERP.API
 {
     /// <summary>
     /// Represents the custom settings from the appsettings.json file

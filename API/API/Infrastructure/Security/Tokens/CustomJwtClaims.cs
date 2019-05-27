@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CLERP.API.Infrastructure.Security.Tokens
+﻿namespace CLERP.API.Infrastructure.Security.Tokens
 {
     /// <summary>
     /// Constins custom claims for JWt created within this app

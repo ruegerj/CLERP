@@ -5,9 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CLERP.API.Infrastructure.Configurations
 {
@@ -25,7 +22,7 @@ namespace CLERP.API.Infrastructure.Configurations
             builder.Property(x => x.State)
                 .HasConversion
                 (
-                   new ValueConverter<OrderState, string>(v => v.ToString(), v => (OrderState)Enum.Parse(typeof(OrderState), v)) 
+                   new ValueConverter<OrderState, string>(v => v.ToString(), v => (OrderState)Enum.Parse(typeof(OrderState), v))
                 ).IsRequired();
 
             builder.HasIndex(x => x.BillingAddressGuid);

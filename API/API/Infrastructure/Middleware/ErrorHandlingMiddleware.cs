@@ -1,12 +1,8 @@
 ﻿using CLERP.API.Infrastructure.Exceptions;
-using FluentValidation;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -68,7 +64,7 @@ namespace CLERP.API.Infrastructure.Middleware
                         responseContainer = new Features.v1.MessageResponse(
                             "An unknown error occured"
                         );
-                        
+
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
                         logger.LogError($"Caught exception of type {ex.GetType()}, sending appropriate response...", ex);
@@ -81,6 +77,6 @@ namespace CLERP.API.Infrastructure.Middleware
             var result = JsonConvert.SerializeObject(responseContainer);
 
             await context.Response.WriteAsync(result); // Write data in response body
-        }        
+        }
     }
 }

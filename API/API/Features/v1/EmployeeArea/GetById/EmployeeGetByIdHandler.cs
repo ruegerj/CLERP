@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Contexts;
 using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.EmployeeArea.GetById
 {

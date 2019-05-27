@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using CLERP.API.Infrastructure.Attributes;
+﻿using CLERP.API.Infrastructure.Attributes;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.RoleArea
 {
@@ -63,8 +60,8 @@ namespace CLERP.API.Features.v1.RoleArea
         /// <returns></returns>
         [HttpPost("add-to-employee")]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "Role successfuly added to the employee")]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, 
-            Type = typeof(BadRequestResponse), 
+        [SwaggerResponse((int)HttpStatusCode.BadRequest,
+            Type = typeof(BadRequestResponse),
             Description = "Role or employee couln't be found")]
         [SwaggerResponse((int)HttpStatusCode.Conflict,
             Type = typeof(ConflictResponse),
@@ -176,9 +173,9 @@ namespace CLERP.API.Features.v1.RoleArea
         /// <param name="id">Id of the role</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = null,  Description = "Role deleted successfuly")]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, 
-            Type = typeof(BadRequestResponse), 
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "Role deleted successfuly")]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest,
+            Type = typeof(BadRequestResponse),
             Description = "Role coulnd't be found")]
         public async Task<ActionResult> DeleteRole(Guid id)
         {

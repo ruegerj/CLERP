@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using CLERP.API.Infrastructure.Attributes;
+﻿using CLERP.API.Infrastructure.Attributes;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.EmployeeArea
 {
@@ -45,8 +41,8 @@ namespace CLERP.API.Features.v1.EmployeeArea
         /// <returns></returns>
         [HttpGet("{id}")]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(EmployeeResponse), Description = "Employee found")]
-        [SwaggerResponse((int)HttpStatusCode.NotFound, 
-            Type = typeof(MessageResponse), 
+        [SwaggerResponse((int)HttpStatusCode.NotFound,
+            Type = typeof(MessageResponse),
             Description = "Employee couldn't be found")]
         public async Task<ActionResult<EmployeeResponse>> GetEmployeeById(Guid id)
         {
@@ -67,8 +63,8 @@ namespace CLERP.API.Features.v1.EmployeeArea
         /// <returns></returns>
         [HttpPost("create")]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "Employee successfuly created")]
-        [SwaggerResponse((int)HttpStatusCode.Conflict, 
-            Type = typeof(ConflictResponse), 
+        [SwaggerResponse((int)HttpStatusCode.Conflict,
+            Type = typeof(ConflictResponse),
             Description = "Entered data conflicts with existing")]
         public async Task<ActionResult> CreateEmployee([FromBody] Create.EmployeeCreateRequest createData)
         {
@@ -84,7 +80,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
         /// <param name="id">Id of the employee</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(EmployeeResponse), Description = "Employee successfuly updated")]        
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(EmployeeResponse), Description = "Employee successfuly updated")]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(BadRequestResponse), Description = "Employee couldn't be found")]
         public async Task<ActionResult> UpdateEmployee([FromBody] Update.EmployeeUpdateRequest updateData, Guid id)
         {
@@ -102,7 +98,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
         [HttpDelete("{id}")]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "Employee successfuly deleted")]
         [SwaggerResponse((int)HttpStatusCode.BadRequest,
-            Type = typeof(BadRequestResponse), 
+            Type = typeof(BadRequestResponse),
             Description = "Employee to delete couldn't be found")]
         public async Task<ActionResult> DeleteEmployee(Guid id)
         {
@@ -119,11 +115,11 @@ namespace CLERP.API.Features.v1.EmployeeArea
         [HttpPost("login")]
         [AllowAnonymous]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Login.TokenResponse), Description = "Login successsful")]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, 
-            Type = typeof(BadRequestResponse), 
+        [SwaggerResponse((int)HttpStatusCode.BadRequest,
+            Type = typeof(BadRequestResponse),
             Description = "Invalid credentials")]
         public async Task<ActionResult> Login([FromBody] Login.EmployeeLoginRequest loginData)
-        {                    
+        {
             return Ok(await _mediator.Send(loginData));
         }
     }

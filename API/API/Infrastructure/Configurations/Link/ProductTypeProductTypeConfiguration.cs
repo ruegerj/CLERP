@@ -1,11 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using CLERP.API.Domain.Models.Link;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CLERP.API.Domain.Models.Link;
 using CLERP.API.Infrastructure.Configurations.Abstract;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CLERP.API.Infrastructure.Configurations.Link
 {

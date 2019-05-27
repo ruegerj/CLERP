@@ -7,7 +7,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,8 +20,8 @@ namespace CLERP.API.Features.v1.EmployeeArea.Login
         private readonly IPasswordHasher _hasher;
         private readonly IJwtTokenGenerator _tokenGenerator;
 
-        public EmployeeLoginHandler(ClerpContext context, 
-            ILogger<EmployeeLoginHandler> logger, 
+        public EmployeeLoginHandler(ClerpContext context,
+            ILogger<EmployeeLoginHandler> logger,
             IPasswordHasher hasher,
             IJwtTokenGenerator tokenGenerator)
         {
@@ -77,7 +76,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Login
             var rolesFromDepartment = requestedEmployee.Department?.Roles?.Select(r => r?.Role);
 
             // add roles from employees department
-            rolesFromUser = rolesFromDepartment != null 
+            rolesFromUser = rolesFromDepartment != null
                 && rolesFromDepartment.Count() > 0 ? rolesFromUser.Concat(rolesFromDepartment) : rolesFromUser;
 
             var token = _tokenGenerator.CreateToken(requestedEmployee, rolesFromUser);

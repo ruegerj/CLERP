@@ -1,12 +1,9 @@
 ﻿using CLERP.API.Infrastructure.Security.Tokens;
 using Microsoft.AspNetCore.Http;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace CLERP.API.Infrastructure.Utilities
 {

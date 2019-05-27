@@ -1,13 +1,12 @@
-﻿using System;
+﻿using CLERP.API.Domain.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using CLERP.API.Domain.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 
 namespace CLERP.API.Infrastructure.Security.Tokens
 {
@@ -16,7 +15,7 @@ namespace CLERP.API.Infrastructure.Security.Tokens
         private readonly JwtOptions _jwtOptions;
         private readonly SignInConfigurations _signInConfigurations;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public JwtTokenGenerator(IOptions<JwtOptions> jwtOptions, 
+        public JwtTokenGenerator(IOptions<JwtOptions> jwtOptions,
             SignInConfigurations signInConfigurations,
             IHttpContextAccessor httpContextAccessor)
         {
