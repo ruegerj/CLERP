@@ -91,7 +91,7 @@ namespace CLERP.API
             {
                 options.Conventions.Add(new GroupByApiRootConvention());
 
-                // add auth policy globally so every reqest has be authenticated, unless the controller is decorated with the "AllowAnonymous" attribute
+                // add auth policy globally so every reqest has to be authenticated, unless the controller is decorated with the "AllowAnonymous" attribute
                 var authPolicy = new AuthorizationPolicyBuilder()
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser()

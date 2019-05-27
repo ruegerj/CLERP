@@ -15,7 +15,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Create
         [JsonProperty("email")]
         public string Email { get; set; }
 
-        [JsonProperty("phone-number")]
+        [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }
 
         [JsonProperty("username")]

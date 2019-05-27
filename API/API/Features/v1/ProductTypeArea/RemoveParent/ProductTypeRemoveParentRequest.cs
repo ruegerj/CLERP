@@ -9,13 +9,13 @@ namespace CLERP.API.Features.v1.ProductTypeArea.RemoveParent
         /// <summary>
         /// Id of the parent product type which should be removed
         /// </summary>
-        [JsonProperty("parent-id")]
+        [JsonProperty("parentId")]
         public Guid ParentId { get; set; }
 
         /// <summary>
         /// Id of the product type which the parent should be removed from
         /// </summary>
-        [JsonProperty("base-id")]
+        [JsonProperty("baseId")]
         public Guid BaseProductTypeId { get; set; }
     }
 }

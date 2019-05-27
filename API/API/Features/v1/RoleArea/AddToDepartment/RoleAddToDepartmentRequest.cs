@@ -9,13 +9,13 @@ namespace CLERP.API.Features.v1.RoleArea.AddToDepartment
         /// <summary>
         /// Id of the role which should be added to the department
         /// </summary>
-        [JsonProperty("role-id")]
+        [JsonProperty("roleId")]
         public Guid RoleId { get; set; }
 
         /// <summary>
         /// Id of the department to role should be added to
         /// </summary>
-        [JsonProperty("department-id")]
+        [JsonProperty("departmentId")]
         public Guid DepartmentId { get; set; }
     }
 }

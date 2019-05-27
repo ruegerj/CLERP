@@ -23,7 +23,7 @@ namespace CLERP.API.Features.v1.DepartmentArea
         }
 
         /// <summary>
-        /// Gets all roles
+        /// Gets all departments
         /// </summary>
         /// <returns></returns>
         [HttpGet]

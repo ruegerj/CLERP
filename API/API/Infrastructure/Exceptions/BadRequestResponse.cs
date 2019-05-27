@@ -19,7 +19,7 @@ namespace CLERP.API.Infrastructure.Exceptions
         /// <summary>
         /// Error message, which explains that something went wrong
         /// </summary>
-        [JsonProperty("error-message")]
+        [JsonProperty("errorMessage")]
         public string ErrorMessage { get; set; }
     }
 }

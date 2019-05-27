@@ -20,7 +20,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
         [JsonProperty("birthday")]
         public DateTime Birthday { get; set; }
 
-        [JsonProperty("phone-number")]
+        [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }
 
         [JsonProperty("username")]

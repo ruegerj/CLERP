@@ -40,7 +40,7 @@ namespace CLERP.API.Infrastructure.Exceptions
         [JsonProperty("message")]
         public string Message { get; }
 
-        [JsonProperty("validation-errors")]
+        [JsonProperty("validationErrors")]
         public List<ValidationError> Errors { get; }
     }
 }

@@ -25,13 +25,13 @@ namespace CLERP.API.Features.v1.ProductTypeArea.Create
         /// <summary>
         /// Collection with all ids of all parent product types
         /// </summary>
-        [JsonProperty("parent-ids")]
+        [JsonProperty("parentIds")]
         public IEnumerable<Guid> ParentGuids { get; set; }
 
         /// <summary>
         /// Collection with all ids of all the child product types
         /// </summary>
-        [JsonProperty("child-ids")]
+        [JsonProperty("childIds")]
         public IEnumerable<Guid> ChildGuids { get; set; }
     }
 }

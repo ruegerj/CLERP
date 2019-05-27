@@ -5,7 +5,7 @@ namespace CLERP.API.Features.v1.ProductTypeArea.GetAll
 {
     public class ProductTypeGetAllResponse
     {
-        [JsonProperty("product-types")]
+        [JsonProperty("productTypes")]
         public IEnumerable<ProductTypeResponse> ProductTypes { get; set; }
     }
 }

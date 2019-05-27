@@ -734,7 +734,7 @@
         </member>
         <member name="M:CLERP.API.Features.v1.DepartmentArea.DepartmentController.GetAllDepartments">
             <summary>
-            Gets all roles
+            Gets all departments
             </summary>
             <returns></returns>
         </member>
@@ -914,6 +914,11 @@
         <member name="T:CLERP.API.Features.v1.Playground.ValuesController">
             <summary>
             Sample Controller
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.ProductArea.ProductResponse">
+            <summary>
+            Default response dto for a product
             </summary>
         </member>
         <member name="P:CLERP.API.Features.v1.ProductTypeArea.AddChild.ProductTypeAddChildRequest.ChildId">
