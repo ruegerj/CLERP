@@ -27,4 +27,19 @@ export class EmployeesComponent implements OnInit {
   onEditStarted($event) : void{
     this.isEditing = $event;
   }
+
+  onEditCanceled($event) : void{
+    this.isEditing = $event;
+    //TODO get real clone
+  }
+  
+  onEditSaved($event) : void{
+    this.isEditing = $event;
+    //TODO save the employee
+  }
+
+  onEditNew($event) : void{
+    this.isEditing = $event;
+    this.employee = <Employee>{};
+  }
 }

@@ -11,7 +11,7 @@ import { ProductDetailComponent } from './products/productDetail/productDetail.c
 import { ProductListComponent } from './products/productList/productList.component';
 import { ProductsComponent } from './products/products.component';
 import { EmployeesComponent } from './employees/employees.component';
-import { CrudbarComponent } from './crudbar/crudbar.component';
+import { CrudbarComponent } from './core/crudbar/crudbar.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({

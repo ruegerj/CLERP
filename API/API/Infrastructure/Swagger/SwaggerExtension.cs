@@ -57,12 +57,6 @@ namespace CLERP.API.Infrastructure.Swagger
                     Type = "apiKey"
                 });
 
-                // Register the applied SecurityDeifinition for all endpoints which don't have the AllowAnonymous attribute
-                options.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>()
-                {
-                    { "Bearer", new string[] { } }
-                });
-
                 options.DescribeAllEnumsAsStrings();
                 options.DescribeStringEnumsInCamelCase();
 
@@ -77,6 +71,9 @@ namespace CLERP.API.Infrastructure.Swagger
 
                 // Adds "(Auth)" to the summary so that you can see which endpoints have Authorization
                 options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
+
+                // add Security information to each operation for JWT Auth
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
 
                 // This call remove version from parameter, without it we will have version as parameter 
                 // for all endpoints in swagger UI

@@ -1,5 +1,6 @@
 ﻿using CLERP.API.Features.v1;
 using CLERP.API.Infrastructure.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Linq;
@@ -19,6 +20,20 @@ namespace CLERP.API.Infrastructure.Swagger.Filter
                 // Unprocessable Entity (422) - Failed Validation
                 var validationFailedResponseSchema = context.SchemaRegistry.GetOrRegister(typeof(ValidationFailedResponse));
                 operation.Responses.Add("422", new Response() { Description = "Validation failed", Schema = validationFailedResponseSchema });
+            }
+
+            // register Unauthorized and Forbiden responses if there isn't an AllowAnonymous attribute or an specific Authorize attribute
+            if (!context.MethodInfo.GetCustomAttributes(true).Any(attr => attr is AuthorizeAttribute) 
+                && !context.MethodInfo.GetCustomAttributes(true).Any(attr => attr is AllowAnonymousAttribute))
+            {
+                operation.Responses.Add("401", new Response() { Description = "Unautorized" });
+                operation.Responses.Add("403", new Response() { Description = "Forbidden" });
+                var operationAuth = new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Bearer", new string[] { } }
+                };
+
+                operation.Security = new List<IDictionary<string, IEnumerable<string>>>() { operationAuth };
             }
 
             // Internal Server Error (500)
