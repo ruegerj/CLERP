@@ -16,7 +16,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Create
         private const int minPasswordLength = 10;
         private const int maxPasswordLength = 50;
         private const int maxAge = 100;
-        private const int minAge = 18;
+        private const int minAge = 15;
 
         public EmployeeCreateRequestValidator()
         {

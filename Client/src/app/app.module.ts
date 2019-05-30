@@ -13,7 +13,8 @@ import { ProductsComponent } from './products/products.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { CrudbarComponent } from './core/crudbar/crudbar.component';
 import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor, ErrorInterceptor } from '@_helpers';
 
 @NgModule({
    declarations: [
@@ -34,7 +35,10 @@ import { HttpClientModule } from '@angular/common/http';
       AppRoutingModule,
       HttpClientModule
    ],
-   providers: [],
+   providers: [
+      {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+      {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+   ],
    bootstrap: [
       AppComponent
    ]

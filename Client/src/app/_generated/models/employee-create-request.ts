@@ -10,5 +10,5 @@ export interface EmployeeCreateRequest {
    * Plain password
    */
   password: string;
-  birthday: string;
+  birthday: Date;
 }

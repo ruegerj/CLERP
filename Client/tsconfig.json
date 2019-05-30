@@ -3,9 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@*" : ["src/app/*"],
-      "@Models/*" : ["src/app/_models/*"],
-      "@Core/*" : ["src/app/core/*"]
+      "@*" : ["src/app/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

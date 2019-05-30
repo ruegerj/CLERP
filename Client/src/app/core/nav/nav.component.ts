@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '@_services/authentication.service';
+import { User, Roles } from '@_models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -8,16 +10,29 @@ import { AuthenticationService } from '@_services/authentication.service';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private authServie : AuthenticationService) { }
+  constructor(private router: Router,
+    private authServie: AuthenticationService) {
+    this.authServie.currentUser.subscribe(x => this.currentUser = x);
+  }
 
-  public username : string;
-  public password : string;
+  public username: string;
+  public password: string;
+
+  public currentUser: User;
 
   ngOnInit() {
   }
 
-  loginClicked(): void
-  {
+  get isAdmin() {
+    return this.currentUser && this.currentUser.Roles && this.currentUser.Roles.includes(Roles.SysAdmin);
+}
+
+  loginClicked(): void {
     this.authServie.login(this.username, this.password);
+  }
+
+  logoutClicked(): void{
+    this.authServie.logout();
+    this.router.navigate(['/']);
   }
 }
