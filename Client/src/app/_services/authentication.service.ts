@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '@_models';
-import { HttpClient } from '@angular/common/http';
 import { EmployeeService } from '@_generated/services';
 import { EmployeeLoginRequest, TokenResponse } from '@_generated/models';
+import * as jwt_decode from 'jwt-decode';
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,17 @@ export class AuthenticationService {
     this.loginRequest = {username: username, password: password};
     
     this.employeeService.Login(this.loginRequest).subscribe(data => {
-      console.log(data.token);      
+      if(data.token)
+      {
+        var decoded = jwt_decode(data.token);
+        var receivedUser = new User(decoded['sub'], decoded['eun'], decoded['role'], data.token);
+        localStorage.setItem('currentUser', JSON.stringify(receivedUser));
+        this.currentUserSubject.next(receivedUser);
+
+        console.log(data.token);      
+      }
+      
+
     })
   }
 
