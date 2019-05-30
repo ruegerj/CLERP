@@ -21,21 +21,21 @@ export class CrudbarComponent implements OnInit {
 
   editBtnClicked() : void{
     this.isEditing = true;
-    this.EditStarted.emit(this.isEditing);
+    this.EditStarted.emit();
   }
 
   cancelBtnClicked() : void {
     this.isEditing = false;
-    this.EditCanceled.emit(this.isEditing);
+    this.EditCanceled.emit();
   }
 
   saveBtnClicked() : void {
     this.isEditing = false;
-    this.EditSaved.emit(this.isEditing);  
+    this.EditSaved.emit();  
   }
 
   newBtnClicked() : void {
     this.isEditing = true;
-    this.EditNew.emit(this.isEditing);  
+    this.EditNew.emit();  
   }
 }

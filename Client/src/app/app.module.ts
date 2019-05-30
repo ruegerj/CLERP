@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgForm, FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -33,7 +33,8 @@ import { JwtInterceptor, ErrorInterceptor } from '@_helpers';
       FormsModule,
       NgbModule,
       AppRoutingModule,
-      HttpClientModule
+      HttpClientModule,
+      ReactiveFormsModule
    ],
    providers: [
       {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
