@@ -1,1 +1,2 @@
-export {EmployeesComponent} from './employees.component';
+export * from './employees.component';
+export * from './employeeDetail/employeeDetail.component';

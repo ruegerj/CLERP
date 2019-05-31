@@ -10,11 +10,11 @@ import { FooterComponent } from './core/footer/footer.component';
 import { ProductDetailComponent } from './products/productDetail/productDetail.component';
 import { ProductListComponent } from './products/productList/productList.component';
 import { ProductsComponent } from './products/products.component';
-import { EmployeesComponent } from './employees/employees.component';
-import { CrudbarComponent } from './core/crudbar/crudbar.component';
+import { EmployeeDetailComponent } from './employees/employeeDetail/employeeDetail.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor, ErrorInterceptor } from '@_helpers';
+import { EmployeesComponent } from './employees/employees.component';
 
 @NgModule({
    declarations: [
@@ -24,9 +24,9 @@ import { JwtInterceptor, ErrorInterceptor } from '@_helpers';
       ProductDetailComponent,
       ProductListComponent,
       ProductsComponent,
-      EmployeesComponent,
-      CrudbarComponent,
-      HomeComponent
+      EmployeeDetailComponent,
+      HomeComponent,
+      EmployeesComponent
    ],
    imports: [
       BrowserModule,
@@ -39,7 +39,7 @@ import { JwtInterceptor, ErrorInterceptor } from '@_helpers';
    providers: [
       {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
       {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
-   ],
+      ],
    bootstrap: [
       AppComponent
    ]

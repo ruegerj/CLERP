@@ -1,1 +1,0 @@
-export {CrudbarComponent} from './crudbar.component';
