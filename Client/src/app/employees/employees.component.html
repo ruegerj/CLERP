@@ -1,10 +1,20 @@
 <div class="row justify-content-start mt-4 mb-4">
-  <button type="button" class="btn btn-outline-secondary form-control col-md-2 offset-md-1" >New</button>
+  <a [routerLink]="['/employeeCreate']" class="btn btn-outline-secondary form-control col-md-2 offset-md-1">New</a>
   <form class="form-inline justify-content-around col-md-8">
-    <input class="form-control col-md-8" id="search" placeholder="Search">
-    <button type="submit" class="btn btn-outline-secondary col-md-3">Search</button>
+    <input class="form-control col-md-8" [formControl]="searchControl" placeholder="Search">
+    <button type="submit" class="btn btn-outline-secondary col-md-3" (click)="searchClicked()">Search</button>
   </form>
 </div>
-<div>
-
+<div class="list-group list-group-flush">
+  <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let e of filteredEmployees"
+    [routerLink]="['/employeeEdit', e.id]">
+    <div class="row">
+      <div class="col-md-6">First Name: {{e.firstname}}</div>
+      <div class="col-md-6">Last Name: {{e.lastname}}</div>      
+    </div>
+    <div class="row">
+      <div class="col-md-6">Birthday: {{e.birthday | date : 'yyyy-MM-dd'}}</div>
+      <div class="col-md-6">Username: {{e.username}}</div>      
+    </div>
+  </a>
 </div>

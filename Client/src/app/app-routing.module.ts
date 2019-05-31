@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from '@home';
-import { EmployeesComponent } from '@employees';
+import { EmployeesComponent, EmployeeEditComponent } from '@employees';
 import { ProductsComponent } from '@products';
 import { AuthGuard } from '@_guards';
 import { Roles } from '@_models';
+import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreate.component';
 
 const routes: Routes = [
   { 
@@ -14,6 +15,18 @@ const routes: Routes = [
   { 
     path: 'employees', 
     component: EmployeesComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Roles.SysAdmin, Roles.Management, Roles.HR]}
+  },
+  {
+    path: 'employeeEdit/:id',
+    component: EmployeeEditComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Roles.SysAdmin, Roles.Management, Roles.HR]}
+  },
+  {
+    path: 'employeeCreate',
+    component: EmployeeCreateComponent,
     canActivate: [AuthGuard],
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.HR]}
   },

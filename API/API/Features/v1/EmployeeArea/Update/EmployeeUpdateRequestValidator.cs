@@ -15,7 +15,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
         private const int minAge = 18;
         private const int minPasswordLength = 10;
         private const int maxPasswordLength = 50;
-        private const string phoneNumberRegex = @"\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$";
+        private const string phoneNumberRegex = @"^([\+][0-9]{1,3}([ \.\-])?)?([\(]{1}[0-9]{3}[\)])?([0-9A-Z \.\-]{1,32})((x|ext|extension)?[0-9]{1,4}?)$";
 
         public EmployeeUpdateRequestValidator()
         {

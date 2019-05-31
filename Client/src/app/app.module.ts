@@ -10,11 +10,12 @@ import { FooterComponent } from './core/footer/footer.component';
 import { ProductDetailComponent } from './products/productDetail/productDetail.component';
 import { ProductListComponent } from './products/productList/productList.component';
 import { ProductsComponent } from './products/products.component';
-import { EmployeeDetailComponent } from './employees/employeeDetail/employeeDetail.component';
+import { EmployeeEditComponent } from './employees/employeeEdit/employeeEdit.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor, ErrorInterceptor } from '@_helpers';
 import { EmployeesComponent } from './employees/employees.component';
+import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreate.component';
 
 @NgModule({
    declarations: [
@@ -24,7 +25,8 @@ import { EmployeesComponent } from './employees/employees.component';
       ProductDetailComponent,
       ProductListComponent,
       ProductsComponent,
-      EmployeeDetailComponent,
+      EmployeeEditComponent,
+      EmployeeCreateComponent,
       HomeComponent,
       EmployeesComponent
    ],
