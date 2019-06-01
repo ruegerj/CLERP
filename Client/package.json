@@ -8,7 +8,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "generate-swagger-client": "ng-swagger-gen -i ./src/app/_generated/config/swagger-config.json -o ./src/app/_generated",
-    "start": "ng serve --ssl --ssl-key .\\certificates\\localhost.key  --ssl-cert .\\certificates\\localhost.crt"
+    "start": "ng serve --ssl --ssl-key .\\certificates\\localhost.key  --ssl-cert .\\certificates\\localhost.crt --open"
   },
   "private": true,
   "dependencies": {

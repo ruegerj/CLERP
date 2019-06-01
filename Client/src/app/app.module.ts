@@ -17,6 +17,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor, ErrorInterceptor } from '@_helpers';
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreate.component';
+import { ProductCreateComponent } from '@products/productCreate/productCreate.component';
 
 @NgModule({
    declarations: [
@@ -26,6 +27,7 @@ import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreat
       ProductDetailComponent,
       ProductListComponent,
       ProductDetailOverviewComponent,
+      ProductCreateComponent,
       ProductsComponent,
       EmployeeEditComponent,
       EmployeeCreateComponent,

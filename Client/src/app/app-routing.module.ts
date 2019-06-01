@@ -6,6 +6,7 @@ import { ProductsComponent, ProductDetailOverviewComponent } from '@products';
 import { AuthGuard } from '@_guards';
 import { Roles } from '@_models';
 import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreate.component';
+import { ProductCreateComponent } from '@products/productCreate/productCreate.component';
 
 const routes: Routes = [
   { 
@@ -33,6 +34,12 @@ const routes: Routes = [
   { 
     path: 'products', 
     component: ProductsComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
+  },
+  { 
+    path: 'productCreate', 
+    component: ProductCreateComponent,
     canActivate: [AuthGuard],
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
   },
