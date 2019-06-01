@@ -8,6 +8,23 @@
 <div class="list-group list-group-flush">
   <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let p of filteredProducts"
     [routerLink]="['/productDetailOverview', p.id]">
+    <div style="height: 12em;" class="card">
+      <div class="row ">
+        <div class="col-md-2">
+            <img src="data:image/png;base64,{{p.Image}}" class="image-fluid rounded fit-image">
+          </div>
+          <div class="col-md-10 px-3">
+            <div class="card-block px-3">
+              <h4 class="card-title">{{p.name}}</h4>
+              <div class="row">
+                <p class="col-md-6 card-text"><b>EAN:</b> {{p.ean}}</p>
+                <p class="col-md-6 card-text"><b>Price:</b> {{p.price | number: '1.2'}}</p>
+              </div>
+              <p class="card-text">{{p.Description}}</p>
+            </div>
+          </div>
 
+        </div>
+      </div>
   </a>
 </div>

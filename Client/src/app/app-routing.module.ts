@@ -34,13 +34,13 @@ const routes: Routes = [
     path: 'products', 
     component: ProductsComponent,
     canActivate: [AuthGuard],
-    data: {roles: [Roles.Management, Roles.Logistic, Roles.Production]}
+    data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
   },
   { 
-    path: 'productsDetailOverview/:id', 
+    path: 'productDetailOverview/:id', 
     component: ProductDetailOverviewComponent,
     canActivate: [AuthGuard],
-    data: {roles: [Roles.Management, Roles.Logistic, Roles.Production]}
+    data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
   },
   //all else, redirect to home
   //TODO redirect to error page

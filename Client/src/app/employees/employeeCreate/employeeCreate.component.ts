@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EmployeeService } from '@_generated/services';
 import { NgbDateAdapter, NgbDateNativeAdapter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { ValidationConstans } from '@_models';
 
 @Component({
   selector: 'app-employeeCreate',
@@ -20,14 +21,6 @@ export class EmployeeCreateComponent implements OnInit {
   @ViewChild('modalSuccessContent') private modalSuccessContent: TemplateRef<any>;
   @ViewChild('modalErrorContent') private modalErrorContent: TemplateRef<any>;
 
-  /** validation vars **/
-  private minNameLength: number = 2;
-  private maxNameLength: number = 100;
-  private minUsernameLength: number = 5;
-  private maxUsernameLength: number = 15;
-  private minPasswordLength: number = 10;
-  private maxPasswordLength: number = 50;
-
 
   constructor(
     private employeeService: EmployeeService,
@@ -39,13 +32,13 @@ export class EmployeeCreateComponent implements OnInit {
 
   ngOnInit() {
     this.employeeForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(this.minNameLength), Validators.maxLength(this.maxNameLength)]],
-      lastName: ['', [Validators.required, Validators.minLength(this.minNameLength), Validators.maxLength(this.maxNameLength)]],
+      firstName: ['', [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
+      lastName: ['', [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
       email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', [Validators.required, Validators.pattern('^([\+][0-9]{1,3}([ \.\-])?)?([\(]{1}[0-9]{3}[\)])?([0-9A-Z \.\-]{1,32})((x|ext|extension)?[0-9]{1,4}?)$')]],
+      phoneNumber: ['', [Validators.required, Validators.pattern(ValidationConstans.PhoneNumberRegex)]],
       birthday: ['', Validators.required],
-      username: ['', [Validators.required, Validators.minLength(this.minUsernameLength), Validators.maxLength(this.maxUsernameLength)]],
-      password: ['', [Validators.required, Validators.minLength(this.minPasswordLength), Validators.maxLength(this.maxPasswordLength)]]
+      username: ['', [Validators.required, Validators.minLength(ValidationConstans.MinUsernameLength), Validators.maxLength(ValidationConstans.MaxUsernameLength)]],
+      password: ['', [Validators.required, Validators.minLength(ValidationConstans.MinPasswordLength), Validators.maxLength(ValidationConstans.MaxPasswordLength)]]
     })
   }
 

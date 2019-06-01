@@ -25,7 +25,7 @@ namespace CLERP.API.Features.v1.ProductTypeArea.Update
         public async Task<ProductTypeResponse> Handle(ProductTypeUpdateRequest request, CancellationToken cancellationToken)
         {
             // check if name is unique
-            if (await _context.ProductTypes.Select(pt => pt.Name).AnyAsync(n => n == request.Name, cancellationToken))
+            if (await _context.ProductTypes.AnyAsync(n => (n.Guid != request.ProductTypeGuid && n.Name == request.Name), cancellationToken))
             {
                 throw new ConflictException(nameof(request.Name), $"A product type with the name: {request.Name} already exists, please choose another name");
             }

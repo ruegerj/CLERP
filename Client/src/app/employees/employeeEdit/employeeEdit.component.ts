@@ -4,6 +4,7 @@ import { EmployeeService } from '@_generated/services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeResponse } from '@_generated/models';
+import { ValidationConstans } from '@_models';
 
 @Component({
   selector: 'app-employeeEdit',
@@ -22,12 +23,6 @@ export class EmployeeEditComponent implements OnInit {
   @ViewChild('modalSuccessContent') private modalSuccessContent: TemplateRef<any>;
   @ViewChild('modalErrorContent') private modalErrorContent: TemplateRef<any>;
 
-  /** validation vars **/
-  private minNameLength: number = 2;
-  private maxNameLength: number = 100;
-  private minUsernameLength: number = 5;
-  private maxUsernameLength: number = 15;
-
 
   constructor(
     private employeeService: EmployeeService,
@@ -37,26 +32,24 @@ export class EmployeeEditComponent implements OnInit {
     private modalService: NgbModal
   ) {
     this.isEditing = false;
-    // this.backupEmployee = Object.assign({}, this.employee);
   }
 
 
   ngOnInit() {
     this.employeeForm = this.formBuilder.group({
-      username: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(this.minUsernameLength), Validators.maxLength(this.maxUsernameLength)]],
-      firstName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(this.minNameLength), Validators.maxLength(this.maxNameLength)]],
-      lastName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(this.minNameLength), Validators.maxLength(this.maxNameLength)]],
+      username: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstans.MinUsernameLength), Validators.maxLength(ValidationConstans.MaxUsernameLength)]],
+      firstName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
+      lastName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
       email: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.email]],
-      phoneNumber: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.pattern('^([\+][0-9]{1,3}([ \.\-])?)?([\(]{1}[0-9]{3}[\)])?([0-9A-Z \.\-]{1,32})((x|ext|extension)?[0-9]{1,4}?)$')]],
+      phoneNumber: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.pattern(ValidationConstans.PhoneNumberRegex)]],
       birthday: [{ value: '', disabled: !this.isEditing }, Validators.required],
-    })
+    });
 
     this.route.params.subscribe(params => this.id = params.id);
 
     if (this.id) {
       this.employeeService.GetEmployeeById(this.id).subscribe(data => {
         this.employee = data;
-        console.log(data);
         this.setFormValues(data);
       })
     }
@@ -91,7 +84,7 @@ export class EmployeeEditComponent implements OnInit {
     this.setFormValues(this.employee);
   }
 
-  createClicked(modalSuccessContent): void {
+  updateClicked(modalSuccessContent): void {
     this.submitted = true;
 
     if (this.employeeForm.invalid) {

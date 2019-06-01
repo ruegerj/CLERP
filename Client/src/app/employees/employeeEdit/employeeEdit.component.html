@@ -60,7 +60,7 @@
           <a *ngIf="!isEditing" class="btn btn-outline-secondary col-md-4" [routerLink]="'/employees'">Back</a>
 
           <button *ngIf="isEditing" type="button" class="btn btn-outline-secondary col-md-4"
-            (click)="createClicked()">Update</button>
+            (click)="updateClicked()">Update</button>
           <button *ngIf="isEditing" type="button" class="btn btn-outline-secondary col-md-4"
             (click)="cancelClicked()">Cancel</button>
         </div>

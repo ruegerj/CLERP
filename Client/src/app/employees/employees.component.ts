@@ -17,6 +17,7 @@ export class EmployeesComponent implements OnInit {
 
   constructor(private employeeServcie: EmployeeService) { }
 
+
   ngOnInit() {
     this.employeeServcie.GetAll().subscribe(data => { 
       this.employees = data.employees; 
@@ -26,10 +27,12 @@ export class EmployeesComponent implements OnInit {
 
 
   searchClicked(): void {
+    var searchText = this.searchControl.value.toLowerCase();
+
     this.filteredEmployees = this.employees.filter(employee => {
-      return (employee.firstname.toLowerCase().includes(this.searchControl.value.toLowerCase())
-        || employee.lastname.toLowerCase().includes(this.searchControl.value.toLowerCase())
-        || employee.username.toLowerCase().includes(this.searchControl.value.toLowerCase()));
+      return (employee.firstname.toLowerCase().includes(searchText)
+        || employee.lastname.toLowerCase().includes(searchText)
+        || employee.username.toLowerCase().includes(searchText));
     })
   }
 }
