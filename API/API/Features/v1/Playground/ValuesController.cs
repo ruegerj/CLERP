@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CLERP.API.Infrastructure.Attributes;
-using FluentValidation;
-using Microsoft.AspNetCore.Authorization;
+﻿using CLERP.API.Infrastructure.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace CLERP.API.Features.v1.Playground
 {
@@ -44,7 +39,7 @@ namespace CLERP.API.Features.v1.Playground
         // POST api/values
         [HttpPost]
         public void Post([FromBody] string data)
-        {           
+        {
         }
 
         // PUT api/values/5
@@ -58,5 +53,5 @@ namespace CLERP.API.Features.v1.Playground
         public void Delete(int id)
         {
         }
-    }    
+    }
 }

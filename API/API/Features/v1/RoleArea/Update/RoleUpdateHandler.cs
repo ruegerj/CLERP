@@ -3,9 +3,6 @@ using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Contexts;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 

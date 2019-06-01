@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,8 +16,8 @@ namespace CLERP.API.Infrastructure.Behavior
             _logger = logger;
         }
 
-        public async Task<TResponse> Handle(TRequest request, 
-            CancellationToken cancellationToken, 
+        public async Task<TResponse> Handle(TRequest request,
+            CancellationToken cancellationToken,
             RequestHandlerDelegate<TResponse> next)
         {
             TResponse result;

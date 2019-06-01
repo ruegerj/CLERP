@@ -1,10 +1,7 @@
-﻿using CLERP.API.Infrastructure.Security.Tokens;
-using CLERP.API.Infrastructure.Utilities;
+﻿using CLERP.API.Infrastructure.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -33,7 +30,7 @@ namespace CLERP.API.Infrastructure.Policies.Authorization.IpCheck
                 return Task.CompletedTask;
             }
 
-            if (ipClaim.Value ==  HttpContext.Connection.RemoteIpAddress?.ToString())
+            if (ipClaim.Value == HttpContext.Connection.RemoteIpAddress?.ToString())
             {
                 // ip-address from token and current matches => access granted
                 context.Succeed(requirement);

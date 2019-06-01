@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.ProductTypeArea
 {
@@ -32,13 +30,13 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// <summary>
         /// All ids from the entities related as children to this product type
         /// </summary>
-        [JsonProperty("child-ids")]
+        [JsonProperty("childIds")]
         public IEnumerable<Guid> ChildGuids { get; set; }
 
         /// <summary>
         /// All ids from the entities related as paretns to this product type
         /// </summary>
-        [JsonProperty("parent-ids")]
+        [JsonProperty("parentIds")]
         public IEnumerable<Guid> ParentGuids { get; set; }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using MediatR;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.EmployeeArea.Update
 {
@@ -21,7 +18,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
         [JsonProperty("email")]
         public string Email { get; set; }
 
-        [JsonProperty("phone-number")]
+        [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }
 
         [JsonProperty("birthday")]

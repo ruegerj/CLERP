@@ -1,9 +1,6 @@
 ﻿using MediatR;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.ProductTypeArea.AddChild
 {
@@ -12,13 +9,13 @@ namespace CLERP.API.Features.v1.ProductTypeArea.AddChild
         /// <summary>
         /// Id of the new child product type
         /// </summary>
-        [JsonProperty("child-id")]
+        [JsonProperty("childId")]
         public Guid ChildId { get; set; }
 
         /// <summary>
         /// Id of the product type which the child product type should be added to
         /// </summary>
-        [JsonProperty("base-id")]
+        [JsonProperty("baseId")]
         public Guid BaseProductTypeId { get; set; }
     }
 }

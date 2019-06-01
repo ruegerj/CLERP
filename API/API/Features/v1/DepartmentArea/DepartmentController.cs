@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using CLERP.API.Infrastructure.Attributes;
+﻿using CLERP.API.Infrastructure.Attributes;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.DepartmentArea
 {
@@ -27,7 +23,7 @@ namespace CLERP.API.Features.v1.DepartmentArea
         }
 
         /// <summary>
-        /// Gets all roles
+        /// Gets all departments
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -103,15 +99,15 @@ namespace CLERP.API.Features.v1.DepartmentArea
         /// <param name="createData">Data for creating a new departmen</param>
         /// <returns></returns>
         [HttpPost]
-        [SwaggerResponse((int)HttpStatusCode.OK, 
-            Type = typeof(Create.DepartmentCreateResponse), 
+        [SwaggerResponse((int)HttpStatusCode.OK,
+            Type = typeof(Create.DepartmentCreateResponse),
             Description = "Department successfuly created")]
         [SwaggerResponse((int)HttpStatusCode.Conflict,
             Type = typeof(ConflictResponse),
             Description = "Entered data conflicts with existing")]
         public async Task<ActionResult> CreateDepartment([FromBody] Create.DepartmentCreateRequest createData)
         {
-           return Ok(await _mediator.Send(createData));
+            return Ok(await _mediator.Send(createData));
         }
 
         /// <summary>
@@ -122,8 +118,8 @@ namespace CLERP.API.Features.v1.DepartmentArea
         /// <returns></returns>
         [HttpPut("{id}")]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(DepartmentResponse), Description = "Department successfuly updated")]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, 
-            Type = typeof(BadRequestResponse), 
+        [SwaggerResponse((int)HttpStatusCode.BadRequest,
+            Type = typeof(BadRequestResponse),
             Description = "Department couldn't be found")]
         public async Task<ActionResult> UpdateDepartment([FromBody] Update.DepartmentUpdateRequest updateData, Guid id)
         {

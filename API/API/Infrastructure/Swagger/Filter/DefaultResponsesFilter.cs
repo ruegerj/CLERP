@@ -3,10 +3,8 @@ using CLERP.API.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CLERP.API.Infrastructure.Swagger.Filter
 {
@@ -29,8 +27,10 @@ namespace CLERP.API.Infrastructure.Swagger.Filter
             if (!context.MethodInfo.GetCustomAttributes(true).Any(attr => attr is AuthorizeAttribute) 
                 && !context.MethodInfo.GetCustomAttributes(true).Any(attr => attr is AllowAnonymousAttribute))
             {
-                operation.Responses.Add("401", new Response() { Description = "Unautorized" });
+                operation.Responses.Add("401", new Response() { Description = "Unauthorized" });
                 operation.Responses.Add("403", new Response() { Description = "Forbidden" });
+
+                // register required auth type for operation
                 var operationAuth = new Dictionary<string, IEnumerable<string>>
                 {
                     { "Bearer", new string[] { } }
@@ -41,7 +41,7 @@ namespace CLERP.API.Infrastructure.Swagger.Filter
 
             // Internal Server Error (500)
             var internalSeverErrorResponseSchema = context.SchemaRegistry.GetOrRegister(typeof(MessageResponse));
-            operation.Responses.Add("500", new Response() { Description = "An unknown error occured",  Schema = internalSeverErrorResponseSchema });
+            operation.Responses.Add("500", new Response() { Description = "An unknown error occured", Schema = internalSeverErrorResponseSchema });
         }
     }
 }

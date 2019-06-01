@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using CLERP.API.Features.v1;
-using CLERP.API.Infrastructure.Attributes;
+﻿using CLERP.API.Infrastructure.Attributes;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.ProductTypeArea
 {
@@ -72,7 +67,7 @@ namespace CLERP.API.Features.v1.ProductTypeArea
             Description = "Entered data conflicts with existing")]
         public async Task<ActionResult> CreateProductType([FromBody] Create.ProductTypeCreateRequest createData)
         {
-           return Ok(await _mediator.Send(createData));
+            return Ok(await _mediator.Send(createData));
         }
 
         /// <summary>
@@ -82,11 +77,11 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// <returns></returns>
         [HttpPost("add-parent")]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "Parent successfuly added")]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, 
-            Type = typeof(BadRequestResponse), 
+        [SwaggerResponse((int)HttpStatusCode.BadRequest,
+            Type = typeof(BadRequestResponse),
             Description = "Product type or parent product type coulnd't be found")]
-        [SwaggerResponse((int)HttpStatusCode.Conflict, 
-            Type = typeof(ConflictResponse), 
+        [SwaggerResponse((int)HttpStatusCode.Conflict,
+            Type = typeof(ConflictResponse),
             Description = "Entered data conflicts with existing")]
         public async Task<ActionResult> AddParentProductType([FromBody] AddParent.ProductTypeAddParentRequest productTypeAddParenData)
         {
@@ -122,8 +117,8 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// <param name="id">Id of the product type</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [SwaggerResponse((int)HttpStatusCode.OK, 
-            Type = typeof(ProductTypeResponse), 
+        [SwaggerResponse((int)HttpStatusCode.OK,
+            Type = typeof(ProductTypeResponse),
             Description = "ProductType successfuly updated")]
         [SwaggerResponse((int)HttpStatusCode.BadRequest,
             Type = typeof(BadRequestResponse),

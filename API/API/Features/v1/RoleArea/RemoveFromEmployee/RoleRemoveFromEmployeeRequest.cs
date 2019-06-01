@@ -1,9 +1,6 @@
 ﻿using MediatR;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.RoleArea.RemoveFromEmployee
 {
@@ -12,13 +9,13 @@ namespace CLERP.API.Features.v1.RoleArea.RemoveFromEmployee
         /// <summary>
         /// Id of the role which should be removed from the employee
         /// </summary>
-        [JsonProperty("role-id")]
+        [JsonProperty("roleId")]
         public Guid RoleId { get; set; }
 
         /// <summary>
         /// Id of the employee which the role should be removed from
         /// </summary>
-        [JsonProperty("employee-id")]
+        [JsonProperty("employeeId")]
         public Guid EmployeeId { get; set; }
     }
 }

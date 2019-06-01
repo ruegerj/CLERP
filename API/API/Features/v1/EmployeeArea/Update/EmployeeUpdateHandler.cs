@@ -4,9 +4,6 @@ using CLERP.API.Infrastructure.Contexts;
 using CLERP.API.Infrastructure.Exceptions;
 using CLERP.API.Infrastructure.Security.Hashing;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,8 +15,8 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
         private readonly IMapper _mapper;
         private readonly IPasswordHasher _hasher;
 
-        public EmployeeUpdateHandler(ClerpContext context, 
-            IMapper mapper, 
+        public EmployeeUpdateHandler(ClerpContext context,
+            IMapper mapper,
             IPasswordHasher hasher)
         {
             _context = context;
@@ -42,7 +39,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
             employee.Lastname = request.Lastname;
 
             // set new password only if the current and new pw are provided and the current password entered is correct
-            if (!string.IsNullOrEmpty(request.CurrentPassword) 
+            if (!string.IsNullOrEmpty(request.CurrentPassword)
                 && !string.IsNullOrEmpty(request.NewPassword)
                 && _hasher.PasswordMatches(request.CurrentPassword, employee.Password))
             {

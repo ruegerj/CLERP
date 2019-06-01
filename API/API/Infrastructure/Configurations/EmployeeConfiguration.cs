@@ -1,12 +1,8 @@
 ﻿using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Configurations.Abstract;
-using CLERP.API.Infrastructure.Security.Hashing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CLERP.API.Infrastructure.Configurations
 {

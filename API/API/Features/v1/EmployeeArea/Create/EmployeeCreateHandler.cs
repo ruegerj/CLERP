@@ -1,15 +1,12 @@
-﻿using AutoMapper;
-using CLERP.API.Domain.Models;
+﻿using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Contexts;
 using CLERP.API.Infrastructure.Exceptions;
 using CLERP.API.Infrastructure.Security.Hashing;
 using FluentValidation;
-using FluentValidation.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

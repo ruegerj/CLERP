@@ -1,15 +1,11 @@
 ﻿using CLERP.API.Domain.Models;
-using CLERP.API.Domain.Models.Abstract;
 using CLERP.API.Domain.Models.Link;
 using CLERP.API.Infrastructure.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -33,7 +29,7 @@ namespace CLERP.API.Infrastructure.Contexts
         /// <param name="options">Options injected by the builder</param>
         /// <param name="logger">Injected logger</param>
         /// <param name="currentUserAccessor">Injected user accessor</param>
-        public ClerpContext(DbContextOptions<ClerpContext> options, 
+        public ClerpContext(DbContextOptions<ClerpContext> options,
                             ILogger<ClerpContext> logger,
                             ICurrentUserAccessor currentUserAccessor) : base(options)
         {
@@ -81,7 +77,7 @@ namespace CLERP.API.Infrastructure.Contexts
         public void BeginTransaction()
         {
             if (_currentTransaction != null)
-            {                
+            {
                 return;
             }
 
@@ -162,7 +158,7 @@ namespace CLERP.API.Infrastructure.Contexts
             DateTime now = DateTime.Now;
 
             string currentUsername = _currentUserAccessor.GetUsername();
-            string username  = !string.IsNullOrEmpty(currentUsername) ? currentUsername : "Unknown user";
+            string username = !string.IsNullOrEmpty(currentUsername) ? currentUsername : "Unknown user";
 
             var addedEntities = ChangeTracker.Entries().Where(e => e.State == EntityState.Added).ToList();
 

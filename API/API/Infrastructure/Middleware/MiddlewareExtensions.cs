@@ -1,9 +1,4 @@
-﻿using CLERP.API.Infrastructure.Exceptions;
-using Microsoft.AspNetCore.Builder;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Builder;
 
 namespace CLERP.API.Infrastructure.Middleware
 {

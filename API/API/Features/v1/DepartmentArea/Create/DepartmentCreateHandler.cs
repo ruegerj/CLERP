@@ -3,8 +3,6 @@ using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Contexts;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,7 +12,7 @@ namespace CLERP.API.Features.v1.DepartmentArea.Create
     public class DepartmentCreateHandler : IRequestHandler<DepartmentCreateRequest, DepartmentCreateResponse>
     {
         private readonly ClerpContext _context;
-        private readonly IMapper _mapper; 
+        private readonly IMapper _mapper;
 
         public DepartmentCreateHandler(ClerpContext context, IMapper mapper)
         {

@@ -1,8 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CLERP.API.Infrastructure.Exceptions
 {
@@ -23,7 +19,7 @@ namespace CLERP.API.Infrastructure.Exceptions
         /// <summary>
         /// Error message, which explains that something went wrong
         /// </summary>
-        [JsonProperty("error-message")]
+        [JsonProperty("errorMessage")]
         public string ErrorMessage { get; set; }
     }
 }

@@ -1,11 +1,6 @@
-﻿using CLERP.API.Domain.Models;
-using CLERP.API.Infrastructure.Contexts;
+﻿using CLERP.API.Infrastructure.Contexts;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,7 +22,7 @@ namespace CLERP.API.Features.v1.RoleArea.RemoveFromDepartment
                 cancellationToken);
 
             if (linkRoleDepartment == null)
-            {                
+            {
                 throw new BadRequestException(); // department doesn't have this role => can't be removed
             }
 

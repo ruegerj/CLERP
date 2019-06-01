@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CLERP.API.Domain.Models.Abstract
+﻿namespace CLERP.API.Domain.Models.Abstract
 {
     #region Enums used within the Db
 

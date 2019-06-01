@@ -1,8 +1,6 @@
 ﻿using CLERP.API.Infrastructure.Contexts;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,8 +20,8 @@ namespace CLERP.API.Infrastructure.Behavior
             _context = context;
         }
 
-        public async Task<TResponse> Handle(TRequest request, 
-            CancellationToken cancellationToken, 
+        public async Task<TResponse> Handle(TRequest request,
+            CancellationToken cancellationToken,
             RequestHandlerDelegate<TResponse> next)
         {
             TResponse result;

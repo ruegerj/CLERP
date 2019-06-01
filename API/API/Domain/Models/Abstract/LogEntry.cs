@@ -1,10 +1,4 @@
-﻿using CLERP.API.Domain.Models.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CLERP.API.Domain.Models.Abstract
+﻿namespace CLERP.API.Domain.Models.Abstract
 {
     /// <summary>
     /// Represents base class for a log / note

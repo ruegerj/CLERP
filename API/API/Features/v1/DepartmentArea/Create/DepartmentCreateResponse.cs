@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.DepartmentArea.Create
 {
@@ -11,7 +8,7 @@ namespace CLERP.API.Features.v1.DepartmentArea.Create
         /// <summary>
         /// Id of the generated department
         /// </summary>
-        [JsonProperty("department-id")]
+        [JsonProperty("departmentId")]
         public Guid DepartmentId { get; set; }
     }
 }

@@ -1,38 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CLERP.API.Infrastructure.Security.Hashing;
+﻿using AutoMapper;
+using CLERP.API.Infrastructure.Behavior;
 using CLERP.API.Infrastructure.Contexts;
+using CLERP.API.Infrastructure.Conventions;
+using CLERP.API.Infrastructure.Middleware;
+using CLERP.API.Infrastructure.Policies.Authorization.IpCheck;
+using CLERP.API.Infrastructure.Security.Hashing;
+using CLERP.API.Infrastructure.Security.Tokens;
+using CLERP.API.Infrastructure.Swagger;
+using CLERP.API.Infrastructure.Utilities;
+using FluentValidation.AspNetCore;
+using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using MediatR;
-using System.Reflection;
-using AutoMapper;
-using CLERP.API.Infrastructure.Conventions;
-using Newtonsoft.Json;
-using FluentValidation.AspNetCore;
-using CLERP.API.Infrastructure.Exceptions;
-using CLERP.API.Infrastructure.Behavior;
-using CLERP.API.Infrastructure.Utilities;
-using Microsoft.AspNetCore.Http;
-using CLERP.API.Infrastructure.Middleware;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using CLERP.API.Infrastructure.Security.Tokens;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using System.Net;
-using CLERP.API.Infrastructure.Policies.Authorization.IpCheck;
-using CLERP.API.Infrastructure.Swagger;
+using Newtonsoft.Json;
+using System;
 
 namespace CLERP.API
 {
@@ -76,7 +66,7 @@ namespace CLERP.API
             });
 
             // configure jwt auth
-            services.AddAuthentication(auth => 
+            services.AddAuthentication(auth =>
             {
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -101,7 +91,7 @@ namespace CLERP.API
             {
                 options.Conventions.Add(new GroupByApiRootConvention());
 
-                // add auth policy globally so every reqest has be authenticated, unless the controller is decorated with the "AllowAnonymous" attribute
+                // add auth policy globally so every reqest has to be authenticated, unless the controller is decorated with the "AllowAnonymous" attribute
                 var authPolicy = new AuthorizationPolicyBuilder()
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser()
@@ -121,7 +111,7 @@ namespace CLERP.API
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddApiVersioning(options => 
+            services.AddApiVersioning(options =>
             {
                 options.AssumeDefaultVersionWhenUnspecified = true;
                 options.DefaultApiVersion = new ApiVersion(1, 0); // v1
@@ -155,7 +145,7 @@ namespace CLERP.API
             services.AddAutoMapper(currentAssembly);
             Mapper.Initialize(cfg => cfg.AddMaps(currentAssembly));
 
-            services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; } ); // Disable built in validation error response
+            services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; }); // Disable built in validation error response
 
             services.AddScoped<IPasswordHasher, PasswordHasher>(); // Register hashing implentation for password hashing within the application
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
