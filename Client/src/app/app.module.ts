@@ -7,8 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './core/nav/nav.component';
 import { FooterComponent } from './core/footer/footer.component';
-import { ProductDetailComponent } from './products/productDetail/productDetail.component';
-import { ProductListComponent } from './products/productList/productList.component';
+import { ProductDetailComponent } from './products/productDetailOverview/productDetail/productDetail.component';
+import { ProductListComponent } from './products/productDetailOverview/productList/productList.component';
+import { ProductDetailOverviewComponent } from '@products';
 import { ProductsComponent } from './products/products.component';
 import { EmployeeEditComponent } from './employees/employeeEdit/employeeEdit.component';
 import { HomeComponent } from './home/home.component';
@@ -24,6 +25,7 @@ import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreat
       FooterComponent,
       ProductDetailComponent,
       ProductListComponent,
+      ProductDetailOverviewComponent,
       ProductsComponent,
       EmployeeEditComponent,
       EmployeeCreateComponent,
@@ -39,9 +41,9 @@ import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreat
       ReactiveFormsModule
    ],
    providers: [
-      {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-      {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
-      ],
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+   ],
    bootstrap: [
       AppComponent
    ]

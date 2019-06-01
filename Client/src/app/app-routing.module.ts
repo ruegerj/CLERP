@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from '@home';
 import { EmployeesComponent, EmployeeEditComponent } from '@employees';
-import { ProductsComponent } from '@products';
+import { ProductsComponent, ProductDetailOverviewComponent } from '@products';
 import { AuthGuard } from '@_guards';
 import { Roles } from '@_models';
 import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreate.component';
@@ -36,7 +36,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {roles: [Roles.Management, Roles.Logistic, Roles.Production]}
   },
-
+  { 
+    path: 'productsDetailOverview/:id', 
+    component: ProductDetailOverviewComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Roles.Management, Roles.Logistic, Roles.Production]}
+  },
   //all else, redirect to home
   //TODO redirect to error page
   { 
