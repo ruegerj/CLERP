@@ -64,7 +64,7 @@ export class EmployeeCreateComponent implements OnInit {
     }
 
     this.employeeService.CreateEmployee({
-      firstname: this.f.firstName.value, lastname: this.f.lastName.value, email: this.f.email.value, "phone-number": this.f.phoneNumber.value,
+      firstname: this.f.firstName.value, lastname: this.f.lastName.value, email: this.f.email.value, phoneNumber: this.f.phoneNumber.value,
       birthday: this.f.birthday.value, username: this.f.username.value, password: this.f.password.value
     }).subscribe(data => {
       this.modalService.open(this.modalSuccessContent);

@@ -12,10 +12,10 @@ export interface ProductTypeCreateRequest {
   /**
    * Collection with all ids of all parent product types
    */
-  "parent-ids"?: Array<string>;
+  parentIds?: Array<string>;
 
   /**
    * Collection with all ids of all the child product types
    */
-  "child-ids"?: Array<string>;
+  childIds?: Array<string>;
 }

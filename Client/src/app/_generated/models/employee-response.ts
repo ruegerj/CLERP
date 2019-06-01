@@ -8,6 +8,7 @@ export interface EmployeeResponse {
   firstname?: string;
   lastname?: string;
   birthday?: string;
-  "phone-number"?: string;
+  email?: string;
+  phoneNumber?: string;
   username?: string;
 }

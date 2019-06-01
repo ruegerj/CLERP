@@ -43,12 +43,12 @@ export class EmployeeEditComponent implements OnInit {
 
   ngOnInit() {
     this.employeeForm = this.formBuilder.group({
+      username: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(this.minUsernameLength), Validators.maxLength(this.maxUsernameLength)]],
       firstName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(this.minNameLength), Validators.maxLength(this.maxNameLength)]],
       lastName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(this.minNameLength), Validators.maxLength(this.maxNameLength)]],
       email: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.email]],
       phoneNumber: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.pattern('^([\+][0-9]{1,3}([ \.\-])?)?([\(]{1}[0-9]{3}[\)])?([0-9A-Z \.\-]{1,32})((x|ext|extension)?[0-9]{1,4}?)$')]],
       birthday: [{ value: '', disabled: !this.isEditing }, Validators.required],
-      // username: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(this.minUsernameLength), Validators.maxLength(this.maxUsernameLength)]],
     })
 
     this.route.params.subscribe(params => this.id = params.id);
@@ -56,6 +56,7 @@ export class EmployeeEditComponent implements OnInit {
     if (this.id) {
       this.employeeService.GetEmployeeById(this.id).subscribe(data => {
         this.employee = data;
+        console.log(data);
         this.setFormValues(data);
       })
     }
@@ -67,12 +68,12 @@ export class EmployeeEditComponent implements OnInit {
 
   private setFormValues(e: EmployeeResponse) {
     this.employeeForm.setValue({
+      username: e.username,
       firstName: e.firstname,
       lastName: e.lastname,
-      email: '',
-      phoneNumber: e["phone-number"],
+      email: e.email,
+      phoneNumber: e.phoneNumber,
       birthday: new Date(e.birthday),
-      // username: e.username,
     })
   }
 
@@ -99,7 +100,7 @@ export class EmployeeEditComponent implements OnInit {
 
     this.employeeService.UpdateEmployee({
       id: this.id, updateData: {
-        firstname: this.f.firstName.value, lastname: this.f.lastName.value, email: this.f.email.value, "phone-number": this.f.phoneNumber.value,
+        username: this.f.username.value, firstname: this.f.firstName.value, lastname: this.f.lastName.value, email: this.f.email.value, phoneNumber: this.f.phoneNumber.value,
         birthday: this.f.birthday.value
       }
     }).subscribe(data => {

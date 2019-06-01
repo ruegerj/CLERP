@@ -1,9 +1,10 @@
 /* tslint:disable */
 export interface EmployeeUpdateRequest {
+  username: string;
   lastname: string;
   firstname: string;
   email: string;
-  "phone-number"?: string;
+  phoneNumber: string;
   birthday: string;
 
   /**

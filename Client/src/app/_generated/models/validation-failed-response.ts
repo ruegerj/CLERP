@@ -7,5 +7,5 @@ import { ValidationError } from './validation-error';
  */
 export interface ValidationFailedResponse {
   message?: string;
-  "validation-errors"?: Array<ValidationError>;
+  validationErrors?: Array<ValidationError>;
 }

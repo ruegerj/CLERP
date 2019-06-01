@@ -1,11 +1,11 @@
 <div class="p-5">
   <form [formGroup]="employeeForm">
-    <!-- <div class="form-group row">
+    <div class="form-group row">
       <label for="username" class="col-md-2 col-form-label">Username</label>
       <div class="col-md-10">
         <input type="text" class="form-control" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
       </div>
-    </div> -->
+    </div>
 
     <div class="form-group row">
       <label for="firstname" class="col-md-2 col-form-label">Firstname</label>
@@ -79,7 +79,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <p>Employee was created succesfully.</p>
+    <p>Employee was updated succesfully.</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Close click')">Close</button>

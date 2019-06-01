@@ -13,10 +13,20 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
         private const int minAge = 18;
         private const int minPasswordLength = 10;
         private const int maxPasswordLength = 50;
+        private const int minUsernameLength = 5;
+        private const int maxUsernameLength = 15;
         private const string phoneNumberRegex = @"^([\+][0-9]{1,3}([ \.\-])?)?([\(]{1}[0-9]{3}[\)])?([0-9A-Z \.\-]{1,32})((x|ext|extension)?[0-9]{1,4}?)$";
 
         public EmployeeUpdateRequestValidator()
         {
+            RuleFor(e => e.Username)
+                .NotNull()
+                .NotEmpty()
+                .MinimumLength(minUsernameLength)
+                .MaximumLength(maxUsernameLength)
+                .Must(BeWhiteSpaceless).WithMessage("The username cannot contain any whitespaces.")
+                .Must(BeWithoutSpecialChars).WithMessage("The username cannot contain any special characters.");
+
             RuleFor(e => e.Firstname)
                 .NotNull()
                 .NotEmpty()
@@ -69,6 +79,17 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
         {
             int specialCharsCount = value.Count(c => !char.IsLetterOrDigit(c));
             return specialCharsCount >= 1;
+        }
+
+        private static bool BeWhiteSpaceless(string value)
+        {
+            return !value.Contains(" ");
+        }
+
+        private static bool BeWithoutSpecialChars(string value)
+        {
+            const string expression = @"(?i)^[a-z’'()/.,\s-]+$";
+            return Regex.Match(value, expression).Success;
         }
     }
 }

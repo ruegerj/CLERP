@@ -4,10 +4,10 @@ export interface RoleAddToDepartmentRequest {
   /**
    * Id of the role which should be added to the department
    */
-  "role-id"?: string;
+  roleId?: string;
 
   /**
    * Id of the department to role should be added to
    */
-  "department-id"?: string;
+  departmentId?: string;
 }

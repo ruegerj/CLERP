@@ -8,5 +8,5 @@ export interface BadRequestResponse {
   /**
    * Error message, which explains that something went wrong
    */
-  "error-message"?: string;
+  errorMessage?: string;
 }

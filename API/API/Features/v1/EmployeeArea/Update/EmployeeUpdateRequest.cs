@@ -9,6 +9,9 @@ namespace CLERP.API.Features.v1.EmployeeArea.Update
         [JsonIgnore]
         public Guid EmployeeId { get; set; }
 
+        [JsonProperty("username")]
+        public string Username { get; set; }
+
         [JsonProperty("lastname")]
         public string Lastname { get; set; }
 

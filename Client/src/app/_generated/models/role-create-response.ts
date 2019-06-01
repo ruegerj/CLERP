@@ -4,5 +4,5 @@ export interface RoleCreateResponse {
   /**
    * Id of the new created role
    */
-  "role-id"?: string;
+  roleId?: string;
 }

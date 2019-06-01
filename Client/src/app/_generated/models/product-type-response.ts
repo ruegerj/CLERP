@@ -17,10 +17,10 @@ export interface ProductTypeResponse {
   /**
    * All ids from the entities related as children to this product type
    */
-  "child-ids"?: Array<string>;
+  childIds?: Array<string>;
 
   /**
    * All ids from the entities related as paretns to this product type
    */
-  "parent-ids"?: Array<string>;
+  parentIds?: Array<string>;
 }

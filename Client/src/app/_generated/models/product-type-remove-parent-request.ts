@@ -4,10 +4,10 @@ export interface ProductTypeRemoveParentRequest {
   /**
    * Id of the parent product type which should be removed
    */
-  "parent-id"?: string;
+  parentId?: string;
 
   /**
    * Id of the product type which the parent should be removed from
    */
-  "base-id"?: string;
+  baseId?: string;
 }
