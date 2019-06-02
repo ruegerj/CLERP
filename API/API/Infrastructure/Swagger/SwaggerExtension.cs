@@ -118,7 +118,6 @@ namespace CLERP.API.Infrastructure.Swagger
             app.UseSwaggerUI(config =>
             {
                 config.SwaggerEndpoint("/swagger/v1/swagger.json", "CLERP API v1");
-                config.RoutePrefix = string.Empty;
                 config.DisplayOperationId();
             });
 
