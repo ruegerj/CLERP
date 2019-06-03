@@ -28,7 +28,7 @@ namespace CLERP.API.Infrastructure.Configurations
             // seed data
             builder.HasData(new Employee()
             {
-                Guid = Guid.NewGuid(),
+                Guid = new Guid("0DFAC9A3-F4B2-47F6-8F91-4E0198E8D6BF"),
                 Birthday = new DateTime(2001, 5, 27),
                 Creation = DateTime.Now,
                 CreatedBy = "system",

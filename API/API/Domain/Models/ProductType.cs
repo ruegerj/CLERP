@@ -26,6 +26,8 @@ namespace CLERP.API.Domain.Models
         /// </summary>
         public decimal Price { get; set; }
 
+        public byte[] Image { get; set; }
+
         /// <summary>
         /// All parent product-types which have this product type as child
         /// </summary>

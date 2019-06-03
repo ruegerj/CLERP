@@ -1169,7 +1169,7 @@
             Id of the employee which the role should be removed from
             </summary>
         </member>
-        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetAllDepartments">
+        <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.GetAllRoles">
             <summary>
             Gets all roles
             </summary>

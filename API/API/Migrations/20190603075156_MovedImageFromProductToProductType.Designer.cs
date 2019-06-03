@@ -4,14 +4,16 @@ using CLERP.API.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CLERP.API.Migrations
 {
     [DbContext(typeof(ClerpContext))]
-    partial class ClerpContextModelSnapshot : ModelSnapshot
+    [Migration("20190603075156_MovedImageFromProductToProductType")]
+    partial class MovedImageFromProductToProductType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -313,71 +315,71 @@ namespace CLERP.API.Migrations
                     b.HasData(
                         new
                         {
-                            Guid = new Guid("c0a1d8dc-9d37-4b68-ad4e-420e14fd29af"),
+                            Guid = new Guid("89135f1e-3161-4e51-985b-8a985cf53579"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(529),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 909, DateTimeKind.Local).AddTicks(6958),
                             Description = "The management of the firm",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(2348),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 909, DateTimeKind.Local).AddTicks(8325),
                             LastModifiedBy = "system",
                             Title = "Management"
                         },
                         new
                         {
-                            Guid = new Guid("4b7f2fb2-2726-49b3-b8ab-6f7b42120dee"),
+                            Guid = new Guid("6c81f8dc-c2da-4f41-943e-d1595294f43c"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(6134),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 910, DateTimeKind.Local).AddTicks(1262),
                             Description = "The finance department of the firm",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(6160),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 910, DateTimeKind.Local).AddTicks(1282),
                             LastModifiedBy = "system",
                             Title = "Finance"
                         },
                         new
                         {
-                            Guid = new Guid("98eb6ffe-57bb-4d49-ad13-23195a1325ee"),
+                            Guid = new Guid("20e6b188-bec4-4ea7-9a54-e3c26b9f6cf3"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(6213),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 910, DateTimeKind.Local).AddTicks(1312),
                             Description = "The hr department of the firm",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(6219),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 910, DateTimeKind.Local).AddTicks(1316),
                             LastModifiedBy = "system",
                             Title = "HR"
                         },
                         new
                         {
-                            Guid = new Guid("426a9547-086d-4847-a80e-00140da99723"),
+                            Guid = new Guid("cb8c65e4-2b4e-4d09-a728-85a9e4b633a6"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(6238),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 910, DateTimeKind.Local).AddTicks(1322),
                             Description = "The sales department of the firm",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(6243),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 910, DateTimeKind.Local).AddTicks(1326),
                             LastModifiedBy = "system",
                             Title = "Sales"
                         },
                         new
                         {
-                            Guid = new Guid("273a60ce-7282-4141-9676-1c3040ec1303"),
+                            Guid = new Guid("7b39acf0-c34e-46b9-b49c-c157f9a0c17f"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(6260),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 910, DateTimeKind.Local).AddTicks(1330),
                             Description = "The purchase department of the firm",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(6313),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 910, DateTimeKind.Local).AddTicks(1334),
                             LastModifiedBy = "system",
                             Title = "Purchase"
                         },
                         new
                         {
-                            Guid = new Guid("7e645fd7-25df-4baa-898d-59963c4f4d43"),
+                            Guid = new Guid("8264bce1-da7a-4114-9049-8ff261a75add"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(6333),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 910, DateTimeKind.Local).AddTicks(1341),
                             Description = "The logistics department of the firm",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(6337),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 910, DateTimeKind.Local).AddTicks(1344),
                             LastModifiedBy = "system",
                             Title = "Logistic"
                         },
                         new
                         {
-                            Guid = new Guid("2d08de41-25f6-4369-bacb-de75f90cf2ea"),
+                            Guid = new Guid("b12fb4c1-cf64-49a7-9b42-3a3cae6765c2"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(6352),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 910, DateTimeKind.Local).AddTicks(1349),
                             Description = "The production department of the firm",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 38, DateTimeKind.Local).AddTicks(6357),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 910, DateTimeKind.Local).AddTicks(1352),
                             LastModifiedBy = "system",
                             Title = "Production"
                         });
@@ -430,13 +432,13 @@ namespace CLERP.API.Migrations
                     b.HasData(
                         new
                         {
-                            Guid = new Guid("0dfac9a3-f4b2-47f6-8f91-4e0198e8d6bf"),
+                            Guid = new Guid("1e61a55b-a539-4681-847f-dec9a76edb08"),
                             Birthday = new DateTime(2001, 5, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 45, DateTimeKind.Local).AddTicks(2001),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 914, DateTimeKind.Local).AddTicks(9802),
                             Email = "admin@clerp.ch",
                             Firstname = "System",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 45, DateTimeKind.Local).AddTicks(4897),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 915, DateTimeKind.Local).AddTicks(1992),
                             LastModifiedBy = "system",
                             Lastname = "Administrator",
                             Password = "AI1ZmgGoYudgP1w9VOvAIAnobk5IXBU3wC/Pfv/Xyg0Mr9PEgJPW5UBP9ScXzpEiVg==",
@@ -744,81 +746,81 @@ namespace CLERP.API.Migrations
                     b.HasData(
                         new
                         {
-                            Guid = new Guid("90f17bbe-edb8-4e0f-8492-b18d130ef058"),
+                            Guid = new Guid("8e887b0f-f7d7-4cbd-a854-7f1c6467416e"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(40),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(2865),
                             Description = "Employee from the logistics department",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(68),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(2894),
                             LastModifiedBy = "system",
                             Name = "Logistic"
                         },
                         new
                         {
-                            Guid = new Guid("d34ce4a4-6fae-4623-9cf9-7468a19781fb"),
+                            Guid = new Guid("6ed05682-c3ee-4581-b9d9-759b8b09d9c9"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1343),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4218),
                             Description = "Employee from the finances department",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1354),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4229),
                             LastModifiedBy = "system",
                             Name = "Finance"
                         },
                         new
                         {
-                            Guid = new Guid("58457e73-da9f-4f6e-b31b-7f89807e320c"),
+                            Guid = new Guid("c658b4c5-3ef8-45e9-ae4b-4edcececac78"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1377),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4244),
                             Description = "Employee from the purchases department",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1381),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4248),
                             LastModifiedBy = "system",
                             Name = "Purchase"
                         },
                         new
                         {
-                            Guid = new Guid("324270ba-fc55-41de-95f2-943fc628c5ee"),
+                            Guid = new Guid("32f99b24-fa27-4a7d-98d2-d6537daf3ff7"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1393),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4253),
                             Description = "Administrators of the app",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1396),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4256),
                             LastModifiedBy = "system",
                             Name = "SysAdmin"
                         },
                         new
                         {
-                            Guid = new Guid("b6bab4db-bd5d-4b34-a6e5-085204c16c79"),
+                            Guid = new Guid("cadcae19-a644-4efa-84cd-ebb55d7f935a"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1409),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4261),
                             Description = "Employee from the sales department",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1412),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4265),
                             LastModifiedBy = "system",
                             Name = "Sale"
                         },
                         new
                         {
-                            Guid = new Guid("ed32b358-5eb5-41ad-8895-e65641f8d1bd"),
+                            Guid = new Guid("dacc67c3-d1e0-442e-b548-57be6547210e"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1426),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4272),
                             Description = "Employee from the management",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1430),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4276),
                             LastModifiedBy = "system",
                             Name = "Management"
                         },
                         new
                         {
-                            Guid = new Guid("e0c8423a-581f-4be9-8493-1b20aee0673a"),
+                            Guid = new Guid("21b03ce6-bbcc-4852-bf35-b30482eea21d"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1440),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4280),
                             Description = "Employee from the hr department",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1444),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4284),
                             LastModifiedBy = "system",
                             Name = "HR"
                         },
                         new
                         {
-                            Guid = new Guid("65231084-3178-4259-886c-4698a02c701d"),
+                            Guid = new Guid("da6c0f7e-ad7b-4d64-a580-fa920a9af88b"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1454),
+                            Creation = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4289),
                             Description = "Employee from the production department",
-                            LastModified = new DateTime(2019, 6, 3, 10, 2, 6, 86, DateTimeKind.Local).AddTicks(1457),
+                            LastModified = new DateTime(2019, 6, 3, 9, 51, 55, 956, DateTimeKind.Local).AddTicks(4292),
                             LastModifiedBy = "system",
                             Name = "Production"
                         });

@@ -21,7 +21,7 @@ namespace CLERP.API.Infrastructure.Configurations
             {
                 new Role()
                 {
-                    Guid = Guid.NewGuid(),
+                    Guid = new Guid("90F17BBE-EDB8-4E0F-8492-B18D130EF058"),
                     CreatedBy = "system",
                     Creation = DateTime.Now,
                     LastModifiedBy = "system",
@@ -31,7 +31,7 @@ namespace CLERP.API.Infrastructure.Configurations
                 },
                 new Role()
                 {
-                    Guid = Guid.NewGuid(),
+                    Guid = new Guid("D34CE4A4-6FAE-4623-9CF9-7468A19781FB"),
                     CreatedBy = "system",
                     Creation = DateTime.Now,
                     LastModifiedBy = "system",
@@ -41,7 +41,7 @@ namespace CLERP.API.Infrastructure.Configurations
                 },
                 new Role()
                 {
-                    Guid = Guid.NewGuid(),
+                    Guid = new Guid("58457E73-DA9F-4F6E-B31B-7F89807E320C"),
                     CreatedBy = "system",
                     Creation = DateTime.Now,
                     LastModifiedBy = "system",
@@ -51,7 +51,7 @@ namespace CLERP.API.Infrastructure.Configurations
                 },
                 new Role()
                 {
-                    Guid = Guid.NewGuid(),
+                    Guid = new Guid("324270BA-FC55-41DE-95F2-943FC628C5EE"),
                     CreatedBy = "system",
                     Creation = DateTime.Now,
                     LastModifiedBy = "system",
@@ -61,7 +61,7 @@ namespace CLERP.API.Infrastructure.Configurations
                 },
                 new Role()
                 {
-                    Guid = Guid.NewGuid(),
+                    Guid = new Guid("B6BAB4DB-BD5D-4B34-A6E5-085204C16C79"),
                     CreatedBy = "system",
                     Creation = DateTime.Now,
                     LastModifiedBy = "system",
@@ -71,7 +71,7 @@ namespace CLERP.API.Infrastructure.Configurations
                 },
                 new Role()
                 {
-                    Guid = Guid.NewGuid(),
+                    Guid = new Guid("ED32B358-5EB5-41AD-8895-E65641F8D1BD"),
                     CreatedBy = "system",
                     Creation = DateTime.Now,
                     LastModifiedBy = "system",
@@ -81,7 +81,7 @@ namespace CLERP.API.Infrastructure.Configurations
                 },
                 new Role()
                 {
-                    Guid = Guid.NewGuid(),
+                    Guid = new Guid("E0C8423A-581F-4BE9-8493-1B20AEE0673A"),
                     CreatedBy = "system",
                     Creation = DateTime.Now,
                     LastModifiedBy = "system",
@@ -91,7 +91,7 @@ namespace CLERP.API.Infrastructure.Configurations
                 },
                 new Role()
                 {
-                    Guid = Guid.NewGuid(),
+                    Guid = new Guid("65231084-3178-4259-886C-4698A02C701D"),
                     CreatedBy = "system",
                     Creation = DateTime.Now,
                     LastModifiedBy = "system",

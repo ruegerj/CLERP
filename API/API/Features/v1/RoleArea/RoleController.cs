@@ -28,7 +28,7 @@ namespace CLERP.API.Features.v1.RoleArea
         /// <returns></returns>
         [HttpGet]
         [Produces(typeof(GetAll.RoleGetAllResponse))]
-        public async Task<ActionResult> GetAllDepartments()
+        public async Task<ActionResult> GetAllRoles()
         {
             return Ok(await _mediator.Send(new GetAll.RoleGetAllRequest()));
         }
