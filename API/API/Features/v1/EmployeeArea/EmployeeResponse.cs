@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace CLERP.API.Features.v1.EmployeeArea
 {
@@ -28,5 +29,11 @@ namespace CLERP.API.Features.v1.EmployeeArea
 
         [JsonProperty("username")]
         public string Username { get; set; }
+
+        [JsonProperty("department")]
+        public EmployeeDepartmentResponse Department { get; set; }
+
+        [JsonProperty("roles")]
+        public IEnumerable<EmployeeRoleResponse> Roles { get; set; }
     }
 }

@@ -62,15 +62,13 @@ namespace CLERP.API.Features.v1.EmployeeArea
         /// <param name="createData">Required data for creating an employee</param>
         /// <returns></returns>
         [HttpPost("create")]
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "Employee successfuly created")]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(Create.EmployeeCreateResponse), Description = "Employee successfuly created")]
         [SwaggerResponse((int)HttpStatusCode.Conflict,
             Type = typeof(ConflictResponse),
             Description = "Entered data conflicts with existing")]
         public async Task<ActionResult> CreateEmployee([FromBody] Create.EmployeeCreateRequest createData)
         {
-            await _mediator.Send(createData);
-
-            return Ok();
+            return Ok(await _mediator.Send(createData));
         }
 
         /// <summary>
