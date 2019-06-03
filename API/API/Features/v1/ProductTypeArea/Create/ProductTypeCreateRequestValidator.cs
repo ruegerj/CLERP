@@ -4,17 +4,13 @@ namespace CLERP.API.Features.v1.ProductTypeArea.Create
 {
     public class ProductTypeCreateRequestValidator : AbstractValidator<ProductTypeCreateRequest>
     {
-        private const int minNameLength = 2;
-        private const int maxNameLength = 50;
-        private const decimal minPrice = 0.01m;
-
         public ProductTypeCreateRequestValidator()
         {
             RuleFor(pt => pt.Name)
                 .NotNull()
                 .NotEmpty()
-                .MinimumLength(minNameLength)
-                .MaximumLength(maxNameLength);
+                .MinimumLength(ValidationDefinitions.ProductTypeNameMinCharCount)
+                .MaximumLength(ValidationDefinitions.ProductTypeNameMaxCharCount);
 
             RuleFor(pt => pt.EAN)
                 .NotNull()
@@ -23,7 +19,7 @@ namespace CLERP.API.Features.v1.ProductTypeArea.Create
             RuleFor(pt => pt.Price)
                 .NotNull()
                 .NotEmpty()
-                .GreaterThan(minPrice);
+                .GreaterThan(ValidationDefinitions.ProductTypePriceMin);
 
             RuleFor(pt => pt.ChildGuids)
                 .NotNull();

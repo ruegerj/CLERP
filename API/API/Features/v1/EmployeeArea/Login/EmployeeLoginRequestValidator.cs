@@ -9,12 +9,12 @@ namespace CLERP.API.Features.v1.EmployeeArea.Login
             RuleFor(eld => eld.Username)
                 .NotNull()
                 .NotEmpty()
-                .MaximumLength(50);
+                .MaximumLength(ValidationDefinitions.EmployeeUsernameMaxCharCount);
 
             RuleFor(eld => eld.Password)
                 .NotNull()
                 .NotEmpty()
-                .MaximumLength(50);
+                .MaximumLength(ValidationDefinitions.EmployeePasswordMaxCharCount);
         }
     }
 }
