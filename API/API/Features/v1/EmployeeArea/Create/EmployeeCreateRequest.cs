@@ -4,7 +4,7 @@ using System;
 
 namespace CLERP.API.Features.v1.EmployeeArea.Create
 {
-    public class EmployeeCreateRequest : IRequest<Guid>
+    public class EmployeeCreateRequest : IRequest<EmployeeCreateResponse>
     {
         [JsonProperty("lastname")]
         public string Lastname { get; set; }

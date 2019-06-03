@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CLERP.API.Features.v1.EmployeeArea.Create
 {
-    public class EmployeeCreateHandler : IRequestHandler<EmployeeCreateRequest, Guid>
+    public class EmployeeCreateHandler : IRequestHandler<EmployeeCreateRequest, EmployeeCreateResponse>
     {
         private readonly ClerpContext _context;
         private readonly ILogger<EmployeeCreateHandler> _logger;
@@ -29,7 +29,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Create
             _hasher = hasher;
         }
 
-        public async Task<Guid> Handle(EmployeeCreateRequest request, CancellationToken cancellationToken)
+        public async Task<EmployeeCreateResponse> Handle(EmployeeCreateRequest request, CancellationToken cancellationToken)
         {
             var employeesWithSimilarUsernameEmail = await _context.Employees
                 .Where(e => e.Username == request.Username || e.Email == request.Email)
@@ -57,7 +57,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Create
                 Lastname = request.Lastname,
                 PhoneNumber = request.PhoneNumber,
                 Username = request.Username,
-                Password = hashedPassword,
+                Password = hashedPassword
             };
 
             await _context.AddAsync(newEmployee, cancellationToken);
@@ -66,7 +66,7 @@ namespace CLERP.API.Features.v1.EmployeeArea.Create
 
             _logger.LogDebug($"Successfully created user {newEmployee.Username} with the id {newEmployee.Guid}");
 
-            return newEmployee.Guid;
+            return new EmployeeCreateResponse() { EmployeeId = newEmployee.Guid };
         }
     }
 }

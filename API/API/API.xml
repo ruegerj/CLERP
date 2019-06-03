@@ -816,6 +816,11 @@
             Plain password
             </summary>
         </member>
+        <member name="P:CLERP.API.Features.v1.EmployeeArea.Create.EmployeeCreateResponse.EmployeeId">
+            <summary>
+            Id of the created employee
+            </summary>
+        </member>
         <member name="P:CLERP.API.Features.v1.EmployeeArea.Delete.EmployeeDeleteRequest.EmployeeId">
             <summary>
             Id of the employee which have to be deleted
@@ -863,9 +868,39 @@
             <param name="loginData">Username and password from the employee</param>
             <returns></returns>
         </member>
+        <member name="T:CLERP.API.Features.v1.EmployeeArea.EmployeeDepartmentResponse">
+            <summary>
+            Default response dto for a department from an employee
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.EmployeeArea.EmployeeDepartmentResponse.Title">
+            <summary>
+            Title of the department
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.EmployeeArea.EmployeeDepartmentResponse.Description">
+            <summary>
+            Description of the deparment
+            </summary>
+        </member>
         <member name="T:CLERP.API.Features.v1.EmployeeArea.EmployeeResponse">
             <summary>
             Default response dto for an employee
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.EmployeeArea.EmployeeRoleResponse">
+            <summary>
+            Default response dto for a role from an employee
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.EmployeeArea.EmployeeRoleResponse.Name">
+            <summary>
+            Name of the role
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.EmployeeArea.EmployeeRoleResponse.Description">
+            <summary>
+            Optional description of the role
             </summary>
         </member>
         <member name="T:CLERP.API.Features.v1.EmployeeArea.GetAll.EmployeeGetAllRequest">
