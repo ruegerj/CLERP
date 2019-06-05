@@ -4,14 +4,16 @@ using CLERP.API.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CLERP.API.Migrations
 {
     [DbContext(typeof(ClerpContext))]
-    partial class ClerpContextModelSnapshot : ModelSnapshot
+    [Migration("20190603125242_RemovedNameFromProduct")]
+    partial class RemovedNameFromProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

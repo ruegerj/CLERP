@@ -10,8 +10,6 @@ namespace CLERP.API.Domain.Models
     /// </summary>
     public class Product : EntityBase
     {
-        public string Name { get; set; }
-
         /// <summary>
         /// Optional description
         /// </summary>

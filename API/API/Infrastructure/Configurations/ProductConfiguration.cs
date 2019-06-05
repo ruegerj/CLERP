@@ -15,7 +15,6 @@ namespace CLERP.API.Infrastructure.Configurations
             base.Configure(builder);
 
             builder.ToTable("Products");
-            builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.SerialNumber).IsRequired();
             builder.Property(x => x.State)
                 .HasConversion

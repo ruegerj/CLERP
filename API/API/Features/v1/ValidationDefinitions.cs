@@ -43,6 +43,14 @@ namespace CLERP.API.Features.v1
 
         public const int RoleNameMaxCharCount = 30;
 
+        public const int ProductDescriptionMaxCharCount = 500;
+
+        public const int ProductSerialNumberMinCharCount = 4;
+
+        public const int ProductSerialNumberMaxCharCount = 30;
+
+        public const int ProductMaxChildCount = 50;
+
         #endregion
 
         #region Predicates
