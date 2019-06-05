@@ -34,8 +34,8 @@ export class EmployeeCreateComponent implements OnInit {
   ) { }
 
 
-  ngOnInit() {   
-    
+  ngOnInit() {
+
     this.employeeForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
       lastName: ['', [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
@@ -54,7 +54,7 @@ export class EmployeeCreateComponent implements OnInit {
     });
 
     //Roles needed to build form
-    this.roleService.GetAllDepartments().subscribe(data => {
+    this.roleService.GetAllRoles().subscribe(data => {
       this.roles = data.roles;
       this.addRoleCheckboxes();
     });
@@ -77,31 +77,56 @@ export class EmployeeCreateComponent implements OnInit {
   createClicked(): void {
     this.submitted = true;
 
+
+
     if (this.employeeForm.invalid) {
       return;
     }
 
+    const formValue = Object.assign({}, this.employeeForm.value, {
+      roles: this.employeeForm.value.roles.map((selected, i) => {
+        return {
+          id: this.roles[i].id,
+          selected
+        }
+      })
+    });
+
     var createdEmployeeId: string = null;
 
     this.employeeService.CreateEmployee({
-      firstname: this.f.firstName.value, lastname: this.f.lastName.value, email: this.f.email.value, phoneNumber: this.f.phoneNumber.value,
-      birthday: this.f.birthday.value, username: this.f.username.value, password: this.f.password.value
+      firstname: formValue.firstName, lastname: formValue.lastName, email: formValue.email, phoneNumber: formValue.phoneNumber,
+      birthday: formValue.birthday, username: formValue.username, password: formValue.password
     }).subscribe(data => {
-      // createdEmployeeId = data.guid;
+      createdEmployeeId = data.employeeId;
     }, (error) => {
       this.modalService.open(this.modalErrorContent);
       return;
     });
 
+    console.log(createdEmployeeId);
+
     if (createdEmployeeId) {
       this.departmentService.AddEmployeeToDepartment({
-        departmentId: this.f.department.value, employeeId: createdEmployeeId
+        departmentId: formValue.department, employeeId: createdEmployeeId
       }).subscribe(data => {
-        this.modalService.open(this.modalSuccessContent);
-        this.router.navigate(['/employees']);
       }, (error) => {
         this.modalService.open(this.modalErrorContent);
         return;
+      });
+
+      formValue.roles.forEach(element => {
+        if (element.selected) {
+          this.roleService.AddRoleToEmployee({
+            employeeId: createdEmployeeId, roleId: element.id
+          }).subscribe(data => {
+            this.modalService.open(this.modalSuccessContent);
+            this.router.navigate(['/employees']);
+          }, (error) => {
+            this.modalService.open(this.modalErrorContent);
+            return;
+          });
+        }
       });
     }
   }

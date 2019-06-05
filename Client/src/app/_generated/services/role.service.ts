@@ -20,7 +20,7 @@ import { RoleRemoveFromDepartmentRequest } from '../models/role-remove-from-depa
   providedIn: 'root',
 })
 class RoleService extends __BaseService {
-  static readonly GetAllDepartmentsPath = '/api/v1/Role';
+  static readonly GetAllRolesPath = '/api/v1/Role';
   static readonly CreateRolePath = '/api/v1/Role';
   static readonly GetRoleByIdPath = '/api/v1/Role/{id}';
   static readonly UpdateRolePath = '/api/v1/Role/{id}';
@@ -40,7 +40,7 @@ class RoleService extends __BaseService {
   /**
    * @return Success
    */
-  GetAllDepartmentsResponse(): __Observable<__StrictHttpResponse<RoleGetAllResponse>> {
+  GetAllRolesResponse(): __Observable<__StrictHttpResponse<RoleGetAllResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -64,8 +64,8 @@ class RoleService extends __BaseService {
   /**
    * @return Success
    */
-  GetAllDepartments(): __Observable<RoleGetAllResponse> {
-    return this.GetAllDepartmentsResponse().pipe(
+  GetAllRoles(): __Observable<RoleGetAllResponse> {
+    return this.GetAllRolesResponse().pipe(
       __map(_r => _r.body as RoleGetAllResponse)
     );
   }

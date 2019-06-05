@@ -10,6 +10,7 @@ import { map as __map, filter as __filter } from 'rxjs/operators';
 import { EmployeeGetAllResponse } from '../models/employee-get-all-response';
 import { EmployeeResponse } from '../models/employee-response';
 import { EmployeeUpdateRequest } from '../models/employee-update-request';
+import { EmployeeCreateResponse } from '../models/employee-create-response';
 import { EmployeeCreateRequest } from '../models/employee-create-request';
 import { TokenResponse } from '../models/token-response';
 import { EmployeeLoginRequest } from '../models/employee-login-request';
@@ -183,8 +184,9 @@ class EmployeeService extends __BaseService {
 
   /**
    * @param createData Required data for creating an employee
+   * @return Employee successfuly created
    */
-  CreateEmployeeResponse(createData?: EmployeeCreateRequest): __Observable<__StrictHttpResponse<null>> {
+  CreateEmployeeResponse(createData?: EmployeeCreateRequest): __Observable<__StrictHttpResponse<EmployeeCreateResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -202,16 +204,17 @@ class EmployeeService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<null>;
+        return _r as __StrictHttpResponse<EmployeeCreateResponse>;
       })
     );
   }
   /**
    * @param createData Required data for creating an employee
+   * @return Employee successfuly created
    */
-  CreateEmployee(createData?: EmployeeCreateRequest): __Observable<null> {
+  CreateEmployee(createData?: EmployeeCreateRequest): __Observable<EmployeeCreateResponse> {
     return this.CreateEmployeeResponse(createData).pipe(
-      __map(_r => _r.body as null)
+      __map(_r => _r.body as EmployeeCreateResponse)
     );
   }
 

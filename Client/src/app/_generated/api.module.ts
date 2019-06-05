@@ -5,6 +5,7 @@ import { ApiConfiguration, ApiConfigurationInterface } from './api-configuration
 
 import { DepartmentService } from './services/department.service';
 import { EmployeeService } from './services/employee.service';
+import { ProductService } from './services/product.service';
 import { ProductTypeService } from './services/product-type.service';
 import { RoleService } from './services/role.service';
 import { ValuesService } from './services/values.service';
@@ -24,6 +25,7 @@ import { ValuesService } from './services/values.service';
     ApiConfiguration,
     DepartmentService,
     EmployeeService,
+    ProductService,
     ProductTypeService,
     RoleService,
     ValuesService

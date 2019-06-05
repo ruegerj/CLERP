@@ -12,10 +12,17 @@ export { DepartmentAddEmployeeRequest } from './models/department-add-employee-r
 export { DepartmentRemoveEmployeeRequest } from './models/department-remove-employee-request';
 export { EmployeeGetAllResponse } from './models/employee-get-all-response';
 export { EmployeeResponse } from './models/employee-response';
+export { EmployeeDepartmentResponse } from './models/employee-department-response';
+export { EmployeeRoleResponse } from './models/employee-role-response';
 export { EmployeeUpdateRequest } from './models/employee-update-request';
 export { EmployeeCreateRequest } from './models/employee-create-request';
+export { EmployeeCreateResponse } from './models/employee-create-response';
 export { EmployeeLoginRequest } from './models/employee-login-request';
 export { TokenResponse } from './models/token-response';
+export { ProductGetAllResponse } from './models/product-get-all-response';
+export { ProductResponse } from './models/product-response';
+export { ProductCreateRequest } from './models/product-create-request';
+export { ProductCreateResponse } from './models/product-create-response';
 export { ProductTypeGetAllResponse } from './models/product-type-get-all-response';
 export { ProductTypeResponse } from './models/product-type-response';
 export { ProductTypeCreateRequest } from './models/product-type-create-request';

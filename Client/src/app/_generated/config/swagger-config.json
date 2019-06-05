@@ -16,12 +16,8 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [
-          
-        ],
-        "parameters": [
-          
-        ],
+        "produces": [],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Success",
@@ -44,9 +40,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -80,12 +74,6 @@
               "$ref": "#/definitions/DepartmentCreateResponse"
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "409": {
             "description": "Entered data conflicts with existing",
             "schema": {
@@ -98,6 +86,12 @@
               "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "500": {
             "description": "An unknown error occured",
             "schema": {
@@ -107,9 +101,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -144,12 +136,6 @@
               "$ref": "#/definitions/DepartmentResponse"
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "404": {
             "description": "Department couldn't be found",
             "schema": {
@@ -162,6 +148,12 @@
               "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "500": {
             "description": "An unknown error occured",
             "schema": {
@@ -171,9 +163,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -221,17 +211,17 @@
               "$ref": "#/definitions/BadRequestResponse"
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "422": {
             "description": "Validation failed",
             "schema": {
               "$ref": "#/definitions/ValidationFailedResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "An unknown error occured",
@@ -242,9 +232,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -271,13 +259,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Department deleted successfuly"
-          },
           "400": {
             "description": "Department coulnd't be found",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "200": {
+            "description": "Department deleted successfuly"
+          },
+          "422": {
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
           "401": {
@@ -285,12 +279,6 @@
           },
           "403": {
             "description": "Forbidden"
-          },
-          "422": {
-            "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
           },
           "500": {
             "description": "An unknown error occured",
@@ -301,9 +289,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -333,20 +319,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Employee successfuly added to the department"
-          },
           "400": {
             "description": "Department or employee couln't be found",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "409": {
             "description": "Can't add employee, the department has this employee added already",
@@ -354,11 +331,20 @@
               "$ref": "#/definitions/ConflictResponse"
             }
           },
+          "200": {
+            "description": "Employee successfuly added to the department"
+          },
           "422": {
             "description": "Validation failed",
             "schema": {
               "$ref": "#/definitions/ValidationFailedResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "An unknown error occured",
@@ -369,9 +355,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -401,13 +385,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Employee successfuly removed from the department"
-          },
           "400": {
             "description": "Emplyoee or department couln't be found, or the department doesn't have this employee added",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "200": {
+            "description": "Employee successfuly removed from the department"
+          },
+          "422": {
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
           "401": {
@@ -415,12 +405,6 @@
           },
           "403": {
             "description": "Forbidden"
-          },
-          "422": {
-            "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
           },
           "500": {
             "description": "An unknown error occured",
@@ -431,9 +415,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -448,12 +430,8 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [
-          
-        ],
-        "parameters": [
-          
-        ],
+        "produces": [],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Success",
@@ -476,9 +454,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -513,12 +489,6 @@
               "$ref": "#/definitions/EmployeeResponse"
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "404": {
             "description": "Employee couldn't be found",
             "schema": {
@@ -531,6 +501,12 @@
               "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "500": {
             "description": "An unknown error occured",
             "schema": {
@@ -540,9 +516,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -590,17 +564,17 @@
               "$ref": "#/definitions/BadRequestResponse"
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "422": {
             "description": "Validation failed",
             "schema": {
               "$ref": "#/definitions/ValidationFailedResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "An unknown error occured",
@@ -611,9 +585,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -640,13 +612,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Employee successfuly deleted"
-          },
           "400": {
             "description": "Employee to delete couldn't be found",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "200": {
+            "description": "Employee successfuly deleted"
+          },
+          "422": {
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
           "401": {
@@ -654,12 +632,6 @@
           },
           "403": {
             "description": "Forbidden"
-          },
-          "422": {
-            "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
           },
           "500": {
             "description": "An unknown error occured",
@@ -670,9 +642,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -703,13 +673,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Employee successfuly created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
+            "description": "Employee successfuly created",
+            "schema": {
+              "$ref": "#/definitions/EmployeeCreateResponse"
+            }
           },
           "409": {
             "description": "Entered data conflicts with existing",
@@ -723,6 +690,12 @@
               "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "500": {
             "description": "An unknown error occured",
             "schema": {
@@ -732,9 +705,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -791,6 +762,168 @@
         }
       }
     },
+    "/api/v1/Product": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Gets all products",
+        "operationId": "GetAllProducts",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProductGetAllResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Creates a new product",
+        "operationId": "CreateProduct",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "createData",
+            "in": "body",
+            "description": "Data for creating a new product",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ProductCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product successfuly created",
+            "schema": {
+              "$ref": "#/definitions/ProductCreateResponse"
+            }
+          },
+          "400": {
+            "description": "Product type or compartment coulnd't be found",
+            "schema": {
+              "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "422": {
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/Product/{id}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Gets a product by the id",
+        "operationId": "GetProductById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the requested product",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product found",
+            "schema": {
+              "$ref": "#/definitions/ProductResponse"
+            }
+          },
+          "404": {
+            "description": "Product couldn't be found",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          },
+          "422": {
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/ProductType": {
       "get": {
         "tags": [
@@ -801,12 +934,8 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [
-          
-        ],
-        "parameters": [
-          
-        ],
+        "produces": [],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Success",
@@ -829,9 +958,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -865,12 +992,6 @@
               "$ref": "#/definitions/ProductTypeCreateResponse"
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "409": {
             "description": "Entered data conflicts with existing",
             "schema": {
@@ -883,6 +1004,12 @@
               "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "500": {
             "description": "An unknown error occured",
             "schema": {
@@ -892,9 +1019,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -929,12 +1054,6 @@
               "$ref": "#/definitions/ProductTypeResponse"
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "404": {
             "description": "ProductType couldn't be found",
             "schema": {
@@ -947,6 +1066,12 @@
               "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "500": {
             "description": "An unknown error occured",
             "schema": {
@@ -956,9 +1081,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -1006,17 +1129,17 @@
               "$ref": "#/definitions/BadRequestResponse"
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "422": {
             "description": "Validation failed",
             "schema": {
               "$ref": "#/definitions/ValidationFailedResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "An unknown error occured",
@@ -1027,9 +1150,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -1056,13 +1177,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ProductType deleted successfuly"
-          },
           "400": {
             "description": "ProductType coulnd't be found",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "200": {
+            "description": "ProductType deleted successfuly"
+          },
+          "422": {
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
           "401": {
@@ -1070,12 +1197,6 @@
           },
           "403": {
             "description": "Forbidden"
-          },
-          "422": {
-            "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
           },
           "500": {
             "description": "An unknown error occured",
@@ -1086,9 +1207,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -1118,20 +1237,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Parent successfuly added"
-          },
           "400": {
             "description": "Product type or parent product type coulnd't be found",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "409": {
             "description": "Entered data conflicts with existing",
@@ -1139,11 +1249,20 @@
               "$ref": "#/definitions/ConflictResponse"
             }
           },
+          "200": {
+            "description": "Parent successfuly added"
+          },
           "422": {
             "description": "Validation failed",
             "schema": {
               "$ref": "#/definitions/ValidationFailedResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "An unknown error occured",
@@ -1154,9 +1273,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -1186,20 +1303,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Child successfuly added"
-          },
           "400": {
             "description": "Product type or child product type coulnd't be found",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "409": {
             "description": "Entered data conflicts with existing",
@@ -1207,11 +1315,20 @@
               "$ref": "#/definitions/ConflictResponse"
             }
           },
+          "200": {
+            "description": "Child successfuly added"
+          },
           "422": {
             "description": "Validation failed",
             "schema": {
               "$ref": "#/definitions/ValidationFailedResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "An unknown error occured",
@@ -1222,9 +1339,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -1254,13 +1369,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Parent successfuly removed from the product type"
-          },
           "400": {
             "description": "Parent or base product type couln't be found, or the base product type doesn't have this product type as parent",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "200": {
+            "description": "Parent successfuly removed from the product type"
+          },
+          "422": {
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
           "401": {
@@ -1268,12 +1389,6 @@
           },
           "403": {
             "description": "Forbidden"
-          },
-          "422": {
-            "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
           },
           "500": {
             "description": "An unknown error occured",
@@ -1284,9 +1399,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -1316,13 +1429,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Child successfuly removed from the product type"
-          },
           "400": {
             "description": "Child or base product type couln't be found, or the base product type doesn't have this product type as child",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "200": {
+            "description": "Child successfuly removed from the product type"
+          },
+          "422": {
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
           "401": {
@@ -1330,12 +1449,6 @@
           },
           "403": {
             "description": "Forbidden"
-          },
-          "422": {
-            "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
           },
           "500": {
             "description": "An unknown error occured",
@@ -1346,9 +1459,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -1359,16 +1470,12 @@
           "Role"
         ],
         "summary": "Gets all roles",
-        "operationId": "GetAllDepartments",
+        "operationId": "GetAllRoles",
         "consumes": [
           "application/json"
         ],
-        "produces": [
-          
-        ],
-        "parameters": [
-          
-        ],
+        "produces": [],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Success",
@@ -1391,9 +1498,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -1427,12 +1532,6 @@
               "$ref": "#/definitions/RoleCreateResponse"
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "409": {
             "description": "Entered data conflicts with existing",
             "schema": {
@@ -1445,6 +1544,12 @@
               "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "500": {
             "description": "An unknown error occured",
             "schema": {
@@ -1454,9 +1559,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -1491,12 +1594,6 @@
               "$ref": "#/definitions/RoleResponse"
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "404": {
             "description": "Role couldn't be found",
             "schema": {
@@ -1509,6 +1606,12 @@
               "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "500": {
             "description": "An unknown error occured",
             "schema": {
@@ -1518,9 +1621,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -1568,17 +1669,17 @@
               "$ref": "#/definitions/BadRequestResponse"
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "422": {
             "description": "Validation failed",
             "schema": {
               "$ref": "#/definitions/ValidationFailedResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "An unknown error occured",
@@ -1589,9 +1690,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -1618,13 +1717,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Role deleted successfuly"
-          },
           "400": {
             "description": "Role coulnd't be found",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "200": {
+            "description": "Role deleted successfuly"
+          },
+          "422": {
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
           "401": {
@@ -1632,12 +1737,6 @@
           },
           "403": {
             "description": "Forbidden"
-          },
-          "422": {
-            "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
           },
           "500": {
             "description": "An unknown error occured",
@@ -1648,9 +1747,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -1680,20 +1777,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Role successfuly added to the employee"
-          },
           "400": {
             "description": "Role or employee couln't be found",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "409": {
             "description": "Can't add role, the employee has this role already",
@@ -1701,11 +1789,20 @@
               "$ref": "#/definitions/ConflictResponse"
             }
           },
+          "200": {
+            "description": "Role successfuly added to the employee"
+          },
           "422": {
             "description": "Validation failed",
             "schema": {
               "$ref": "#/definitions/ValidationFailedResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "An unknown error occured",
@@ -1716,9 +1813,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -1748,20 +1843,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Role successfuly added to the department"
-          },
           "400": {
             "description": "Role or department couln't be found",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "409": {
             "description": "Can't add role, the department has this role already",
@@ -1769,11 +1855,20 @@
               "$ref": "#/definitions/ConflictResponse"
             }
           },
+          "200": {
+            "description": "Role successfuly added to the department"
+          },
           "422": {
             "description": "Validation failed",
             "schema": {
               "$ref": "#/definitions/ValidationFailedResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "An unknown error occured",
@@ -1784,9 +1879,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -1816,13 +1909,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Role successfuly removed from the employee"
-          },
           "400": {
             "description": "Role or employee couln't be found, or the employee doesn't have the role",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "200": {
+            "description": "Role successfuly removed from the employee"
+          },
+          "422": {
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
           "401": {
@@ -1830,12 +1929,6 @@
           },
           "403": {
             "description": "Forbidden"
-          },
-          "422": {
-            "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
           },
           "500": {
             "description": "An unknown error occured",
@@ -1846,9 +1939,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -1878,13 +1969,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Role successfuly removed from the department"
-          },
           "400": {
             "description": "Role or department couln't be found, or the department doesn't have the role",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
+            }
+          },
+          "200": {
+            "description": "Role successfuly removed from the department"
+          },
+          "422": {
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
             }
           },
           "401": {
@@ -1892,12 +1989,6 @@
           },
           "403": {
             "description": "Forbidden"
-          },
-          "422": {
-            "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
           },
           "500": {
             "description": "An unknown error occured",
@@ -1908,9 +1999,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -1927,9 +2016,7 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Success",
@@ -1956,9 +2043,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -1987,17 +2072,17 @@
           "200": {
             "description": "Success"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "422": {
             "description": "Validation failed",
             "schema": {
               "$ref": "#/definitions/ValidationFailedResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "An unknown error occured",
@@ -2008,9 +2093,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -2043,17 +2126,17 @@
               "type": "string"
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "422": {
             "description": "Validation failed",
             "schema": {
               "$ref": "#/definitions/ValidationFailedResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "An unknown error occured",
@@ -2064,9 +2147,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -2102,17 +2183,17 @@
           "200": {
             "description": "Success"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "422": {
             "description": "Validation failed",
             "schema": {
               "$ref": "#/definitions/ValidationFailedResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "An unknown error occured",
@@ -2123,9 +2204,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       },
@@ -2153,17 +2232,17 @@
           "200": {
             "description": "Success"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
           "422": {
             "description": "Validation failed",
             "schema": {
               "$ref": "#/definitions/ValidationFailedResponse"
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "An unknown error occured",
@@ -2174,9 +2253,7 @@
         },
         "security": [
           {
-            "Bearer": [
-              
-            ]
+            "Bearer": []
           }
         ]
       }
@@ -2389,6 +2466,52 @@
         },
         "username": {
           "type": "string"
+        },
+        "department": {
+          "$ref": "#/definitions/EmployeeDepartmentResponse"
+        },
+        "roles": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmployeeRoleResponse"
+          }
+        }
+      }
+    },
+    "EmployeeDepartmentResponse": {
+      "description": "Default response dto for a department from an employee",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the department",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the deparment",
+          "type": "string"
+        }
+      }
+    },
+    "EmployeeRoleResponse": {
+      "description": "Default response dto for a role from an employee",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the role",
+          "type": "string"
+        },
+        "description": {
+          "description": "Optional description of the role",
+          "type": "string"
         }
       }
     },
@@ -2425,7 +2548,6 @@
         },
         "phoneNumber": {
           "minLength": 1,
-          "pattern": "^([\\+][0-9]{1,3}([ \\.\\-])?)?([\\(]{1}[0-9]{3}[\\)])?([0-9A-Z \\.\\-]{1,32})((x|ext|extension)?[0-9]{1,4}?)$",
           "type": "string"
         },
         "birthday": {
@@ -2490,6 +2612,16 @@
         }
       }
     },
+    "EmployeeCreateResponse": {
+      "type": "object",
+      "properties": {
+        "employeeId": {
+          "format": "uuid",
+          "description": "Id of the created employee",
+          "type": "string"
+        }
+      }
+    },
     "EmployeeLoginRequest": {
       "required": [
         "username",
@@ -2498,7 +2630,7 @@
       "type": "object",
       "properties": {
         "username": {
-          "maxLength": 50,
+          "maxLength": 15,
           "minLength": 1,
           "type": "string"
         },
@@ -2516,6 +2648,115 @@
       "properties": {
         "token": {
           "description": "Access token for the employee",
+          "type": "string"
+        }
+      }
+    },
+    "ProductGetAllResponse": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductResponse"
+          }
+        }
+      }
+    },
+    "ProductResponse": {
+      "description": "Default response dto for a product",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "serialNumber": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "inStock",
+            "reserved",
+            "sold",
+            "defect"
+          ],
+          "type": "string"
+        },
+        "parentId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "childIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "productTypeId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "compartmentId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "billId": {
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    },
+    "ProductCreateRequest": {
+      "required": [
+        "serialNumber"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "serialNumber": {
+          "maxLength": 30,
+          "minLength": 4,
+          "type": "string"
+        },
+        "parentId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "childrenIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "productTypeId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "compartmentId": {
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    },
+    "ProductCreateResponse": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "format": "uuid",
+          "description": "Id of the created product",
           "type": "string"
         }
       }
@@ -2863,7 +3104,5 @@
       "description": "Please insert JWT with Bearer into field. Example: \"bearer {token}\""
     }
   },
-  "tags": [
-    
-  ]
+  "tags": []
 }
