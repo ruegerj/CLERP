@@ -10,7 +10,7 @@ namespace CLERP.API.Features.v1.RoleArea.RemoveFromEmployee
         /// <summary>
         /// Ids of the roles which should be removed from the employee
         /// </summary>
-        [JsonProperty("roleId")]
+        [JsonProperty("roleIds")]
         public IEnumerable<Guid> RoleIds { get; set; }
 
         /// <summary>

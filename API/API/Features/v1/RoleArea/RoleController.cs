@@ -54,7 +54,7 @@ namespace CLERP.API.Features.v1.RoleArea
         }
 
         /// <summary>
-        /// Add's a certain role to an employee
+        /// Add's one ore more certain roles to an employee
         /// </summary>
         /// <param name="roleAddEmployeeData">Data for adding a role to an employee</param>
         /// <returns></returns>
@@ -128,7 +128,7 @@ namespace CLERP.API.Features.v1.RoleArea
         }
 
         /// <summary>
-        /// Removes a certain role from an employee
+        /// Removes one or more certain roles from an employee
         /// </summary>
         /// <param name="removeRoleFromEmployeeData">Data for removing a role from an employee</param>
         /// <returns></returns>

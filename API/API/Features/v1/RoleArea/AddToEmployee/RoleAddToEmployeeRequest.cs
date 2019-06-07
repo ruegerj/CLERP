@@ -11,7 +11,7 @@ namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
         /// <summary>
         /// Ids of the roles which should be added to the employee
         /// </summary>
-        [JsonProperty("roleId")]
+        [JsonProperty("roleIds")]
         public IEnumerable<Guid> RoleIds { get; set; }
 
         /// <summary>

@@ -25,53 +25,65 @@ namespace CLERP.API.Features.v1.ProductArea.Create
 
         public async Task<ProductCreateResponse> Handle(ProductCreateRequest request, CancellationToken cancellationToken)
         {
-            var product = new Product()
+            var responseData = new List<ProductCreateResponseModel>();
+
+            foreach (var productModel in request.Products)
             {
-                Description = request.Description,
-                SerialNumber = request.SerialNumber,
-                State = ProductState.InStock,
-            };
-
-            product.Type = await _context.ProductTypes.FindByGuidAsync(request.TypeGuid, cancellationToken);
-
-            if (product.Type == null)
-            {
-                throw new BadRequestException(); // cant create product => product type not found
-            }
-
-            product.Compartment = await _context.Compartments.FindByGuidAsync(request.CompartmentGuid, cancellationToken);
-
-            if (product.Compartment == null)
-            {
-                throw new BadRequestException(); // cant create product => compartment not found
-            }
-
-            var parentProduct = request.ParentGuid != null ? await _context.Products.FindByGuidAsync(new Guid(request.ParentGuid.ToString()), cancellationToken) : null;
-
-            if (parentProduct != null) // only add parent if found or parent id is not null
-            {
-                product.Parent = parentProduct;
-            }
-
-            // add child products if existing
-            if (request.ChildrenGuids != null && request.ChildrenGuids.Any())
-            {
-                foreach (var childGuid in request.ChildrenGuids)
+                var product = new Product()
                 {
-                    var child = await _context.Products.FindByGuidAsync(childGuid, cancellationToken);
+                    Description = productModel.Description,
+                    SerialNumber = productModel.SerialNumber,
+                    State = ProductState.InStock
+                };
 
-                    if (child != null)
+                product.Type = await _context.ProductTypes.FindByGuidAsync(productModel.TypeGuid, cancellationToken);
+
+                if (product.Type == null)
+                {
+                    throw new BadRequestException(); // cant create product => product type not found
+                }
+
+                product.Compartment = await _context.Compartments.FindByGuidAsync(productModel.CompartmentGuid, cancellationToken);
+
+                if (product.Compartment == null)
+                {
+                    throw new BadRequestException(); // cant create product => compartment not found
+                }
+
+                var parentProduct = productModel.ParentGuid != null ? 
+                    await _context.Products.FindByGuidAsync(new Guid(productModel.ParentGuid.ToString()), cancellationToken) : null;
+
+                if (parentProduct != null) // only add parent if found or parent id is not null
+                {
+                    product.Parent = parentProduct;
+                }
+
+                // add child products if existing
+                if (productModel.ChildrenGuids != null && productModel.ChildrenGuids.Any())
+                {
+                    foreach (var childGuid in productModel.ChildrenGuids)
                     {
-                        product.Children.Add(child);
+                        var child = await _context.Products.FindByGuidAsync(childGuid, cancellationToken);
+
+                        if (child != null)
+                        {
+                            product.Children.Add(child);
+                        }
                     }
                 }
-            }
 
-            await _context.Products.AddAsync(product, cancellationToken);
+                await _context.Products.AddAsync(product, cancellationToken);
+
+                responseData.Add(new ProductCreateResponseModel()
+                {
+                    ProductGuid = product.Guid,
+                    SerialNumber = product.SerialNumber
+                });
+            }
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return new ProductCreateResponse() { ProductGuid = product.Guid };
+            return new ProductCreateResponse() { Products =  responseData };
         }
     }
 }

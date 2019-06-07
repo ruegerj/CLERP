@@ -57,9 +57,9 @@ namespace CLERP.API.Features.v1.ProductArea
         }
 
         /// <summary>
-        /// Creates a new product
+        /// Creates one or more new products
         /// </summary>
-        /// <param name="createData">Data for creating a new product</param>
+        /// <param name="createData">Data for creating new products</param>
         /// <returns></returns>
         [HttpPost]
         [SwaggerResponse((int)HttpStatusCode.OK,
