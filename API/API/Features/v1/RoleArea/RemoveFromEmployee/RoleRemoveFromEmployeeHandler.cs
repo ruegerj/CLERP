@@ -1,6 +1,8 @@
 ﻿using CLERP.API.Infrastructure.Contexts;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,16 +19,18 @@ namespace CLERP.API.Features.v1.RoleArea.RemoveFromEmployee
 
         protected async override Task Handle(RoleRemoveFromEmployeeRequest request, CancellationToken cancellationToken)
         {
-            var linkRoleEmployee = await _context.RolesEmployees.FindAsync(
-                keyValues: new object[] { request.RoleId, request.EmployeeId },
-                cancellationToken);
+            var linksRolesEmployees = await _context.RolesEmployees
+                .Where(re => request.RoleIds.Any(ri => ri == re.RoleGuid)
+                    && re.EmployeeGuid == request.EmployeeId)
+                .ToListAsync(cancellationToken);
 
-            if (linkRoleEmployee == null)
+            // check if all roles which should be removed could be found
+            if (linksRolesEmployees.Count == 0 || linksRolesEmployees.Count != request.RoleIds.Count())
             {
-                throw new BadRequestException(); // department doesn't have this role => can't be removed
+                throw new BadRequestException(); // department doesn't have these roles => can't be removed
             }
 
-            _context.RolesEmployees.Remove(linkRoleEmployee);
+            linksRolesEmployees.ForEach(lre => _context.RolesEmployees.Remove(lre));
 
             await _context.SaveChangesAsync(cancellationToken);
         }

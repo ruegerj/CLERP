@@ -20,14 +20,15 @@ namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
 
         protected async override Task Handle(RoleAddToEmployeeRequest request, CancellationToken cancellationToken)
         {
-            // Load role including the employees whi^ch have this role
-            var role = await _context.Roles.Where(r => r.Guid == request.RoleId)
+            // Load all requested roles including the employees which have these roles
+            var roles = await _context.Roles.Where(r => request.RoleIds.Any(ri => ri == r.Guid))
                 .Include(r => r.Employees)
-                .FirstOrDefaultAsync();
+                .ToListAsync(cancellationToken);
 
-            if (role == null)
+            // check if count of requested roles match the count of found roles
+            if (roles.Count == 0 || roles.Count != request.RoleIds.Count())
             {
-                throw new BadRequestException(); // role to add not found
+                throw new BadRequestException(); // not all roles to add not found
             }
 
             var employee = await _context.Employees.FindByGuidAsync(request.EmployeeId, cancellationToken);
@@ -37,15 +38,18 @@ namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
                 throw new BadRequestException(); // employee to add role not found
             }
 
-            if (role.Employees.Any(e => e.EmployeeGuid == employee.Guid))
+            if (roles.Any(r => r.Employees.Any(er => er.EmployeeGuid == employee.Guid)))
             {
-                throw new ConflictException("role is already added to this employee"); // role is already added to the employee
+                throw new ConflictException("one or more roles are already added to this employee"); // one or more roles are already added to the employee
             }
 
-            role.Employees.Add(new RoleEmployee()
+            roles.ForEach(r =>
             {
-                Employee = employee,
-                Role = role
+                r.Employees.Add(new RoleEmployee()
+                {
+                    Employee = employee,
+                    Role = r
+                });
             });
 
             await _context.SaveChangesAsync(cancellationToken);
