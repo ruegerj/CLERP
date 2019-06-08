@@ -8,7 +8,7 @@ import { ProductTypeResponse } from '@_generated/models';
 @Component({
   selector: 'app-productDetailOverview',
   templateUrl: './productDetailOverview.component.html',
-  styleUrls: ['./productDetailOverview.component.css']
+  styleUrls: ['./productDetailOverview.component.scss']
 })
 export class ProductDetailOverviewComponent implements OnInit {
   public id: string;

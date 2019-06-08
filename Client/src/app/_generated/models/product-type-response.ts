@@ -15,6 +15,11 @@ export interface ProductTypeResponse {
   price?: number;
 
   /**
+   * Image as base64 string
+   */
+  imageBase64?: string;
+
+  /**
    * All ids from the entities related as children to this product type
    */
   childIds?: Array<string>;

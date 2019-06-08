@@ -10,7 +10,7 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-employeeCreate',
   templateUrl: './employeeCreate.component.html',
-  styleUrls: ['./employeeCreate.component.css'],
+  styleUrls: ['./employeeCreate.component.scss'],
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }]
 })
 export class EmployeeCreateComponent implements OnInit {

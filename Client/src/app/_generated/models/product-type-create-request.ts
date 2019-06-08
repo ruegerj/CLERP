@@ -10,6 +10,11 @@ export interface ProductTypeCreateRequest {
   price: number;
 
   /**
+   * Image as base64 string
+   */
+  imageBase64?: string;
+
+  /**
    * Collection with all ids of all parent product types
    */
   parentIds?: Array<string>;

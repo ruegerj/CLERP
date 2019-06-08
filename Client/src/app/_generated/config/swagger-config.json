@@ -2392,7 +2392,7 @@
       "description": "Payload of CLERP.API.Infrastructure.Exceptions.BadRequestException",
       "type": "object",
       "properties": {
-        "errorMessage": {
+        "message": {
           "description": "Error message, which explains that something went wrong",
           "type": "string"
         }
@@ -2823,6 +2823,10 @@
           "format": "double",
           "type": "number"
         },
+        "imageBase64": {
+          "description": "Image as base64 string",
+          "type": "string"
+        },
         "childIds": {
           "description": "All ids from the entities related as children to this product type",
           "uniqueItems": false,
@@ -2870,6 +2874,10 @@
           "exclusiveMinimum": true,
           "minLength": 1,
           "type": "number"
+        },
+        "imageBase64": {
+          "description": "Image as base64 string",
+          "type": "string"
         },
         "parentIds": {
           "description": "Collection with all ids of all parent product types",
