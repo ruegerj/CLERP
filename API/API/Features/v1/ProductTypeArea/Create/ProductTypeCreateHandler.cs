@@ -32,17 +32,23 @@ namespace CLERP.API.Features.v1.ProductTypeArea.Create
 
             var newProductType = _mapper.Map<ProductTypeCreateRequest, ProductType>(request);
 
-            var children = await _context.ProductTypesProductTypes
-                .Where(pt => request.ChildGuids.Contains(pt.ParentGuid))
-                .ToListAsync(cancellationToken);
+            if (request.ChildGuids?.Count() > 0)
+            {
+                var children = await _context.ProductTypesProductTypes
+                    .Where(pt => request.ChildGuids.Contains(pt.ParentGuid))
+                    .ToListAsync(cancellationToken);
 
-            children.ForEach(c => newProductType.Children.Add(c));
+                children.ForEach(c => newProductType.Children.Add(c));
+            }
 
-            var parents = await _context.ProductTypesProductTypes
-                .Where(pt => request.ParentGuids.Contains(pt.ChildGuid))
-                .ToListAsync(cancellationToken);
+            if (request.ParentGuids?.Count() > 0)
+            {
+                var parents = await _context.ProductTypesProductTypes
+                    .Where(pt => request.ParentGuids.Contains(pt.ChildGuid))
+                    .ToListAsync(cancellationToken);
 
-            parents.ForEach(p => newProductType.Parents.Add(p));
+                parents.ForEach(p => newProductType.Parents.Add(p));
+            }
 
             await _context.SaveChangesAsync(cancellationToken);
 
