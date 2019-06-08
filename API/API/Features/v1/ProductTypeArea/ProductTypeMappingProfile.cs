@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CLERP.API.Domain.Models;
+using CLERP.API.Infrastructure.Converters.TypeConverters;
 
 namespace CLERP.API.Features.v1.ProductTypeArea
 {
@@ -15,6 +16,10 @@ namespace CLERP.API.Features.v1.ProductTypeArea
             CreateMap<Create.ProductTypeCreateRequest, ProductType>()
                 .ForMember(pt => pt.Children, t => t.Ignore())
                 .ForMember(pt => pt.Parents, t => t.Ignore());
+
+            // Maps for image base64 <=> byte[]
+            CreateMap<string, byte[]>().ConvertUsing<Base64ByteArrayConverter>();
+            CreateMap<byte[], string>().ConvertUsing<ByteArrayBase64Converter>();
         }
     }
 }

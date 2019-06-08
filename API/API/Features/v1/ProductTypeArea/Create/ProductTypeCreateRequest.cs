@@ -23,6 +23,12 @@ namespace CLERP.API.Features.v1.ProductTypeArea.Create
         public decimal Price { get; set; }
 
         /// <summary>
+        /// Image as base64 string
+        /// </summary>
+        [JsonProperty("imageBase64")]
+        public string Image { get; set; }
+
+        /// <summary>
         /// Collection with all ids of all parent product types
         /// </summary>
         [JsonProperty("parentIds")]

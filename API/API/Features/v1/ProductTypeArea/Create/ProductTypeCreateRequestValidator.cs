@@ -21,15 +21,9 @@ namespace CLERP.API.Features.v1.ProductTypeArea.Create
                 .NotEmpty()
                 .GreaterThan(ValidationDefinitions.ProductTypePriceMin);
 
-            RuleFor(pt => pt.ChildGuids)
-                .NotNull();
-
-            RuleFor(pt => pt.ParentGuids)
-                .NotNull();
-
-            RuleForEach(pt => pt.ChildGuids).NotNull();
-
-            RuleForEach(pt => pt.ParentGuids).NotNull();
+            RuleFor(pt => pt.Image)
+                .Must(ValidationDefinitions.BeBase64)
+                .When(pt => !string.IsNullOrEmpty(pt.Image));
         }
     }
 }
