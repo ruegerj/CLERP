@@ -80,8 +80,6 @@ export class EmployeeCreateComponent implements OnInit {
   createClicked(): void {
     this.submitted = true;
 
-
-
     if (this.employeeForm.invalid) {
       return;
     }

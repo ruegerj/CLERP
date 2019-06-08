@@ -13,13 +13,13 @@ namespace CLERP.API.Infrastructure.Exceptions
         /// <param name="message"></param>
         public BadRequestResponse(string message)
         {
-            ErrorMessage = message;
+            Message = message;
         }
 
         /// <summary>
         /// Error message, which explains that something went wrong
         /// </summary>
-        [JsonProperty("errorMessage")]
-        public string ErrorMessage { get; set; }
+        [JsonProperty("message")]
+        public string Message { get; set; }
     }
 }
