@@ -1,8 +1,5 @@
 /* tslint:disable */
+import { ProductCreateResponseModel } from './product-create-response-model';
 export interface ProductCreateResponse {
-
-  /**
-   * Id of the created product
-   */
-  productId?: string;
+  products?: Array<ProductCreateResponseModel>;
 }

@@ -2,9 +2,9 @@
 export interface RoleAddToEmployeeRequest {
 
   /**
-   * Id of the role which should be added to the employee
+   * Ids of the roles which should be added to the employee
    */
-  roleId?: string;
+  roleIds?: Array<string>;
 
   /**
    * Id of the employee which the role should be added to

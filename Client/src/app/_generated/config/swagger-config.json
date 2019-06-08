@@ -804,7 +804,7 @@
         "tags": [
           "Product"
         ],
-        "summary": "Creates a new product",
+        "summary": "Creates one or more new products",
         "operationId": "CreateProduct",
         "consumes": [
           "application/json"
@@ -816,7 +816,7 @@
           {
             "name": "createData",
             "in": "body",
-            "description": "Data for creating a new product",
+            "description": "Data for creating new products",
             "required": false,
             "schema": {
               "$ref": "#/definitions/ProductCreateRequest"
@@ -1757,7 +1757,7 @@
         "tags": [
           "Role"
         ],
-        "summary": "Add's a certain role to an employee",
+        "summary": "Add's one ore more certain roles to an employee",
         "operationId": "AddRoleToEmployee",
         "consumes": [
           "application/json"
@@ -1889,7 +1889,7 @@
         "tags": [
           "Role"
         ],
-        "summary": "Removes a certain role from an employee",
+        "summary": "Removes one or more certain roles from an employee",
         "operationId": "RemoveRoleFromEmployee",
         "consumes": [
           "application/json"
@@ -2714,6 +2714,18 @@
       }
     },
     "ProductCreateRequest": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductCreateRequestModel"
+          }
+        }
+      }
+    },
+    "ProductCreateRequestModel": {
       "required": [
         "serialNumber"
       ],
@@ -2754,6 +2766,22 @@
     "ProductCreateResponse": {
       "type": "object",
       "properties": {
+        "products": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductCreateResponseModel"
+          }
+        }
+      }
+    },
+    "ProductCreateResponseModel": {
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "description": "Serialnumber to match the new id to the product",
+          "type": "string"
+        },
         "productId": {
           "format": "uuid",
           "description": "Id of the created product",
@@ -3038,10 +3066,14 @@
     "RoleAddToEmployeeRequest": {
       "type": "object",
       "properties": {
-        "roleId": {
-          "format": "uuid",
-          "description": "Id of the role which should be added to the employee",
-          "type": "string"
+        "roleIds": {
+          "description": "Ids of the roles which should be added to the employee",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
         },
         "employeeId": {
           "format": "uuid",
@@ -3068,10 +3100,14 @@
     "RoleRemoveFromEmployeeRequest": {
       "type": "object",
       "properties": {
-        "roleId": {
-          "format": "uuid",
-          "description": "Id of the role which should be removed from the employee",
-          "type": "string"
+        "roleIds": {
+          "description": "Ids of the roles which should be removed from the employee",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
         },
         "employeeId": {
           "format": "uuid",

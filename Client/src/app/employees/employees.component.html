@@ -8,14 +8,16 @@
 <div class="list-group list-group-flush">
   <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let e of filteredEmployees"
     [routerLink]="['/employeeEdit', e.id]">
-    <div class="row">
-      <div class="col-md-4">First Name: {{e.firstname}}</div>
-      <div class="col-md-4">Last Name: {{e.lastname}}</div>      
-      <div class="col-md-4">Email: {{e.email}}</div>      
-    </div>
-    <div class="row">
-      <div class="col-md-4">Birthday: {{e.birthday | date : 'yyyy-MM-dd'}}</div>
-      <div class="col-md-4">Username: {{e.username}}</div>      
+    <div class="card">
+      <div class="row">
+        <div class="col-md-4">First Name: {{e.firstname}}</div>
+        <div class="col-md-4">Last Name: {{e.lastname}}</div>
+        <div class="col-md-4">Email: {{e.email}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">Birthday: {{e.birthday | date : 'yyyy-MM-dd'}}</div>
+        <div class="col-md-4">Username: {{e.username}}</div>
+      </div>
     </div>
   </a>
 </div>

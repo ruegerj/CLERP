@@ -1,9 +1,5 @@
 /* tslint:disable */
+import { ProductCreateRequestModel } from './product-create-request-model';
 export interface ProductCreateRequest {
-  description?: string;
-  serialNumber: string;
-  parentId?: string;
-  childrenIds?: Array<string>;
-  productTypeId?: string;
-  compartmentId?: string;
+  products?: Array<ProductCreateRequestModel>;
 }

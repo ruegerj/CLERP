@@ -2,9 +2,9 @@
 export interface RoleRemoveFromEmployeeRequest {
 
   /**
-   * Id of the role which should be removed from the employee
+   * Ids of the roles which should be removed from the employee
    */
-  roleId?: string;
+  roleIds?: Array<string>;
 
   /**
    * Id of the employee which the role should be removed from

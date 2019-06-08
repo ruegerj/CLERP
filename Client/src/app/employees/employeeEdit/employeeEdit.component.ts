@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { NgbDateAdapter, NgbDateNativeAdapter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EmployeeService } from '@_generated/services';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { EmployeeService, DepartmentService, RoleService } from '@_generated/services';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EmployeeResponse } from '@_generated/models';
+import { EmployeeResponse, DepartmentResponse, RoleResponse } from '@_generated/models';
 import { ValidationConstans } from '@_models';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-employeeEdit',
@@ -14,11 +15,13 @@ import { ValidationConstans } from '@_models';
 })
 export class EmployeeEditComponent implements OnInit {
   /** properties **/
-  employee: EmployeeResponse;
-  isEditing: boolean;
-  submitted: boolean = false;
-  employeeForm: FormGroup;
-  id: string;
+  public employee: EmployeeResponse;
+  public isEditing: boolean;
+  public submitted: boolean = false;
+  public employeeForm: FormGroup;
+  public id: string;
+  public departments: Array<DepartmentResponse>;
+  public roles: Array<RoleResponse>;
 
   @ViewChild('modalSuccessContent') private modalSuccessContent: TemplateRef<any>;
   @ViewChild('modalErrorContent') private modalErrorContent: TemplateRef<any>;
@@ -29,7 +32,9 @@ export class EmployeeEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private departmentService: DepartmentService,
+    private roleService: RoleService
   ) {
     this.isEditing = false;
   }
@@ -43,21 +48,66 @@ export class EmployeeEditComponent implements OnInit {
       email: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.email]],
       phoneNumber: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.pattern(ValidationConstans.PhoneNumberRegex)]],
       birthday: [{ value: '', disabled: !this.isEditing }, Validators.required],
+      department: [''],
+      roles: new FormArray([])
     });
 
-    this.route.params.subscribe(params => this.id = params.id);
 
-    if (this.id) {
-      this.employeeService.GetEmployeeById(this.id).subscribe(data => {
-        this.employee = data;
-        this.setFormValues(data);
+    let getAllDepartements = this.departmentService.GetAllDepartments();
+    let getAllRoles = this.roleService.GetAllRoles();
+    let getEmployee = this.employeeService.GetEmployeeById(this.id);
+
+
+    this.route.params.subscribe(params => {
+      this.id = params.id;
+      forkJoin([getAllDepartements, getAllRoles]).subscribe(results => {
+        this.departments = results[0].departments;
+
+        this.roles = results[1].roles;
+        this.addRoleCheckboxes();
+
+        this.employeeService.GetEmployeeById(params.id).subscribe(data => {
+          this.employee = data;
+          console.log(this.employee);
+          this.setFormValues(data);
+        })
       })
-    }
+    });
+
+
+    // this.departmentService.GetAllDepartments().subscribe(data => {
+    //   this.departments = data.departments;
+    // });
+
+    // //Roles needed to build form
+    // this.roleService.GetAllRoles().subscribe(data => {
+    //   this.roles = data.roles;
+    //   this.addRoleCheckboxes();
+    // });
+
+
+
+    // if (this.id) {
+    //   this.employeeService.GetEmployeeById(this.id).subscribe(data => {
+    //     this.employee = data;
+    //     console.log(this.employee);
+    //     this.setFormValues(data);
+    //   })
+    // }
   }
 
 
   // convenience getter for easy access to form fields
   get f() { return this.employeeForm.controls; }
+
+
+  private addRoleCheckboxes() {
+    this.roles.map(() => {
+      const control = new FormControl(false);
+      (this.employeeForm.controls.roles as FormArray).push(control);
+    });
+  }
+
 
   private setFormValues(e: EmployeeResponse) {
     this.employeeForm.setValue({
@@ -67,6 +117,8 @@ export class EmployeeEditComponent implements OnInit {
       email: e.email,
       phoneNumber: e.phoneNumber,
       birthday: new Date(e.birthday),
+      department: this.departments.filter(function(departement) {return departement.id === e.id}),
+      roles: e.roles
     })
   }
 

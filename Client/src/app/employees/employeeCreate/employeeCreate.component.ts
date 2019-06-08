@@ -5,6 +5,9 @@ import { EmployeeService, DepartmentService, RoleService } from '@_generated/ser
 import { NgbDateAdapter, NgbDateNativeAdapter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { ValidationConstans } from '@_models';
+import { mergeMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { error } from 'util';
 
 @Component({
   selector: 'app-employeeCreate',
@@ -20,8 +23,8 @@ export class EmployeeCreateComponent implements OnInit {
   departments: Array<DepartmentResponse>;
   roles: Array<RoleResponse>;
 
-  @ViewChild('modalSuccessContent') private modalSuccessContent: TemplateRef<any>;
-  @ViewChild('modalErrorContent') private modalErrorContent: TemplateRef<any>;
+  // @ViewChild('modalSuccessContent') private modalSuccessContent: TemplateRef<any>;
+  // @ViewChild('modalErrorContent') private modalErrorContent: TemplateRef<any>;
 
 
   constructor(
@@ -37,13 +40,13 @@ export class EmployeeCreateComponent implements OnInit {
   ngOnInit() {
 
     this.employeeForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
-      lastName: ['', [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
-      email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', [Validators.required, Validators.pattern(ValidationConstans.PhoneNumberRegex)]],
+      firstName: ['test ', [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
+      lastName: ['test', [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
+      email: ['test@mail.com', [Validators.required, Validators.email]],
+      phoneNumber: ['+41 55 666 11 22', [Validators.required, Validators.pattern(ValidationConstans.PhoneNumberRegex)]],
       birthday: ['', Validators.required],
-      username: ['', [Validators.required, Validators.minLength(ValidationConstans.MinUsernameLength), Validators.maxLength(ValidationConstans.MaxUsernameLength)]],
-      password: ['', [Validators.required, Validators.minLength(ValidationConstans.MinPasswordLength), Validators.maxLength(ValidationConstans.MaxPasswordLength)]],
+      username: ['testuser', [Validators.required, Validators.minLength(ValidationConstans.MinUsernameLength), Validators.maxLength(ValidationConstans.MaxUsernameLength)]],
+      password: ['123456789#', [Validators.required, Validators.minLength(ValidationConstans.MinPasswordLength), Validators.maxLength(ValidationConstans.MaxPasswordLength)]],
       department: [''],
       roles: new FormArray([])
     });
@@ -92,42 +95,37 @@ export class EmployeeCreateComponent implements OnInit {
       })
     });
 
-    var createdEmployeeId: string = null;
+    console.log(formValue);
+    console.log(formValue.department);
+    console.log(formValue.roles.filter(function (role) { return role.selected === true }).map(roles => roles.id));
+
 
     this.employeeService.CreateEmployee({
       firstname: formValue.firstName, lastname: formValue.lastName, email: formValue.email, phoneNumber: formValue.phoneNumber,
       birthday: formValue.birthday, username: formValue.username, password: formValue.password
     }).subscribe(data => {
-      createdEmployeeId = data.employeeId;
-    }, (error) => {
-      this.modalService.open(this.modalErrorContent);
-      return;
-    });
-
-    console.log(createdEmployeeId);
-
-    if (createdEmployeeId) {
-      this.departmentService.AddEmployeeToDepartment({
-        departmentId: formValue.department, employeeId: createdEmployeeId
-      }).subscribe(data => {
-      }, (error) => {
-        this.modalService.open(this.modalErrorContent);
-        return;
-      });
-
-      formValue.roles.forEach(element => {
-        if (element.selected) {
-          this.roleService.AddRoleToEmployee({
-            employeeId: createdEmployeeId, roleId: element.id
-          }).subscribe(data => {
-            this.modalService.open(this.modalSuccessContent);
+      forkJoin(
+        this.departmentService.AddEmployeeToDepartment({ departmentId: formValue.department.id, employeeId: data.employeeId }),
+        this.roleService.AddRoleToEmployee({ employeeId: data.employeeId, roleIds: formValue.roles.filter(function (role) { return role.selected === true }).map(roles => roles.id) })).subscribe(
+          data => {
+            // this.modalService.open(this.modalSuccessContent);
+            alert("succescfully created employee");
             this.router.navigate(['/employees']);
-          }, (error) => {
-            this.modalService.open(this.modalErrorContent);
+          },
+          error => {
+            // console.log(error);
+            alert(error);
+            // this.modalService.open(this.modalErrorContent);
             return;
-          });
-        }
-      });
-    }
+          }
+        )
+    },
+      error => {
+        // console.log(error);
+        alert(error);
+        // this.modalService.open(this.modalErrorContent);
+        return;
+      }
+    )
   }
 }

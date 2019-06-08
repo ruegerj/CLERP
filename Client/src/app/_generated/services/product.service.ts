@@ -60,7 +60,7 @@ class ProductService extends __BaseService {
   }
 
   /**
-   * @param createData Data for creating a new product
+   * @param createData Data for creating new products
    * @return Product successfuly created
    */
   CreateProductResponse(createData?: ProductCreateRequest): __Observable<__StrictHttpResponse<ProductCreateResponse>> {
@@ -86,7 +86,7 @@ class ProductService extends __BaseService {
     );
   }
   /**
-   * @param createData Data for creating a new product
+   * @param createData Data for creating new products
    * @return Product successfuly created
    */
   CreateProduct(createData?: ProductCreateRequest): __Observable<ProductCreateResponse> {
