@@ -1,11 +1,13 @@
 <div class="p-5">
   <form [formGroup]="productTypeForm">
-    <input style="display: none" type="file" class="form-control" formControlName="image"
-      (change)="onFileChanged($event)" [ngClass]="{ 'is-invalid': submitted && f.productName.errors }" #fileInput>
+    <input style="display: none" type="file" accept="image/*" class="form-control"
+      (change)="preview(file.files)" [ngClass]="{ 'is-invalid': submitted && f.productName.errors }" #file>
 
     <div class="form-group row">
-      <img style="max-height: 15em" id="productImage" class="image-fluid rounded fit-image p-3 offset-3 h-100" src="data:image/png;base64,{{f.image.value}}"
-        onError="this.src='./assets/images/noImageFound.gif';" alt="Product Image" (click)="fileInput.click()">
+      <img style="max-height: 15em" id="productImage" class="image-fluid rounded fit-image p-3 offset-3 h-100" [src]="imgURL" onError="this.src='./assets/images/noImageFound.gif';" alt="Product Image" (click)="file.click()">
+    </div>
+    <div class="form-group row">
+      <span class="offset-3 px-3" style="color:red;" *ngIf="message">{{message}}</span>
     </div>
 
     <div class="form-group row">
@@ -15,6 +17,9 @@
           [ngClass]="{ 'is-invalid': submitted && f.productName.errors }">
       </div>
     </div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productTypeForm.controls['productName'].errors?.required">Password is required.</div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productTypeForm.controls['productName'].errors?.minlength">Minimum length is {{valditationConstants.MinNameLength}}</div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productTypeForm.controls['productName'].errors?.maxlength">Maximum length is {{valditationConstants.MaxNameLength}}</div>
 
     <div class="form-group row">
       <label for="ean" class="col-md-3 col-form-label text-left">EAN</label>
@@ -23,6 +28,7 @@
           [ngClass]="{ 'is-invalid': submitted && f.ean.errors }">
       </div>
     </div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productTypeForm.controls['ean'].errors?.required">EAN is required.</div>
 
     <div class="form-group row">
       <label for="price" class="col-md-3 col-form-label text-left">Price</label>
@@ -31,6 +37,7 @@
           formControlName="price" [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
       </div>
     </div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productTypeForm.controls['price'].errors?.required">Price is required.</div>
 
     <div class="form-group row">
       <label for="description" class="col-md-3 col-form-label text-left">Description</label>
