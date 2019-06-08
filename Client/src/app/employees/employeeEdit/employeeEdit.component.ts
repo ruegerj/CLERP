@@ -80,21 +80,21 @@ export class EmployeeEditComponent implements OnInit {
 
   private addRoleCheckboxes() {
     this.roles.map(() => {
-      const control = new FormControl({value: false, disabled: !this.isEditing});
+      const control = new FormControl({ value: false, disabled: !this.isEditing });
       (this.employeeForm.controls.roles as FormArray).push(control);
     });
   }
 
 
   private setFormValues(e: EmployeeResponse) {
-    this.employeeForm.patchValue({
+    this.employeeForm.setValue({
       username: e.username,
       firstName: e.firstname,
       lastName: e.lastname,
       email: e.email,
       phoneNumber: e.phoneNumber,
       birthday: new Date(e.birthday),
-      department: this.departments.find(d => { return d.id === e.department.id}),
+      department: this.departments.find(d => { return d.id === e.department.id }),
       roles: this.roles.map(r => e.roles.map(r => r.id).includes(r.id))
     })
   }
@@ -120,17 +120,54 @@ export class EmployeeEditComponent implements OnInit {
       return;
     }
 
+    const formValue = Object.assign({}, this.employeeForm.value, {
+      roles: this.employeeForm.value.roles.map((selected, i) => {
+        return {
+          id: this.roles[i].id,
+          selected
+        }
+      })
+    });
+
     this.employeeService.UpdateEmployee({
       id: this.id, updateData: {
-        username: this.f.username.value, firstname: this.f.firstName.value, lastname: this.f.lastName.value, email: this.f.email.value, phoneNumber: this.f.phoneNumber.value,
-        birthday: this.f.birthday.value
+        username: formValue.username, firstname: formValue.firstName, lastname: formValue.lastName, email: formValue.email, phoneNumber: formValue.phoneNumber,
+        birthday: formValue.birthday
       }
     }).subscribe(data => {
-      this.modalService.open(this.modalSuccessContent);
-      this.router.navigate(['/employees']);
-    }, (error) => {
-      this.modalService.open(this.modalErrorContent);
-    }
-    );
+      if (formValue.department.id === this.employee.department.id) {
+          this.roleService.AddRoleToEmployee({ employeeId: formValue.employeeId, roleIds: formValue.roles.filter(function (role) { return role.selected === true }).map(roles => roles.id) }).subscribe(
+            data => {
+              alert("succescfully updated employee");
+              this.router.navigate(['/employees']);
+            },
+            error => {
+              alert(error);
+              return;
+            }
+          )
+      }
+      else{
+        forkJoin(
+          this.departmentService.AddEmployeeToDepartment({ departmentId: formValue.department.id, employeeId: formValue.employeeId }),
+          this.roleService.AddRoleToEmployee({ employeeId: formValue.employeeId, roleIds: formValue.roles.filter(function (role) { return role.selected === true }).map(roles => roles.id) })).subscribe(
+            data => {
+              alert("succescfully updated employee");
+              this.router.navigate(['/employees']);
+            },
+            error => {
+              alert(error);
+              return;
+            }
+          )
+      }
+    },
+      error => {
+        // console.log(error);
+        alert(error);
+        // this.modalService.open(this.modalErrorContent);
+        return;
+      }
+    )
   }
 }
