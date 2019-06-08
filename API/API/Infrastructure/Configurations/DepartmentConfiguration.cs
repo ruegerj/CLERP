@@ -85,7 +85,7 @@ namespace CLERP.API.Infrastructure.Configurations
                     CreatedBy = "system",
                     LastModified = DateTime.Now,
                     LastModifiedBy = "system",
-                    Guid = new Guid("{2D08DE41-25F6-4369-BACB-DE75F90CF2EA}"),
+                    Guid = new Guid("2D08DE41-25F6-4369-BACB-DE75F90CF2EA"),
                     Title = "Production",
                     Description = "The production department of the firm"
                 }

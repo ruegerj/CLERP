@@ -4,14 +4,16 @@ using CLERP.API.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CLERP.API.Migrations
 {
     [DbContext(typeof(ClerpContext))]
-    partial class ClerpContextModelSnapshot : ModelSnapshot
+    [Migration("20190608113324_AddedSeedDataFromRoles_Departments")]
+    partial class AddedSeedDataFromRoles_Departments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

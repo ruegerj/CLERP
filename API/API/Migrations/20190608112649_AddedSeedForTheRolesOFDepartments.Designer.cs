@@ -4,14 +4,16 @@ using CLERP.API.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CLERP.API.Migrations
 {
     [DbContext(typeof(ClerpContext))]
-    partial class ClerpContextModelSnapshot : ModelSnapshot
+    [Migration("20190608112649_AddedSeedForTheRolesOFDepartments")]
+    partial class AddedSeedForTheRolesOFDepartments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -315,9 +317,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("c0a1d8dc-9d37-4b68-ad4e-420e14fd29af"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(6391),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(1879),
                             Description = "The management of the firm",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(7290),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(2816),
                             LastModifiedBy = "system",
                             Title = "Management"
                         },
@@ -325,9 +327,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("4b7f2fb2-2726-49b3-b8ab-6f7b42120dee"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(9101),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(4763),
                             Description = "The finance department of the firm",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(9115),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(4777),
                             LastModifiedBy = "system",
                             Title = "Finance"
                         },
@@ -335,9 +337,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("98eb6ffe-57bb-4d49-ad13-23195a1325ee"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(9140),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(4803),
                             Description = "The hr department of the firm",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(9143),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(4806),
                             LastModifiedBy = "system",
                             Title = "HR"
                         },
@@ -345,9 +347,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("426a9547-086d-4847-a80e-00140da99723"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(9152),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(4816),
                             Description = "The sales department of the firm",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(9155),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(4819),
                             LastModifiedBy = "system",
                             Title = "Sales"
                         },
@@ -355,9 +357,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("273a60ce-7282-4141-9676-1c3040ec1303"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(9162),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(4828),
                             Description = "The purchase department of the firm",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(9164),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(4830),
                             LastModifiedBy = "system",
                             Title = "Purchase"
                         },
@@ -365,9 +367,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("7e645fd7-25df-4baa-898d-59963c4f4d43"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(9172),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(4839),
                             Description = "The logistics department of the firm",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(9175),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(4841),
                             LastModifiedBy = "system",
                             Title = "Logistic"
                         },
@@ -375,9 +377,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("2d08de41-25f6-4369-bacb-de75f90cf2ea"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(9182),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(4849),
                             Description = "The production department of the firm",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 902, DateTimeKind.Local).AddTicks(9184),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 123, DateTimeKind.Local).AddTicks(4851),
                             LastModifiedBy = "system",
                             Title = "Production"
                         });
@@ -433,10 +435,10 @@ namespace CLERP.API.Migrations
                             Guid = new Guid("0dfac9a3-f4b2-47f6-8f91-4e0198e8d6bf"),
                             Birthday = new DateTime(2001, 5, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 906, DateTimeKind.Local).AddTicks(9330),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 126, DateTimeKind.Local).AddTicks(9529),
                             Email = "admin@clerp.ch",
                             Firstname = "System",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 907, DateTimeKind.Local).AddTicks(1475),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 127, DateTimeKind.Local).AddTicks(989),
                             LastModifiedBy = "system",
                             Lastname = "Administrator",
                             Password = "AI1ZmgGoYudgP1w9VOvAIAnobk5IXBU3wC/Pfv/Xyg0Mr9PEgJPW5UBP9ScXzpEiVg==",
@@ -521,71 +523,6 @@ namespace CLERP.API.Migrations
                     b.HasIndex("DepartmentGuid");
 
                     b.ToTable("Roles_Departments");
-
-                    b.HasData(
-                        new
-                        {
-                            RoleGuid = new Guid("ed32b358-5eb5-41ad-8895-e65641f8d1bd"),
-                            DepartmentGuid = new Guid("c0a1d8dc-9d37-4b68-ad4e-420e14fd29af"),
-                            CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(1102),
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(1894),
-                            LastModifiedBy = "system"
-                        },
-                        new
-                        {
-                            RoleGuid = new Guid("d34ce4a4-6fae-4623-9cf9-7468a19781fb"),
-                            DepartmentGuid = new Guid("4b7f2fb2-2726-49b3-b8ab-6f7b42120dee"),
-                            CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(2653),
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(2666),
-                            LastModifiedBy = "system"
-                        },
-                        new
-                        {
-                            RoleGuid = new Guid("e0c8423a-581f-4be9-8493-1b20aee0673a"),
-                            DepartmentGuid = new Guid("98eb6ffe-57bb-4d49-ad13-23195a1325ee"),
-                            CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(2685),
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(2687),
-                            LastModifiedBy = "system"
-                        },
-                        new
-                        {
-                            RoleGuid = new Guid("b6bab4db-bd5d-4b34-a6e5-085204c16c79"),
-                            DepartmentGuid = new Guid("426a9547-086d-4847-a80e-00140da99723"),
-                            CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(2700),
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(2702),
-                            LastModifiedBy = "system"
-                        },
-                        new
-                        {
-                            RoleGuid = new Guid("58457e73-da9f-4f6e-b31b-7f89807e320c"),
-                            DepartmentGuid = new Guid("273a60ce-7282-4141-9676-1c3040ec1303"),
-                            CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(2712),
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(2714),
-                            LastModifiedBy = "system"
-                        },
-                        new
-                        {
-                            RoleGuid = new Guid("90f17bbe-edb8-4e0f-8492-b18d130ef058"),
-                            DepartmentGuid = new Guid("7e645fd7-25df-4baa-898d-59963c4f4d43"),
-                            CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(2728),
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(2730),
-                            LastModifiedBy = "system"
-                        },
-                        new
-                        {
-                            RoleGuid = new Guid("65231084-3178-4259-886c-4698a02c701d"),
-                            DepartmentGuid = new Guid("2d08de41-25f6-4369-bacb-de75f90cf2ea"),
-                            CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(2741),
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 952, DateTimeKind.Local).AddTicks(2743),
-                            LastModifiedBy = "system"
-                        });
                 });
 
             modelBuilder.Entity("CLERP.API.Domain.Models.Link.RoleEmployee", b =>
@@ -619,8 +556,8 @@ namespace CLERP.API.Migrations
                             RoleGuid = new Guid("324270ba-fc55-41de-95f2-943fc628c5ee"),
                             EmployeeGuid = new Guid("0dfac9a3-f4b2-47f6-8f91-4e0198e8d6bf"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 955, DateTimeKind.Local).AddTicks(3333),
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 955, DateTimeKind.Local).AddTicks(3347),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 180, DateTimeKind.Local).AddTicks(5098),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 180, DateTimeKind.Local).AddTicks(5112),
                             LastModifiedBy = "system"
                         });
                 });
@@ -819,9 +756,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("90f17bbe-edb8-4e0f-8492-b18d130ef058"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(665),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 158, DateTimeKind.Local).AddTicks(8990),
                             Description = "Employee from the logistics department",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(696),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 158, DateTimeKind.Local).AddTicks(9021),
                             LastModifiedBy = "system",
                             Name = "Logistic"
                         },
@@ -829,9 +766,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("d34ce4a4-6fae-4623-9cf9-7468a19781fb"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1569),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 158, DateTimeKind.Local).AddTicks(9959),
                             Description = "Employee from the finances department",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1579),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 158, DateTimeKind.Local).AddTicks(9968),
                             LastModifiedBy = "system",
                             Name = "Finance"
                         },
@@ -839,9 +776,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("58457e73-da9f-4f6e-b31b-7f89807e320c"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1596),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 158, DateTimeKind.Local).AddTicks(9985),
                             Description = "Employee from the purchases department",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1598),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 158, DateTimeKind.Local).AddTicks(9988),
                             LastModifiedBy = "system",
                             Name = "Purchase"
                         },
@@ -849,9 +786,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("324270ba-fc55-41de-95f2-943fc628c5ee"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1605),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 158, DateTimeKind.Local).AddTicks(9996),
                             Description = "Administrators of the app",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1607),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 158, DateTimeKind.Local).AddTicks(9999),
                             LastModifiedBy = "system",
                             Name = "SysAdmin"
                         },
@@ -859,9 +796,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("b6bab4db-bd5d-4b34-a6e5-085204c16c79"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1615),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 159, DateTimeKind.Local).AddTicks(7),
                             Description = "Employee from the sales department",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1617),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 159, DateTimeKind.Local).AddTicks(9),
                             LastModifiedBy = "system",
                             Name = "Sale"
                         },
@@ -869,9 +806,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("ed32b358-5eb5-41ad-8895-e65641f8d1bd"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1626),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 159, DateTimeKind.Local).AddTicks(19),
                             Description = "Employee from the management",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1628),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 159, DateTimeKind.Local).AddTicks(21),
                             LastModifiedBy = "system",
                             Name = "Management"
                         },
@@ -879,9 +816,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("e0c8423a-581f-4be9-8493-1b20aee0673a"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1635),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 159, DateTimeKind.Local).AddTicks(28),
                             Description = "Employee from the hr department",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1637),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 159, DateTimeKind.Local).AddTicks(31),
                             LastModifiedBy = "system",
                             Name = "HR"
                         },
@@ -889,9 +826,9 @@ namespace CLERP.API.Migrations
                         {
                             Guid = new Guid("65231084-3178-4259-886c-4698a02c701d"),
                             CreatedBy = "system",
-                            Creation = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1643),
+                            Creation = new DateTime(2019, 6, 8, 13, 26, 49, 159, DateTimeKind.Local).AddTicks(38),
                             Description = "Employee from the production department",
-                            LastModified = new DateTime(2019, 6, 8, 13, 33, 23, 935, DateTimeKind.Local).AddTicks(1645),
+                            LastModified = new DateTime(2019, 6, 8, 13, 26, 49, 159, DateTimeKind.Local).AddTicks(40),
                             LastModifiedBy = "system",
                             Name = "Production"
                         });
