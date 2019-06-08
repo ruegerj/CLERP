@@ -48,7 +48,7 @@ export class EmployeeEditComponent implements OnInit {
       email: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.email]],
       phoneNumber: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.pattern(ValidationConstans.PhoneNumberRegex)]],
       birthday: [{ value: '', disabled: !this.isEditing }, Validators.required],
-      department: [''],
+      department: [{ value: '', disabled: !this.isEditing }, Validators.required],
       roles: new FormArray([])
     });
 
@@ -57,7 +57,6 @@ export class EmployeeEditComponent implements OnInit {
     let getAllRoles = this.roleService.GetAllRoles();
     let getEmployee = this.employeeService.GetEmployeeById(this.id);
 
-
     this.route.params.subscribe(params => {
       this.id = params.id;
       forkJoin([getAllDepartements, getAllRoles]).subscribe(results => {
@@ -65,7 +64,6 @@ export class EmployeeEditComponent implements OnInit {
 
         this.employeeService.GetEmployeeById(params.id).subscribe(data => {
           this.employee = data;
-          console.log(this.employee);
           this.setFormValues(data);
         })
 
@@ -73,27 +71,6 @@ export class EmployeeEditComponent implements OnInit {
         this.addRoleCheckboxes();
       })
     });
-
-
-    // this.departmentService.GetAllDepartments().subscribe(data => {
-    //   this.departments = data.departments;
-    // });
-
-    // //Roles needed to build form
-    // this.roleService.GetAllRoles().subscribe(data => {
-    //   this.roles = data.roles;
-    //   this.addRoleCheckboxes();
-    // });
-
-
-
-    // if (this.id) {
-    //   this.employeeService.GetEmployeeById(this.id).subscribe(data => {
-    //     this.employee = data;
-    //     console.log(this.employee);
-    //     this.setFormValues(data);
-    //   })
-    // }
   }
 
 
@@ -103,7 +80,7 @@ export class EmployeeEditComponent implements OnInit {
 
   private addRoleCheckboxes() {
     this.roles.map(() => {
-      const control = new FormControl(false);
+      const control = new FormControl({value: false, disabled: !this.isEditing});
       (this.employeeForm.controls.roles as FormArray).push(control);
     });
   }
