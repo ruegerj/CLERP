@@ -20,7 +20,13 @@ export class EmployeesComponent implements OnInit {
 
   ngOnInit() {
     this.employeeServcie.GetAll().subscribe(data => { 
-      this.employees = data.employees; 
+      this.employees = data.employees.sort(function(a, b) {  
+        var x = a.username.toLowerCase();
+        var y = b.username.toLowerCase();
+        if (x < y) {return -1;}
+        if (x > y) {return 1;}
+        return 0;});
+
       this.filteredEmployees = this.employees; 
     });
   }
@@ -33,6 +39,26 @@ export class EmployeesComponent implements OnInit {
       return (employee.firstname.toLowerCase().includes(searchText)
         || employee.lastname.toLowerCase().includes(searchText)
         || employee.username.toLowerCase().includes(searchText));
+    })
+  }
+
+
+  deleteClicked(id: string) : void {
+    this.employeeServcie.DeleteEmployee(id).subscribe( data => {
+      alert("Employee with id: '" + id + "' was deleted succesfully");
+
+      this.employeeServcie.GetAll().subscribe(data => { 
+        this.employees = data.employees.sort(function(a, b) {  
+          var x = a.username.toLowerCase();
+          var y = b.username.toLowerCase();
+          if (x < y) {return -1;}
+          if (x > y) {return 1;}
+          return 0;}); 
+
+        this.filteredEmployees = this.employees; 
+      });
+    }, error => {
+      alert("Could not delete employee")
     })
   }
 }
