@@ -50,6 +50,8 @@ namespace CLERP.API.Features.v1.ProductTypeArea.Create
                 parents.ForEach(p => newProductType.Parents.Add(p));
             }
 
+            await _context.ProductTypes.AddAsync(newProductType, cancellationToken);
+
             await _context.SaveChangesAsync(cancellationToken);
 
             return new ProductTypeCreateResponse() { ProductTypeGuid = newProductType.Guid };
