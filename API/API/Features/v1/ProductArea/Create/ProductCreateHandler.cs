@@ -15,12 +15,10 @@ namespace CLERP.API.Features.v1.ProductArea.Create
     public class ProductCreateHandler : IRequestHandler<ProductCreateRequest, ProductCreateResponse>
     {
         private readonly ClerpContext _context;
-        private readonly IMapper _mapper;
 
-        public ProductCreateHandler(ClerpContext context, IMapper mapper)
+        public ProductCreateHandler(ClerpContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
         public async Task<ProductCreateResponse> Handle(ProductCreateRequest request, CancellationToken cancellationToken)
