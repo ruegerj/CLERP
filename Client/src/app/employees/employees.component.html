@@ -9,17 +9,17 @@
   <div class="card d-flex flex-row justify-content-end" *ngFor="let e of filteredEmployees">
     <a class="card-body text-dark card-link " [routerLink]="['/employeeEdit', e.id]">
       <div class="row">
-        <div class="col-md-4">First Name: {{e.firstname}}</div>
-        <div class="col-md-4">Last Name: {{e.lastname}}</div>
-        <div class="col-md-4">Email: {{e.email}}</div>
+        <div class="col-md-4"><b>First Name:</b> {{e.firstname}}</div>
+        <div class="col-md-4"><b>Last Name:</b> {{e.lastname}}</div>
+        <div class="col-md-4"><b>Email:</b> {{e.email}}</div>
       </div>
       <div class="row">
-        <div class="col-md-4">Birthday: {{e.birthday | date : 'yyyy-MM-dd'}}</div>
-        <div class="col-md-4">Username: {{e.username}}</div>
+        <div class="col-md-4"><b>Birthday:</b> {{e.birthday | date : 'yyyy-MM-dd'}}</div>
+        <div class="col-md-4"><b>Username:</b> {{e.username}}</div>
       </div>
     </a>
-    <div class="card-footer">
-      <button class="btn btn-outline-secondary h-100" (click)="deleteClicked(e.id)">Delete</button>
+    <div class="card-footer specialCardFooter">
+      <button class="btn btn-outline-secondary h-100 " (click)="deleteClicked(e.id)">Delete</button>
     </div>
   </div>
 </div>

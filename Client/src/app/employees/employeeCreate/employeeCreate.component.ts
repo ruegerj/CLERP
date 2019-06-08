@@ -1,13 +1,11 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EmployeeResponse, DepartmentResponse, RoleResponse } from '@_generated/models';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { EmployeeService, DepartmentService, RoleService } from '@_generated/services';
-import { NgbDateAdapter, NgbDateNativeAdapter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { ValidationConstans } from '@_models';
-import { mergeMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
-import { error } from 'util';
 
 @Component({
   selector: 'app-employeeCreate',
@@ -23,16 +21,12 @@ export class EmployeeCreateComponent implements OnInit {
   departments: Array<DepartmentResponse>;
   roles: Array<RoleResponse>;
 
-  // @ViewChild('modalSuccessContent') private modalSuccessContent: TemplateRef<any>;
-  // @ViewChild('modalErrorContent') private modalErrorContent: TemplateRef<any>;
-
 
   constructor(
     private employeeService: EmployeeService,
     private departmentService: DepartmentService,
     private roleService: RoleService,
     private formBuilder: FormBuilder,
-    private modalService: NgbModal,
     private router: Router,
   ) { }
 
@@ -93,35 +87,39 @@ export class EmployeeCreateComponent implements OnInit {
       })
     });
 
-    console.log(formValue);
-    console.log(formValue.department);
-    console.log(formValue.roles.filter(function (role) { return role.selected === true }).map(roles => roles.id));
-
-
     this.employeeService.CreateEmployee({
       firstname: formValue.firstName, lastname: formValue.lastName, email: formValue.email, phoneNumber: formValue.phoneNumber,
       birthday: formValue.birthday, username: formValue.username, password: formValue.password
     }).subscribe(data => {
-      forkJoin(
-        this.departmentService.AddEmployeeToDepartment({ departmentId: formValue.department.id, employeeId: data.employeeId }),
-        this.roleService.AddRoleToEmployee({ employeeId: data.employeeId, roleIds: formValue.roles.filter(function (role) { return role.selected === true }).map(roles => roles.id) })).subscribe(
+      if (formValue.roles.filter(function (role) { return role.selected === true }).length > 0) {
+        forkJoin(
+          this.departmentService.AddEmployeeToDepartment({ departmentId: formValue.department.id, employeeId: data.employeeId }),
+          this.roleService.AddRoleToEmployee({ employeeId: data.employeeId, roleIds: formValue.roles.filter(function (role) { return role.selected === true }).map(roles => roles.id) })).subscribe(
+            data => {
+              alert("succescfully created employee");
+              this.router.navigate(['/employees']);
+            },
+            error => {
+              alert(error);
+              return;
+            }
+          )
+      }
+      else {
+        this.departmentService.AddEmployeeToDepartment({ departmentId: formValue.department.id, employeeId: data.employeeId }).subscribe(
           data => {
-            // this.modalService.open(this.modalSuccessContent);
             alert("succescfully created employee");
             this.router.navigate(['/employees']);
           },
           error => {
-            // console.log(error);
             alert(error);
-            // this.modalService.open(this.modalErrorContent);
             return;
           }
         )
+      }
     },
       error => {
-        // console.log(error);
         alert(error);
-        // this.modalService.open(this.modalErrorContent);
         return;
       }
     )

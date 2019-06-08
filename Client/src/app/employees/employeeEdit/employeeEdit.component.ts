@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { NgbDateAdapter, NgbDateNativeAdapter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeService, DepartmentService, RoleService } from '@_generated/services';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,16 +23,12 @@ export class EmployeeEditComponent implements OnInit {
   public departments: Array<DepartmentResponse>;
   public roles: Array<RoleResponse>;
 
-  @ViewChild('modalSuccessContent') private modalSuccessContent: TemplateRef<any>;
-  @ViewChild('modalErrorContent') private modalErrorContent: TemplateRef<any>;
-
 
   constructor(
     private employeeService: EmployeeService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private modalService: NgbModal,
     private departmentService: DepartmentService,
     private roleService: RoleService
   ) {
@@ -136,7 +132,7 @@ export class EmployeeEditComponent implements OnInit {
       }
     }).subscribe(data => {
       if (formValue.department.id === this.employee.department.id) {
-          this.roleService.AddRoleToEmployee({ employeeId: formValue.employeeId, roleIds: formValue.roles.filter(function (role) { return role.selected === true }).map(roles => roles.id) }).subscribe(
+          this.roleService.AddRoleToEmployee({ employeeId: this.id, roleIds: formValue.roles.filter(function (role) { return role.selected === true }).map(roles => roles.id) }).subscribe(
             data => {
               alert("succescfully updated employee");
               this.router.navigate(['/employees']);
@@ -150,7 +146,7 @@ export class EmployeeEditComponent implements OnInit {
       else{
         forkJoin(
           this.departmentService.AddEmployeeToDepartment({ departmentId: formValue.department.id, employeeId: formValue.employeeId }),
-          this.roleService.AddRoleToEmployee({ employeeId: formValue.employeeId, roleIds: formValue.roles.filter(function (role) { return role.selected === true }).map(roles => roles.id) })).subscribe(
+          this.roleService.AddRoleToEmployee({ employeeId: this.id, roleIds: formValue.roles.filter(function (role) { return role.selected === true }).map(roles => roles.id) })).subscribe(
             data => {
               alert("succescfully updated employee");
               this.router.navigate(['/employees']);
@@ -163,9 +159,7 @@ export class EmployeeEditComponent implements OnInit {
       }
     },
       error => {
-        // console.log(error);
         alert(error);
-        // this.modalService.open(this.modalErrorContent);
         return;
       }
     )
