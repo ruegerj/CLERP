@@ -951,7 +951,12 @@
             Sample Controller
             </summary>
         </member>
-        <member name="P:CLERP.API.Features.v1.ProductArea.Create.ProductCreateResponse.ProductGuid">
+        <member name="P:CLERP.API.Features.v1.ProductArea.Create.ProductCreateResponseModel.SerialNumber">
+            <summary>
+            Serialnumber to match the new id to the product
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductArea.Create.ProductCreateResponseModel.ProductGuid">
             <summary>
             Id of the created product
             </summary>
@@ -972,6 +977,28 @@
             Gets a product by the id
             </summary>
             <param name="id">Id of the requested product</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.ProductArea.ProductController.CreateProduct(CLERP.API.Features.v1.ProductArea.Create.ProductCreateRequest)">
+            <summary>
+            Creates one or more new products
+            </summary>
+            <param name="createData">Data for creating new products</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.ProductArea.ProductController.UpdateProduct(CLERP.API.Features.v1.ProductArea.Update.ProductUpdateRequest,System.Guid)">
+            <summary>
+            Updates a product
+            </summary>
+            <param name="updateData">Data for updating a product</param>
+            <param name="id">Id of the product which should be updated</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.ProductArea.ProductController.DeleteProduct(System.Guid)">
+            <summary>
+            Deletes a product
+            </summary>
+            <param name="id">Id of the product</param>
             <returns></returns>
         </member>
         <member name="T:CLERP.API.Features.v1.ProductArea.ProductResponse">
@@ -1002,6 +1029,11 @@
         <member name="P:CLERP.API.Features.v1.ProductTypeArea.Create.ProductTypeCreateRequest.EAN">
             <summary>
             European Article Number
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.Create.ProductTypeCreateRequest.Image">
+            <summary>
+            Image as base64 string
             </summary>
         </member>
         <member name="P:CLERP.API.Features.v1.ProductTypeArea.Create.ProductTypeCreateRequest.ParentGuids">
@@ -1097,6 +1129,11 @@
             European articel number
             </summary>
         </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.ProductTypeResponse.Image">
+            <summary>
+            Image as base64 string
+            </summary>
+        </member>
         <member name="P:CLERP.API.Features.v1.ProductTypeArea.ProductTypeResponse.ChildGuids">
             <summary>
             All ids from the entities related as children to this product type
@@ -1152,9 +1189,9 @@
             Id of the department to role should be added to
             </summary>
         </member>
-        <member name="P:CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest.RoleId">
+        <member name="P:CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest.RoleIds">
             <summary>
-            Id of the role which should be added to the employee
+            Ids of the roles which should be added to the employee
             </summary>
         </member>
         <member name="P:CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest.EmployeeId">
@@ -1182,9 +1219,9 @@
             Id of the department to role should be removed from
             </summary>
         </member>
-        <member name="P:CLERP.API.Features.v1.RoleArea.RemoveFromEmployee.RoleRemoveFromEmployeeRequest.RoleId">
+        <member name="P:CLERP.API.Features.v1.RoleArea.RemoveFromEmployee.RoleRemoveFromEmployeeRequest.RoleIds">
             <summary>
-            Id of the role which should be removed from the employee
+            Ids of the roles which should be removed from the employee
             </summary>
         </member>
         <member name="P:CLERP.API.Features.v1.RoleArea.RemoveFromEmployee.RoleRemoveFromEmployeeRequest.EmployeeId">
@@ -1207,7 +1244,7 @@
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.AddRoleToEmployee(CLERP.API.Features.v1.RoleArea.AddToEmployee.RoleAddToEmployeeRequest)">
             <summary>
-            Add's a certain role to an employee
+            Add's one ore more certain roles to an employee
             </summary>
             <param name="roleAddEmployeeData">Data for adding a role to an employee</param>
             <returns></returns>
@@ -1236,7 +1273,7 @@
         </member>
         <member name="M:CLERP.API.Features.v1.RoleArea.RoleController.RemoveRoleFromEmployee(CLERP.API.Features.v1.RoleArea.RemoveFromEmployee.RoleRemoveFromEmployeeRequest)">
             <summary>
-            Removes a certain role from an employee
+            Removes one or more certain roles from an employee
             </summary>
             <param name="removeRoleFromEmployeeData">Data for removing a role from an employee</param>
             <returns></returns>
@@ -1373,6 +1410,16 @@
             <param name="cancellationToken">Optional Cancellation-Token</param>
             <returns>If found the entity with the provided Guid, else null</returns>
         </member>
+        <member name="T:CLERP.API.Infrastructure.Converters.TypeConverters.Base64ByteArrayConverter">
+            <summary>
+            Converts a base64 string to a byte[]
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Converters.TypeConverters.ByteArrayBase64Converter">
+            <summary>
+            Converts byte array to a base64 string
+            </summary>
+        </member>
         <member name="T:CLERP.API.Infrastructure.Exceptions.BadRequestException">
             <summary>
             Exception which, when thrown, returns an result with the HttpStatusCode 400 - BadRequest
@@ -1410,7 +1457,7 @@
             </summary>
             <param name="message"></param>
         </member>
-        <member name="P:CLERP.API.Infrastructure.Exceptions.BadRequestResponse.ErrorMessage">
+        <member name="P:CLERP.API.Infrastructure.Exceptions.BadRequestResponse.Message">
             <summary>
             Error message, which explains that something went wrong
             </summary>
