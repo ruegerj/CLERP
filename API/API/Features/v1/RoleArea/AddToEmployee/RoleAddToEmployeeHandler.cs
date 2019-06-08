@@ -23,6 +23,7 @@ namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
             // Load all requested roles including the employees which have these roles
             var roles = await _context.Roles.Where(r => request.RoleIds.Any(ri => ri == r.Guid))
                 .Include(r => r.Employees)
+                .Include(r => r.Departments)
                 .ToListAsync(cancellationToken);
 
             // check if count of requested roles match the count of found roles
@@ -38,10 +39,9 @@ namespace CLERP.API.Features.v1.RoleArea.AddToEmployee
                 throw new BadRequestException(); // employee to add role not found
             }
 
-            if (roles.Any(r => r.Employees.Any(er => er.EmployeeGuid == employee.Guid)))
-            {
-                throw new ConflictException("one or more roles are already added to this employee"); // one or more roles are already added to the employee
-            }
+            roles = roles.Where(r => !r.Employees.Any(re => re.EmployeeGuid == employee.Guid) 
+                && !r.Departments.Any(rd => rd.DepartmentGuid == employee.DepartmentGuid))
+                .ToList(); // filter roles which the employee (including via the department) doesnt have already
 
             roles.ForEach(r =>
             {
