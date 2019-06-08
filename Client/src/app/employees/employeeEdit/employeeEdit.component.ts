@@ -63,14 +63,14 @@ export class EmployeeEditComponent implements OnInit {
       forkJoin([getAllDepartements, getAllRoles]).subscribe(results => {
         this.departments = results[0].departments;
 
-        this.roles = results[1].roles;
-        this.addRoleCheckboxes();
-
         this.employeeService.GetEmployeeById(params.id).subscribe(data => {
           this.employee = data;
           console.log(this.employee);
           this.setFormValues(data);
         })
+
+        this.roles = results[1].roles;
+        this.addRoleCheckboxes();
       })
     });
 
@@ -110,15 +110,15 @@ export class EmployeeEditComponent implements OnInit {
 
 
   private setFormValues(e: EmployeeResponse) {
-    this.employeeForm.setValue({
+    this.employeeForm.patchValue({
       username: e.username,
       firstName: e.firstname,
       lastName: e.lastname,
       email: e.email,
       phoneNumber: e.phoneNumber,
       birthday: new Date(e.birthday),
-      department: this.departments.filter(function(departement) {return departement.id === e.id}),
-      roles: e.roles
+      department: this.departments.find(d => { return d.id === e.department.id}),
+      roles: this.roles.map(r => e.roles.map(r => r.id).includes(r.id))
     })
   }
 
