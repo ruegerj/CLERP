@@ -39,7 +39,8 @@ namespace CLERP.API.Infrastructure.Configurations
                 LastModified = DateTime.Now,
                 LastModifiedBy = "system",
                 Username = "admin",
-                Password = "AI1ZmgGoYudgP1w9VOvAIAnobk5IXBU3wC/Pfv/Xyg0Mr9PEgJPW5UBP9ScXzpEiVg=="
+                Password = "AI1ZmgGoYudgP1w9VOvAIAnobk5IXBU3wC/Pfv/Xyg0Mr9PEgJPW5UBP9ScXzpEiVg==",
+                DepartmentGuid = new Guid("C0A1D8DC-9D37-4B68-AD4E-420E14FD29AF") // Management department
             });
         }
     }
