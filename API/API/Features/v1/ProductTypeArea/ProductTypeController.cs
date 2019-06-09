@@ -105,19 +105,19 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         }
 
         /// <summary>
-        /// Adds a product type as a new child to a product type
+        /// Adds one or more product types as new children to a product type
         /// </summary>
-        /// <param name="productTypeAddChildData">Data for adding a new child product type</param>
+        /// <param name="productTypeAddChildData">Data for adding new children for a product type</param>
         /// <returns></returns>
         [HttpPost("add-child")]
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "Child successfuly added")]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "Children successfuly added")]
         [SwaggerResponse((int)HttpStatusCode.BadRequest,
             Type = typeof(BadRequestResponse),
             Description = "Product type or child product type coulnd't be found")]
         [SwaggerResponse((int)HttpStatusCode.Conflict,
             Type = typeof(ConflictResponse),
             Description = "Entered data conflicts with existing")]
-        public async Task<ActionResult> AddChildProductType([FromBody] AddChild.ProductTypeAddChildRequest productTypeAddChildData)
+        public async Task<ActionResult> AddChildProductType([FromBody] AddChildren.ProductTypeAddChildrenRequest productTypeAddChildData)
         {
             await _mediator.Send(productTypeAddChildData);
 
@@ -171,11 +171,11 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         [HttpDelete("remove-child")]
         [SwaggerResponse((int)HttpStatusCode.OK,
             Type = null,
-            Description = "Child successfuly removed from the product type")]
+            Description = "Children successfuly removed from the product type")]
         [SwaggerResponse((int)HttpStatusCode.BadRequest,
             Type = typeof(BadRequestResponse),
-            Description = "Child or base product type couln't be found, or the base product type doesn't have this product type as child")]
-        public async Task<ActionResult> RemoveChildProductType([FromBody] RemoveChild.ProductTypeRemoveChildRequest productTypeRemoveChildData)
+            Description = "Child or base product type couln't be found, or the base product type doesn't have one or more from this product type as child")]
+        public async Task<ActionResult> RemoveChildProductType([FromBody] RemoveChildren.ProductTypeRemoveChildrenRequest productTypeRemoveChildData)
         {
             await _mediator.Send(productTypeRemoveChildData);
 

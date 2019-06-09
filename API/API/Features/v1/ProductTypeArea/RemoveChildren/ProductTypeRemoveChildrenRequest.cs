@@ -1,16 +1,17 @@
 ﻿using MediatR;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
-namespace CLERP.API.Features.v1.ProductTypeArea.RemoveChild
+namespace CLERP.API.Features.v1.ProductTypeArea.RemoveChildren
 {
-    public class ProductTypeRemoveChildRequest : IRequest
+    public class ProductTypeRemoveChildrenRequest : IRequest
     {
         /// <summary>
-        /// Id of the child product type which should be removed
+        /// Ids of the children product types which should be removed
         /// </summary>
-        [JsonProperty("childId")]
-        public Guid ChildId { get; set; }
+        [JsonProperty("childIds")]
+        public IEnumerable<Guid> ChildIds { get; set; }
 
         /// <summary>
         /// Id of the product type which the child should be removed from

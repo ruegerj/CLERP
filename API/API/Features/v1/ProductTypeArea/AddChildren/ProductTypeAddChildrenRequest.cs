@@ -1,16 +1,17 @@
 ﻿using MediatR;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
-namespace CLERP.API.Features.v1.ProductTypeArea.AddChild
+namespace CLERP.API.Features.v1.ProductTypeArea.AddChildren
 {
-    public class ProductTypeAddChildRequest : IRequest
+    public class ProductTypeAddChildrenRequest : IRequest
     {
         /// <summary>
-        /// Id of the new child product type
+        /// Ids from the new children for the product type
         /// </summary>
-        [JsonProperty("childId")]
-        public Guid ChildId { get; set; }
+        [JsonProperty("childIds")]
+        public IEnumerable<Guid> ChildIds { get; set; }
 
         /// <summary>
         /// Id of the product type which the child product type should be added to
