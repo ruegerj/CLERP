@@ -13,6 +13,7 @@ namespace CLERP.API.Features.v1.EmployeeArea
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
+    [Authorize(Roles = "SysAdmin, Management, HR")]
     [ValidateModel]
     public class EmployeeController : ControllerBase
     {

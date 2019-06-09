@@ -3,6 +3,7 @@ using CLERP.API.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,21 +24,24 @@ namespace CLERP.API.Infrastructure.Swagger.Filter
                 operation.Responses.Add("422", new Response() { Description = "Validation failed", Schema = validationFailedResponseSchema });
             }
 
-            // register Unauthorized and Forbiden responses if there isn't an AllowAnonymous attribute or an specific Authorize attribute
+            // register Unauthorized and Forbiden responses if there isn't an AllowAnonymous attribute or a specific Authorize attribute
             if (!context.MethodInfo.GetCustomAttributes(true).Any(attr => attr is AuthorizeAttribute) 
-                && !context.MethodInfo.GetCustomAttributes(true).Any(attr => attr is AllowAnonymousAttribute))
+                && !context.MethodInfo.DeclaringType.CustomAttributes.Any(attr => attr.AttributeType.Name == nameof(AuthorizeAttribute)) // check controller
+                && !context.MethodInfo.GetCustomAttributes(true).Any(attr => attr is AllowAnonymousAttribute)
+                && !context.MethodInfo.DeclaringType.CustomAttributes.Any(attr => attr.AttributeType.Name == nameof(AllowAnonymousAttribute))) // check controller
             {
                 operation.Responses.Add("401", new Response() { Description = "Unauthorized" });
                 operation.Responses.Add("403", new Response() { Description = "Forbidden" });
 
                 // register required auth type for operation
-                var operationAuth = new Dictionary<string, IEnumerable<string>>
+                operation.Security = new List<IDictionary<string, IEnumerable<string>>>
                 {
-                    { "Bearer", new string[] { } }
+                    new Dictionary<string, IEnumerable<string>>
+                    {
+                        {"Bearer", Array.Empty<string>()}
+                    }
                 };
-
-                operation.Security = new List<IDictionary<string, IEnumerable<string>>>() { operationAuth };
-            }
+            }           
 
             // Internal Server Error (500)
             var internalSeverErrorResponseSchema = context.SchemaRegistry.GetOrRegister(typeof(MessageResponse));

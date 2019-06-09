@@ -5,6 +5,7 @@ using CLERP.API.Infrastructure.Contexts;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,6 +45,7 @@ namespace CLERP.API.Features.v1.ProductTypeArea.Update
             productType.Description = request.Description;
             productType.EAN = request.EAN;
             productType.Price = request.Price;
+            productType.Image = Convert.FromBase64String(request.Image);
 
             await _context.SaveChangesAsync(cancellationToken);
 
