@@ -4,7 +4,7 @@ import { EmployeeService, DepartmentService, RoleService } from '@_generated/ser
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeResponse, DepartmentResponse, RoleResponse } from '@_generated/models';
-import { ValidationConstans } from '@_models';
+import { ValidationConstants } from '@_models';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -38,11 +38,11 @@ export class EmployeeEditComponent implements OnInit {
 
   ngOnInit() {
     this.employeeForm = this.formBuilder.group({
-      username: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstans.MinUsernameLength), Validators.maxLength(ValidationConstans.MaxUsernameLength)]],
-      firstName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
-      lastName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
+      username: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstants.MinUsernameLength), Validators.maxLength(ValidationConstants.MaxUsernameLength)]],
+      firstName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstants.MinNameLength), Validators.maxLength(ValidationConstants.MaxNameLength)]],
+      lastName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstants.MinNameLength), Validators.maxLength(ValidationConstants.MaxNameLength)]],
       email: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.email]],
-      phoneNumber: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.pattern(ValidationConstans.PhoneNumberRegex)]],
+      phoneNumber: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.pattern(ValidationConstants.PhoneNumberRegex)]],
       birthday: [{ value: '', disabled: !this.isEditing }, Validators.required],
       department: [{ value: '', disabled: !this.isEditing }, Validators.required],
       roles: new FormArray([])

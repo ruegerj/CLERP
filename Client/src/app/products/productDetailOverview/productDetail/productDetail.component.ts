@@ -3,7 +3,7 @@ import { Product } from '@_models/product';
 import { ProductTypeService } from '@_generated/services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductTypeResponse } from '@_generated/models';
-import { ValidationConstans } from '@_models';
+import { ValidationConstants } from '@_models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
@@ -19,6 +19,10 @@ export class ProductDetailComponent implements OnInit {
   public isEditing: boolean;
   public productForm: FormGroup;
 
+  public imagePath;
+  imgURL: any;
+  public message: string;
+
   //@Input() currentId: string;
   private currentId: string;
 
@@ -30,35 +34,56 @@ export class ProductDetailComponent implements OnInit {
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute 
+    private route: ActivatedRoute
   ) {
     this.isEditing = false;
-
-    this.route.params.subscribe(params => {
-      this.currentId = params.id;
-      this.ngOnInit();
-    });
   }
 
   ngOnInit() {
-
     this.productForm = this.formBuilder.group({
-      productName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
+      productName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstants.MinNameLength), Validators.maxLength(ValidationConstants.MaxNameLength)]],
       ean: [{ value: '', disabled: !this.isEditing }, Validators.required],
       price: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.min(0.01)]],
       description: [{ value: '', disabled: !this.isEditing }]
     });
 
-    this.productTypeService.GetProductTypeById(this.currentId).subscribe(data => {
-      console.log(data);
-      this.product = data;
-      this.setFormValues(data);
+    this.route.params.subscribe(params => {
+      this.currentId = params.id;
+      this.productTypeService.GetProductTypeById(this.currentId).subscribe(data => {
+        console.log(data);
+        this.imgURL = "data:image/png;base64," + data.imageBase64;
+        this.product = data;
+        this.setFormValues(data);
+      });
     });
   }
 
 
   // convenience getter for easy access to form fields
   get f() { return this.productForm.controls; }
+
+  // gett for ValidationConstants
+  get valditationConstants() { return ValidationConstants; }
+
+  preview(files) {
+    if (files.length === 0)
+      return;
+
+    var mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported.";
+      return;
+    }
+
+    var reader = new FileReader();
+    this.imagePath = files;
+
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+      this.imgURL.replace(/^data:image\/[a-z]+;base64,/, "");
+    }
+  }
 
 
   private setFormValues(e: ProductTypeResponse) {

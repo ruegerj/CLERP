@@ -1,7 +1,7 @@
 <div class="p-5">
   <form [formGroup]="productTypeForm">
     <input style="display: none" type="file" accept="image/*" class="form-control"
-      (change)="preview(file.files)" [ngClass]="{ 'is-invalid': submitted && f.productName.errors }" #file>
+      (change)="preview(file.files)" #file>
 
     <div class="form-group row">
       <img style="max-height: 15em" id="productImage" class="image-fluid rounded fit-image p-3 offset-3 h-100" [src]="imgURL" onError="this.src='./assets/images/noImageFound.gif';" alt="Product Image" (click)="file.click()">

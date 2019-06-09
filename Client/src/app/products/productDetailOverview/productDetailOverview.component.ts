@@ -1,10 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductTypeService } from '@_generated/services';
-import { ActivatedRoute, Route, Router, NavigationEnd, NavigationStart } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidationConstans } from '@_models';
-import { ProductTypeResponse } from '@_generated/models';
-import { Observable, of, Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-productDetailOverview',

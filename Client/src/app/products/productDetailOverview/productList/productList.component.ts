@@ -19,20 +19,19 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productTypeService: ProductTypeService,
     private route: ActivatedRoute) {
-      this.route.params.subscribe(params => {
-        this.currentId = params.id;
-        this.ngOnInit();
-      });
-     }
 
-  ngOnInit() {
-    if (this.currentId) {
-      this.productTypeService.GetAllChildrenFromProductType(this.currentId).subscribe(data => {
-        this.childProducts = data.children;
-      }, error => {
-        alert(error);
-      });
-    }
   }
 
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.currentId = params.id;
+      if (this.currentId) {
+        this.productTypeService.GetAllChildrenFromProductType(this.currentId).subscribe(data => {
+          this.childProducts = data.children;
+        }, error => {
+          alert(error);
+        });
+      }
+    });
+  }
 }

@@ -3,7 +3,7 @@ import { ProductTypeResponse } from '@_generated/models';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProductTypeService } from '@_generated/services';
 import { Router } from '@angular/router';
-import { ValidationConstans as ValidationConstants } from '@_models';
+import { ValidationConstants } from '@_models';
 
 @Component({
   selector: 'app-productCreate',
@@ -33,8 +33,6 @@ export class ProductCreateComponent implements OnInit {
       price: ['', [Validators.required, Validators.min(0.01)]],
       description: ['']
     });
-
-    console.log(this.productTypeForm.controls['productName'].errors);
   }
 
 
