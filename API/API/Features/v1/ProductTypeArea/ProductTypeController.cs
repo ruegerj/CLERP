@@ -149,7 +149,7 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// </summary>
         /// <param name="productTypeRemoveParentData">Data for removing one or more parents from the base product type</param>
         /// <returns></returns>
-        [HttpDelete("remove-parent")]
+        [HttpDelete("remove-parents")]
         [SwaggerResponse((int)HttpStatusCode.OK,
             Type = null,
             Description = "Parents successfuly removed from the product type")]
