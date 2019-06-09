@@ -20,6 +20,10 @@ namespace CLERP.API.Features.v1.ProductTypeArea.Update
                 .NotNull()
                 .NotEmpty()
                 .GreaterThan(ValidationDefinitions.ProductTypePriceMin);
+
+            RuleFor(pt => pt.Image)
+                .Must(ValidationDefinitions.BeBase64)
+                .When(pt => !string.IsNullOrEmpty(pt.Image));
         }
     }
 }

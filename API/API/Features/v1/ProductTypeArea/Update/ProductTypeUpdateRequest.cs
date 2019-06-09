@@ -23,5 +23,11 @@ namespace CLERP.API.Features.v1.ProductTypeArea.Update
 
         [JsonProperty("price")]
         public decimal Price { get; set; }
+
+        /// <summary>
+        /// Image as base64 string
+        /// </summary>
+        [JsonProperty("imageBase64")]
+        public string Image { get; set; }
     }
 }

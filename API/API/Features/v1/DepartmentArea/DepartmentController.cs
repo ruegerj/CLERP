@@ -1,6 +1,7 @@
 ﻿using CLERP.API.Infrastructure.Attributes;
 using CLERP.API.Infrastructure.Exceptions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
@@ -12,6 +13,7 @@ namespace CLERP.API.Features.v1.DepartmentArea
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
+    [Authorize(Roles = "SysAdmin, Management")]
     [ValidateModel]
     public class DepartmentController : ControllerBase
     {
