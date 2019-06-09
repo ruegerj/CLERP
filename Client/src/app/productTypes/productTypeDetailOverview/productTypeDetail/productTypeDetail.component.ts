@@ -1,29 +1,26 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
-import { Product } from '@_models/product';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ProductTypeService } from '@_generated/services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductTypeResponse } from '@_generated/models';
 import { ValidationConstants } from '@_models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-productDetail',
-  templateUrl: './productDetail.component.html',
-  styleUrls: ['./productDetail.component.scss']
+  selector: 'app-productTypeDetail',
+  templateUrl: './productTypeDetail.component.html',
+  styleUrls: ['./productTypeDetail.component.scss']
 })
-export class ProductDetailComponent implements OnInit {
-  public product: ProductTypeResponse;
+export class ProductTypeDetailComponent implements OnInit {
+  public productType: ProductTypeResponse;
   public submitted: boolean;
   public isEditing: boolean;
-  public productForm: FormGroup;
+  public productTypeForm: FormGroup;
 
   public imagePath;
   imgURL: any;
   public message: string;
 
-  //@Input() currentId: string;
   private currentId: string;
 
   @ViewChild('modalSuccessContent') private modalSuccessContent: TemplateRef<any>;
@@ -40,8 +37,8 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productForm = this.formBuilder.group({
-      productName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstants.MinNameLength), Validators.maxLength(ValidationConstants.MaxNameLength)]],
+    this.productTypeForm = this.formBuilder.group({
+      productTypeName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstants.MinNameLength), Validators.maxLength(ValidationConstants.MaxNameLength)]],
       ean: [{ value: '', disabled: !this.isEditing }, Validators.required],
       price: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.min(0.01)]],
       description: [{ value: '', disabled: !this.isEditing }]
@@ -52,7 +49,7 @@ export class ProductDetailComponent implements OnInit {
       this.productTypeService.GetProductTypeById(this.currentId).subscribe(data => {
         console.log(data);
         this.imgURL = "data:image/png;base64," + data.imageBase64;
-        this.product = data;
+        this.productType = data;
         this.setFormValues(data);
       });
     });
@@ -60,7 +57,7 @@ export class ProductDetailComponent implements OnInit {
 
 
   // convenience getter for easy access to form fields
-  get f() { return this.productForm.controls; }
+  get f() { return this.productTypeForm.controls; }
 
   // gett for ValidationConstants
   get valditationConstants() { return ValidationConstants; }
@@ -87,11 +84,11 @@ export class ProductDetailComponent implements OnInit {
 
 
   private setFormValues(e: ProductTypeResponse) {
-    this.productForm.setValue({
-      productName: this.product.name,
-      ean: this.product.ean,
-      price: this.product.price,
-      description: this.product.Description
+    this.productTypeForm.setValue({
+      productTypeName: this.productType.name,
+      ean: this.productType.ean,
+      price: this.productType.price,
+      description: this.productType.Description
     });
   }
 
@@ -100,20 +97,20 @@ export class ProductDetailComponent implements OnInit {
   editClicked(): void {
     this.isEditing = true;
     this.submitted = false;
-    this.productForm.enable();
+    this.productTypeForm.enable();
   }
 
   cancelClicked(): void {
     this.isEditing = false;
     this.submitted = false;
-    this.productForm.disable();
-    this.setFormValues(this.product);
+    this.productTypeForm.disable();
+    this.setFormValues(this.productType);
   }
 
   updateClicked(modalSuccessContent): void {
     this.submitted = true;
 
-    if (this.productForm.invalid) {
+    if (this.productTypeForm.invalid) {
       return;
     }
 
@@ -125,10 +122,10 @@ export class ProductDetailComponent implements OnInit {
         price: this.f.price.value, description: this.f.description.value
       }
     }).subscribe(data => {
-      this.modalService.open(this.modalSuccessContent);
-      this.router.navigate(['/products']);
+      alert("Producttype updated succesfully");
+      this.router.navigate(['/productTypes']);
     }, (error) => {
-      this.modalService.open(this.modalErrorContent);
+      alert(error);
     }
     );
   }

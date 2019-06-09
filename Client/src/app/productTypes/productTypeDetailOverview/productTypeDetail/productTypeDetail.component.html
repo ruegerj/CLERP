@@ -1,5 +1,5 @@
 <div class="p-5">
-  <form [formGroup]="productForm">
+  <form [formGroup]="productTypeForm">
     <input style="display: none" type="file" accept="image/*" class="form-control" (change)="preview(file.files)" #file>
 
     <div class="form-group row">
@@ -10,16 +10,17 @@
     <div class="form-group row">
       <span class="offset-3 px-3" style="color:red;" *ngIf="message">{{message}}</span>
     </div>
+    
     <div class="form-group row">
-      <label for="productName" class="col-md-3 col-form-label text-left">Product Name</label>
+      <label for="productTypeName" class="col-md-3 col-form-label text-left">Name</label>
       <div class="col-md-9">
-        <input type="text" class="form-control" formControlName="productName"
-          [ngClass]="{ 'is-invalid': submitted && f.productName.errors }">
+        <input type="text" class="form-control" formControlName="productTypeName"
+          [ngClass]="{ 'is-invalid': submitted && f.productTypeName.errors }">
       </div>
     </div>
-    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productForm.controls['productName'].errors?.required">Name is required.</div>
-    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productForm.controls['productName'].errors?.minlength">Minimum length is {{valditationConstants.MinNameLength}}</div>
-    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productForm.controls['productName'].errors?.maxlength">Maximum length is {{valditationConstants.MaxNameLength}}</div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && f['productTypeName'].errors?.required">Name is required.</div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && f['productTypeName'].errors?.minlength">Minimum length is {{valditationConstants.MinNameLength}}</div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && f['productTypeName'].errors?.maxlength">Maximum length is {{valditationConstants.MaxNameLength}}</div>
 
     <div class="form-group row">
       <label for="ean" class="col-md-3 col-form-label text-left">EAN</label>
@@ -28,16 +29,16 @@
           [ngClass]="{ 'is-invalid': submitted && f.ean.errors }">
       </div>
     </div>
-    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productForm.controls['ean'].errors?.required">EAN is required.</div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && f['ean'].errors?.required">EAN is required.</div>
 
     <div class="form-group row">
       <label for="price" class="col-md-3 col-form-label text-left">Price</label>
       <div class="col-md-9">
-        <input type="number" class="form-control" [value]="productForm.get('price').value" step="0.01"
+        <input type="number" class="form-control" [value]="productTypeForm.get('price').value" step="0.01"
           formControlName="price" [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
       </div>
     </div>
-    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productForm.controls['price'].errors?.required">Price is required.</div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && f['price'].errors?.required">Price is required.</div>
 
     <div class="form-group row">
       <label for="description" class="col-md-3 col-form-label text-left">Description</label>
@@ -53,7 +54,7 @@
         <div class="row justify-content-between px-3">
           <button *ngIf="!isEditing" type="button" class="btn btn-outline-secondary col-md-4"
             (click)="editClicked()">Edit</button>
-          <a *ngIf="!isEditing" class="btn btn-outline-secondary col-md-4" [routerLink]="'/products'">Back</a>
+          <a *ngIf="!isEditing" class="btn btn-outline-secondary col-md-4" [routerLink]="'/productTypes'">Back</a>
 
           <button *ngIf="isEditing" type="button" class="btn btn-outline-secondary col-md-4"
             (click)="updateClicked()">Update</button>

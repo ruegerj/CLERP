@@ -6,12 +6,12 @@ import { Router } from '@angular/router';
 import { ValidationConstants } from '@_models';
 
 @Component({
-  selector: 'app-productCreate',
-  templateUrl: './productCreate.component.html',
-  styleUrls: ['./productCreate.component.scss']
+  selector: 'app-productTypeCreate',
+  templateUrl: './productTypeCreate.component.html',
+  styleUrls: ['./productTypeCreate.component.scss']
 })
-export class ProductCreateComponent implements OnInit {
-  public product: ProductTypeResponse = {};
+export class ProductTypeCreateComponent implements OnInit {
+  public productType: ProductTypeResponse = {};
   public submitted: boolean;
   public productTypeForm: FormGroup;
 
@@ -27,8 +27,8 @@ export class ProductCreateComponent implements OnInit {
 
   ngOnInit() {
     this.productTypeForm = this.formBuilder.group({
-      productImage: [''],
-      productName: ['', [Validators.required, Validators.minLength(ValidationConstants.MinNameLength), Validators.maxLength(ValidationConstants.MaxNameLength)]],
+      productTypeImage: [''],
+      productTypeName: ['', [Validators.required, Validators.minLength(ValidationConstants.MinNameLength), Validators.maxLength(ValidationConstants.MaxNameLength)]],
       ean: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0.01)]],
       description: ['']
@@ -57,7 +57,7 @@ export class ProductCreateComponent implements OnInit {
 
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
-      this.f.productImage.setValue(reader.result);
+      this.f.productTypeImage.setValue(reader.result);
       this.imgURL = reader.result;
     }
   }
@@ -73,10 +73,10 @@ export class ProductCreateComponent implements OnInit {
 
     this.productTypeService.CreateProductType({
       imageBase64: this.imgURL.replace(/^data:image\/[a-z]+;base64,/, ""),
-      name: this.f.productName.value, ean: this.f.ean.value, price: this.f.price.value, description: this.f.description.value
+      name: this.f.productTypeName.value, ean: this.f.ean.value, price: this.f.price.value, description: this.f.description.value
     }).subscribe(data => {
-      alert("Product created succesfully");
-      this.router.navigate(['/products']);
+      alert("ProductType created succesfully");
+      this.router.navigate(['/productTypes']);
     }, (error) => {
       alert(error);
     })

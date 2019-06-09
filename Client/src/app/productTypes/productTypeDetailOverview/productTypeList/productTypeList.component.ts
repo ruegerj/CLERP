@@ -5,16 +5,16 @@ import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-productList',
-  templateUrl: './productList.component.html',
-  styleUrls: ['./productList.component.scss']
+  selector: 'app-productTypeList',
+  templateUrl: './productTypeList.component.html',
+  styleUrls: ['./productTypeList.component.scss']
 })
-export class ProductListComponent implements OnInit {
+export class ProductTypeListComponent implements OnInit {
 
 
   // @Input() currentId: string;
   private currentId: string;
-  public childProducts: Array<ProductTypeResponse>;
+  public childProductTypes: Array<ProductTypeResponse>;
 
   constructor(
     private productTypeService: ProductTypeService,
@@ -27,7 +27,7 @@ export class ProductListComponent implements OnInit {
       this.currentId = params.id;
       if (this.currentId) {
         this.productTypeService.GetAllChildrenFromProductType(this.currentId).subscribe(data => {
-          this.childProducts = data.children;
+          this.childProductTypes = data.children;
         }, error => {
           alert(error);
         });
