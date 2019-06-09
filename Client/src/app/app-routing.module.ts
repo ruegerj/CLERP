@@ -9,12 +9,12 @@ import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreat
 import { ProductCreateComponent } from '@products/productCreate/productCreate.component';
 
 const routes: Routes = [
-  { 
-    path: '', 
+  {
+    path: '',
     component: HomeComponent
   },
-  { 
-    path: 'employees', 
+  {
+    path: 'employees',
     component: EmployeesComponent,
     canActivate: [AuthGuard],
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.HR]}
@@ -31,34 +31,35 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.HR]}
   },
-  { 
-    path: 'products', 
+  {
+    path: 'products',
     component: ProductsComponent,
     canActivate: [AuthGuard],
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
   },
-  { 
-    path: 'productCreate', 
+  {
+    path: 'productCreate',
     component: ProductCreateComponent,
     canActivate: [AuthGuard],
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
   },
-  { 
-    path: 'productDetailOverview/:id', 
+  {
+    path: 'productDetailOverview/:id',
     component: ProductDetailOverviewComponent,
     canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always',
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
   },
-  //all else, redirect to home
-  //TODO redirect to error page
-  { 
-    path: '**', 
-    redirectTo: '' 
+  // all else, redirect to home
+  // TODO redirect to error page
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CLERP.API.Domain.Models;
 using CLERP.API.Infrastructure.Converters.TypeConverters;
+using System.Collections.Generic;
 
 namespace CLERP.API.Features.v1.ProductTypeArea
 {

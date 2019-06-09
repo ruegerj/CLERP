@@ -12,6 +12,7 @@ import { ProductTypeCreateResponse } from '../models/product-type-create-respons
 import { ProductTypeCreateRequest } from '../models/product-type-create-request';
 import { ProductTypeResponse } from '../models/product-type-response';
 import { ProductTypeUpdateRequest } from '../models/product-type-update-request';
+import { ProductTypeGetAllChildrenResponse } from '../models/product-type-get-all-children-response';
 import { ProductTypeAddParentRequest } from '../models/product-type-add-parent-request';
 import { ProductTypeAddChildRequest } from '../models/product-type-add-child-request';
 import { ProductTypeRemoveParentRequest } from '../models/product-type-remove-parent-request';
@@ -25,6 +26,7 @@ class ProductTypeService extends __BaseService {
   static readonly GetProductTypeByIdPath = '/api/v1/ProductType/{id}';
   static readonly UpdateProductTypePath = '/api/v1/ProductType/{id}';
   static readonly DeleteProductTypePath = '/api/v1/ProductType/{id}';
+  static readonly GetAllChildrenFromProductTypePath = '/api/v1/ProductType/children/{id}';
   static readonly AddParentProductTypePath = '/api/v1/ProductType/add-parent';
   static readonly AddChildProductTypePath = '/api/v1/ProductType/add-child';
   static readonly RemoveParentProductTypePath = '/api/v1/ProductType/remove-parent';
@@ -220,6 +222,42 @@ class ProductTypeService extends __BaseService {
   DeleteProductType(id: string): __Observable<null> {
     return this.DeleteProductTypeResponse(id).pipe(
       __map(_r => _r.body as null)
+    );
+  }
+
+  /**
+   * @param id Id of the parent product type
+   * @return Success
+   */
+  GetAllChildrenFromProductTypeResponse(id: string): __Observable<__StrictHttpResponse<ProductTypeGetAllChildrenResponse>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/api/v1/ProductType/children/${id}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ProductTypeGetAllChildrenResponse>;
+      })
+    );
+  }
+  /**
+   * @param id Id of the parent product type
+   * @return Success
+   */
+  GetAllChildrenFromProductType(id: string): __Observable<ProductTypeGetAllChildrenResponse> {
+    return this.GetAllChildrenFromProductTypeResponse(id).pipe(
+      __map(_r => _r.body as ProductTypeGetAllChildrenResponse)
     );
   }
 

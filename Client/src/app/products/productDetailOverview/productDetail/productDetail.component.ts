@@ -5,7 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductTypeResponse } from '@_generated/models';
 import { ValidationConstans } from '@_models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-productDetail',
@@ -18,7 +19,8 @@ export class ProductDetailComponent implements OnInit {
   public isEditing: boolean;
   public productForm: FormGroup;
 
-  @Input() id: string;
+  //@Input() currentId: string;
+  private currentId: string;
 
   @ViewChild('modalSuccessContent') private modalSuccessContent: TemplateRef<any>;
   @ViewChild('modalErrorContent') private modalErrorContent: TemplateRef<any>;
@@ -27,12 +29,19 @@ export class ProductDetailComponent implements OnInit {
     private productTypeService: ProductTypeService,
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute 
   ) {
     this.isEditing = false;
+
+    this.route.params.subscribe(params => {
+      this.currentId = params.id;
+      this.ngOnInit();
+    });
   }
 
   ngOnInit() {
+
     this.productForm = this.formBuilder.group({
       productName: [{ value: '', disabled: !this.isEditing }, [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
       ean: [{ value: '', disabled: !this.isEditing }, Validators.required],
@@ -40,14 +49,11 @@ export class ProductDetailComponent implements OnInit {
       description: [{ value: '', disabled: !this.isEditing }]
     });
 
-
-    if (this.id) {
-      this.productTypeService.GetProductTypeById(this.id).subscribe(data => {
-        console.log(data);
-        this.product = data;
-        this.setFormValues(data);
-      })
-    }
+    this.productTypeService.GetProductTypeById(this.currentId).subscribe(data => {
+      console.log(data);
+      this.product = data;
+      this.setFormValues(data);
+    });
   }
 
 
@@ -89,7 +95,7 @@ export class ProductDetailComponent implements OnInit {
     console.log(this.f);
 
     this.productTypeService.UpdateProductType({
-      id: this.id, updateData: {
+      id: this.currentId, updateData: {
         name: this.f.productName.value, ean: this.f.ean.value,
         price: this.f.price.value, description: this.f.description.value
       }

@@ -1051,6 +1051,16 @@
             Id of the created product type
             </summary>
         </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.GetAllChildren.ProductTypeGetAllChildrenRequest.ParentGuid">
+            <summary>
+            Id of the parent product which children shoulb be loaded
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.GetAllChildren.ProductTypeGetAllChildrenResponse.Children">
+            <summary>
+            All first level children of the product type
+            </summary>
+        </member>
         <member name="T:CLERP.API.Features.v1.ProductTypeArea.GetAll.ProductTypeGetAllRequest">
             <summary>
             Empty class just for meadiatR mapping
@@ -1067,6 +1077,13 @@
             Gets a product type by the id
             </summary>
             <param name="id">Id of the product type</param>
+            <returns></returns>
+        </member>
+        <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.GetAllChildrenFromProductType(System.Guid)">
+            <summary>
+            Gets all first level children of a product type
+            </summary>
+            <param name="id">Id of the parent product type</param>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.CreateProductType(CLERP.API.Features.v1.ProductTypeArea.Create.ProductTypeCreateRequest)">

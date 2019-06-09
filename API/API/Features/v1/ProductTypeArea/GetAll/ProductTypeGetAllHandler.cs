@@ -22,22 +22,9 @@ namespace CLERP.API.Features.v1.ProductTypeArea.GetAll
 
         public async Task<ProductTypeGetAllResponse> Handle(ProductTypeGetAllRequest request, CancellationToken cancellationToken)
         {
-            var productTypes = await _context.ProductTypes
-                .Include(pt => pt.Children)
-                .Include(pt => pt.Parents).ToListAsync(cancellationToken);
+            var productTypes = await _context.ProductTypes.ToListAsync(cancellationToken);
 
-            var productTypeDtos = productTypes.Select(pt =>
-            {
-                var productTypeDto = _mapper.Map<ProductType, ProductTypeResponse>(pt);
-
-                // Fill parent and child id collections
-                productTypeDto.ChildGuids = pt.Children.Select(c => c.ChildGuid);
-                productTypeDto.ParentGuids = pt.Parents.Select(p => p.ParentGuid);
-
-                return productTypeDto;
-            });
-
-            return new ProductTypeGetAllResponse() { ProductTypes = productTypeDtos };
+            return new ProductTypeGetAllResponse() { ProductTypes = productTypes.Select(pt => _mapper.Map<ProductTypeResponse>(pt)) };
         }
     }
 }

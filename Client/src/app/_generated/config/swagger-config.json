@@ -8,117 +8,71 @@
   "paths": {
     "/api/v1/Department": {
       "get": {
-        "tags": [
-          "Department"
-        ],
+        "tags": ["Department"],
         "summary": "Gets all departments",
         "operationId": "GetAllDepartments",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "produces": [],
         "parameters": [],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DepartmentGetAllResponse"
-            }
+            "schema": { "$ref": "#/definitions/DepartmentGetAllResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "post": {
-        "tags": [
-          "Department"
-        ],
+        "tags": ["Department"],
         "summary": "Creates a department",
         "operationId": "CreateDepartment",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "createData",
             "in": "body",
             "description": "Data for creating a new departmen",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/DepartmentCreateRequest"
-            }
+            "schema": { "$ref": "#/definitions/DepartmentCreateRequest" }
           }
         ],
         "responses": {
           "200": {
             "description": "Department successfuly created",
-            "schema": {
-              "$ref": "#/definitions/DepartmentCreateResponse"
-            }
+            "schema": { "$ref": "#/definitions/DepartmentCreateResponse" }
           },
           "409": {
             "description": "Entered data conflicts with existing",
-            "schema": {
-              "$ref": "#/definitions/ConflictResponse"
-            }
+            "schema": { "$ref": "#/definitions/ConflictResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Department/{id}": {
       "get": {
-        "tags": [
-          "Department"
-        ],
+        "tags": ["Department"],
         "summary": "Gets an department by the id",
         "operationId": "GetDepartmentById",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -132,62 +86,38 @@
         "responses": {
           "200": {
             "description": "Department found",
-            "schema": {
-              "$ref": "#/definitions/DepartmentResponse"
-            }
+            "schema": { "$ref": "#/definitions/DepartmentResponse" }
           },
           "404": {
             "description": "Department couldn't be found",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "put": {
-        "tags": [
-          "Department"
-        ],
+        "tags": ["Department"],
         "summary": "Updates a department",
         "operationId": "UpdateDepartment",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "updateData",
             "in": "body",
             "description": "Updated department data",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/DepartmentUpdateRequest"
-            }
+            "schema": { "$ref": "#/definitions/DepartmentUpdateRequest" }
           },
           {
             "name": "id",
@@ -201,53 +131,31 @@
         "responses": {
           "200": {
             "description": "Department successfuly updated",
-            "schema": {
-              "$ref": "#/definitions/DepartmentResponse"
-            }
+            "schema": { "$ref": "#/definitions/DepartmentResponse" }
           },
           "400": {
             "description": "Department couldn't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "delete": {
-        "tags": [
-          "Department"
-        ],
+        "tags": ["Department"],
         "summary": "Deletes a department",
         "operationId": "DeleteDepartment",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -261,118 +169,72 @@
         "responses": {
           "400": {
             "description": "Department coulnd't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
-          "200": {
-            "description": "Department deleted successfuly"
-          },
+          "200": { "description": "Department deleted successfuly" },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Department/add-employee": {
       "post": {
-        "tags": [
-          "Department"
-        ],
+        "tags": ["Department"],
         "summary": "Adds an employee to a department",
         "operationId": "AddEmployeeToDepartment",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "departmentAddEmployeeData",
             "in": "body",
             "description": "Data for adding an employee to a department",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/DepartmentAddEmployeeRequest"
-            }
+            "schema": { "$ref": "#/definitions/DepartmentAddEmployeeRequest" }
           }
         ],
         "responses": {
           "400": {
             "description": "Department or employee couln't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "409": {
             "description": "Can't add employee, the department has this employee added already",
-            "schema": {
-              "$ref": "#/definitions/ConflictResponse"
-            }
+            "schema": { "$ref": "#/definitions/ConflictResponse" }
           },
           "200": {
             "description": "Employee successfuly added to the department"
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Department/remove-employee": {
       "post": {
-        "tags": [
-          "Department"
-        ],
+        "tags": ["Department"],
         "summary": "Removes an employee from a department",
         "operationId": "RemoveEmployeeFromDepartment",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "departmentRemoveEmployeeData",
@@ -387,91 +249,55 @@
         "responses": {
           "400": {
             "description": "Emplyoee or department couln't be found, or the department doesn't have this employee added",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "200": {
             "description": "Employee successfuly removed from the department"
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Employee": {
       "get": {
-        "tags": [
-          "Employee"
-        ],
+        "tags": ["Employee"],
         "summary": "Gets all employees",
         "operationId": "GetAll",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "produces": [],
         "parameters": [],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/EmployeeGetAllResponse"
-            }
+            "schema": { "$ref": "#/definitions/EmployeeGetAllResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Employee/{id}": {
       "get": {
-        "tags": [
-          "Employee"
-        ],
+        "tags": ["Employee"],
         "summary": "Gets an employee by his id",
         "operationId": "GetEmployeeById",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -485,62 +311,38 @@
         "responses": {
           "200": {
             "description": "Employee found",
-            "schema": {
-              "$ref": "#/definitions/EmployeeResponse"
-            }
+            "schema": { "$ref": "#/definitions/EmployeeResponse" }
           },
           "404": {
             "description": "Employee couldn't be found",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "put": {
-        "tags": [
-          "Employee"
-        ],
+        "tags": ["Employee"],
         "summary": "Updates the data from an employee",
         "operationId": "UpdateEmployee",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "updateData",
             "in": "body",
             "description": "Data to update",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/EmployeeUpdateRequest"
-            }
+            "schema": { "$ref": "#/definitions/EmployeeUpdateRequest" }
           },
           {
             "name": "id",
@@ -554,53 +356,31 @@
         "responses": {
           "200": {
             "description": "Employee successfuly updated",
-            "schema": {
-              "$ref": "#/definitions/EmployeeResponse"
-            }
+            "schema": { "$ref": "#/definitions/EmployeeResponse" }
           },
           "400": {
             "description": "Employee couldn't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "delete": {
-        "tags": [
-          "Employee"
-        ],
+        "tags": ["Employee"],
         "summary": "Deletes an employee",
         "operationId": "DeleteEmployee",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -614,267 +394,165 @@
         "responses": {
           "400": {
             "description": "Employee to delete couldn't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
-          "200": {
-            "description": "Employee successfuly deleted"
-          },
+          "200": { "description": "Employee successfuly deleted" },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Employee/create": {
       "post": {
-        "tags": [
-          "Employee"
-        ],
+        "tags": ["Employee"],
         "summary": "Creates an employee",
         "operationId": "CreateEmployee",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "createData",
             "in": "body",
             "description": "Required data for creating an employee",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/EmployeeCreateRequest"
-            }
+            "schema": { "$ref": "#/definitions/EmployeeCreateRequest" }
           }
         ],
         "responses": {
           "200": {
             "description": "Employee successfuly created",
-            "schema": {
-              "$ref": "#/definitions/EmployeeCreateResponse"
-            }
+            "schema": { "$ref": "#/definitions/EmployeeCreateResponse" }
           },
           "409": {
             "description": "Entered data conflicts with existing",
-            "schema": {
-              "$ref": "#/definitions/ConflictResponse"
-            }
+            "schema": { "$ref": "#/definitions/ConflictResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Employee/login": {
       "post": {
-        "tags": [
-          "Employee"
-        ],
+        "tags": ["Employee"],
         "summary": "Logs a employee in and returns the created Jwt",
         "operationId": "Login",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "loginData",
             "in": "body",
             "description": "Username and password from the employee",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/EmployeeLoginRequest"
-            }
+            "schema": { "$ref": "#/definitions/EmployeeLoginRequest" }
           }
         ],
         "responses": {
           "200": {
             "description": "Login successsful",
-            "schema": {
-              "$ref": "#/definitions/TokenResponse"
-            }
+            "schema": { "$ref": "#/definitions/TokenResponse" }
           },
           "400": {
             "description": "Invalid credentials",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         }
       }
     },
     "/api/v1/Product": {
       "get": {
-        "tags": [
-          "Product"
-        ],
+        "tags": ["Product"],
         "summary": "Gets all products",
         "operationId": "GetAllProducts",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "produces": [],
         "parameters": [],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ProductGetAllResponse"
-            }
+            "schema": { "$ref": "#/definitions/ProductGetAllResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "post": {
-        "tags": [
-          "Product"
-        ],
+        "tags": ["Product"],
         "summary": "Creates one or more new products",
         "operationId": "CreateProduct",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "createData",
             "in": "body",
             "description": "Data for creating new products",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/ProductCreateRequest"
-            }
+            "schema": { "$ref": "#/definitions/ProductCreateRequest" }
           }
         ],
         "responses": {
           "200": {
-            "description": "Product successfuly created",
-            "schema": {
-              "$ref": "#/definitions/ProductCreateResponse"
-            }
+            "description": "Products successfuly created",
+            "schema": { "$ref": "#/definitions/ProductCreateResponse" }
           },
           "400": {
-            "description": "Product type or compartment coulnd't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "description": "Product types or compartments coulnd't be found",
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Product/{id}": {
       "get": {
-        "tags": [
-          "Product"
-        ],
+        "tags": ["Product"],
         "summary": "Gets a product by the id",
         "operationId": "GetProductById",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -888,155 +566,173 @@
         "responses": {
           "200": {
             "description": "Product found",
-            "schema": {
-              "$ref": "#/definitions/ProductResponse"
-            }
+            "schema": { "$ref": "#/definitions/ProductResponse" }
           },
           "404": {
             "description": "Product couldn't be found",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
+        "security": [{ "Bearer": [] }]
+      },
+      "delete": {
+        "tags": ["Product"],
+        "summary": "Deletes a product",
+        "operationId": "DeleteProduct",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
           {
-            "Bearer": []
+            "name": "id",
+            "in": "path",
+            "description": "Id of the product",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
           }
-        ]
+        ],
+        "responses": {
+          "400": {
+            "description": "Product coulnd't be found",
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
+          },
+          "200": { "description": "Product deleted successfuly" },
+          "422": {
+            "description": "Validation failed",
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
+          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "500": {
+            "description": "An unknown error occured",
+            "schema": { "$ref": "#/definitions/MessageResponse" }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      },
+      "patch": {
+        "tags": ["Product"],
+        "summary": "Updates a product",
+        "operationId": "UpdateProduct",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "updateData",
+            "in": "body",
+            "description": "Data for updating a product",
+            "required": false,
+            "schema": { "$ref": "#/definitions/ProductUpdateRequest" }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the product which should be updated",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product successfuly updated",
+            "schema": { "$ref": "#/definitions/ProductResponse" }
+          },
+          "400": {
+            "description": "Product coulnd't be found",
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
+          },
+          "422": {
+            "description": "Validation failed",
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
+          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "500": {
+            "description": "An unknown error occured",
+            "schema": { "$ref": "#/definitions/MessageResponse" }
+          }
+        },
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/ProductType": {
       "get": {
-        "tags": [
-          "ProductType"
-        ],
+        "tags": ["ProductType"],
         "summary": "Gets all product types",
         "operationId": "GetAllProductTypes",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "produces": [],
         "parameters": [],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ProductTypeGetAllResponse"
-            }
+            "schema": { "$ref": "#/definitions/ProductTypeGetAllResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "post": {
-        "tags": [
-          "ProductType"
-        ],
+        "tags": ["ProductType"],
         "summary": "Creates a new product type",
         "operationId": "CreateProductType",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "createData",
             "in": "body",
             "description": "Data for creating a new product type",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/ProductTypeCreateRequest"
-            }
+            "schema": { "$ref": "#/definitions/ProductTypeCreateRequest" }
           }
         ],
         "responses": {
           "200": {
             "description": "ProductType successfuly created",
-            "schema": {
-              "$ref": "#/definitions/ProductTypeCreateResponse"
-            }
+            "schema": { "$ref": "#/definitions/ProductTypeCreateResponse" }
           },
           "409": {
             "description": "Entered data conflicts with existing",
-            "schema": {
-              "$ref": "#/definitions/ConflictResponse"
-            }
+            "schema": { "$ref": "#/definitions/ConflictResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/ProductType/{id}": {
       "get": {
-        "tags": [
-          "ProductType"
-        ],
+        "tags": ["ProductType"],
         "summary": "Gets a product type by the id",
         "operationId": "GetProductTypeById",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -1050,62 +746,38 @@
         "responses": {
           "200": {
             "description": "ProductType found",
-            "schema": {
-              "$ref": "#/definitions/ProductTypeResponse"
-            }
+            "schema": { "$ref": "#/definitions/ProductTypeResponse" }
           },
           "404": {
             "description": "ProductType couldn't be found",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "put": {
-        "tags": [
-          "ProductType"
-        ],
+        "tags": ["ProductType"],
         "summary": "Updates a product type",
         "operationId": "UpdateProductType",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "updateData",
             "in": "body",
             "description": "Data for updating a product type",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/ProductTypeUpdateRequest"
-            }
+            "schema": { "$ref": "#/definitions/ProductTypeUpdateRequest" }
           },
           {
             "name": "id",
@@ -1119,53 +791,31 @@
         "responses": {
           "200": {
             "description": "ProductType successfuly updated",
-            "schema": {
-              "$ref": "#/definitions/ProductTypeResponse"
-            }
+            "schema": { "$ref": "#/definitions/ProductTypeResponse" }
           },
           "400": {
             "description": "ProductType couldn't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "delete": {
-        "tags": [
-          "ProductType"
-        ],
+        "tags": ["ProductType"],
         "summary": "Deletes a product type",
         "operationId": "DeleteProductType",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -1179,404 +829,284 @@
         "responses": {
           "400": {
             "description": "ProductType coulnd't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
+          "200": { "description": "ProductType deleted successfuly" },
+          "422": {
+            "description": "Validation failed",
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
+          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "500": {
+            "description": "An unknown error occured",
+            "schema": { "$ref": "#/definitions/MessageResponse" }
+          }
+        },
+        "security": [{ "Bearer": [] }]
+      }
+    },
+    "/api/v1/ProductType/children/{id}": {
+      "get": {
+        "tags": ["ProductType"],
+        "summary": "Gets all first level children of a product type",
+        "operationId": "GetAllChildrenFromProductType",
+        "consumes": ["application/json"],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the parent product type",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
           "200": {
-            "description": "ProductType deleted successfuly"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProductTypeGetAllChildrenResponse"
+            }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/ProductType/add-parent": {
       "post": {
-        "tags": [
-          "ProductType"
-        ],
+        "tags": ["ProductType"],
         "summary": "Adds a product type as a new parent to a product type",
         "operationId": "AddParentProductType",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "productTypeAddParenData",
             "in": "body",
             "description": "Data for adding a new parent product type",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/ProductTypeAddParentRequest"
-            }
+            "schema": { "$ref": "#/definitions/ProductTypeAddParentRequest" }
           }
         ],
         "responses": {
           "400": {
             "description": "Product type or parent product type coulnd't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "409": {
             "description": "Entered data conflicts with existing",
-            "schema": {
-              "$ref": "#/definitions/ConflictResponse"
-            }
+            "schema": { "$ref": "#/definitions/ConflictResponse" }
           },
-          "200": {
-            "description": "Parent successfuly added"
-          },
+          "200": { "description": "Parent successfuly added" },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/ProductType/add-child": {
       "post": {
-        "tags": [
-          "ProductType"
-        ],
+        "tags": ["ProductType"],
         "summary": "Adds a product type as a new child to a product type",
         "operationId": "AddChildProductType",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "productTypeAddChildData",
             "in": "body",
             "description": "Data for adding a new child product type",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/ProductTypeAddChildRequest"
-            }
+            "schema": { "$ref": "#/definitions/ProductTypeAddChildRequest" }
           }
         ],
         "responses": {
           "400": {
             "description": "Product type or child product type coulnd't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "409": {
             "description": "Entered data conflicts with existing",
-            "schema": {
-              "$ref": "#/definitions/ConflictResponse"
-            }
+            "schema": { "$ref": "#/definitions/ConflictResponse" }
           },
-          "200": {
-            "description": "Child successfuly added"
-          },
+          "200": { "description": "Child successfuly added" },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/ProductType/remove-parent": {
       "delete": {
-        "tags": [
-          "ProductType"
-        ],
+        "tags": ["ProductType"],
         "summary": "Removes a parent product type from a product type (base)",
         "operationId": "RemoveParentProductType",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "productTypeRemoveParentData",
             "in": "body",
             "description": "Data for removing the parent from the base product type",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/ProductTypeRemoveParentRequest"
-            }
+            "schema": { "$ref": "#/definitions/ProductTypeRemoveParentRequest" }
           }
         ],
         "responses": {
           "400": {
             "description": "Parent or base product type couln't be found, or the base product type doesn't have this product type as parent",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "200": {
             "description": "Parent successfuly removed from the product type"
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/ProductType/remove-child": {
       "delete": {
-        "tags": [
-          "ProductType"
-        ],
+        "tags": ["ProductType"],
         "summary": "Removes a child product type from a product type (base)",
         "operationId": "RemoveChildProductType",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "productTypeRemoveChildData",
             "in": "body",
             "description": "Data for removing the child from the base product type",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/ProductTypeRemoveChildRequest"
-            }
+            "schema": { "$ref": "#/definitions/ProductTypeRemoveChildRequest" }
           }
         ],
         "responses": {
           "400": {
             "description": "Child or base product type couln't be found, or the base product type doesn't have this product type as child",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "200": {
             "description": "Child successfuly removed from the product type"
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Role": {
       "get": {
-        "tags": [
-          "Role"
-        ],
+        "tags": ["Role"],
         "summary": "Gets all roles",
         "operationId": "GetAllRoles",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "produces": [],
         "parameters": [],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/RoleGetAllResponse"
-            }
+            "schema": { "$ref": "#/definitions/RoleGetAllResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "post": {
-        "tags": [
-          "Role"
-        ],
+        "tags": ["Role"],
         "summary": "Creates a role",
         "operationId": "CreateRole",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "createData",
             "in": "body",
             "description": "Data for creating a new role",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/RoleCreateRequest"
-            }
+            "schema": { "$ref": "#/definitions/RoleCreateRequest" }
           }
         ],
         "responses": {
           "200": {
             "description": "Role successfuly created",
-            "schema": {
-              "$ref": "#/definitions/RoleCreateResponse"
-            }
+            "schema": { "$ref": "#/definitions/RoleCreateResponse" }
           },
           "409": {
             "description": "Entered data conflicts with existing",
-            "schema": {
-              "$ref": "#/definitions/ConflictResponse"
-            }
+            "schema": { "$ref": "#/definitions/ConflictResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Role/{id}": {
       "get": {
-        "tags": [
-          "Role"
-        ],
+        "tags": ["Role"],
         "summary": "Gets a role by id",
         "operationId": "GetRoleById",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -1590,62 +1120,38 @@
         "responses": {
           "200": {
             "description": "Role found",
-            "schema": {
-              "$ref": "#/definitions/RoleResponse"
-            }
+            "schema": { "$ref": "#/definitions/RoleResponse" }
           },
           "404": {
             "description": "Role couldn't be found",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "put": {
-        "tags": [
-          "Role"
-        ],
+        "tags": ["Role"],
         "summary": "Updates a role",
         "operationId": "UpdateRole",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "updateData",
             "in": "body",
             "description": "Updated role data",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/RoleUpdateRequest"
-            }
+            "schema": { "$ref": "#/definitions/RoleUpdateRequest" }
           },
           {
             "name": "id",
@@ -1659,53 +1165,31 @@
         "responses": {
           "200": {
             "description": "Role successfuly updated",
-            "schema": {
-              "$ref": "#/definitions/RoleResponse"
-            }
+            "schema": { "$ref": "#/definitions/RoleResponse" }
           },
           "400": {
             "description": "Role couldn't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "delete": {
-        "tags": [
-          "Role"
-        ],
+        "tags": ["Role"],
         "summary": "Deletes a role",
         "operationId": "DeleteRole",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -1719,244 +1203,148 @@
         "responses": {
           "400": {
             "description": "Role coulnd't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
-          "200": {
-            "description": "Role deleted successfuly"
-          },
+          "200": { "description": "Role deleted successfuly" },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Role/add-to-employee": {
       "post": {
-        "tags": [
-          "Role"
-        ],
+        "tags": ["Role"],
         "summary": "Add's one ore more certain roles to an employee",
         "operationId": "AddRoleToEmployee",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "roleAddEmployeeData",
             "in": "body",
             "description": "Data for adding a role to an employee",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/RoleAddToEmployeeRequest"
-            }
+            "schema": { "$ref": "#/definitions/RoleAddToEmployeeRequest" }
           }
         ],
         "responses": {
           "400": {
             "description": "Role or employee couln't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "409": {
             "description": "Can't add role, the employee has this role already",
-            "schema": {
-              "$ref": "#/definitions/ConflictResponse"
-            }
+            "schema": { "$ref": "#/definitions/ConflictResponse" }
           },
-          "200": {
-            "description": "Role successfuly added to the employee"
-          },
+          "200": { "description": "Role successfuly added to the employee" },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Role/add-to-department": {
       "post": {
-        "tags": [
-          "Role"
-        ],
+        "tags": ["Role"],
         "summary": "Adds a certain role to a department",
         "operationId": "AddRoleToDepartment",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "roleAddDepartmentData",
             "in": "body",
             "description": "Data for adding a role to a department",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/RoleAddToDepartmentRequest"
-            }
+            "schema": { "$ref": "#/definitions/RoleAddToDepartmentRequest" }
           }
         ],
         "responses": {
           "400": {
             "description": "Role or department couln't be found",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "409": {
             "description": "Can't add role, the department has this role already",
-            "schema": {
-              "$ref": "#/definitions/ConflictResponse"
-            }
+            "schema": { "$ref": "#/definitions/ConflictResponse" }
           },
-          "200": {
-            "description": "Role successfuly added to the department"
-          },
+          "200": { "description": "Role successfuly added to the department" },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Role/remove-from-employee": {
       "delete": {
-        "tags": [
-          "Role"
-        ],
+        "tags": ["Role"],
         "summary": "Removes one or more certain roles from an employee",
         "operationId": "RemoveRoleFromEmployee",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "removeRoleFromEmployeeData",
             "in": "body",
             "description": "Data for removing a role from an employee",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/RoleRemoveFromEmployeeRequest"
-            }
+            "schema": { "$ref": "#/definitions/RoleRemoveFromEmployeeRequest" }
           }
         ],
         "responses": {
           "400": {
             "description": "Role or employee couln't be found, or the employee doesn't have the role",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "200": {
             "description": "Role successfuly removed from the employee"
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Role/remove-from-department": {
       "delete": {
-        "tags": [
-          "Role"
-        ],
+        "tags": ["Role"],
         "summary": "Removes a certain role from a department",
         "operationId": "RemoveRoleFromDepartment",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "removeRoleFromDepartmentData",
@@ -1971,51 +1359,31 @@
         "responses": {
           "400": {
             "description": "Role or department couln't be found, or the department doesn't have the role",
-            "schema": {
-              "$ref": "#/definitions/BadRequestResponse"
-            }
+            "schema": { "$ref": "#/definitions/BadRequestResponse" }
           },
           "200": {
             "description": "Role successfuly removed from the department"
           },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Values": {
       "get": {
-        "tags": [
-          "Values"
-        ],
+        "tags": ["Values"],
         "operationId": "Get",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [],
         "responses": {
           "200": {
@@ -2023,93 +1391,53 @@
             "schema": {
               "uniqueItems": false,
               "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "items": { "type": "string" }
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "post": {
-        "tags": [
-          "Values"
-        ],
+        "tags": ["Values"],
         "operationId": "Post",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "data",
             "in": "body",
             "required": false,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
+          "200": { "description": "Success" },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     },
     "/api/v1/Values/{id}": {
       "get": {
-        "tags": [
-          "Values"
-        ],
+        "tags": ["Values"],
         "operationId": "Get",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -2120,48 +1448,25 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "string"
-            }
-          },
+          "200": { "description": "Success", "schema": { "type": "string" } },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "put": {
-        "tags": [
-          "Values"
-        ],
+        "tags": ["Values"],
         "operationId": "Put",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -2174,51 +1479,29 @@
             "name": "value",
             "in": "body",
             "required": false,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
+          "200": { "description": "Success" },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       },
       "delete": {
-        "tags": [
-          "Values"
-        ],
+        "tags": ["Values"],
         "operationId": "Delete",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -2229,33 +1512,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
+          "200": { "description": "Success" },
           "422": {
             "description": "Validation failed",
-            "schema": {
-              "$ref": "#/definitions/ValidationFailedResponse"
-            }
+            "schema": { "$ref": "#/definitions/ValidationFailedResponse" }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
           "500": {
             "description": "An unknown error occured",
-            "schema": {
-              "$ref": "#/definitions/MessageResponse"
-            }
+            "schema": { "$ref": "#/definitions/MessageResponse" }
           }
         },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
+        "security": [{ "Bearer": [] }]
       }
     }
   },
@@ -2266,9 +1535,7 @@
         "departments": {
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/DepartmentResponse"
-          }
+          "items": { "$ref": "#/definitions/DepartmentResponse" }
         }
       }
     },
@@ -2276,14 +1543,8 @@
       "description": "Default response dto for a department",
       "type": "object",
       "properties": {
-        "id": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "title": {
-          "description": "Title of the department",
-          "type": "string"
-        },
+        "id": { "format": "uuid", "type": "string" },
+        "title": { "description": "Title of the department", "type": "string" },
         "description": {
           "description": "Description of the deparment",
           "type": "string"
@@ -2293,26 +1554,14 @@
     "MessageResponse": {
       "description": "A response contianer when just a message have to be returned",
       "type": "object",
-      "properties": {
-        "message": {
-          "type": "string"
-        }
-      }
+      "properties": { "message": { "type": "string" } }
     },
     "DepartmentCreateRequest": {
-      "required": [
-        "title"
-      ],
+      "required": ["title"],
       "type": "object",
       "properties": {
-        "title": {
-          "maxLength": 30,
-          "minLength": 2,
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
+        "title": { "maxLength": 30, "minLength": 2, "type": "string" },
+        "description": { "type": "string" }
       }
     },
     "DepartmentCreateResponse": {
@@ -2344,16 +1593,11 @@
       "description": "Represents the summary of all validation errors\r\nData-Format that will be returned after a failed validation",
       "type": "object",
       "properties": {
-        "message": {
-          "type": "string",
-          "readOnly": true
-        },
+        "message": { "type": "string", "readOnly": true },
         "validationErrors": {
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          },
+          "items": { "$ref": "#/definitions/ValidationError" },
           "readOnly": true
         }
       }
@@ -2362,30 +1606,16 @@
       "description": "Represents a validation error, occured when validating an incoming model",
       "type": "object",
       "properties": {
-        "field": {
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true
-        }
+        "field": { "type": "string", "readOnly": true },
+        "message": { "type": "string", "readOnly": true }
       }
     },
     "DepartmentUpdateRequest": {
-      "required": [
-        "title"
-      ],
+      "required": ["title"],
       "type": "object",
       "properties": {
-        "title": {
-          "maxLength": 30,
-          "minLength": 2,
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
+        "title": { "maxLength": 30, "minLength": 2, "type": "string" },
+        "description": { "type": "string" }
       }
     },
     "BadRequestResponse": {
@@ -2434,9 +1664,7 @@
         "employees": {
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/EmployeeResponse"
-          }
+          "items": { "$ref": "#/definitions/EmployeeResponse" }
         }
       }
     },
@@ -2444,38 +1672,18 @@
       "description": "Default response dto for an employee",
       "type": "object",
       "properties": {
-        "id": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "firstname": {
-          "type": "string"
-        },
-        "lastname": {
-          "type": "string"
-        },
-        "birthday": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "phoneNumber": {
-          "type": "string"
-        },
-        "username": {
-          "type": "string"
-        },
-        "department": {
-          "$ref": "#/definitions/EmployeeDepartmentResponse"
-        },
+        "id": { "format": "uuid", "type": "string" },
+        "firstname": { "type": "string" },
+        "lastname": { "type": "string" },
+        "birthday": { "format": "date-time", "type": "string" },
+        "email": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "username": { "type": "string" },
+        "department": { "$ref": "#/definitions/EmployeeDepartmentResponse" },
         "roles": {
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/EmployeeRoleResponse"
-          }
+          "items": { "$ref": "#/definitions/EmployeeRoleResponse" }
         }
       }
     },
@@ -2483,14 +1691,8 @@
       "description": "Default response dto for a department from an employee",
       "type": "object",
       "properties": {
-        "id": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "title": {
-          "description": "Title of the department",
-          "type": "string"
-        },
+        "id": { "format": "uuid", "type": "string" },
+        "title": { "description": "Title of the department", "type": "string" },
         "description": {
           "description": "Description of the deparment",
           "type": "string"
@@ -2501,14 +1703,8 @@
       "description": "Default response dto for a role from an employee",
       "type": "object",
       "properties": {
-        "id": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the role",
-          "type": "string"
-        },
+        "id": { "format": "uuid", "type": "string" },
+        "name": { "description": "Name of the role", "type": "string" },
         "description": {
           "description": "Optional description of the role",
           "type": "string"
@@ -2526,34 +1722,16 @@
       ],
       "type": "object",
       "properties": {
-        "username": {
-          "maxLength": 15,
-          "minLength": 5,
-          "type": "string"
-        },
-        "lastname": {
-          "maxLength": 100,
-          "minLength": 2,
-          "type": "string"
-        },
-        "firstname": {
-          "maxLength": 100,
-          "minLength": 2,
-          "type": "string"
-        },
+        "username": { "maxLength": 15, "minLength": 5, "type": "string" },
+        "lastname": { "maxLength": 100, "minLength": 2, "type": "string" },
+        "firstname": { "maxLength": 100, "minLength": 2, "type": "string" },
         "email": {
           "minLength": 1,
           "pattern": "^((([a-z]|\\d|[!#\\$%&'\\*\\+\\-\\/=\\?\\^_`{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+(\\.([a-z]|\\d|[!#\\$%&'\\*\\+\\-\\/=\\?\\^_`{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+)*)|((\\x22)((((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)+)?(([\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x7f]|\\x21|[\\x23-\\x5b]|[\\x5d-\\x7e]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(\\\\([\\x01-\\x09\\x0b\\x0c\\x0d-\\x7f]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]))))*(((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)+)?(\\x22)))@((([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-z]|\\d|-||_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.)+(([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+|(([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+([a-z]+|\\d|-|\\.{0,1}|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])?([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))$",
           "type": "string"
         },
-        "phoneNumber": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "birthday": {
-          "format": "date-time",
-          "type": "string"
-        },
+        "phoneNumber": { "minLength": 1, "type": "string" },
+        "birthday": { "format": "date-time", "type": "string" },
         "current-password": {
           "description": "The current plain password of the employee, can be null  if a password change shouldn't be performed",
           "type": "string"
@@ -2576,40 +1754,22 @@
       ],
       "type": "object",
       "properties": {
-        "lastname": {
-          "maxLength": 100,
-          "minLength": 2,
-          "type": "string"
-        },
-        "firstname": {
-          "maxLength": 100,
-          "minLength": 2,
-          "type": "string"
-        },
+        "lastname": { "maxLength": 100, "minLength": 2, "type": "string" },
+        "firstname": { "maxLength": 100, "minLength": 2, "type": "string" },
         "email": {
           "minLength": 1,
           "pattern": "^((([a-z]|\\d|[!#\\$%&'\\*\\+\\-\\/=\\?\\^_`{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+(\\.([a-z]|\\d|[!#\\$%&'\\*\\+\\-\\/=\\?\\^_`{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+)*)|((\\x22)((((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)+)?(([\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x7f]|\\x21|[\\x23-\\x5b]|[\\x5d-\\x7e]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(\\\\([\\x01-\\x09\\x0b\\x0c\\x0d-\\x7f]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]))))*(((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)+)?(\\x22)))@((([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-z]|\\d|-||_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.)+(([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+|(([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+([a-z]+|\\d|-|\\.{0,1}|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])?([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))$",
           "type": "string"
         },
-        "phoneNumber": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "username": {
-          "maxLength": 15,
-          "minLength": 5,
-          "type": "string"
-        },
+        "phoneNumber": { "minLength": 1, "type": "string" },
+        "username": { "maxLength": 15, "minLength": 5, "type": "string" },
         "password": {
           "description": "Plain password",
           "maxLength": 50,
           "minLength": 10,
           "type": "string"
         },
-        "birthday": {
-          "format": "date-time",
-          "type": "string"
-        }
+        "birthday": { "format": "date-time", "type": "string" }
       }
     },
     "EmployeeCreateResponse": {
@@ -2623,17 +1783,10 @@
       }
     },
     "EmployeeLoginRequest": {
-      "required": [
-        "username",
-        "password"
-      ],
+      "required": ["username", "password"],
       "type": "object",
       "properties": {
-        "username": {
-          "maxLength": 15,
-          "minLength": 1,
-          "type": "string"
-        },
+        "username": { "maxLength": 15, "minLength": 1, "type": "string" },
         "password": {
           "description": "Plain password",
           "maxLength": 50,
@@ -2658,9 +1811,7 @@
         "products": {
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProductResponse"
-          }
+          "items": { "$ref": "#/definitions/ProductResponse" }
         }
       }
     },
@@ -2668,49 +1819,22 @@
       "description": "Default response dto for a product",
       "type": "object",
       "properties": {
-        "id": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "serialNumber": {
-          "type": "string"
-        },
+        "id": { "format": "uuid", "type": "string" },
+        "name": { "type": "string" },
+        "serialNumber": { "type": "string" },
         "state": {
-          "enum": [
-            "inStock",
-            "reserved",
-            "sold",
-            "defect"
-          ],
+          "enum": ["inStock", "reserved", "sold", "defect"],
           "type": "string"
         },
-        "parentId": {
-          "format": "uuid",
-          "type": "string"
-        },
+        "parentId": { "format": "uuid", "type": "string" },
         "childIds": {
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "format": "uuid",
-            "type": "string"
-          }
+          "items": { "format": "uuid", "type": "string" }
         },
-        "productTypeId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "compartmentId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "billId": {
-          "format": "uuid",
-          "type": "string"
-        }
+        "productTypeId": { "format": "uuid", "type": "string" },
+        "compartmentId": { "format": "uuid", "type": "string" },
+        "billId": { "format": "uuid", "type": "string" }
       }
     },
     "ProductCreateRequest": {
@@ -2719,48 +1843,24 @@
         "products": {
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProductCreateRequestModel"
-          }
+          "items": { "$ref": "#/definitions/ProductCreateRequestModel" }
         }
       }
     },
     "ProductCreateRequestModel": {
-      "required": [
-        "serialNumber"
-      ],
+      "required": ["serialNumber"],
       "type": "object",
       "properties": {
-        "description": {
-          "maxLength": 500,
-          "minLength": 0,
-          "type": "string"
-        },
-        "serialNumber": {
-          "maxLength": 30,
-          "minLength": 4,
-          "type": "string"
-        },
-        "parentId": {
-          "format": "uuid",
-          "type": "string"
-        },
+        "description": { "maxLength": 500, "minLength": 0, "type": "string" },
+        "serialNumber": { "maxLength": 30, "minLength": 4, "type": "string" },
+        "parentId": { "format": "uuid", "type": "string" },
         "childrenIds": {
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "format": "uuid",
-            "type": "string"
-          }
+          "items": { "format": "uuid", "type": "string" }
         },
-        "productTypeId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "compartmentId": {
-          "format": "uuid",
-          "type": "string"
-        }
+        "productTypeId": { "format": "uuid", "type": "string" },
+        "compartmentId": { "format": "uuid", "type": "string" }
       }
     },
     "ProductCreateResponse": {
@@ -2769,9 +1869,7 @@
         "products": {
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProductCreateResponseModel"
-          }
+          "items": { "$ref": "#/definitions/ProductCreateResponseModel" }
         }
       }
     },
@@ -2789,15 +1887,26 @@
         }
       }
     },
+    "ProductUpdateRequest": {
+      "required": ["state"],
+      "type": "object",
+      "properties": {
+        "description": { "type": "string" },
+        "state": {
+          "minLength": 1,
+          "enum": ["inStock", "reserved", "sold", "defect"],
+          "type": "string"
+        },
+        "compartmentId": { "format": "uuid", "type": "string" }
+      }
+    },
     "ProductTypeGetAllResponse": {
       "type": "object",
       "properties": {
         "productTypes": {
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProductTypeResponse"
-          }
+          "items": { "$ref": "#/definitions/ProductTypeResponse" }
         }
       }
     },
@@ -2805,24 +1914,11 @@
       "description": "Default response dto for a product type",
       "type": "object",
       "properties": {
-        "id": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "Description": {
-          "type": "string"
-        },
-        "ean": {
-          "description": "European articel number",
-          "type": "string"
-        },
-        "price": {
-          "format": "double",
-          "type": "number"
-        },
+        "id": { "format": "uuid", "type": "string" },
+        "name": { "type": "string" },
+        "Description": { "type": "string" },
+        "ean": { "description": "European articel number", "type": "string" },
+        "price": { "format": "double", "type": "number" },
         "imageBase64": {
           "description": "Image as base64 string",
           "type": "string"
@@ -2831,38 +1927,22 @@
           "description": "All ids from the entities related as children to this product type",
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "format": "uuid",
-            "type": "string"
-          }
+          "items": { "format": "uuid", "type": "string" }
         },
         "parentIds": {
           "description": "All ids from the entities related as paretns to this product type",
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "format": "uuid",
-            "type": "string"
-          }
+          "items": { "format": "uuid", "type": "string" }
         }
       }
     },
     "ProductTypeCreateRequest": {
-      "required": [
-        "name",
-        "ean",
-        "price"
-      ],
+      "required": ["name", "ean", "price"],
       "type": "object",
       "properties": {
-        "name": {
-          "maxLength": 50,
-          "minLength": 2,
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
+        "name": { "maxLength": 50, "minLength": 2, "type": "string" },
+        "description": { "type": "string" },
         "ean": {
           "description": "European Article Number",
           "minLength": 1,
@@ -2883,19 +1963,13 @@
           "description": "Collection with all ids of all parent product types",
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "format": "uuid",
-            "type": "string"
-          }
+          "items": { "format": "uuid", "type": "string" }
         },
         "childIds": {
           "description": "Collection with all ids of all the child product types",
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "format": "uuid",
-            "type": "string"
-          }
+          "items": { "format": "uuid", "type": "string" }
         }
       }
     },
@@ -2910,21 +1984,11 @@
       }
     },
     "ProductTypeUpdateRequest": {
-      "required": [
-        "name",
-        "ean",
-        "price"
-      ],
+      "required": ["name", "ean", "price"],
       "type": "object",
       "properties": {
-        "name": {
-          "maxLength": 50,
-          "minLength": 2,
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
+        "name": { "maxLength": 50, "minLength": 2, "type": "string" },
+        "description": { "type": "string" },
         "ean": {
           "description": "European Article Number",
           "minLength": 1,
@@ -2936,6 +2000,17 @@
           "exclusiveMinimum": true,
           "minLength": 1,
           "type": "number"
+        }
+      }
+    },
+    "ProductTypeGetAllChildrenResponse": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "description": "All first level children of the product type",
+          "uniqueItems": false,
+          "type": "array",
+          "items": { "$ref": "#/definitions/ProductTypeResponse" }
         }
       }
     },
@@ -3005,9 +2080,7 @@
         "roles": {
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoleResponse"
-          }
+          "items": { "$ref": "#/definitions/RoleResponse" }
         }
       }
     },
@@ -3015,14 +2088,8 @@
       "description": "Default response dto for a role",
       "type": "object",
       "properties": {
-        "id": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the role",
-          "type": "string"
-        },
+        "id": { "format": "uuid", "type": "string" },
+        "name": { "description": "Name of the role", "type": "string" },
         "description": {
           "description": "Optional description of the role",
           "type": "string"
@@ -3030,19 +2097,11 @@
       }
     },
     "RoleCreateRequest": {
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "type": "object",
       "properties": {
-        "name": {
-          "maxLength": 30,
-          "minLength": 2,
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
+        "name": { "maxLength": 30, "minLength": 2, "type": "string" },
+        "description": { "type": "string" }
       }
     },
     "RoleCreateResponse": {
@@ -3056,19 +2115,11 @@
       }
     },
     "RoleUpdateRequest": {
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "type": "object",
       "properties": {
-        "name": {
-          "maxLength": 30,
-          "minLength": 2,
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
+        "name": { "maxLength": 30, "minLength": 2, "type": "string" },
+        "description": { "type": "string" }
       }
     },
     "RoleAddToEmployeeRequest": {
@@ -3078,10 +2129,7 @@
           "description": "Ids of the roles which should be added to the employee",
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "format": "uuid",
-            "type": "string"
-          }
+          "items": { "format": "uuid", "type": "string" }
         },
         "employeeId": {
           "format": "uuid",
@@ -3112,10 +2160,7 @@
           "description": "Ids of the roles which should be removed from the employee",
           "uniqueItems": false,
           "type": "array",
-          "items": {
-            "format": "uuid",
-            "type": "string"
-          }
+          "items": { "format": "uuid", "type": "string" }
         },
         "employeeId": {
           "format": "uuid",

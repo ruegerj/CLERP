@@ -1,3 +1,5 @@
-<p>
-  productList works!
-</p>
+<div class="list-group list-group-flush">
+  <a *ngFor="let product of childProducts"  class="list-group-item list-group-item-action" [routerLink] = "['/productDetailOverview', product.id]">
+    <h3>{{product.name}}</h3>
+  </a>
+</div>

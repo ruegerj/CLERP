@@ -54,6 +54,18 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         }
 
         /// <summary>
+        /// Gets all first level children of a product type
+        /// </summary>
+        /// <param name="id">Id of the parent product type</param>
+        /// <returns></returns>
+        [HttpGet("children/{id}")]
+        [Produces(typeof(GetAllChildren.ProductTypeGetAllChildrenResponse))]
+        public async Task<ActionResult> GetAllChildrenFromProductType(Guid id)
+        {
+            return Ok(await _mediator.Send(new GetAllChildren.ProductTypeGetAllChildrenRequest() { ParentGuid = id }));
+        }
+
+        /// <summary>
         /// Creates a new product type
         /// </summary>
         /// <param name="createData">Data for creating a new product type</param>
