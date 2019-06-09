@@ -6,25 +6,27 @@
   </form>
 </div>
 <div class="list-group list-group-flush">
-  <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let p of filteredProductTypes"
-    [routerLink]="['/productTypeDetailOverview', p.id]">
-    <div class="card">
+  <div class="card d-flex flex-row justify-content-end" *ngFor="let p of filteredProductTypes">
+    <a class="card-body text-dark card-link" [routerLink]="['/productTypeDetailOverview', p.id]">
       <div class="row">
-        <div class="col-md-2 text-center">
-          <img style="max-height: 10em" src="data:image/png;base64,{{p.imageBase64}}" class="image-fluid rounded fit-image p-2">
-        </div>
-        <div class="col-md-10 px-3">
-          <div class="card-block px-3">
-            <h4 class="card-title">{{p.name}}</h4>
-            <div class="row">
-              <p class="col-md-6 card-text"><b>EAN:</b> {{p.ean}}</p>
-              <p class="col-md-6 card-text"><b>Price:</b> {{p.price | number: '1.2'}}</p>
-            </div>
-            <p style="height: 5em" class="card-text overflow-auto"><b>Description: </b>{{p.Description}}</p>
-          </div>
-        </div>
-
+          <div class="col-md-2 text-center">
+        <img style="max-height: 10em" src="data:image/png;base64,{{p.imageBase64}}"
+          class="image-fluid rounded fit-image p-2">
       </div>
+      <div class="col-md-10 px-3">
+        <div class="card-block px-3">
+          <h4 class="card-title">{{p.name}}</h4>
+          <div class="row">
+            <p class="col-md-6 card-text"><b>EAN:</b> {{p.ean}}</p>
+            <p class="col-md-6 card-text"><b>Price:</b> {{p.price | number: '1.2'}}</p>
+          </div>
+          <p style="height: 5em" class="card-text overflow-auto"><b>Description: </b>{{p.Description}}</p>
+        </div>
+      </div>
+      </div>
+    </a>
+    <div class="card-footer specialCardFooter">
+      <button class="btn btn-outline-secondary h-100" (click)="deleteClicked(p.id)">Delete</button>
     </div>
-  </a>
+  </div>
 </div>

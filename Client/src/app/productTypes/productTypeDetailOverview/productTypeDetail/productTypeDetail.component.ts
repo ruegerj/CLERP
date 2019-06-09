@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductTypeService } from '@_generated/services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductTypeResponse } from '@_generated/models';
 import { ValidationConstants } from '@_models';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -23,13 +22,10 @@ export class ProductTypeDetailComponent implements OnInit {
 
   private currentId: string;
 
-  @ViewChild('modalSuccessContent') private modalSuccessContent: TemplateRef<any>;
-  @ViewChild('modalErrorContent') private modalErrorContent: TemplateRef<any>;
 
   constructor(
     private productTypeService: ProductTypeService,
     private formBuilder: FormBuilder,
-    private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute
   ) {

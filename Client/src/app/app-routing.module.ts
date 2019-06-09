@@ -7,6 +7,7 @@ import { AuthGuard } from '@_guards';
 import { Roles } from '@_models';
 import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreate.component';
 import { ProductTypeCreateComponent } from '@productTypes/productTypeCreate/productTypeCreate.component';
+import { AddToProductTypeComponent } from '@productTypes/addToProductType/addToProductType.component';
 
 const routes: Routes = [
   {
@@ -49,7 +50,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
   },
-  // all else, redirect to home
+  {
+    path: 'addToProductType',
+    component: AddToProductTypeComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
+  },  // all else, redirect to home
   // TODO redirect to error page
   {
     path: '**',
@@ -58,7 +64,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
