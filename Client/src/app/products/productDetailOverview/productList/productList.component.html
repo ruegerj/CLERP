@@ -1,5 +1,15 @@
 <div class="list-group list-group-flush">
   <a *ngFor="let product of childProducts"  class="list-group-item list-group-item-action" [routerLink] = "['/productDetailOverview', product.id]">
-    <h3>{{product.name}}</h3>
+    <div class="row">
+      <h4 class="col-md-4">{{product.name}}</h4>
+      <span class="col-md-4">
+        <b>EAN:</b> 
+        {{product.ean}}
+      </span>
+      <span class="col-md-4">
+        <b>Price:</b>
+        {{product.price}}
+      </span>
+    </div>
   </a>
 </div>
