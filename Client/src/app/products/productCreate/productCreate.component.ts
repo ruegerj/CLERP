@@ -39,7 +39,7 @@ export class ProductCreateComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.productTypeForm.controls; }
 
-  // gett for ValidationConstants
+  // getter for ValidationConstants
   get valditationConstants() { return ValidationConstants; }
 
   preview(files) {

@@ -72,7 +72,10 @@ export class EmployeeEditComponent implements OnInit {
 
   // convenience getter for easy access to form fields
   get f() { return this.employeeForm.controls; }
-
+  
+  // getter for ValidationConstants
+  get valditationConstants() { return ValidationConstants; }
+  
 
   private addRoleCheckboxes() {
     this.roles.map(() => {

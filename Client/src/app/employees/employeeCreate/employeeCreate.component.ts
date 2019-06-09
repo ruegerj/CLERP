@@ -32,16 +32,15 @@ export class EmployeeCreateComponent implements OnInit {
 
 
   ngOnInit() {
-
     this.employeeForm = this.formBuilder.group({
-      firstName: ['test ', [Validators.required, Validators.minLength(ValidationConstants.MinNameLength), Validators.maxLength(ValidationConstants.MaxNameLength)]],
+      firstName: ['test', [Validators.required, Validators.minLength(ValidationConstants.MinNameLength), Validators.maxLength(ValidationConstants.MaxNameLength)]],
       lastName: ['test', [Validators.required, Validators.minLength(ValidationConstants.MinNameLength), Validators.maxLength(ValidationConstants.MaxNameLength)]],
       email: ['test@mail.com', [Validators.required, Validators.email]],
       phoneNumber: ['+41 55 666 11 22', [Validators.required, Validators.pattern(ValidationConstants.PhoneNumberRegex)]],
       birthday: ['', Validators.required],
       username: ['testuser', [Validators.required, Validators.minLength(ValidationConstants.MinUsernameLength), Validators.maxLength(ValidationConstants.MaxUsernameLength)]],
       password: ['123456789#', [Validators.required, Validators.minLength(ValidationConstants.MinPasswordLength), Validators.maxLength(ValidationConstants.MaxPasswordLength)]],
-      department: [''],
+      department: ['', Validators.required],
       roles: new FormArray([])
     });
 
@@ -61,6 +60,9 @@ export class EmployeeCreateComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.employeeForm.controls; }
 
+  // getter for ValidationConstants
+  get valditationConstants() { return ValidationConstants; }
+
 
   private addRoleCheckboxes() {
     this.roles.map(() => {
@@ -73,6 +75,8 @@ export class EmployeeCreateComponent implements OnInit {
   /** click event methods for **/
   createClicked(): void {
     this.submitted = true;
+
+    console.log(this.f.birthday.errors);
 
     if (this.employeeForm.invalid) {
       return;

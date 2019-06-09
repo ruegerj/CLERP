@@ -17,7 +17,7 @@
           [ngClass]="{ 'is-invalid': submitted && f.productName.errors }">
       </div>
     </div>
-    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productTypeForm.controls['productName'].errors?.required">Password is required.</div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productTypeForm.controls['productName'].errors?.required">Name is required.</div>
     <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productTypeForm.controls['productName'].errors?.minlength">Minimum length is {{valditationConstants.MinNameLength}}</div>
     <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && productTypeForm.controls['productName'].errors?.maxlength">Maximum length is {{valditationConstants.MaxNameLength}}</div>
 
