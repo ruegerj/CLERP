@@ -40,6 +40,8 @@ export class ProductTypeDetailComponent implements OnInit {
       description: [{ value: '', disabled: !this.isEditing }]
     });
 
+
+
     this.route.params.subscribe(params => {
       this.currentId = params.id;
       this.productTypeService.GetProductTypeById(this.currentId).subscribe(data => {
@@ -47,6 +49,11 @@ export class ProductTypeDetailComponent implements OnInit {
         this.imgURL = "data:image/png;base64," + data.imageBase64;
         this.productType = data;
         this.setFormValues(data);
+
+        //reset editing state
+        this.isEditing = false;
+        this.submitted = false;
+        this.productTypeForm.disable();
       });
     });
   }
@@ -74,7 +81,6 @@ export class ProductTypeDetailComponent implements OnInit {
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.imgURL = reader.result;
-      this.imgURL.replace(/^data:image\/[a-z]+;base64,/, "");
     }
   }
 
@@ -110,11 +116,10 @@ export class ProductTypeDetailComponent implements OnInit {
       return;
     }
 
-    console.log(this.f);
-
     this.productTypeService.UpdateProductType({
       id: this.currentId, updateData: {
-        name: this.f.productName.value, ean: this.f.ean.value,
+        imageBase64: this.imgURL.replace(/^data:image\/[a-z]+;base64,/, ""),
+        name: this.f.productTypeName.value, ean: this.f.ean.value,
         price: this.f.price.value, description: this.f.description.value
       }
     }).subscribe(data => {

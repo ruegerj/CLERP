@@ -8,7 +8,6 @@ import { EmployeeService } from './services/employee.service';
 import { ProductService } from './services/product.service';
 import { ProductTypeService } from './services/product-type.service';
 import { RoleService } from './services/role.service';
-import { ValuesService } from './services/values.service';
 
 /**
  * Provider for all Api services, plus ApiConfiguration
@@ -27,8 +26,7 @@ import { ValuesService } from './services/values.service';
     EmployeeService,
     ProductService,
     ProductTypeService,
-    RoleService,
-    ValuesService
+    RoleService
   ],
 })
 export class ApiModule {

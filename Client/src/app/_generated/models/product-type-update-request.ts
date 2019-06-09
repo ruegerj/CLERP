@@ -8,4 +8,9 @@ export interface ProductTypeUpdateRequest {
    */
   ean: string;
   price: number;
+
+  /**
+   * Image as base64 string
+   */
+  imageBase64?: string;
 }
