@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from '@home';
 import { EmployeesComponent, EmployeeEditComponent } from '@employees';
-import { ProductsComponent, ProductDetailOverviewComponent } from '@products';
+import { ProductTypesComponent, ProductTypeDetailOverviewComponent } from '@productTypes';
 import { AuthGuard } from '@_guards';
 import { Roles } from '@_models';
 import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreate.component';
-import { ProductCreateComponent } from '@products/productCreate/productCreate.component';
+import { ProductTypeCreateComponent } from '@productTypes/productTypeCreate/productTypeCreate.component';
 
 const routes: Routes = [
   {
@@ -32,22 +32,21 @@ const routes: Routes = [
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.HR]}
   },
   {
-    path: 'products',
-    component: ProductsComponent,
+    path: 'productTypes',
+    component: ProductTypesComponent,
     canActivate: [AuthGuard],
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
   },
   {
-    path: 'productCreate',
-    component: ProductCreateComponent,
+    path: 'productTypeCreate',
+    component: ProductTypeCreateComponent,
     canActivate: [AuthGuard],
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
   },
   {
-    path: 'productDetailOverview/:id',
-    component: ProductDetailOverviewComponent,
+    path: 'productTypeDetailOverview/:id',
+    component: ProductTypeDetailOverviewComponent,
     canActivate: [AuthGuard],
-    runGuardsAndResolvers: 'always',
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
   },
   // all else, redirect to home

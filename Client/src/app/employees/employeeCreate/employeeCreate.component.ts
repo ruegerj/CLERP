@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@ang
 import { EmployeeService, DepartmentService, RoleService } from '@_generated/services';
 import { NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { ValidationConstans } from '@_models';
+import { ValidationConstants } from '@_models';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -32,16 +32,15 @@ export class EmployeeCreateComponent implements OnInit {
 
 
   ngOnInit() {
-
     this.employeeForm = this.formBuilder.group({
-      firstName: ['test ', [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
-      lastName: ['test', [Validators.required, Validators.minLength(ValidationConstans.MinNameLength), Validators.maxLength(ValidationConstans.MaxNameLength)]],
+      firstName: ['test', [Validators.required, Validators.minLength(ValidationConstants.MinNameLength), Validators.maxLength(ValidationConstants.MaxNameLength)]],
+      lastName: ['test', [Validators.required, Validators.minLength(ValidationConstants.MinNameLength), Validators.maxLength(ValidationConstants.MaxNameLength)]],
       email: ['test@mail.com', [Validators.required, Validators.email]],
-      phoneNumber: ['+41 55 666 11 22', [Validators.required, Validators.pattern(ValidationConstans.PhoneNumberRegex)]],
+      phoneNumber: ['+41 55 666 11 22', [Validators.required, Validators.pattern(ValidationConstants.PhoneNumberRegex)]],
       birthday: ['', Validators.required],
-      username: ['testuser', [Validators.required, Validators.minLength(ValidationConstans.MinUsernameLength), Validators.maxLength(ValidationConstans.MaxUsernameLength)]],
-      password: ['123456789#', [Validators.required, Validators.minLength(ValidationConstans.MinPasswordLength), Validators.maxLength(ValidationConstans.MaxPasswordLength)]],
-      department: [''],
+      username: ['testuser', [Validators.required, Validators.minLength(ValidationConstants.MinUsernameLength), Validators.maxLength(ValidationConstants.MaxUsernameLength)]],
+      password: ['123456789#', [Validators.required, Validators.minLength(ValidationConstants.MinPasswordLength), Validators.maxLength(ValidationConstants.MaxPasswordLength)]],
+      department: ['', Validators.required],
       roles: new FormArray([])
     });
 
@@ -61,6 +60,9 @@ export class EmployeeCreateComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.employeeForm.controls; }
 
+  // getter for ValidationConstants
+  get valditationConstants() { return ValidationConstants; }
+
 
   private addRoleCheckboxes() {
     this.roles.map(() => {
@@ -73,6 +75,8 @@ export class EmployeeCreateComponent implements OnInit {
   /** click event methods for **/
   createClicked(): void {
     this.submitted = true;
+
+    console.log(this.f.birthday.errors);
 
     if (this.employeeForm.invalid) {
       return;

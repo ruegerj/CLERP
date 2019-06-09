@@ -1,4 +1,4 @@
-export class ValidationConstans{
+export class ValidationConstants{
     public static MinNameLength: number = 2;
     public static MaxNameLength: number = 100;
     public static MinUsernameLength: number = 5;

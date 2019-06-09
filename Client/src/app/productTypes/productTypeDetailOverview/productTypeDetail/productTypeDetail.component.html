@@ -1,0 +1,100 @@
+<div class="p-5">
+  <form [formGroup]="productTypeForm">
+    <input style="display: none" type="file" accept="image/*" class="form-control" (change)="preview(file.files)" #file>
+
+    <div class="form-group row">
+      <img style="max-height: 15em" id="productImage" class="image-fluid rounded fit-image p-3 offset-3 h-100"
+        [src]="imgURL" onError="this.src='./assets/images/noImageFound.gif';" alt="Product Image"
+        (click)="file.click()">
+    </div>
+    <div class="form-group row">
+      <span class="offset-3 px-3" style="color:red;" *ngIf="message">{{message}}</span>
+    </div>
+    
+    <div class="form-group row">
+      <label for="productTypeName" class="col-md-3 col-form-label text-left">Name</label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" formControlName="productTypeName"
+          [ngClass]="{ 'is-invalid': submitted && f.productTypeName.errors }">
+      </div>
+    </div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && f['productTypeName'].errors?.required">Name is required.</div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && f['productTypeName'].errors?.minlength">Minimum length is {{valditationConstants.MinNameLength}}</div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && f['productTypeName'].errors?.maxlength">Maximum length is {{valditationConstants.MaxNameLength}}</div>
+
+    <div class="form-group row">
+      <label for="ean" class="col-md-3 col-form-label text-left">EAN</label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" formControlName="ean"
+          [ngClass]="{ 'is-invalid': submitted && f.ean.errors }">
+      </div>
+    </div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && f['ean'].errors?.required">EAN is required.</div>
+
+    <div class="form-group row">
+      <label for="price" class="col-md-3 col-form-label text-left">Price</label>
+      <div class="col-md-9">
+        <input type="number" class="form-control" [value]="productTypeForm.get('price').value" step="0.01"
+          formControlName="price" [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
+      </div>
+    </div>
+    <div class="offset-3 px-3 form-group row text-danger" *ngIf="submitted && f['price'].errors?.required">Price is required.</div>
+
+    <div class="form-group row">
+      <label for="description" class="col-md-3 col-form-label text-left">Description</label>
+      <div class="col-md-9">
+        <textarea rows="5" class="form-control" formControlName="description"
+          [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+                </textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-9 offset-3">
+        <div class="row justify-content-between px-3">
+          <button *ngIf="!isEditing" type="button" class="btn btn-outline-secondary col-md-4"
+            (click)="editClicked()">Edit</button>
+          <a *ngIf="!isEditing" class="btn btn-outline-secondary col-md-4" [routerLink]="'/productTypes'">Back</a>
+
+          <button *ngIf="isEditing" type="button" class="btn btn-outline-secondary col-md-4"
+            (click)="updateClicked()">Update</button>
+          <button *ngIf="isEditing" type="button" class="btn btn-outline-secondary col-md-4"
+            (click)="cancelClicked()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<ng-template #modalSuccessContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Success</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Product was updated succesfully.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #modalErrorContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Error</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>product update has encountered an error.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

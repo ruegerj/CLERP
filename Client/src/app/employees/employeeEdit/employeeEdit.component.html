@@ -6,6 +6,9 @@
         <input type="text" class="form-control" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
       </div>
     </div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['username'].errors?.required">Username is required</div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['username'].errors?.minlength">Minimum length is {{valditationConstants.MinUsernameLength}}</div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['username'].errors?.maxlength">Maximum length is {{valditationConstants.MaxUsernameLength}}</div>
 
     <div class="form-group row">
       <label for="firstname" class="col-md-2 col-form-label">Firstname</label>
@@ -14,6 +17,9 @@
           [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
       </div>
     </div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['firstName'].errors?.required">Firstname is required</div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['firstName'].errors?.minlength">Minimum length is {{valditationConstants.MinNameLength}}</div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['firstName'].errors?.maxlength">Maximum length is {{valditationConstants.MaxNameLength}}</div>
 
     <div class="form-group row">
       <label for="lastname" class="col-md-2 col-form-label">Lastname</label>
@@ -22,6 +28,9 @@
           [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
       </div>
     </div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['lastName'].errors?.required">Lastname is required</div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['lastName'].errors?.minlength">Minimum length is {{valditationConstants.MinNameLength}}</div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['lastName'].errors?.maxlength">Maximum length is {{valditationConstants.MaxNameLength}}</div>
 
     <div class="form-group row">
       <label for="email" class="col-md-2 col-form-label">Email</label>
@@ -30,6 +39,8 @@
           [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
       </div>
     </div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['email'].errors?.required">Email is required</div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['email'].errors?.email">Not a valid email</div>
 
     <div class="form-group row">
       <label for="phonenr" class="col-md-2 col-form-label">Phone Number</label>
@@ -38,6 +49,8 @@
           [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }">
       </div>
     </div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['phoneNumber'].errors?.required">Phone Number is required</div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['phoneNumber'].errors?.pattern">Not a valid phone number</div>
 
     <div class="form-group row">
       <label for="birthday" class="col-md-2 col-form-label">Date of Birth</label>
@@ -51,6 +64,8 @@
         </div>
       </div>
     </div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['birthday'].errors?.required">Date of Birth is required</div>
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['birthday'].errors?.ngbDate">Invalid date</div>
 
     <div class="form-group row">
       <label for="department" class="col-md-2 col-form-label">Department</label>
@@ -63,7 +78,8 @@
         </select>
       </div>
     </div>
-
+    <div class="offset-2 px-3 form-group row text-danger" *ngIf="submitted && f['department'].errors?.required">Department is required.</div>
+    
     <div class="form-group row">
       <label for="checkbox" class="col-md-2 col-form-label">Roles</label>
       <div class="col-md-10">
