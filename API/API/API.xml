@@ -1001,12 +1001,12 @@
             Default response dto for a product
             </summary>
         </member>
-        <member name="P:CLERP.API.Features.v1.ProductTypeArea.AddChild.ProductTypeAddChildRequest.ChildId">
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.AddChildren.ProductTypeAddChildrenRequest.ChildIds">
             <summary>
-            Id of the new child product type
+            Ids from the new children for the product type
             </summary>
         </member>
-        <member name="P:CLERP.API.Features.v1.ProductTypeArea.AddChild.ProductTypeAddChildRequest.BaseProductTypeId">
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.AddChildren.ProductTypeAddChildrenRequest.BaseProductTypeId">
             <summary>
             Id of the product type which the child product type should be added to
             </summary>
@@ -1095,11 +1095,11 @@
             <param name="productTypeAddParenData">Data for adding a new parent product type</param>
             <returns></returns>
         </member>
-        <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.AddChildProductType(CLERP.API.Features.v1.ProductTypeArea.AddChild.ProductTypeAddChildRequest)">
+        <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.AddChildProductType(CLERP.API.Features.v1.ProductTypeArea.AddChildren.ProductTypeAddChildrenRequest)">
             <summary>
-            Adds a product type as a new child to a product type
+            Adds one or more product types as new children to a product type
             </summary>
-            <param name="productTypeAddChildData">Data for adding a new child product type</param>
+            <param name="productTypeAddChildData">Data for adding new children for a product type</param>
             <returns></returns>
         </member>
         <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.UpdateProductType(CLERP.API.Features.v1.ProductTypeArea.Update.ProductTypeUpdateRequest,System.Guid)">
@@ -1117,7 +1117,7 @@
             <param name="productTypeRemoveParentData">Data for removing the parent from the base product type</param>
             <returns></returns>
         </member>
-        <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.RemoveChildProductType(CLERP.API.Features.v1.ProductTypeArea.RemoveChild.ProductTypeRemoveChildRequest)">
+        <member name="M:CLERP.API.Features.v1.ProductTypeArea.ProductTypeController.RemoveChildProductType(CLERP.API.Features.v1.ProductTypeArea.RemoveChildren.ProductTypeRemoveChildrenRequest)">
             <summary>
             Removes a child product type from a product type (base)
             </summary>
@@ -1156,12 +1156,12 @@
             All ids from the entities related as paretns to this product type
             </summary>
         </member>
-        <member name="P:CLERP.API.Features.v1.ProductTypeArea.RemoveChild.ProductTypeRemoveChildRequest.ChildId">
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.RemoveChildren.ProductTypeRemoveChildrenRequest.ChildIds">
             <summary>
-            Id of the child product type which should be removed
+            Ids of the children product types which should be removed
             </summary>
         </member>
-        <member name="P:CLERP.API.Features.v1.ProductTypeArea.RemoveChild.ProductTypeRemoveChildRequest.BaseProductTypeId">
+        <member name="P:CLERP.API.Features.v1.ProductTypeArea.RemoveChildren.ProductTypeRemoveChildrenRequest.BaseProductTypeId">
             <summary>
             Id of the product type which the child should be removed from
             </summary>

@@ -85,19 +85,19 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         }
 
         /// <summary>
-        /// Adds a product type as a new parent to a product type
+        /// Adds one or more product types as a new parents to a product type
         /// </summary>
-        /// <param name="productTypeAddParenData">Data for adding a new parent product type</param>
+        /// <param name="productTypeAddParenData">Data for adding one or more new parents product types</param>
         /// <returns></returns>
-        [HttpPost("add-parent")]
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "Parent successfuly added")]
+        [HttpPost("add-parents")]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "Parents successfuly added")]
         [SwaggerResponse((int)HttpStatusCode.BadRequest,
             Type = typeof(BadRequestResponse),
             Description = "Product type or parent product type coulnd't be found")]
         [SwaggerResponse((int)HttpStatusCode.Conflict,
             Type = typeof(ConflictResponse),
             Description = "Entered data conflicts with existing")]
-        public async Task<ActionResult> AddParentProductType([FromBody] AddParent.ProductTypeAddParentRequest productTypeAddParenData)
+        public async Task<ActionResult> AddParentProductType([FromBody] AddParent.ProductTypeAddParentsRequest productTypeAddParenData)
         {
             await _mediator.Send(productTypeAddParenData);
 
@@ -145,18 +145,18 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         }
 
         /// <summary>
-        /// Removes a parent product type from a product type (base)
+        /// Removes one or more parent product types from a product type (base)
         /// </summary>
-        /// <param name="productTypeRemoveParentData">Data for removing the parent from the base product type</param>
+        /// <param name="productTypeRemoveParentData">Data for removing one or more parents from the base product type</param>
         /// <returns></returns>
         [HttpDelete("remove-parent")]
         [SwaggerResponse((int)HttpStatusCode.OK,
             Type = null,
-            Description = "Parent successfuly removed from the product type")]
+            Description = "Parents successfuly removed from the product type")]
         [SwaggerResponse((int)HttpStatusCode.BadRequest,
             Type = typeof(BadRequestResponse),
-            Description = "Parent or base product type couln't be found, or the base product type doesn't have this product type as parent")]
-        public async Task<ActionResult> RemoveParentProductType([FromBody] RemoveParent.ProductTypeRemoveParentRequest productTypeRemoveParentData)
+            Description = "Parent or base product type couln't be found, or the base product type doesn't have one of these product types as parent")]
+        public async Task<ActionResult> RemoveParentProductType([FromBody] RemoveParents.ProductTypeRemoveParentsRequest productTypeRemoveParentData)
         {
             await _mediator.Send(productTypeRemoveParentData);
 
@@ -164,9 +164,9 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         }
 
         /// <summary>
-        /// Removes a child product type from a product type (base)
+        /// Removes one or more child product types from a product type (base)
         /// </summary>
-        /// <param name="productTypeRemoveChildData">Data for removing the child from the base product type</param>
+        /// <param name="productTypeRemoveChildData">Data for removing one or more children from the base product type</param>
         /// <returns></returns>
         [HttpDelete("remove-children")]
         [SwaggerResponse((int)HttpStatusCode.OK,
