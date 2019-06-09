@@ -109,7 +109,7 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// </summary>
         /// <param name="productTypeAddChildData">Data for adding new children for a product type</param>
         /// <returns></returns>
-        [HttpPost("add-child")]
+        [HttpPost("add-children")]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = null, Description = "Children successfuly added")]
         [SwaggerResponse((int)HttpStatusCode.BadRequest,
             Type = typeof(BadRequestResponse),
@@ -168,7 +168,7 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// </summary>
         /// <param name="productTypeRemoveChildData">Data for removing the child from the base product type</param>
         /// <returns></returns>
-        [HttpDelete("remove-child")]
+        [HttpDelete("remove-children")]
         [SwaggerResponse((int)HttpStatusCode.OK,
             Type = null,
             Description = "Children successfuly removed from the product type")]
