@@ -1,10 +1,10 @@
 /* tslint:disable */
-export interface ProductTypeRemoveParentRequest {
+export interface ProductTypeRemoveParentsRequest {
 
   /**
    * Id of the parent product type which should be removed
    */
-  parentId?: string;
+  parentId?: Array<string>;
 
   /**
    * Id of the product type which the parent should be removed from

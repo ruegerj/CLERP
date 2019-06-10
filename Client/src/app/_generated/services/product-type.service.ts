@@ -13,10 +13,10 @@ import { ProductTypeCreateRequest } from '../models/product-type-create-request'
 import { ProductTypeResponse } from '../models/product-type-response';
 import { ProductTypeUpdateRequest } from '../models/product-type-update-request';
 import { ProductTypeGetAllChildrenResponse } from '../models/product-type-get-all-children-response';
-import { ProductTypeAddParentRequest } from '../models/product-type-add-parent-request';
-import { ProductTypeAddChildRequest } from '../models/product-type-add-child-request';
-import { ProductTypeRemoveParentRequest } from '../models/product-type-remove-parent-request';
-import { ProductTypeRemoveChildRequest } from '../models/product-type-remove-child-request';
+import { ProductTypeAddParentsRequest } from '../models/product-type-add-parents-request';
+import { ProductTypeAddChildrenRequest } from '../models/product-type-add-children-request';
+import { ProductTypeRemoveParentsRequest } from '../models/product-type-remove-parents-request';
+import { ProductTypeRemoveChildrenRequest } from '../models/product-type-remove-children-request';
 @Injectable({
   providedIn: 'root',
 })
@@ -27,10 +27,11 @@ class ProductTypeService extends __BaseService {
   static readonly UpdateProductTypePath = '/api/v1/ProductType/{id}';
   static readonly DeleteProductTypePath = '/api/v1/ProductType/{id}';
   static readonly GetAllChildrenFromProductTypePath = '/api/v1/ProductType/children/{id}';
-  static readonly AddParentProductTypePath = '/api/v1/ProductType/add-parent';
-  static readonly AddChildProductTypePath = '/api/v1/ProductType/add-child';
-  static readonly RemoveParentProductTypePath = '/api/v1/ProductType/remove-parent';
-  static readonly RemoveChildProductTypePath = '/api/v1/ProductType/remove-child';
+  static readonly GetAllParentsFromProductTypePath = '/api/v1/ProductType/parents/{id}';
+  static readonly AddParentProductTypePath = '/api/v1/ProductType/add-parents';
+  static readonly AddChildProductTypePath = '/api/v1/ProductType/add-children';
+  static readonly RemoveParentProductTypePath = '/api/v1/ProductType/remove-parents';
+  static readonly RemoveChildProductTypePath = '/api/v1/ProductType/remove-children';
 
   constructor(
     config: __Configuration,
@@ -226,7 +227,7 @@ class ProductTypeService extends __BaseService {
   }
 
   /**
-   * @param id Id of the parent product type
+   * @param id Id of the parent product type which the children should be loaded for
    * @return Success
    */
   GetAllChildrenFromProductTypeResponse(id: string): __Observable<__StrictHttpResponse<ProductTypeGetAllChildrenResponse>> {
@@ -252,7 +253,7 @@ class ProductTypeService extends __BaseService {
     );
   }
   /**
-   * @param id Id of the parent product type
+   * @param id Id of the parent product type which the children should be loaded for
    * @return Success
    */
   GetAllChildrenFromProductType(id: string): __Observable<ProductTypeGetAllChildrenResponse> {
@@ -262,16 +263,52 @@ class ProductTypeService extends __BaseService {
   }
 
   /**
-   * @param productTypeAddParenData Data for adding a new parent product type
+   * @param id Id of the child product type which the parents should be loaded for
+   * @return Success
    */
-  AddParentProductTypeResponse(productTypeAddParenData?: ProductTypeAddParentRequest): __Observable<__StrictHttpResponse<null>> {
+  GetAllParentsFromProductTypeResponse(id: string): __Observable<__StrictHttpResponse<ProductTypeGetAllChildrenResponse>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/api/v1/ProductType/parents/${id}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<ProductTypeGetAllChildrenResponse>;
+      })
+    );
+  }
+  /**
+   * @param id Id of the child product type which the parents should be loaded for
+   * @return Success
+   */
+  GetAllParentsFromProductType(id: string): __Observable<ProductTypeGetAllChildrenResponse> {
+    return this.GetAllParentsFromProductTypeResponse(id).pipe(
+      __map(_r => _r.body as ProductTypeGetAllChildrenResponse)
+    );
+  }
+
+  /**
+   * @param productTypeAddParenData Data for adding one or more new parents product types
+   */
+  AddParentProductTypeResponse(productTypeAddParenData?: ProductTypeAddParentsRequest): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
     __body = productTypeAddParenData;
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/api/v1/ProductType/add-parent`,
+      this.rootUrl + `/api/v1/ProductType/add-parents`,
       __body,
       {
         headers: __headers,
@@ -287,25 +324,25 @@ class ProductTypeService extends __BaseService {
     );
   }
   /**
-   * @param productTypeAddParenData Data for adding a new parent product type
+   * @param productTypeAddParenData Data for adding one or more new parents product types
    */
-  AddParentProductType(productTypeAddParenData?: ProductTypeAddParentRequest): __Observable<null> {
+  AddParentProductType(productTypeAddParenData?: ProductTypeAddParentsRequest): __Observable<null> {
     return this.AddParentProductTypeResponse(productTypeAddParenData).pipe(
       __map(_r => _r.body as null)
     );
   }
 
   /**
-   * @param productTypeAddChildData Data for adding a new child product type
+   * @param productTypeAddChildData Data for adding new children for a product type
    */
-  AddChildProductTypeResponse(productTypeAddChildData?: ProductTypeAddChildRequest): __Observable<__StrictHttpResponse<null>> {
+  AddChildProductTypeResponse(productTypeAddChildData?: ProductTypeAddChildrenRequest): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
     __body = productTypeAddChildData;
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/api/v1/ProductType/add-child`,
+      this.rootUrl + `/api/v1/ProductType/add-children`,
       __body,
       {
         headers: __headers,
@@ -321,25 +358,25 @@ class ProductTypeService extends __BaseService {
     );
   }
   /**
-   * @param productTypeAddChildData Data for adding a new child product type
+   * @param productTypeAddChildData Data for adding new children for a product type
    */
-  AddChildProductType(productTypeAddChildData?: ProductTypeAddChildRequest): __Observable<null> {
+  AddChildProductType(productTypeAddChildData?: ProductTypeAddChildrenRequest): __Observable<null> {
     return this.AddChildProductTypeResponse(productTypeAddChildData).pipe(
       __map(_r => _r.body as null)
     );
   }
 
   /**
-   * @param productTypeRemoveParentData Data for removing the parent from the base product type
+   * @param productTypeRemoveParentData Data for removing one or more parents from the base product type
    */
-  RemoveParentProductTypeResponse(productTypeRemoveParentData?: ProductTypeRemoveParentRequest): __Observable<__StrictHttpResponse<null>> {
+  RemoveParentProductTypeResponse(productTypeRemoveParentData?: ProductTypeRemoveParentsRequest): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
     __body = productTypeRemoveParentData;
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/api/v1/ProductType/remove-parent`,
+      this.rootUrl + `/api/v1/ProductType/remove-parents`,
       __body,
       {
         headers: __headers,
@@ -355,25 +392,25 @@ class ProductTypeService extends __BaseService {
     );
   }
   /**
-   * @param productTypeRemoveParentData Data for removing the parent from the base product type
+   * @param productTypeRemoveParentData Data for removing one or more parents from the base product type
    */
-  RemoveParentProductType(productTypeRemoveParentData?: ProductTypeRemoveParentRequest): __Observable<null> {
+  RemoveParentProductType(productTypeRemoveParentData?: ProductTypeRemoveParentsRequest): __Observable<null> {
     return this.RemoveParentProductTypeResponse(productTypeRemoveParentData).pipe(
       __map(_r => _r.body as null)
     );
   }
 
   /**
-   * @param productTypeRemoveChildData Data for removing the child from the base product type
+   * @param productTypeRemoveChildData Data for removing one or more children from the base product type
    */
-  RemoveChildProductTypeResponse(productTypeRemoveChildData?: ProductTypeRemoveChildRequest): __Observable<__StrictHttpResponse<null>> {
+  RemoveChildProductTypeResponse(productTypeRemoveChildData?: ProductTypeRemoveChildrenRequest): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
     __body = productTypeRemoveChildData;
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/api/v1/ProductType/remove-child`,
+      this.rootUrl + `/api/v1/ProductType/remove-children`,
       __body,
       {
         headers: __headers,
@@ -389,9 +426,9 @@ class ProductTypeService extends __BaseService {
     );
   }
   /**
-   * @param productTypeRemoveChildData Data for removing the child from the base product type
+   * @param productTypeRemoveChildData Data for removing one or more children from the base product type
    */
-  RemoveChildProductType(productTypeRemoveChildData?: ProductTypeRemoveChildRequest): __Observable<null> {
+  RemoveChildProductType(productTypeRemoveChildData?: ProductTypeRemoveChildrenRequest): __Observable<null> {
     return this.RemoveChildProductTypeResponse(productTypeRemoveChildData).pipe(
       __map(_r => _r.body as null)
     );

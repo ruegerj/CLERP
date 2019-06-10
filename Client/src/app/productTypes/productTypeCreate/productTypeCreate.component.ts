@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProductTypeService } from '@_generated/services';
 import { Router } from '@angular/router';
 import { ValidationConstants } from '@_models';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-productTypeCreate',
@@ -14,6 +15,8 @@ export class ProductTypeCreateComponent implements OnInit {
   public productType: ProductTypeResponse = {};
   public submitted: boolean;
   public productTypeForm: FormGroup;
+  public children: Array<ProductTypeResponse> = new Array<ProductTypeResponse>();
+  public parents: Array<ProductTypeResponse> = new Array<ProductTypeResponse>();
 
   public imagePath;
   imgURL: any;
@@ -63,8 +66,41 @@ export class ProductTypeCreateComponent implements OnInit {
   }
 
 
-  /** click event methods for **/
-  createClicked(): void {
+  public childAdded(pt: ProductTypeResponse): void {
+    if (!this.children.map(c => c.id).includes(pt.id)) {
+      this.children.push(pt);
+    }
+    else {
+      alert(pt.name + " already added to children.");
+    }
+  }
+
+  public parentAdded(pt: ProductTypeResponse): void {
+    if (!this.parents.map(p => p.id).includes(pt.id)) {
+      this.parents.push(pt);
+    }
+    else {
+      alert(pt.name + " already added to parents.");
+    }
+  }
+
+
+  /** click event methods **/
+  public removeChildClicked(child: ProductTypeResponse): void {
+    const index: number = this.children.indexOf(child);
+    if (index !== -1) {
+      this.children.splice(index, 1);
+    }
+  }
+
+  public removeParentClicked(parent: ProductTypeResponse): void {
+    const index: number = this.parents.indexOf(parent);
+    if (index !== -1) {
+      this.parents.splice(index, 1);
+    }
+  }
+
+  public createClicked(): void {
     this.submitted = true;
 
     if (this.productTypeForm.invalid) {
@@ -75,8 +111,15 @@ export class ProductTypeCreateComponent implements OnInit {
       imageBase64: this.imgURL.replace(/^data:image\/[a-z]+;base64,/, ""),
       name: this.f.productTypeName.value, ean: this.f.ean.value, price: this.f.price.value, description: this.f.description.value
     }).subscribe(data => {
-      alert("ProductType created succesfully");
-      this.router.navigate(['/productTypes']);
+      forkJoin(
+        this.productTypeService.AddChildProductType({ baseId: data.productTypeId, childIds: this.children.map(c => c.id) }),
+        this.productTypeService.AddParentProductType({ baseId: data.productTypeId, parentIds: this.parents.map(p => p.id) })
+      ).subscribe(data => {
+        alert("ProductType created succesfully");
+        this.router.navigate(['/productTypes']);
+      }, error => {
+        alert(error);
+      });
     }, (error) => {
       alert(error);
     })

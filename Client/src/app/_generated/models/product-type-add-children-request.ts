@@ -1,10 +1,10 @@
 /* tslint:disable */
-export interface ProductTypeAddChildRequest {
+export interface ProductTypeAddChildrenRequest {
 
   /**
-   * Id of the new child product type
+   * Ids from the new children for the product type
    */
-  childId?: string;
+  childIds?: Array<string>;
 
   /**
    * Id of the product type which the child product type should be added to

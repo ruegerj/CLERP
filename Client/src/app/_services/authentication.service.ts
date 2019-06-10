@@ -35,11 +35,9 @@ export class AuthenticationService {
         var receivedUser = new User(decoded['sub'], decoded['eun'], decoded['role'], data.token);
         localStorage.setItem('currentUser', JSON.stringify(receivedUser));
         this.currentUserSubject.next(receivedUser);
-
-        console.log(data.token);      
-      }
-      
-
+      }  
+    }, error => {
+      alert(error);
     })
   }
 

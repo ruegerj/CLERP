@@ -16,14 +16,10 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const currentUser = this.authenticationService.currentUserValue;
         if (currentUser) {
-            // debug info
-            // console.log("route roles: " + route.data.roles);
-            // console.log("user roles: " + currentUser.Roles);
-
             // check if user has roles and if route is restricted by role
             if (!currentUser.Roles || (route.data.roles && !route.data.roles.some(x => currentUser.Roles.includes(x)))) {
                 // role not authorised so redirect to home page
-                console.log("not authorized or missing roles");
+                alert("You do not posses the required role.\nRedirected to home page.");
                 this.router.navigate(['/']);
                 return false;
             }
@@ -33,6 +29,7 @@ export class AuthGuard implements CanActivate {
         }
 
         // not logged in so redirect to home page with the return url
+        alert("Not logged in.\nRedirected to home page.");
         this.router.navigate(['/'], { queryParams: { returnUrl: state.url } });
         return false;
     }

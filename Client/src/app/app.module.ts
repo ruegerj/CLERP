@@ -7,8 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from '@app.component';
 import { NavComponent } from '@core/nav/nav.component';
 import { FooterComponent } from '@core/footer/footer.component';
-import { ProductTypeDetailComponent } from '@productTypes/productTypeDetailOverview/productTypeDetail/productTypeDetail.component';
-import { ProductTypeListComponent } from '@productTypes/productTypeDetailOverview/productTypeList/productTypeList.component';
+import { ProductTypeChildListComponent } from '@productTypes/productTypeDetailOverview/productTypeChildList/productTypeChildList.component';
 import { ProductTypeDetailOverviewComponent } from '@productTypes';
 import { ProductTypesComponent } from '@productTypes/productTypes.component';
 import { EmployeeEditComponent } from '@employees/employeeEdit/employeeEdit.component';
@@ -19,14 +18,15 @@ import { EmployeesComponent } from '@employees/employees.component';
 import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreate.component';
 import { ProductTypeCreateComponent } from '@productTypes/productTypeCreate/productTypeCreate.component';
 import { AddToProductTypeComponent } from '@productTypes/addToProductType/addToProductType.component';
+import { ProductTypeParentListComponent } from '@productTypes/productTypeDetailOverview/productTypeParentList/productTypeParentList.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       NavComponent,
       FooterComponent,
-      ProductTypeDetailComponent,
-      ProductTypeListComponent,
+      ProductTypeChildListComponent,
+      ProductTypeParentListComponent,
       ProductTypeDetailOverviewComponent,
       ProductTypeCreateComponent,
       ProductTypesComponent,

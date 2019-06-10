@@ -1,20 +1,19 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ProductTypeResponse } from '@_generated/models';
 import { ProductTypeService } from '@_generated/services';
-import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-productTypeList',
-  templateUrl: './productTypeList.component.html',
-  styleUrls: ['./productTypeList.component.scss']
+  selector: 'app-productTypeChildList',
+  templateUrl: './productTypeChildList.component.html',
+  styleUrls: ['./productTypeChildList.component.scss']
 })
-export class ProductTypeListComponent implements OnInit {
-
-
-  // @Input() currentId: string;
+export class ProductTypeChildListComponent implements OnInit {
   private currentId: string;
   public childProductTypes: Array<ProductTypeResponse>;
+
+  @Output() childRemoved = new EventEmitter<ProductTypeResponse>();
+
 
   constructor(
     private productTypeService: ProductTypeService,
@@ -33,5 +32,14 @@ export class ProductTypeListComponent implements OnInit {
         });
       }
     });
+  }
+
+
+  public removeClicked(pt: ProductTypeResponse): void {
+    const index: number = this.childProductTypes.indexOf(pt);
+    if (index !== -1) {
+      this.childProductTypes.splice(index, 1);
+      this.childRemoved.emit(pt);
+    }    
   }
 }

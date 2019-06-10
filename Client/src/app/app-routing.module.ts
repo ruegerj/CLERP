@@ -51,11 +51,12 @@ const routes: Routes = [
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
   },
   {
-    path: 'addToProductType',
+    path: 'addToProductType/:origin',
     component: AddToProductTypeComponent,
     canActivate: [AuthGuard],
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
-  },  // all else, redirect to home
+  },  
+  // all else, redirect to home
   // TODO redirect to error page
   {
     path: '**',

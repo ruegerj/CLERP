@@ -1,0 +1,20 @@
+<div class="list-group list-group-flush">
+  <div *ngFor="let pt of childProductTypes" class="list-group-item list-group-item-action">
+    <div class="row">
+      <a class="col-md-9 text-dark card-link" [routerLink]="['/productTypeDetailOverview', pt.id]">
+        <div class="row">
+          <h4 class="col-md-4">{{pt.name}}</h4>
+          <span class="col-md-4">
+            <b>EAN:</b>
+            {{pt.ean}}
+          </span>
+          <span class="col-md-4">
+            <b>Price:</b>
+            {{pt.price}}
+          </span>
+        </div>
+      </a>
+      <button class="btn btn-outline-secondary col-md-2" (click)="removeClicked(pt)">Remove</button>
+    </div>
+  </div>
+</div>

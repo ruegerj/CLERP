@@ -1353,7 +1353,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "Id of the parent product type",
+            "description": "Id of the parent product type which the children should be loaded for",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1392,12 +1392,66 @@
         ]
       }
     },
-    "/api/v1/ProductType/add-parent": {
+    "/api/v1/ProductType/parents/{id}": {
+      "get": {
+        "tags": [
+          "ProductType"
+        ],
+        "summary": "Gets all first level parents of a product type (Auth roles: SysAdmin, Management, Production, Logistic, Sale)",
+        "operationId": "GetAllParentsFromProductType",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the child product type which the parents should be loaded for",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProductTypeGetAllChildrenResponse"
+            }
+          },
+          "422": {
+            "description": "Validation failed",
+            "schema": {
+              "$ref": "#/definitions/ValidationFailedResponse"
+            }
+          },
+          "500": {
+            "description": "An unknown error occured",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/v1/ProductType/add-parents": {
       "post": {
         "tags": [
           "ProductType"
         ],
-        "summary": "Adds a product type as a new parent to a product type (Auth roles: SysAdmin, Management, Production, Logistic, Sale)",
+        "summary": "Adds one or more product types as a new parents to a product type (Auth roles: SysAdmin, Management, Production, Logistic, Sale)",
         "operationId": "AddParentProductType",
         "consumes": [
           "application/json"
@@ -1409,10 +1463,10 @@
           {
             "name": "productTypeAddParenData",
             "in": "body",
-            "description": "Data for adding a new parent product type",
+            "description": "Data for adding one or more new parents product types",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/ProductTypeAddParentRequest"
+              "$ref": "#/definitions/ProductTypeAddParentsRequest"
             }
           }
         ],
@@ -1430,7 +1484,7 @@
             }
           },
           "200": {
-            "description": "Parent successfuly added"
+            "description": "Parents successfuly added"
           },
           "422": {
             "description": "Validation failed",
@@ -1458,12 +1512,12 @@
         ]
       }
     },
-    "/api/v1/ProductType/add-child": {
+    "/api/v1/ProductType/add-children": {
       "post": {
         "tags": [
           "ProductType"
         ],
-        "summary": "Adds a product type as a new child to a product type (Auth roles: SysAdmin, Management, Production, Logistic, Sale)",
+        "summary": "Adds one or more product types as new children to a product type (Auth roles: SysAdmin, Management, Production, Logistic, Sale)",
         "operationId": "AddChildProductType",
         "consumes": [
           "application/json"
@@ -1475,10 +1529,10 @@
           {
             "name": "productTypeAddChildData",
             "in": "body",
-            "description": "Data for adding a new child product type",
+            "description": "Data for adding new children for a product type",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/ProductTypeAddChildRequest"
+              "$ref": "#/definitions/ProductTypeAddChildrenRequest"
             }
           }
         ],
@@ -1496,7 +1550,7 @@
             }
           },
           "200": {
-            "description": "Child successfuly added"
+            "description": "Children successfuly added"
           },
           "422": {
             "description": "Validation failed",
@@ -1524,12 +1578,12 @@
         ]
       }
     },
-    "/api/v1/ProductType/remove-parent": {
+    "/api/v1/ProductType/remove-parents": {
       "delete": {
         "tags": [
           "ProductType"
         ],
-        "summary": "Removes a parent product type from a product type (base) (Auth roles: SysAdmin, Management, Production, Logistic, Sale)",
+        "summary": "Removes one or more parent product types from a product type (base) (Auth roles: SysAdmin, Management, Production, Logistic, Sale)",
         "operationId": "RemoveParentProductType",
         "consumes": [
           "application/json"
@@ -1541,22 +1595,22 @@
           {
             "name": "productTypeRemoveParentData",
             "in": "body",
-            "description": "Data for removing the parent from the base product type",
+            "description": "Data for removing one or more parents from the base product type",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/ProductTypeRemoveParentRequest"
+              "$ref": "#/definitions/ProductTypeRemoveParentsRequest"
             }
           }
         ],
         "responses": {
           "400": {
-            "description": "Parent or base product type couln't be found, or the base product type doesn't have this product type as parent",
+            "description": "Parent or base product type couln't be found, or the base product type doesn't have one of these product types as parent",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
             }
           },
           "200": {
-            "description": "Parent successfuly removed from the product type"
+            "description": "Parents successfuly removed from the product type"
           },
           "422": {
             "description": "Validation failed",
@@ -1584,12 +1638,12 @@
         ]
       }
     },
-    "/api/v1/ProductType/remove-child": {
+    "/api/v1/ProductType/remove-children": {
       "delete": {
         "tags": [
           "ProductType"
         ],
-        "summary": "Removes a child product type from a product type (base) (Auth roles: SysAdmin, Management, Production, Logistic, Sale)",
+        "summary": "Removes one or more child product types from a product type (base) (Auth roles: SysAdmin, Management, Production, Logistic, Sale)",
         "operationId": "RemoveChildProductType",
         "consumes": [
           "application/json"
@@ -1601,22 +1655,22 @@
           {
             "name": "productTypeRemoveChildData",
             "in": "body",
-            "description": "Data for removing the child from the base product type",
+            "description": "Data for removing one or more children from the base product type",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/ProductTypeRemoveChildRequest"
+              "$ref": "#/definitions/ProductTypeRemoveChildrenRequest"
             }
           }
         ],
         "responses": {
           "400": {
-            "description": "Child or base product type couln't be found, or the base product type doesn't have this product type as child",
+            "description": "Child or base product type couln't be found, or the base product type doesn't have one or more from this product type as child",
             "schema": {
               "$ref": "#/definitions/BadRequestResponse"
             }
           },
           "200": {
-            "description": "Child successfuly removed from the product type"
+            "description": "Children successfuly removed from the product type"
           },
           "422": {
             "description": "Validation failed",
@@ -2907,28 +2961,36 @@
         }
       }
     },
-    "ProductTypeAddParentRequest": {
+    "ProductTypeAddParentsRequest": {
       "type": "object",
       "properties": {
-        "parentId": {
-          "format": "uuid",
-          "description": "Id of the new parent product type",
-          "type": "string"
+        "parentIds": {
+          "description": "Ids of the new parents product types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
         },
         "baseId": {
           "format": "uuid",
-          "description": "Id of the product type which the parent product type should be added to",
+          "description": "Id of the product type which the parents product types should be added to",
           "type": "string"
         }
       }
     },
-    "ProductTypeAddChildRequest": {
+    "ProductTypeAddChildrenRequest": {
       "type": "object",
       "properties": {
-        "childId": {
-          "format": "uuid",
-          "description": "Id of the new child product type",
-          "type": "string"
+        "childIds": {
+          "description": "Ids from the new children for the product type",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
         },
         "baseId": {
           "format": "uuid",
@@ -2937,13 +2999,17 @@
         }
       }
     },
-    "ProductTypeRemoveParentRequest": {
+    "ProductTypeRemoveParentsRequest": {
       "type": "object",
       "properties": {
         "parentId": {
-          "format": "uuid",
           "description": "Id of the parent product type which should be removed",
-          "type": "string"
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
         },
         "baseId": {
           "format": "uuid",
@@ -2952,13 +3018,17 @@
         }
       }
     },
-    "ProductTypeRemoveChildRequest": {
+    "ProductTypeRemoveChildrenRequest": {
       "type": "object",
       "properties": {
-        "childId": {
-          "format": "uuid",
-          "description": "Id of the child product type which should be removed",
-          "type": "string"
+        "childIds": {
+          "description": "Ids of the children product types which should be removed",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
         },
         "baseId": {
           "format": "uuid",

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ProductTypeResponse } from '@_generated/models';
 import { ProductTypeService } from '@_generated/services';
@@ -13,6 +13,8 @@ export class AddToProductTypeComponent implements OnInit {
   public productTypes: Array<ProductTypeResponse>;
   public filteredProductTypes: Array<ProductTypeResponse>;
 
+  @Output() ptAdded = new EventEmitter<ProductTypeResponse>();
+
 
   constructor(private productTypeService: ProductTypeService) { }
 
@@ -24,8 +26,11 @@ export class AddToProductTypeComponent implements OnInit {
     })
   }
 
+  public addClicked(pt: ProductTypeResponse): void{
+    this.ptAdded.emit(pt);
+  }
 
-  searchClicked(): void {
+  public searchClicked(): void {
     var searchText = this.searchControl.value.toLowerCase();
     this.filteredProductTypes = this.productTypes.filter(pt => {
       return (
