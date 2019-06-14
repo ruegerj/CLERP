@@ -1,34 +1,40 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
-    <a class="navbar-brand" routerLink="/">CLERP</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active" *ngIf='currentUser'>
-          <a class="nav-link" routerLink="/productTypes">ProductTypes</a>
-        </li>
-        <li class="nav-item" *ngIf='currentUser'>
-          <a class="nav-link" routerLink="/orders">Orders</a>
-        </li>
-        <li class="nav-item" *ngIf='currentUser'>
-            <a class="nav-link" routerLink="/businessPartners">Business Partners</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" *ngIf="isAdmin" routerLink="/employees">Employees</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0" *ngIf="!currentUser; else loggedIn">
-        <input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username" [(ngModel)]="username" name="username">
-        <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password" [(ngModel)]="password" name="password">
-        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="loginClicked()">Login</button>
-      </form>
-      <ng-template #loggedIn>
-        <div class="my-2 my-lg-0">
-          Welcome {{currentUser.Username}}
-        <button class="btn btn-outline-secondary m-2 my-sm-0" (click)="logoutClicked()">Logout</button>
+  <a class="navbar-brand" routerLink="/">CLERP</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf='currentUser'>
+        <a class="nav-link" routerLink="/productTypes">ProductTypes</a>
+      </li>
+      <li ngbDropdown>
+        <a class="nav-link dropdown" id="productDropdown" ngbDropdownToggle>Products</a>
+        <div ngbDropdownMenu aria-labelledby="productDropdown">
+          <a class="nav-link" routerLink="/products">Overview</a>
+          <a class="nav-link" routerLink="/scanProducts">Scan Products</a>
         </div>
-      </ng-template>
-    </div>
-  </nav>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="isAdmin" routerLink="/employees">Employees</a>
+      </li>
+      <li class="nav-item" *ngIf='currentUser'>
+        <a class="nav-link disabled" routerLink="/businessPartners">Business Partners</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" *ngIf="!currentUser; else loggedIn">
+      <input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username"
+        [(ngModel)]="username" name="username">
+      <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password"
+        [(ngModel)]="password" name="password">
+      <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="loginClicked()">Login</button>
+    </form>
+    <ng-template #loggedIn>
+      <div class="my-2 my-lg-0">
+        Welcome {{currentUser.Username}}
+        <button class="btn btn-outline-secondary m-2 my-sm-0" (click)="logoutClicked()">Logout</button>
+      </div>
+    </ng-template>
+  </div>
+</nav>

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 import { AppComponent } from '@app.component';
 import { NavComponent } from '@core/nav/nav.component';
@@ -19,6 +20,8 @@ import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreat
 import { ProductTypeCreateComponent } from '@productTypes/productTypeCreate/productTypeCreate.component';
 import { AddToProductTypeComponent } from '@productTypes/addToProductType/addToProductType.component';
 import { ProductTypeParentListComponent } from '@productTypes/productTypeDetailOverview/productTypeParentList/productTypeParentList.component';
+import { ProductsComponent } from '@products/products.component';
+import { ScanProductsComponent } from '@products/scanProducts/scanProducts.component';
 
 @NgModule({
    declarations: [
@@ -34,7 +37,9 @@ import { ProductTypeParentListComponent } from '@productTypes/productTypeDetailO
       EmployeeCreateComponent,
       HomeComponent,
       EmployeesComponent,
-      AddToProductTypeComponent
+      AddToProductTypeComponent,
+      ProductsComponent,
+      ScanProductsComponent
    ],
    imports: [
       BrowserModule,
@@ -42,7 +47,8 @@ import { ProductTypeParentListComponent } from '@productTypes/productTypeDetailO
       NgbModule,
       AppRoutingModule,
       HttpClientModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      ZXingScannerModule
    ],
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -8,6 +8,8 @@ import { Roles } from '@_models';
 import { EmployeeCreateComponent } from '@employees/employeeCreate/employeeCreate.component';
 import { ProductTypeCreateComponent } from '@productTypes/productTypeCreate/productTypeCreate.component';
 import { AddToProductTypeComponent } from '@productTypes/addToProductType/addToProductType.component';
+import { ProductsComponent } from '@products/products.component';
+import { ScanProductsComponent } from '@products';
 
 const routes: Routes = [
   {
@@ -55,7 +57,19 @@ const routes: Routes = [
     component: AddToProductTypeComponent,
     canActivate: [AuthGuard],
     data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
-  },  
+  }, 
+  {
+    path: 'products',
+    component: ProductsComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production, Roles.Sale, Roles.Purchase]}
+  },
+  {
+    path: 'scanProducts',
+    component: ScanProductsComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Roles.SysAdmin, Roles.Management, Roles.Logistic, Roles.Production]}
+  },
   // all else, redirect to home
   // TODO redirect to error page
   {

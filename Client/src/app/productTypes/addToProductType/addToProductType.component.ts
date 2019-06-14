@@ -6,7 +6,7 @@ import { ProductTypeService } from '@_generated/services';
 @Component({
   selector: 'app-addToProductType',
   templateUrl: './addToProductType.component.html',
-  styleUrls: ['./addToProductType.component.css']
+  styleUrls: ['./addToProductType.component.scss']
 })
 export class AddToProductTypeComponent implements OnInit {
   private _isEditing: boolean;
