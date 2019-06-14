@@ -73,7 +73,7 @@ namespace CLERP.API.Features.v1.ProductTypeArea
         /// <param name="id">Id of the child product type which the parents should be loaded for</param>
         /// <returns></returns>
         [HttpGet("parents/{id}")]
-        [Produces(typeof(GetAllChildren.ProductTypeGetAllChildrenResponse))]
+        [Produces(typeof(GetAllParents.ProductTypeGetAllParentsResponse))]
         public async Task<ActionResult> GetAllParentsFromProductType(Guid id)
         {
             return Ok(await _mediator.Send(new GetAllParents.ProductTypeGetAllParentsRequest() { ChildId = id }));

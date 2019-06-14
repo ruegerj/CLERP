@@ -98,21 +98,29 @@ export class ProductTypeDetailOverviewComponent implements OnInit {
   }
 
   public addChildAdded(pt: ProductTypeResponse): void {
-    if (!this.childrenToAdd.map(c => c.id).includes(pt.id)) {
-      this.childrenToAdd.push(pt);
+    if (this.productType.id == pt.id) {
+      alert("Can't add product type to itself.");
+      return;
     }
-    else {
+    if (this.childrenToAdd.map(c => c.id).includes(pt.id) || this.productType.childIds.includes(pt.id)) {
       alert(pt.name + " already added to children.");
+      return;
     }
+
+    this.childrenToAdd.push(pt);
   }
 
   public addParentAdded(pt: ProductTypeResponse): void {
-    if (!this.parentsToAdd.map(p => p.id).includes(pt.id)) {
-      this.parentsToAdd.push(pt);
+    if (this.productType.id == pt.id) {
+      alert("Can't add product type to itself.");
+      return;
     }
-    else {
+    if (this.parentsToAdd.map(p => p.id).includes(pt.id) || this.productType.parentIds.includes(pt.id)) {
       alert(pt.name + " already added to parents.");
+      return;
     }
+    
+    this.parentsToAdd.push(pt);
   }
 
   public childRemoved(pt: ProductTypeResponse): void {
@@ -175,6 +183,10 @@ export class ProductTypeDetailOverviewComponent implements OnInit {
     this.submitted = false;
     this.productTypeForm.disable();
     this.setFormValues(this.productType);
+    this.parentsToAdd.length = 0;
+    this.parentsToRemove.length = 0;
+    this.childrenToAdd.length = 0;
+    this.childrenToRemove.length = 0;
   }
 
   updateClicked(modalSuccessContent): void {
@@ -195,7 +207,7 @@ export class ProductTypeDetailOverviewComponent implements OnInit {
         this.childrenToAdd.length > 0 ? this.productTypeService.AddChildProductType({ baseId: this.currentId, childIds: this.childrenToAdd.map(c => c.id) }) : of(null),
         this.parentsToAdd.length > 0 ? this.productTypeService.AddParentProductType({ baseId: this.currentId, parentIds: this.parentsToAdd.map(p => p.id) }) : of(null),
         this.childrenToRemove.length > 0 ? this.productTypeService.RemoveChildProductType({ baseId: this.currentId, childIds: this.childrenToRemove.map(p => p.id) }) : of(null),
-        this.childrenToRemove.length > 0 ? this.productTypeService.RemoveParentProductType({ baseId: this.currentId, parentId: this.parentsToRemove.map(p => p.id) }) : of(null)
+        this.parentsToRemove.length > 0 ? this.productTypeService.RemoveParentProductType({ baseId: this.currentId, parentId: this.parentsToRemove.map(p => p.id) }) : of(null)
       ];
 
       forkJoin(...sources).subscribe(data => {

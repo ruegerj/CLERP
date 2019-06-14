@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ProductTypeResponse } from '@_generated/models';
 import { ProductTypeService } from '@_generated/services';
 import { ActivatedRoute } from '@angular/router';
@@ -10,10 +10,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductTypeChildListComponent implements OnInit {
   private currentId: string;
+  private _isEditing: boolean;
+
   public childProductTypes: Array<ProductTypeResponse>;
 
-  @Output() childRemoved = new EventEmitter<ProductTypeResponse>();
+  @Input() set isEditing(isEditing: boolean) { this._isEditing = isEditing; }
+  get isEditing(): boolean { return this._isEditing; }
 
+  @Output() childRemoved = new EventEmitter<ProductTypeResponse>();
 
   constructor(
     private productTypeService: ProductTypeService,
@@ -36,10 +40,10 @@ export class ProductTypeChildListComponent implements OnInit {
 
 
   public removeClicked(pt: ProductTypeResponse): void {
-    const index: number = this.childProductTypes.indexOf(pt);
-    if (index !== -1) {
-      this.childProductTypes.splice(index, 1);
-      this.childRemoved.emit(pt);
-    }    
+    // const index: number = this.childProductTypes.indexOf(pt);
+    // if (index !== -1) {
+    //   this.childProductTypes.splice(index, 1);
+    // }    
+    this.childRemoved.emit(pt);
   }
 }

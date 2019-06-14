@@ -14,7 +14,7 @@
           </span>
         </div>
       </a>
-      <button class="btn btn-outline-secondary col-md-2" (click)="removeClicked(pt)">Remove</button>
+      <button class="btn btn-outline-secondary col-md-2" (click)="removeClicked(pt)" [disabled]="!isEditing">Remove</button>
     </div>
   </div>
 </div>

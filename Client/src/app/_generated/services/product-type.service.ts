@@ -13,6 +13,7 @@ import { ProductTypeCreateRequest } from '../models/product-type-create-request'
 import { ProductTypeResponse } from '../models/product-type-response';
 import { ProductTypeUpdateRequest } from '../models/product-type-update-request';
 import { ProductTypeGetAllChildrenResponse } from '../models/product-type-get-all-children-response';
+import { ProductTypeGetAllParentsResponse } from '../models/product-type-get-all-parents-response';
 import { ProductTypeAddParentsRequest } from '../models/product-type-add-parents-request';
 import { ProductTypeAddChildrenRequest } from '../models/product-type-add-children-request';
 import { ProductTypeRemoveParentsRequest } from '../models/product-type-remove-parents-request';
@@ -266,7 +267,7 @@ class ProductTypeService extends __BaseService {
    * @param id Id of the child product type which the parents should be loaded for
    * @return Success
    */
-  GetAllParentsFromProductTypeResponse(id: string): __Observable<__StrictHttpResponse<ProductTypeGetAllChildrenResponse>> {
+  GetAllParentsFromProductTypeResponse(id: string): __Observable<__StrictHttpResponse<ProductTypeGetAllParentsResponse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -284,7 +285,7 @@ class ProductTypeService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<ProductTypeGetAllChildrenResponse>;
+        return _r as __StrictHttpResponse<ProductTypeGetAllParentsResponse>;
       })
     );
   }
@@ -292,9 +293,9 @@ class ProductTypeService extends __BaseService {
    * @param id Id of the child product type which the parents should be loaded for
    * @return Success
    */
-  GetAllParentsFromProductType(id: string): __Observable<ProductTypeGetAllChildrenResponse> {
+  GetAllParentsFromProductType(id: string): __Observable<ProductTypeGetAllParentsResponse> {
     return this.GetAllParentsFromProductTypeResponse(id).pipe(
-      __map(_r => _r.body as ProductTypeGetAllChildrenResponse)
+      __map(_r => _r.body as ProductTypeGetAllParentsResponse)
     );
   }
 

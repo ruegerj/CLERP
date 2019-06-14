@@ -32,6 +32,7 @@ export { ProductTypeCreateRequest } from './models/product-type-create-request';
 export { ProductTypeCreateResponse } from './models/product-type-create-response';
 export { ProductTypeUpdateRequest } from './models/product-type-update-request';
 export { ProductTypeGetAllChildrenResponse } from './models/product-type-get-all-children-response';
+export { ProductTypeGetAllParentsResponse } from './models/product-type-get-all-parents-response';
 export { ProductTypeAddParentsRequest } from './models/product-type-add-parents-request';
 export { ProductTypeAddChildrenRequest } from './models/product-type-add-children-request';
 export { ProductTypeRemoveParentsRequest } from './models/product-type-remove-parents-request';

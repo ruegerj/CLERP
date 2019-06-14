@@ -1417,7 +1417,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ProductTypeGetAllChildrenResponse"
+              "$ref": "#/definitions/ProductTypeGetAllParentsResponse"
             }
           },
           "422": {
@@ -2953,6 +2953,18 @@
       "properties": {
         "children": {
           "description": "All first level children of the product type",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductTypeResponse"
+          }
+        }
+      }
+    },
+    "ProductTypeGetAllParentsResponse": {
+      "type": "object",
+      "properties": {
+        "parents": {
           "uniqueItems": false,
           "type": "array",
           "items": {

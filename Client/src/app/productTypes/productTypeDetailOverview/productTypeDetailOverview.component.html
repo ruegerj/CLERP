@@ -183,21 +183,22 @@
     <ngb-tabset>
       <ngb-tab title="children">
         <ng-template ngbTabContent>
-          <app-productTypeChildList (childRemoved)="childRemoved($event)"></app-productTypeChildList>
+          <app-productTypeChildList (childRemoved)="childRemoved($event)" [isEditing]="isEditing"></app-productTypeChildList>
         </ng-template>
       </ngb-tab>
       <ngb-tab title="parents">
         <ng-template ngbTabContent>
-          <app-productTypeParentList (parent)="parentRemoved($event)"></app-productTypeParentList>
+          <app-productTypeParentList (parentRemoved)="parentRemoved($event)" [isEditing]="isEditing"></app-productTypeParentList>
         </ng-template>
-      </ngb-tab>      <ngb-tab title="Add Child">
+      </ngb-tab>      
+      <ngb-tab title="Add Child">
         <ng-template ngbTabContent>
-          <app-addToProductType (ptAdded)="addChildAdded($event)"></app-addToProductType>
+          <app-addToProductType (ptAdded)="addChildAdded($event)" [isEditing]="isEditing"></app-addToProductType>
         </ng-template>
       </ngb-tab>
       <ngb-tab title="Add Parent">
         <ng-template ngbTabContent>
-          <app-addToProductType (ptAdded)="addParentAdded($event)"></app-addToProductType>
+          <app-addToProductType (ptAdded)="addParentAdded($event)" [isEditing]="isEditing"></app-addToProductType>
         </ng-template>
       </ngb-tab>
     </ngb-tabset>

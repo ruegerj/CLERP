@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ProductTypeResponse } from '@_generated/models';
 import { ProductTypeService } from '@_generated/services';
@@ -9,9 +9,14 @@ import { ProductTypeService } from '@_generated/services';
   styleUrls: ['./addToProductType.component.css']
 })
 export class AddToProductTypeComponent implements OnInit {
+  private _isEditing: boolean;
+
   public searchControl: FormControl = new FormControl('');
   public productTypes: Array<ProductTypeResponse>;
   public filteredProductTypes: Array<ProductTypeResponse>;
+
+  @Input() set isEditing(isEditing: boolean) { this._isEditing = isEditing; }
+  get isEditing(): boolean { return this._isEditing; }
 
   @Output() ptAdded = new EventEmitter<ProductTypeResponse>();
 
@@ -27,6 +32,7 @@ export class AddToProductTypeComponent implements OnInit {
   }
 
   public addClicked(pt: ProductTypeResponse): void{
+
     this.ptAdded.emit(pt);
   }
 
