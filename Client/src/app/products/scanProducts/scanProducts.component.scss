@@ -1,10 +1,9 @@
 :host zxing-scanner::ng-deep{
-    height: 20em;
-    width: 30em;
-    display: block;
+    display: inline-block;
     object-fit: contain;
+    margin: 0 !important;
   }
 
-  #scannerContainer{
-      max-height: 20em;
-  }
+:host zxing-scanner::ng-deep video{
+    margin: 0 !important;
+}

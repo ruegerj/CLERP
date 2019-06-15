@@ -18,8 +18,8 @@ export class ScanProductsComponent implements OnInit {
   public hasCameras: boolean = false;
   public hasPermission: boolean;
 
-  public availableDevices: MediaDeviceInfo[];
-  public selectedDevice: MediaDeviceInfo;
+  public availableDevices: Array<MediaDeviceInfo>;
+  public selectedDevice: MediaDeviceInfo = null;
 
   public productsCreateForm: FormGroup;
   public submitted: boolean = false;
@@ -38,37 +38,42 @@ export class ScanProductsComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+
     this.productsCreateForm = this.formBuilder.group({
       warehouse: ['', Validators.required],
       shelve: ['', Validators.required]
     });
 
     this.warehouseService.GetAllWarehouses().subscribe(data => {
-      this.warehouses = data.warehouses.sort(function(a, b) {
+      console.log(data);
+
+      this.warehouses = data.warehouses.sort(function (a, b) {
         var x = a.name.toLowerCase();
         var y = b.name.toLowerCase();
-        if (x < y) {return -1;}
-        if (x > y) {return 1;}
+        if (x < y) { return -1; }
+        if (x > y) { return 1; }
         return 0;
       });
-      
-      this.warehouses.forEach( w => w.shelves.sort(function(a, b) {
+
+      this.warehouses.forEach(w => w.shelves.sort(function (a, b) {
         var x = a.designation.toLowerCase();
         var y = b.designation.toLowerCase();
-        if (x < y) {return -1;}
-        if (x > y) {return 1;}
+        if (x < y) { return -1; }
+        if (x > y) { return 1; }
         return 0;
-      }))
+      }));
     })
 
     this.f.warehouse.valueChanges.subscribe(val => {
+      console.log(val);
       this.selectedWarehouse = val;
     })
 
     this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
       this.hasCameras = true;
 
-      // console.log('Devices: ', devices);
+      console.log('Devices: ', devices);
       this.availableDevices = devices;
 
       // selects the devices's back camera by default
@@ -82,7 +87,7 @@ export class ScanProductsComponent implements OnInit {
     });
 
     this.scanner.camerasNotFound.subscribe((devices: MediaDeviceInfo[]) => {
-      console.error('An error has occurred when trying to enumerate your video-stream-enabled devices.');
+      console.log('An error has occurred when trying to enumerate your video-stream-enabled devices.');
     });
 
     this.scanner.permissionResponse.subscribe((answer: boolean) => {
@@ -130,7 +135,7 @@ export class ScanProductsComponent implements OnInit {
   }
 
 
-  public removeProductClicked(product: ProductCreateRequestModel): void{
+  public removeProductClicked(product: ProductCreateRequestModel): void {
     //Todo
   }
 }
