@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { Result } from '@zxing/library';
-import { QrScannerComponent } from 'angular2-qrscanner';
 import { ProductService } from '@_generated/services';
 import { ProductCreateRequestModel, ProductCreateRequest } from '@_generated/models';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-scanProducts',
@@ -14,18 +14,33 @@ export class ScanProductsComponent implements OnInit {
   @ViewChild('scanner')
   scanner: ZXingScannerComponent;
 
-  hasCameras = false;
-  hasPermission: boolean;
+  public hasCameras: boolean = false;
+  public hasPermission: boolean;
 
-  availableDevices: MediaDeviceInfo[];
-  selectedDevice: MediaDeviceInfo;
+  public availableDevices: MediaDeviceInfo[];
+  public selectedDevice: MediaDeviceInfo;
+
+  public productsCreateForm: FormGroup;
+  public submitted: boolean = false;
+
+  public warehouses: any;
+  public shelves: any;
+  public scannedProducts: Array<ProductCreateRequestModel> = new Array<ProductCreateRequestModel>();
+
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private formBuilder: FormBuilder
   ) { }
 
 
   ngOnInit(): void {
+    this.productsCreateForm = this.formBuilder.group({
+      warehouse: ['', Validators.required],
+      shelve: ['', Validators.required]
+    });
+
+
 
     this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
       this.hasCameras = true;
@@ -53,29 +68,41 @@ export class ScanProductsComponent implements OnInit {
 
   }
 
+
+  // convenience getter for easy access to form fields
+  get f() { return this.productsCreateForm.controls; }
+
+
+
   handleQrCodeResult(resultString: string) {
     console.log('Result: ', resultString);
     let scannedProduct: ProductCreateRequestModel = JSON.parse(resultString);
     scannedProduct.compartmentId = "7CE87D94-C875-4CCD-845B-578C393BD351";
     console.log(scannedProduct);
+    this.scannedProducts.push(scannedProduct);
 
-    let createRequest: ProductCreateRequest = {products: new Array<ProductCreateRequestModel>()};
-    createRequest.products.push(scannedProduct);
+    // let createRequest: ProductCreateRequest = {products: new Array<ProductCreateRequestModel>()};
+    // createRequest.products.push(scannedProduct);
 
-    this.productService.CreateProduct(createRequest).subscribe(data =>{
-      console.log(data);
-    }, error => {
-      console.log(error);
-    });
+    // this.productService.CreateProduct(createRequest).subscribe(data =>{
+    //   console.log(data);
+    // }, error => {
+    //   console.log(error);
+    // });
   }
 
 
-  onDeviceSelectChange(selectedValue: string) {
+  public onDeviceSelectChange(selectedValue: string) {
     console.log('Selection changed: ', selectedValue);
     this.scanner.updateVideoInputDevices().then((infos: MediaDeviceInfo[]) => {
       console.log(infos);
       this.selectedDevice = infos.find(x => x.deviceId == selectedValue);
     }
     );
+  }
+
+
+  public removeProductClicked(product: ProductCreateRequestModel): void{
+    //Todo
   }
 }

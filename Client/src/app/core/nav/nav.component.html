@@ -9,11 +9,11 @@
       <li class="nav-item" *ngIf='currentUser'>
         <a class="nav-link" routerLink="/productTypes">ProductTypes</a>
       </li>
-      <li ngbDropdown  *ngIf='currentUser'>
+      <li class="nav-item dropdown" ngbDropdown  *ngIf='currentUser'>
         <a class="nav-link dropdown" id="productDropdown" ngbDropdownToggle>Products</a>
         <div ngbDropdownMenu aria-labelledby="productDropdown">
-          <a class="nav-link" routerLink="/products">Overview</a>
-          <a class="nav-link" routerLink="/scanProducts">Scan Products</a>
+          <a class="nav-link dropdown-item" routerLink="/products">Overview</a>
+          <a class="nav-link dropdown-item" routerLink="/scanProducts">Scan Products</a>
         </div>
       </li>
       <li class="nav-item">
