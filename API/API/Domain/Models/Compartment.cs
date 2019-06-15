@@ -1,4 +1,5 @@
 ﻿using CLERP.API.Domain.Models.Abstract;
+using System;
 using System.Collections.Generic;
 
 namespace CLERP.API.Domain.Models
@@ -18,6 +19,11 @@ namespace CLERP.API.Domain.Models
         /// The column number inside the compartment grid
         /// </summary>
         public int Column { get; set; }
+
+        /// <summary>
+        /// FK to the shelf this compartment is in
+        /// </summary>
+        public Guid ShelfGuid { get; set; }
 
         /// <summary>
         /// The shelf this compartmnet is inside

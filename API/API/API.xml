@@ -281,6 +281,11 @@
             The column number inside the compartment grid
             </summary>
         </member>
+        <member name="P:CLERP.API.Domain.Models.Compartment.ShelfGuid">
+            <summary>
+            FK to the shelf this compartment is in
+            </summary>
+        </member>
         <member name="P:CLERP.API.Domain.Models.Compartment.Shelf">
             <summary>
             The shelf this compartmnet is inside
@@ -1384,6 +1389,16 @@
             Configure all properties of <see cref="T:CLERP.API.Domain.Models.Abstract.LinkEntityBase"/>
             </summary>
             <param name="builder"></param>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Configurations.Seed.CompartmentSeedData">
+            <summary>
+            Class containing hardcoded seed data for shelves
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Configurations.Seed.ShelfSeedData">
+            <summary>
+            Class containing hardcoded seed data for shelves
+            </summary>
         </member>
         <member name="T:CLERP.API.Infrastructure.Contexts.ClerpContext">
             <summary>
