@@ -46,3 +46,10 @@ export { RoleAddToEmployeeRequest } from './models/role-add-to-employee-request'
 export { RoleAddToDepartmentRequest } from './models/role-add-to-department-request';
 export { RoleRemoveFromEmployeeRequest } from './models/role-remove-from-employee-request';
 export { RoleRemoveFromDepartmentRequest } from './models/role-remove-from-department-request';
+export { WarehouseGetAllResponse } from './models/warehouse-get-all-response';
+export { WarehouseResponse } from './models/warehouse-response';
+export { WarehouseShelfResponse } from './models/warehouse-shelf-response';
+export { WarehouseAddressResponse } from './models/warehouse-address-response';
+export { WarehouseCompartmentResponse } from './models/warehouse-compartment-response';
+export { WarehouseCityResponse } from './models/warehouse-city-response';
+export { WarehouseCountryResponse } from './models/warehouse-country-response';
