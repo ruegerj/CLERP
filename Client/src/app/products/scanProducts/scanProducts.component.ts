@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { Result } from '@zxing/library';
-import { ProductService } from '@_generated/services';
-import { ProductCreateRequestModel, ProductCreateRequest } from '@_generated/models';
+import { ProductService, ProductTypeService, WarehouseService } from '@_generated/services';
+import { ProductCreateRequestModel, ProductCreateRequest, WarehouseResponse } from '@_generated/models';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Product } from '@_models';
 
 @Component({
   selector: 'app-scanProducts',
@@ -23,13 +24,15 @@ export class ScanProductsComponent implements OnInit {
   public productsCreateForm: FormGroup;
   public submitted: boolean = false;
 
-  public warehouses: any;
-  public shelves: any;
-  public scannedProducts: Array<ProductCreateRequestModel> = new Array<ProductCreateRequestModel>();
+  public scannedProducts: Array<Product> = new Array<Product>();
 
+  public warehouses: Array<WarehouseResponse>;
+  public selectedWarehouse: WarehouseResponse;
 
   constructor(
     private productService: ProductService,
+    private productTypeService: ProductTypeService,
+    private warehouseService: WarehouseService,
     private formBuilder: FormBuilder
   ) { }
 
@@ -40,12 +43,32 @@ export class ScanProductsComponent implements OnInit {
       shelve: ['', Validators.required]
     });
 
+    this.warehouseService.GetAllWarehouses().subscribe(data => {
+      this.warehouses = data.warehouses.sort(function(a, b) {
+        var x = a.name.toLowerCase();
+        var y = b.name.toLowerCase();
+        if (x < y) {return -1;}
+        if (x > y) {return 1;}
+        return 0;
+      });
+      
+      this.warehouses.forEach( w => w.shelves.sort(function(a, b) {
+        var x = a.designation.toLowerCase();
+        var y = b.designation.toLowerCase();
+        if (x < y) {return -1;}
+        if (x > y) {return 1;}
+        return 0;
+      }))
+    })
 
+    this.f.warehouse.valueChanges.subscribe(val => {
+      this.selectedWarehouse = val;
+    })
 
     this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
       this.hasCameras = true;
 
-      console.log('Devices: ', devices);
+      // console.log('Devices: ', devices);
       this.availableDevices = devices;
 
       // selects the devices's back camera by default
@@ -73,13 +96,18 @@ export class ScanProductsComponent implements OnInit {
   get f() { return this.productsCreateForm.controls; }
 
 
-
   handleQrCodeResult(resultString: string) {
     console.log('Result: ', resultString);
     let scannedProduct: ProductCreateRequestModel = JSON.parse(resultString);
     scannedProduct.compartmentId = "7CE87D94-C875-4CCD-845B-578C393BD351";
-    console.log(scannedProduct);
-    this.scannedProducts.push(scannedProduct);
+
+    this.productTypeService.GetProductTypeById(scannedProduct.productTypeId).subscribe(data => {
+      let productToAdd: Product = new Product(data.name, scannedProduct);
+      this.scannedProducts.push(productToAdd);
+    }, error => {
+      console.log(error);
+    })
+
 
     // let createRequest: ProductCreateRequest = {products: new Array<ProductCreateRequestModel>()};
     // createRequest.products.push(scannedProduct);

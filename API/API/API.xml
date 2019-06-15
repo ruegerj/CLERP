@@ -281,6 +281,11 @@
             The column number inside the compartment grid
             </summary>
         </member>
+        <member name="P:CLERP.API.Domain.Models.Compartment.ShelfGuid">
+            <summary>
+            FK to the shelf this compartment is in
+            </summary>
+        </member>
         <member name="P:CLERP.API.Domain.Models.Compartment.Shelf">
             <summary>
             The shelf this compartmnet is inside
@@ -1341,6 +1346,78 @@
             Class which contains all definitions and predicates used in the validators
             </summary>
         </member>
+        <member name="T:CLERP.API.Features.v1.WarehouseArea.GetAll.WarehouseGetAllRequest">
+            <summary>
+            Empty class just for meadiatR mapping
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.WarehouseArea.WarehouseAddressResponse">
+            <summary>
+            Response dto for adress data inside a request targeting the warehouse controller
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.WarehouseArea.WarehouseAddressResponse.Street">
+            <summary>
+            The street name without the house-number
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.WarehouseArea.WarehouseAddressResponse.Housenumber">
+            <summary>
+            The housenumber , can be null if non existing
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.WarehouseArea.WarehouseCityResponse">
+            <summary>
+            Response dto for city data inside a request targeting the warehouse controller
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.WarehouseArea.WarehouseCompartmentResponse">
+            <summary>
+            Response dto for compartment data inside a request targeting the warehouse controller
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.WarehouseArea.WarehouseCompartmentResponse.Row">
+            <summary>
+            The row number inside the compartment grid
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.WarehouseArea.WarehouseCompartmentResponse.Column">
+            <summary>
+            The column number inside the compartment grid
+            </summary>
+        </member>
+        <member name="M:CLERP.API.Features.v1.WarehouseArea.WarehouseController.GetAllWarehouses">
+            <summary>
+            Gets all warehouses including all shelves and compartments and the adress from the warehouses
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CLERP.API.Features.v1.WarehouseArea.WarehouseCountryResponse">
+            <summary>
+            Response dto for country data inside a request targeting the warehouse controller
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.WarehouseArea.WarehouseCountryResponse.Abbreviation">
+            <summary>
+            The abbrevation of the country e.g. Switzerland => CHE
+            Three digit country codes
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.WarehouseArea.WarehouseResponse">
+            <summary>
+            Default response dto for a warehouse
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Features.v1.WarehouseArea.WarehouseShelfResponse">
+            <summary>
+            Response dto for shelf data inside a request targeting the warehouse controller
+            </summary>
+        </member>
+        <member name="P:CLERP.API.Features.v1.WarehouseArea.WarehouseShelfResponse.Designation">
+            <summary>
+            Designation of the shelf e.g. shelf 7A
+            </summary>
+        </member>
         <member name="T:CLERP.API.Infrastructure.Attributes.ValidateModelAttribute">
             <summary>
             Custom attribute for erros in model validation
@@ -1384,6 +1461,16 @@
             Configure all properties of <see cref="T:CLERP.API.Domain.Models.Abstract.LinkEntityBase"/>
             </summary>
             <param name="builder"></param>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Configurations.Seed.CompartmentSeedData">
+            <summary>
+            Class containing hardcoded seed data for shelves
+            </summary>
+        </member>
+        <member name="T:CLERP.API.Infrastructure.Configurations.Seed.ShelfSeedData">
+            <summary>
+            Class containing hardcoded seed data for shelves
+            </summary>
         </member>
         <member name="T:CLERP.API.Infrastructure.Contexts.ClerpContext">
             <summary>

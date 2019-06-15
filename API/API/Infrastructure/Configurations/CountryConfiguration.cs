@@ -3,6 +3,7 @@ using CLERP.API.Infrastructure.Configurations.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System;
 
 namespace CLERP.API.Infrastructure.Configurations
 {
@@ -23,6 +24,18 @@ namespace CLERP.API.Infrastructure.Configurations
                 .IsFixedLength()
                 .IsRequired();
             builder.Property(x => x.Name).IsRequired();
+
+            // Seed data
+            builder.HasData(new Country()
+            {
+                Guid = new Guid("0906D22F-39C2-4619-8C5B-1BA73DB80F64"),
+                Abbreviation = "CH",
+                Name = "Switzerland",
+                Creation = DateTime.Now,
+                CreatedBy = "system",
+                LastModified = DateTime.Now,
+                LastModifiedBy = "system"
+            });
         }
     }
 }
