@@ -122,12 +122,12 @@
     <ngb-tabset>
       <ngb-tab title="Add Child">
         <ng-template ngbTabContent>
-          <app-addToProductType (ptAdded)="childAdded($event)"></app-addToProductType>
+          <app-addToProductType (ptAdded)="childAdded($event)" [isEditing]="true"></app-addToProductType>
         </ng-template>
       </ngb-tab>
       <ngb-tab title="Add Parent">
         <ng-template ngbTabContent>
-          <app-addToProductType (ptAdded)="parentAdded($event)"></app-addToProductType>
+          <app-addToProductType (ptAdded)="parentAdded($event)" [isEditing]="true"></app-addToProductType>
         </ng-template>
       </ngb-tab>
     </ngb-tabset>
