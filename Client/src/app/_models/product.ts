@@ -1,15 +1,11 @@
-export class Product{
-    public Name: string;
-    public Description: string;
-    public EAN: number;
-    public Price: number;
-    public Image?: string; 
+import { ProductCreateRequestModel } from '@_generated/models';
 
-    constructor(name: string, desc: string, ean: number, price: number, img: string = null){
-        this.Name = name;
-        this.Description = desc;
-        this.EAN = ean;
-        this.Price = price;
-        this.Image = img;
+export class Product{
+    public ProductTypeName: string;
+    public RequestModel: ProductCreateRequestModel;
+
+    constructor(productTypeName: string, requestModel: ProductCreateRequestModel){
+        this.ProductTypeName = productTypeName;
+        this.RequestModel = requestModel;
     }
 }

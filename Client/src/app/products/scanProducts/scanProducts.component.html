@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6 p-5">
+  <div class="col-md-6 p-3">
     <div *ngIf="availableDevices">
       <select (change)="onDeviceSelectChange($event.target.value)">
         <option value="" [selected]="!selectedDevice">No Device</option>
@@ -35,7 +35,7 @@
   </div>
 
 
-  <div class="col-md-6 p-5">
+  <div class="col-md-6 p-3">
     <form [formGroup]="productsCreateForm">
       <div class="form-group row">
         <label for="department" class="col-md-2 col-form-label">Warehouse</label>
@@ -52,7 +52,7 @@
         <div class="col-md-4">
           <select class="form-control" formControlName="shelve"
             [ngClass]="{ 'is-invalid': submitted && f.shelve.errors }">
-            <option *ngFor="let shelve of shelves" [ngValue]="shelve">
+            <option *ngFor="let shelve of selectedWarehouse.shelves" [ngValue]="shelve">
               {{shelve.designation}}
             </option>
           </select>
@@ -65,27 +65,31 @@
           <b>Products to add</b>
         </span>
       </div>
-      <div class="form-group row">
         <div class="list-group list-group-flush">
           <div class="list-group-item card" *ngFor="let product of scannedProducts">
             <div class="row">
-              <h5 class="col-md-4">{{product.serialNumber}}</h5>
-              <button class="col-md-2 offset-6 btn btn-outline-secondary"
-                (click)=removeProductClicked(product)>Remove</button>
+              <div class="col-md-2"><b>S/N:</b></div>
+              <div class="col-md-4">{{product.RequestModel.serialNumber}}</div>
+              <div class="col-md-2"><b>Type:</b></div>
+              <div class="col-md-4">{{product.ProductTypeName}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2"><b>Description:</b></div>
+              <textarea class="col-md-10" rows="2">{{product.RequestModel.description}}</textarea>
             </div>
             <div class="row">
-              <span class="col-md-4">
-                <b>ProductTypeId:</b>
-                {{product.productTypeId}}
-              </span>
-              <span class="col-md-4">
-                <b>Compartement:</b>
-                {{product.compartmentId}}
-              </span>
+              <div class="col-md-2"><b>Compartement:</b></div>
+              <div class="col-md-6">
+                {{product.RequestModel.compartmentId}}
+              </div>
+              <div class="col-md-4">
+                <button class="col-md-2 offset-6 btn btn-outline-secondary"
+                  (click)=removeProductClicked(product)>Remove</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
     </form>
   </div>
 </div>
