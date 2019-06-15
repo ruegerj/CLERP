@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { NgQrScannerModule } from 'angular2-qrscanner';
 
 import { AppComponent } from '@app.component';
 import { NavComponent } from '@core/nav/nav.component';
@@ -48,7 +49,8 @@ import { ScanProductsComponent } from '@products/scanProducts/scanProducts.compo
       AppRoutingModule,
       HttpClientModule,
       ReactiveFormsModule,
-      ZXingScannerModule
+      ZXingScannerModule,
+      NgQrScannerModule
    ],
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

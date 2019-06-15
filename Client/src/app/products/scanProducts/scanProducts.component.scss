@@ -1,0 +1,10 @@
+:host zxing-scanner::ng-deep {
+    height: 20em;
+    width: 30em;
+    display: block;
+    object-fit: contain;
+  }
+
+  #scannerContainer{
+      max-height: 20em;
+  }
