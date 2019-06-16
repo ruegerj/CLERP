@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
-import { Result } from '@zxing/library';
 import { ProductService, ProductTypeService, WarehouseService } from '@_generated/services';
-import { ProductCreateRequestModel, ProductCreateRequest, WarehouseResponse } from '@_generated/models';
+import { ProductCreateRequestModel, WarehouseResponse, WarehouseShelfResponse, ProductCreateRequest } from '@_generated/models';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Product } from '@_models';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-scanProducts',
@@ -14,6 +15,8 @@ import { Product } from '@_models';
 export class ScanProductsComponent implements OnInit {
   @ViewChild('scanner')
   scanner: ZXingScannerComponent;
+
+  public isScanning: boolean = false;
 
   public hasCameras: boolean = false;
   public hasPermission: boolean;
@@ -28,6 +31,11 @@ export class ScanProductsComponent implements OnInit {
 
   public warehouses: Array<WarehouseResponse>;
   public selectedWarehouse: WarehouseResponse;
+  public selectedShelf: WarehouseShelfResponse;
+
+  private _alert = new Subject<{message: string, type: string}>();
+
+  public alert: any;
 
   constructor(
     private productService: ProductService,
@@ -38,13 +46,14 @@ export class ScanProductsComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-
     this.productsCreateForm = this.formBuilder.group({
       warehouse: ['', Validators.required],
-      shelve: ['', Validators.required]
+      shelf: ['', Validators.required],
+      compartment: ['', Validators.required]
     });
 
+
+    /** get all warehouses and sort warehouses, shelves and compartments */
     this.warehouseService.GetAllWarehouses().subscribe(data => {
       console.log(data);
 
@@ -56,19 +65,28 @@ export class ScanProductsComponent implements OnInit {
         return 0;
       });
 
-      this.warehouses.forEach(w => w.shelves.sort(function (a, b) {
-        var x = a.designation.toLowerCase();
-        var y = b.designation.toLowerCase();
-        if (x < y) { return -1; }
-        if (x > y) { return 1; }
-        return 0;
-      }));
-    })
+      this.warehouses.forEach(w => {
+        w.shelves.sort(function (a, b) {
+          var x = a.designation.toLowerCase();
+          var y = b.designation.toLowerCase();
+          if (x < y) { return -1; }
+          if (x > y) { return 1; }
+          return 0;
+        })
+
+        w.shelves.forEach(s => s.compartments.sort(function (a, b) { return a.row - b.row || a.column - b.column; }));
+      });
+    });
 
     this.f.warehouse.valueChanges.subscribe(val => {
-      console.log(val);
       this.selectedWarehouse = val;
-    })
+    });
+
+    this.f.shelf.valueChanges.subscribe(val => {
+      this.selectedShelf = val;
+    });
+
+
 
     this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
       this.hasCameras = true;
@@ -94,6 +112,13 @@ export class ScanProductsComponent implements OnInit {
       this.hasPermission = answer;
     });
 
+
+    this._alert.subscribe(({message, type}) => {
+      this.alert = {message: message, type: type};
+    });
+    this._alert.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.alert = null);
   }
 
 
@@ -101,27 +126,26 @@ export class ScanProductsComponent implements OnInit {
   get f() { return this.productsCreateForm.controls; }
 
 
-  handleQrCodeResult(resultString: string) {
+
+  public handleQrCodeResult(resultString: string) {
     console.log('Result: ', resultString);
     let scannedProduct: ProductCreateRequestModel = JSON.parse(resultString);
-    scannedProduct.compartmentId = "7CE87D94-C875-4CCD-845B-578C393BD351";
+
+
+    if (this.scannedProducts.map(sp => sp.RequestModel.serialNumber).includes(scannedProduct.serialNumber)) {
+      this._alert.next({message: "Product has allready been scanned",type: "warning"});
+      return;
+    }
 
     this.productTypeService.GetProductTypeById(scannedProduct.productTypeId).subscribe(data => {
       let productToAdd: Product = new Product(data.name, scannedProduct);
       this.scannedProducts.push(productToAdd);
+      this._alert.next({ message: "QR code scanned succesfully", type: "success"});
     }, error => {
       console.log(error);
+      this._alert.next({message: "Erro while getting Product type",type: "warning"});
     })
 
-
-    // let createRequest: ProductCreateRequest = {products: new Array<ProductCreateRequestModel>()};
-    // createRequest.products.push(scannedProduct);
-
-    // this.productService.CreateProduct(createRequest).subscribe(data =>{
-    //   console.log(data);
-    // }, error => {
-    //   console.log(error);
-    // });
   }
 
 
@@ -130,12 +154,62 @@ export class ScanProductsComponent implements OnInit {
     this.scanner.updateVideoInputDevices().then((infos: MediaDeviceInfo[]) => {
       console.log(infos);
       this.selectedDevice = infos.find(x => x.deviceId == selectedValue);
-    }
-    );
+    });
   }
 
 
-  public removeProductClicked(product: ProductCreateRequestModel): void {
-    //Todo
+  public onCompartmentSelectionChanged(product: Product){
+    console.log("on change executed");
+    product.RequestModel.compartmentId = this.f.compartment.value;
+  }
+
+
+  public startScanningClicked(): void {
+    if(this.f.warehouse.invalid){
+      this._alert.next({message: "Warehouse must be selected", type: "warning"});
+      return;
+    }
+
+    if(this.f.shelf.invalid){
+      this._alert.next({message: "Shelf must be selected", type: "warning"});
+      return;
+    }
+
+    this.scanner.device = this.selectedDevice;
+    this.scanner.reset;
+    this.isScanning = true;
+  }
+
+
+  public stopScanningClicked(): void {
+    this.isScanning = false;
+  }
+
+
+  public removeProductClicked(product: Product): void {
+    const index: number = this.scannedProducts.indexOf(product);
+    if (index !== -1) {
+      this.scannedProducts.splice(index, 1);
+    }
+  }
+
+  public registerProductsClicked(): void{
+    console.log(this.scannedProducts.map(sp => sp.RequestModel));
+    console.log(this.scannedProducts.map(sp => sp.RequestModel).some(x => !x.hasOwnProperty("compartmentId")));
+
+
+    if(this.scannedProducts.map(sp => sp.RequestModel).some(x => !x.hasOwnProperty("compartmentId"))){
+      alert("Every product must have a compartment selected!");
+      return;
+    }
+
+    this.productService.CreateProduct({products: this.scannedProducts.map( sp => sp.RequestModel)}).subscribe(data => {
+      console.log(data);
+      this.scannedProducts.length = 0;
+      alert("Products registered succsessfully.");
+    }, error => {
+      alert(error);
+      console.log(error)
+    });
   }
 }

@@ -32,7 +32,7 @@ namespace CLERP.API.Domain.Models
         /// <summary>
         /// All child prodcuts of this product
         /// </summary>
-        public virtual ICollection<Product> Children { get; set; }
+        public virtual ICollection<Product> Children { get; set; } = new HashSet<Product>();
 
         /// <summary>
         /// Foreign key to the product-type of this product

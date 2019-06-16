@@ -17,7 +17,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" *ngIf="isAdmin" routerLink="/employees">Employees</a>
+        <a class="nav-link" *ngIf='currentUser' routerLink="/employees">Employees</a>
       </li>
       <li class="nav-item" *ngIf='currentUser'>
         <a class="nav-link disabled" routerLink="/businessPartners">Business Partners</a>

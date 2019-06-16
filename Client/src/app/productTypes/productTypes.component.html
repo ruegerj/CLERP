@@ -9,8 +9,8 @@
   <div class="card d-flex flex-row justify-content-end" *ngFor="let p of filteredProductTypes">
     <a class="card-body text-dark card-link" [routerLink]="['/productTypeDetailOverview', p.id]">
       <div class="row">
-          <div class="col-md-2 text-center">
-        <img style="max-height: 10em" src="data:image/png;base64,{{p.imageBase64}}"
+          <div class="col-md-2 text-center">  
+        <img id="productTypeImage" src="data:image/png;base64,{{p.imageBase64}}"
           class="image-fluid rounded fit-image p-2">
       </div>
       <div class="col-md-10 px-3">

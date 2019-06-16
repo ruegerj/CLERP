@@ -1,64 +1,74 @@
-<div class="row">
-  <div class="col-md-6 p-3">
-    <div *ngIf="availableDevices">
-      <select (change)="onDeviceSelectChange($event.target.value)">
-        <option value="" [selected]="!selectedDevice">No Device</option>
-        <option *ngFor="let device of availableDevices" [value]="device.deviceId"
-          [selected]="selectedDevice && device.deviceId === selectedDevice.deviceId">{{ device.label }}</option>
-      </select>
+<div class="row p-3">
+  <div class="col-md-6">
+    <ngb-alert *ngIf="alert" [type]="alert.type" (close)="scanSuccessMessage = null">{{ alert.message }}
+    </ngb-alert>
+
+    <div class="row" *ngIf="availableDevices">
+      <div class="col-md-8">
+        <select class="form-control" (change)="onDeviceSelectChange($event.target.value)">
+          <option value="" [selected]="!selectedDevice">No Device</option>
+          <option *ngFor="let device of availableDevices" [value]="device.deviceId"
+            [selected]="selectedDevice && device.deviceId === selectedDevice.deviceId">{{ device.label }}</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <button *ngIf="!isScanning" class="btn btn-outline-secondary w-100" [disabled]="!selectedDevice"
+          (click)="startScanningClicked()">Start Scanning</button>
+        <button *ngIf="isScanning" class="btn btn-outline-secondary w-100" (click)="stopScanningClicked()">Stop
+          Scanning</button>
+      </div>
     </div>
 
     <div [hidden]="!hasCameras">
-      <div id="scannerContainer" class="rounded border-dark" p-5>
-        <zxing-scanner #scanner class="test-class rounded border-dark" start="true" [device]="selectedDevice"
-          (scanSuccess)="handleQrCodeResult($event)"></zxing-scanner>
+      <div id="scannerContainer" class="rounded border-dark p-3">
+        <zxing-scanner #scanner class="test-class rounded border-dark" start="true" [previewFitMode]="fill"
+          [enable]="isScanning" [device]="selectedDevice" (scanSuccess)="handleQrCodeResult($event)"></zxing-scanner>
       </div>
 
-      <h2 *ngIf="!this.selectedDevice">No camera selected.</h2>
+      <h4 *ngIf="!this.selectedDevice">No camera selected.</h4>
     </div>
 
     <div *ngIf="!hasCameras && hasPermission === true">
-      <h1>Looks like your actual device does not has cameras, or I could no find'em. </h1>
+      <h3>Looks like your actual device does not have cameras, or I could no find'em. </h3>
     </div>
 
     <div *ngIf="hasPermission === undefined">
-      <h1>Waiting for permissions.</h1>
+      <h3>Waiting for permissions.</h3>
 
       <blockquote>
-        <h2>If your device does not has cameras, no permissions will be asked.</h2>
+        <h4>If your device does not have cameras, no permissions will be asked.</h4>
       </blockquote>
     </div>
 
     <div *ngIf="hasPermission === false">
-      <h1>You denied the camera permissions, we can't scan anything without it. 😪</h1>
+      <h3>You denied the camera permissions, we can't scan anything without it.</h3>
     </div>
   </div>
 
 
-  <div class="col-md-6 p-3">
+  <div class="col-md-6">
     <form [formGroup]="productsCreateForm">
       <div class="form-group row mx-0">
         <label for="department" class="col-md-2 col-form-label">Warehouse</label>
         <div class="col-md-4">
           <select class="form-control" formControlName="warehouse"
             [ngClass]="{ 'is-invalid': submitted && f.warehouse.errors }">
-            <option *ngFor="let warehouse of warehouses" [ngValue]="warehouse">
+            <option class="btn btn-outline-secondary" *ngFor="let warehouse of warehouses" [ngValue]="warehouse">
               {{warehouse.name}}
             </option>
           </select>
         </div>
 
-        <label *ngIf="selectedWarehouse" for="department" class="col-md-2 col-form-label">Shelve</label>
+        <label *ngIf="selectedWarehouse" for="department" class="col-md-2 col-form-label">Shelf</label>
         <div *ngIf="selectedWarehouse" class="col-md-4">
-          <select class="form-control" formControlName="shelve"
-            [ngClass]="{ 'is-invalid': submitted && f.shelve.errors }">
-            <option *ngFor="let shelve of selectedWarehouse.shelves" [ngValue]="shelve">
-              {{shelve.designation}}
+          <select class="form-control" formControlName="shelf"
+            [ngClass]="{ 'is-invalid': submitted && f.shelf.errors }">
+            <option *ngFor="let shelf of selectedWarehouse.shelves" [ngValue]="shelf">
+              {{shelf.designation}}
             </option>
           </select>
         </div>
       </div>
-
 
       <div class="form-group row text-center">
         <span class="col-md-12">
@@ -68,27 +78,36 @@
       <div class="list-group list-group-flush">
         <div class="list-group-item card" *ngFor="let product of scannedProducts">
           <div class="row">
-            <div class="col-md-2"><b>S/N:</b></div>
-            <div class="col-md-4">{{product.RequestModel.serialNumber}}</div>
+            <div class="col-md-3"><b>S/N:</b></div>
+            <div class="col-md-3">{{product.RequestModel.serialNumber}}</div>
             <div class="col-md-2"><b>Type:</b></div>
             <div class="col-md-4">{{product.ProductTypeName}}</div>
           </div>
 
           <div class="row">
-            <div class="col-md-2"><b>Description:</b></div>
-            <textarea class="col-md-10" rows="2">{{product.RequestModel.description}}</textarea>
+            <div class="col-md-3"><b>Description:</b></div>
+            <div class="col-md-9 text-center">
+              <textarea class="w-100" rows="2">{{product.RequestModel.description}}</textarea>
+            </div>
           </div>
           <div class="row">
-            <div class="col-md-2"><b>Compartement:</b></div>
-            <div class="col-md-6">
-              {{product.RequestModel.compartmentId}}
+            <div class="col-md-3"><b>Compartement:</b></div>
+            <div class="col-md-5">
+              <select *ngIf="selectedShelf" class="form-control" formControlName="compartment" (change)=onCompartmentSelectionChanged(product)
+                [ngClass]="{ 'is-invalid': submitted && f.compartment.errors }">
+                <option *ngFor="let compartment of selectedShelf.compartments" [ngValue]="compartment.id">
+                  Row: {{compartment.row}} Column: {{compartment.column}}
+                </option>
+              </select>
             </div>
             <div class="col-md-4">
-              <button class="col-md-2 offset-6 btn btn-outline-secondary"
-                (click)=removeProductClicked(product)>Remove</button>
+              <button class="btn btn-outline-secondary w-100" (click)=removeProductClicked(product)>Remove</button>
             </div>
           </div>
         </div>
+      </div>
+      <div class="form-group row">
+        <button class="btn btn-outline-secondary w-100" [disabled]="scannedProducts.length === 0" (click)=registerProductsClicked()>Register Products</button>
       </div>
     </form>
   </div>
