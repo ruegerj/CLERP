@@ -16,7 +16,7 @@ namespace CLERP.API.Features.v1.ProductArea
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    [Authorize(Roles = "SysAdmin, Management, Production, Logistic, Sale")]
+    [Authorize(Roles = "SysAdmin, Management, Production, Logistic, Sale, Purchase")]
     [ValidateModel]
     public class ProductController : ControllerBase
     {
